@@ -105,7 +105,7 @@
                                     <?php include('bookmodal.php'); 
                                           $cid = $row['restaurant_id'];
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' ORDER BY created DESC LIMIT 1";";
+                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' ORDER BY created DESC LIMIT 1";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           date_default_timezone_set("Asia/Manila");
@@ -114,7 +114,7 @@
                                           foreach ($view as $rows) {
                                             $date = date('Y-m-d', strtotime($rows['sched_sdate']));
                                             
-                                           if($rows['status'] == 1){ ?>
+                                           if($rows['status'] == 1 && $date == $date2){ ?>
                                              
                                              <a href="#" data-toggle="modal" data-target="#notAvail<?php echo $rows['restaurant_id'];?>" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                            <?php } else{ ?>
