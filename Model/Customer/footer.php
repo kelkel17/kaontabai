@@ -29,6 +29,7 @@
         <script src="../../assets/js/wow/wow.min.js"></script>
         <script src="../../assets/js/jquery-ui.js"></script>
         <script src="../../assets/js/jquery.timepicker.min.js"></script>
+        <script src="../../assets/js/moment.js"></script>
         
         <script src="../../assets/js/jquery.dataTables.min.js"></script>
         <script src="../../assets/js/dataTables.buttons.min.js"></script>
