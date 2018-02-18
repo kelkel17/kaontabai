@@ -1,5 +1,5 @@
 <?php
-    include('../Controller/dbconn.php');
+    include('../../Controller/dbconn.php');
     $con = con();
     $id = 1;
     $sql = "SELECT sched_sdate as dat FROM schedules WHERE status = 1 AND restaurant_id = 1";
