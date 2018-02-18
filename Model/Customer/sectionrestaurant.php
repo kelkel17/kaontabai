@@ -1,7 +1,7 @@
 <section>
             <?php 
-                $id = $_GET['cid'];
-                $rows = getOwner(array($id));
+                $cid = $_GET['cid'];
+                $rows = getOwner(array($cid));
                 foreach ($rows as $row) {
                     $id = $_GET['id'];
               ?> 
@@ -35,8 +35,8 @@
                                     // $latlng = json_encode($latlng,true);
                                     
                                     // echo '<div id="alldata" style="display:none;">'.$latlng.'</div>';
-                                    $id = $_GET['cid'];
-                                    $byId = getMapbyId($id);
+                                    $cid = $_GET['cid'];
+                                    $byId = getMapbyId($cid);
                                     // $byId = json_encode();
                                     foreach($byId as $r) {
                                     echo '<div id="getbyid" style="display:none;">'.$r.'</div>';
@@ -103,21 +103,26 @@
                           <div class="card-body">
                                  
                                     <?php include('bookmodal.php'); 
-                                          $id = $row['restaurant_id'];
+                                          $cid = $row['restaurant_id'];
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$id' ORDER BY created DESC LIMIT 1";
+                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' ORDER BY created DESC LIMIT 1";";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
+                                          date_default_timezone_set("Asia/Manila");
+                                          $date2 = date('Y-m-d');
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                          if(count($view) >= 0){
                                           foreach ($view as $rows) {
-                                            if($rows['status'] == 1){ ?>
-                                              <a href="#" data-toggle="modal" data-target="#notAvail<?php echo $rows['restaurant_id'];?>" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                           <?php } else { ?>
-                                          <a href="#" data-toggle="modal" data-target="#bookNow<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                      <?php } } } ?>
+                                            $date = date('Y-m-d', strtotime($rows['sched_sdate']));
+                                            
+                                           if($rows['status'] == 1){ ?>
+                                             
+                                             <a href="#" data-toggle="modal" data-target="#notAvail<?php echo $rows['restaurant_id'];?>" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                           <?php } else{ ?>
+                                        <a href="#" data-toggle="modal" data-target="#bookNow<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                      <?php } }  ?>
                                       <a href="#" data-toggle="modal" data-target="#messageUs<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Message Us&nbsp;<i class="fa fa-comment" aria-hidden="true"></i></a>
                               </div>
+                             
                             </div>
                 </div>
               </div>

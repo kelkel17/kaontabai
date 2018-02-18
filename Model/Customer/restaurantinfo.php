@@ -16,7 +16,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
          <?php include('header.php');?>
          <?php include('sectionrestaurant.php');?>
-
+      
          <?php } ?>
       
          <?php include('footer.php'); ?> 
