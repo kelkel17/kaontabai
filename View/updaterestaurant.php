@@ -161,7 +161,6 @@
 											<input type="hidden" name="id" value="<?php echo $row['restaurant_id']?>">
 											<input class="form-control" placeholder="Username" name="username" type="username" value="<?php echo $row['username'];?>" required><br/>
 											<input class="form-control" placeholder="Password" name="password" type="password" value="<?php echo $row['password'];?>" required><br/>
-											<input class="form-control" placeholder="Confirm Password" name="password2" type="password" value="<?php echo $row['password'];?>" required><br/>
 											<input class="form-control" placeholder="Restaurant Name" name="rname" type="text" value="<?php echo $row['restaurant_name'];?>" required><br/>
 											<input class="form-control" placeholder="Restaurant Address" name="addr" type="text" value="<?php echo $row['restaurant_addr'];?>" required><br/>
 											<input class="form-control" placeholder="Restaurant Contact" name="contact" type="text" value="<?php echo $row['restaurant_contact'];?>" required><br/>
