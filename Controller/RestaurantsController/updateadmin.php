@@ -1,5 +1,5 @@
 <?php
-	require_once('../dbconn.php');
+	include('../dbconn.php');
 	
     if(isset($_POST['Update'])){
     	$id = $_POST['id'];
@@ -21,28 +21,25 @@
 		$path = time().$image;
 		  	if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
 		  	{
-		  		if($pass==$pass2){
+		  		
 		  			$data = array($user,$pass,$name,$addr,$contact,$otime,$ctime,$path,$desc,$max,$email,$id);
-		  			updateOwner($data);
-		  			if($data){
 		  				foreach ($promo as $check) {
-			  				$sql = "SELECT promo_id FROM promo_restaurant WHERE promo_id = :promo";
+			  				$sql = "SELECT promo_id, restaurant_id FROM promo_restaurant WHERE promo_id = :promo AND restaurant_id = :id";
 				            $con = con();
 				            $sthandler = $con->prepare($sql);
-				            $sthandler->bindParam(':promo', $check);
+							$sthandler->bindParam(':promo', $check);
+							$sthandler->bindParam(':id', $id);
 				            $sthandler->execute();
 
-				            if($sthandler->rowCount() > 0){
-				                echo '<script>alert("You already availed this promo!"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
-				            } else{
-		  						
-									$data2 = array($check,$id);
-		  							addPromo($data2);	
-								}
-						}		  			
-		  				echo '<script> alert("Succesfully Updated your restaurant information"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
-		  			}
-		  		}
+				            if($sthandler->rowCount() > 0)
+				            	  echo '<script>alert("You already availed this promo!"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
+				             else
+		  							$data2 = array($check,$id);
+		  				 }
+						  updateOwner($data);
+					 	  addPromo($data2);
+					  echo '<script> alert("Succesfully Updated your restaurant information"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
+		  	
 		  	}
 		
 	}	
