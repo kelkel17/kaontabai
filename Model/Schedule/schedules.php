@@ -61,10 +61,11 @@
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
          date_default_timezone_set('Asia/Manila');
-        	$date = date('Y-m-d');
-        	$newdate = new DateTime($date);
-        	$newdate->sub(new DateInterval('P1D'));
-        	$newest = $newdate->format('Y-m-d g:i');
+        	$date = date('Y-m-d g:i');
+        //	$newdate = new DateTime($date);
+        //	$newdate->sub(new DateInterval('P1D'));
+		//	$newest = $newdate->format('Y-m-d g:i');
+			
         	//echo $newest;
         	
 			// $temp4 = date('Y-m-d',strtotime($row['created']));
@@ -98,24 +99,33 @@
 	    	
 
 	    	$get = getSchedule(array($id));
-	    	foreach ($get as $row) {
-	    		$date2 = date('Y-m-d g:i');
-	    		$temp2 = date('Y-m-d g:i',strtotime($row['sched_sdate'].$row['sched_stime']));
-	    		$temp3 = date('Y-m-d g:i',strtotime($row['sched_edate'].$row['sched_stime']));
-	    		// echo $temp2,$temp3;
-	    		if($date2 == $temp2 ){
+	    	foreach ($get as $r) { //($r is from $row just testing)
+				$date2 = date('Y-m-d g:i');
+				$date3 = date('Y-m-d g:i');
+				$temp2 = date('Y-m-d g:i',strtotime($r['sched_sdate'].$r['sched_stime']));
+				$temp3 = date('Y-m-d g:i',strtotime($r['sched_edate'].$r['sched_etime']));
+				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
+				// echo $temp2,$temp3;
+				
+	    		if($date2 == $temp2){
 	    			$status = 1;
-	    			$sid = $row['sched_id'];
+	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
 	    			deactivateSchedule($date);
-	    		} if($date2 >= $temp3 && $temp2 != ''){
+	    		} if($date2 >= $temp3 && $date3 > $temp4 && $temp2 != ''){
 	    			$status = 0;
-	    			$sid = $row['sched_id'];
+	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
-	    			deactivateSchedule($date);
-	    		}
-	    	}
-	     if($newest > $temp3){ ?>
+					deactivateSchedule($date);
+					
+					
+				}
+				// break;
+			}
+			$temp5 =date('Y-m-d g:i',strtotime($row['sched_sdate']));
+			
+			$temp6 =date('Y-m-d g:i',strtotime($row['sched_edate']));
+	     if($date > $temp5 && $date > $temp6){ ?>
 	    		<i class="fa fa2 fa-pencil-square-o" aria-hidden="true" title="Update"></i>
 	    		<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>
 	    		<i class="fa fa2 fa-times" aria-hidden="true" title="Peak-Hour"></i> 
