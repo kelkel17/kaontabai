@@ -21,7 +21,40 @@
       
          <?php include('footer.php'); ?> 
         <script src="../../assets/js/extension2.js"></script>
+        <script>
+    $(document).ready(function(){
+        var test = '';
+	$.ajax({
+        type: "GET",
+		url: "getdate.php",    
+        dataType: 'json',
+        success: function(data) {
 
+           var test2 = [];
+            for(var i in data) {
+				test2.push(moment(data[i].dat).format('DD-M-YYYY'));
+            console.log(test2);
+			}
+            
+        
+            function unavailable(date) {
+                dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                    if ($.inArray(dmy, test2) == -1) {
+                            return [true, ""];
+                                console.log(test2);
+                    } else {
+                            return [false,"","Unavailable"];
+                            console.log(test2);
+                    }
+             }
+        $('#datepicker').datepicker({ beforeShowDay: unavailable});
+
+        }
+        });
+       
+
+    });
+</script>
          <script>
 
         var map;
@@ -56,6 +89,7 @@
       }
 
     </script>
+   
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSycgg4KWvJUmyptQTnn84wV5q0XCMKC0&callback=initMap"
     async defer></script>
     
