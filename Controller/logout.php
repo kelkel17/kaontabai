@@ -1,0 +1,12 @@
+<?php   
+ //logout.php  
+ session_start();  
+ //if(session_destroy())
+ //{ 
+ 	unset($_SESSION["id"]); 
+ 	unset($_SESSION['cart']);
+    unset($_SESSION['count']); 
+    unset($_SESSION['qty']);
+ 	header("location:../index.php");  
+ //}
+ ?> 
