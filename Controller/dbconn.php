@@ -133,12 +133,9 @@ function islogged2(){
 			return $row;
 		}
 
-		function updateOwner($data,$image){
-			$con = con();
-			if(!empty($image))
+		function updateOwner($data){
+			$con = con();	
 			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_logo = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
-			else
-			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
 			$stmt = $con->prepare($sql);
 			$update = $stmt->execute($data);
 			$con = null;
@@ -523,6 +520,8 @@ function islogged2(){
 
 			return $row;
 		}
+
+	
 
 		function updateSchedule($data){
 			$con = con();
@@ -934,6 +933,33 @@ function islogged2(){
 			 $con = null;
 		}
 
+		function autoAdd2($data){
+			$con = con();
+			$sql2 = "INSERT INTO schedules(restaurant_id,sched_sdate,status,schedule_number) VALUES(?,?,?,?)";
+			 $stmt = $con->prepare($sql2);
+			 $add = $stmt->execute($data);
+			 $set = $con->lastInsertId();
+			 return $set;	
+			 $con = null;
+		}
+		function updateAdd2($data){
+			$con = con();
+			$sql2 = "UPDATE schedules SET restaurant_id = ?, status = ? WHERE sched_id = ?";
+			$stmt = $con->prepare($sql2);
+			$add = $stmt->execute($data);
+		 	$con = null;
+		}
+
+		function getAdd2($data){
+			$con = con();
+			$sql = "SELECT * FROM schedules WHERE sched_sdate = ?";
+			$stmt = $con->prepare($sql);
+			$stmt->execute($data);
+			$view = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $view;
+			$con = null;
+		}
+
 		function getAdd($data){
 			$con = con();
 			$sql = "SELECT * FROM schedules WHERE restaurant_id = ? ORDER BY created DESC LIMIT 1";
@@ -943,7 +969,6 @@ function islogged2(){
 			return $view;
 			$con = null;
 		}
-
 		function updateAdd($data){
 			$con = con();
 			$sql3 = "UPDATE schedules SET restaurant_id = ?, status = ? WHERE sched_id = ?";
@@ -951,6 +976,7 @@ function islogged2(){
 			$update = $stmt->execute($data);
 					
 		}
+		
 
 		function time_ago($date) {
 			date_default_timezone_set('Asia/Manila');
