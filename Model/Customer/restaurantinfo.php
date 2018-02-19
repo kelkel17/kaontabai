@@ -20,8 +20,8 @@
          <?php } ?>
       
          <?php include('footer.php'); ?> 
-        <script src="../../assets/js/extension2.js"></script>
-        <script>
+        <!-- <script src="../../assets/js/extension2.js"></script> -->
+        <!-- <script>
     $(document).ready(function(){
         var test = '';
 	$.ajax({
@@ -54,7 +54,7 @@
        
 
     });
-</script>
+</script> -->
          <script>
 
         var map;
