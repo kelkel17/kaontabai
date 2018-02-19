@@ -48,7 +48,7 @@
                             console.log(test2);
                     }
              }
-        $('#datepicker').datepicker({ beforeShowDay: unavailable});
+        $('#iDate').datepicker({ beforeShowDay: unavailable});
 
         }
         });
