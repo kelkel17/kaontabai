@@ -118,11 +118,48 @@
                                              
                                              <a href="#" data-toggle="modal" data-target="#notAvail<?php echo $rows['restaurant_id'];?>" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                            <?php } else{ ?>
+                                           <!--
                                         <a href="#" data-toggle="modal" data-target="#bookNow<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                            -->
+                                          <a href="#" onclick="getDate(<?php echo $row['restaurant_id'];?>);" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                            
                                       <?php } }  ?>
                                       <a href="#" data-toggle="modal" data-target="#messageUs<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Message Us&nbsp;<i class="fa fa-comment" aria-hidden="true"></i></a>
                               </div>
-                             
+                             <script>
+                              function getDate(restId){
+                                // alert(restId);
+                                $('#bookNow'+restId).modal('show');
+                                  $.ajax({
+                                        type: "GET",
+                                        url: "getdate.php?cid="+restId,    
+                                        dataType: 'json',
+                                        success: function(data) {
+                                        // console.log(data);
+                                        var test2 = [];
+                                        for(var i in data) {
+                                          
+                                        test2.push(moment(data[i].dat).format('DD-M-YYYY'));
+                                          console.log(test2);
+                                        }
+                                        
+                                    
+                                        function unavailable(date) {
+                                            dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                                                if ($.inArray(dmy, test2) == -1) {
+                                                        return [true, ""];
+                                                            // console.log(test2);
+                                                } else {
+                                                        return [false,"","Unavailable"];
+                                                        // console.log(test2);
+                                                }
+                                        }
+                                    $('#datepicker').datepicker({ beforeShowDay: unavailable});
+
+                                    }
+                                  });
+                              }
+                             </script>
                             </div>
                 </div>
               </div>
