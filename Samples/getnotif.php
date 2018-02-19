@@ -1,7 +1,7 @@
 <?php
     include('../Controller/dbconn.php');
     $con = con();
-    $id = $_SESSION['id'];
+    $id = 1;
     $sql = "SELECT count(*) as count FROM notifications WHERE status = 0 AND restaurant_id = '$id' GROUP BY restaurant_id";
     $stmt = $con->prepare($sql);
     $stmt->execute();
