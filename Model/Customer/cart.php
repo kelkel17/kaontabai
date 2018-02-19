@@ -117,7 +117,7 @@ $total = 0;
 $price = array();
 ?>
 
-<form method="post" action="purchase.php">
+<form method="post" action="purchase.php?cid=<?php echo $_GET['cid']; ?>">
 <table class="table table-bordered">
 <td>Foods<td>
 <td></td>
