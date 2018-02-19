@@ -18,12 +18,12 @@ include 'dbconn.php';
 		}	elseif($row['restaurant_status'] == 1){
 				if($row['restaurant_name'] == ''){
 				$_SESSION['id'] = $row['restaurant_id'];
-								header('location:../View/updaterestaurant.php?id='.$row['restaurant_id'].'');
+								header('location:../View/loading2.php?id='.$row['restaurant_id'].'');
 				}
 				elseif($row['restaurant_name'] != ''){
 					if($stmt->rowCount() > 0){
 						$_SESSION['id'] = $row['restaurant_id'];
-											header('location:../View/indexadmin.php?id='.$row['restaurant_id'].'');		
+											header('location:../View/loading.php?id='.$row['restaurant_id'].'');		
 					}
 					else{
 						header('location:../loginadmin.php?mess=Your username or password is incorrect!');
