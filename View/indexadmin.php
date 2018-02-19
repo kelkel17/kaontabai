@@ -46,7 +46,7 @@
 	<script src="../something/js/easypiechart-data.js"></script>
 	<script src="../something/js/bootstrap-datepicker.js"></script>
 	<script src="../something/js/custom.js"></script>
-	<script src="../samples/js/app.js"></script>
+    <script src="../samples/js/app.js"></script>
 	<link rel="shortcut icon" href="../assets/img/logo.png">
 		 
 	</script>
