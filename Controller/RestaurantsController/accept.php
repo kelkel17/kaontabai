@@ -19,7 +19,7 @@
 					foreach ($res as $key) {
 						$subject = 'Your reservation request has been accepted';
 						$body = ''.$get['customer_fname'].' '.$get['customer_lname'].' your reservation has been accepted your reservation number is '.$key['reservation_number'].'';
-							//mail($email,$subject,$body,$from);
+							mail($email,$subject,$body,$from);
 								$asd = $_SESSION['id'];
 								date_default_timezone_set("Asia/Manila");
 								$date2 = date('Y-m-d');
@@ -88,7 +88,7 @@
 						foreach ($res as $key) {
 							$subject = 'Your reservation request has been accepted';
 							$body = ''.$get['customer_fname'].' '.$get['customer_lname'].' your reservation has been accepted your reservation number is '.$key['reservation_number'].'';
-							//mail($email,$subject,$body,'From: KaonTaBai!');
+							mai	l($email,$subject,$body,'From: KaonTaBai!');
 							foreach($rsd as $r){
 								print_r($r);
 								$date5 = date('Y-m-d', strtotime($r['reservation_date']));
