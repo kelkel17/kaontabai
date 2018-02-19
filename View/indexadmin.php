@@ -1,6 +1,6 @@
 <?php 
 	
-    require_once('../Controller/dbconn.php');
+    include('../Controller/dbconn.php');
 
     islogged();
     date_default_timezone_set('Asia/Manila');
@@ -25,6 +25,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>KaonTaBai!</title>
+
 	<link href="../something/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../something/css/font-awesome.min.css" rel="stylesheet">
 	<link href="../something/css/datepicker3.css" rel="stylesheet">
@@ -37,6 +38,8 @@
       }
 	</style>
 	<script src="../something/js/jquery.min.js"></script>
+
+	
 	<!-- <script src="../something/js/jquery-1.11.1.min.js"></script> -->
 	<script src="../something/js/bootstrap.min.js"></script>
 	<script src="../samples/js/chart.min.js"></script>
@@ -51,7 +54,10 @@
 		 
 	</script>
 </head>
+
 <body>
+<!--
+<div id="asd"> -->
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -69,6 +75,7 @@
 							
 							
 						</ul>
+						
 						<!-- start of notification -->
 						 <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 										<em class="fa fa-bell"></em><span class="label label-info count"></span>
@@ -117,6 +124,8 @@
 											</a></li> -->
 										</ul>
 						 	</li> 
+					</li>		
+				</ul> 	
 					<!-- end of notification -->
 			</div>
 		</div><!-- /.container-fluid -->
@@ -306,6 +315,8 @@
 		</div>  -->
 		
 	 </div>	<!-- /.main  -->
+</div>	
+<!-- </div>  -->
 
 			
 </body>
