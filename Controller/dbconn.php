@@ -1039,6 +1039,17 @@ function islogged2(){
 			}
 			$con = null;
 		}
+
+		function getEmail($id)
+		{
+			$con = con();
+			$sql = "SELECT owner_email FROM restaurants WHERE restaurant_id = ?";
+			$stmt = $con->prepare($sql);
+			$stmt->execute($id);
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $row;
+			$con = null;
+		}
 ?>
 
 
