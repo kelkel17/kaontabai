@@ -2,7 +2,7 @@
     include('../Controller/dbconn.php');
     $con = con();
     $id = $_SESSION['id'];
-    $sql = "SELECT  FROM notifications WHERE status = 0 AND restaurant_id = '$id' GROUP BY restaurant_id";
+    $sql = "SELECT  * FROM notifications WHERE status = 0 AND restaurant_id = '$id' GROUP BY restaurant_id";
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
