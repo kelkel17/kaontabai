@@ -8,6 +8,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Item;
 use PayPal\Api\Itemlist;
 use PayPal\Excepion\PPConnectionException;
+use PayPal\Api\Payee;
 
 
  // include 'purchase.php';
@@ -17,6 +18,7 @@ $shippingPrice = 0;
 $currency = "PHP";
 $total=$_GET['total'];
 $cid = $_GET['rid'];
+$email = $_GET['email'];
 
 
 $payer = new Payer();
@@ -26,9 +28,13 @@ $transaction = new Transaction();
 $payment = new Payment();
 $redirectUrls = new RedirectUrls();
 $item = new Item();
+$payee = new Payee();
 
 //Payer
 $payer->setPaymentMethod('paypal');
+
+//Payee
+$payee->setEmail($email);
 
 //Items
 $item->setName('Product Name')
@@ -49,7 +55,8 @@ $amount->setCurrency($currency)
 
 //Transactions
 $transaction->setAmount($amount)
-	->setDescription('Payment');
+	->setDescription('Payment')
+	->setPayee($payee);
 
 //Payments
 $payment->setIntent('sale')
@@ -57,8 +64,8 @@ $payment->setIntent('sale')
 	->setTransactions([$transaction]);
 
 //Redorect URLs
-$redirectUrls->setReturnUrl('http://kaontabai.com/kaontabai/model/customer/pays.php?approved=true&cid=$cid')
-	->setCancelUrl('http://kaontabai.com/kaontabai/model/customer/cancelled.php?approved=false&cid=$cid');
+$redirectUrls->setReturnUrl('http://localhost/kaontabai2/kaontabai/model/customer/pays.php?approved=true&cid=$cid')
+	->setCancelUrl('http://localhost/kaontabai2/kaontabai/model/customer/cancelled.php?approved=false&cid=$cid');
 
 $payment->setRedirectUrls($redirectUrls);
 
