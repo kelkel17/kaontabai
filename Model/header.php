@@ -52,43 +52,42 @@
             console.log(data[i]);
             var date = moment().format('LL');
             console.log(date);
-            var date2 = data[0].dat; 
-            console.log(date2);
-
-            if(date == date2){
-                console.log('okay');
-                swal("As of today you have "+data[0].count+" reservation",{
+            var date2 = data[0].count; 
+            if(date != date2){
+                // swal("You have "+date2+" pending reservation",{
+                //     icon: "info"
+                // });
+            }else{
+				swal("As of today you have "+date2+" pending reservations",{
                     icon: "info"
                 });
-            }else{
-                console.log('dili okay');
             }
 
         }
         });
     });
+</script>		
 </script>
-<script>
+	<script>
     $(document).ready(function(){
 	$.ajax({
         type: "GET",
-		url: "getnotif.php",    
+		url: "../../Controller/RestaurantsController/getnotif.php",    
         dataType: 'json',
         success: function(data) {
             for(var i = 0; i < data.length;i++)
-            console.log(data[i]);
+            // console.log(data[i]);
             var date = moment().format('LL');
-            console.log(date);
-            var date2 = data[0].count; 
-            console.log(date2);
-            // if(date != date2){
-            //     console.log('dili okay');
-                swal("You have new "+date2+" notifications",{
+            // console.log(date);
+			var count = data[0].count;
+			var date2 = data[0].dat; 
+            if(date2 == date){
+				console.log(count);
+				console.log(date2);
+                swal("You have "+count+" new notifcation",{
                     icon: "info"
                 });
-            // }else{
-            //     console.log('okay');
-            // }
+            }
 
         }
         });
