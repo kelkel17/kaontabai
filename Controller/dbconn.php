@@ -133,9 +133,12 @@ function islogged2(){
 			return $row;
 		}
 
-		function updateOwner($data){
+		function updateOwner($data,$image){
 			$con = con();	
+			if(!empty($image))
 			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_logo = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
+			else
+			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
 			$stmt = $con->prepare($sql);
 			$update = $stmt->execute($data);
 			$con = null;
