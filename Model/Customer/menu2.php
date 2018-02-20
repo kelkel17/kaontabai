@@ -44,6 +44,7 @@
                 $menu = selectMenu();
                 foreach ($menu as $id) {
                     $cid = $id['mc_id'];
+                    if($cid==1 && $Resid==$id['restaurant_id']){    
         
     ?>
                     <div class="col-sm-4 container">
@@ -73,7 +74,7 @@
                             
                     
                     </div>   
-                    <?php } ?> 
+                    <?php }} ?> 
                    
         </div>
 
