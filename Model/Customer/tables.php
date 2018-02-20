@@ -47,93 +47,71 @@
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                          date_default_timezone_set("Asia/Manila");
+                                          $date2 = date('Y-m-d');
                                           foreach ($view as $rows) {
-                                            if($rows['status'] == 1){ ?>
+                                              
+                                            $date = date('Y-m-d', strtotime($rows['sched_sdate']));
+                                            if($rows['status'] == 1 && $date == $date2){ ?>
+                                            
                                               <a href="#" data-toggle="modal" data-target="#notAvail<?php echo $_GET['cid'];?>" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                            <?php }
                                            if($t['status'] == 1){ ?>
                                               <a href="#" data-toggle="modal" data-target="#notAvails<?php echo $_GET['cid'];?>" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                            <?php } else if($rows['status'] == 0) { ?>
-                                          <a href="#" data-toggle="modal" data-target="#bookNow<?php echo $_GET['cid'];?>" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                          <a href="#" data-toggle="modal" onclick="getDate(<?php echo $_GET['cid'];?>);" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                       <?php } } ?>
                          </div>
-                         <div class="modal" id="notAvail<?php echo $_GET['cid'];?>">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="modal-header">
-                                          <!-- <button class="close" data-dismiss="modal" type="button">
-                                              <span>&times;</span>
-                                          </button> -->
+                            <?php include('tablemodal.php'); ?>        
+                           <script>
+                              function getDate(restId){
+                                // alert(restId);
+                                $('#bookNow'+restId).modal('show');
+                                  $.ajax({
+                                        type: "GET",
+                                        url: "getdate.php?cid="+restId,    
+                                        dataType: 'json',
+                                        success: function(data) {
+                                        // console.log(data);
+                                        var test2 = [];
+                                        for(var i in data) {
                                           
-                                          <h3 class="modal-title"><?php echo $rows['restaurant_name'];?> doesn't allow online reservation at the moment, please do contact them for more information</h3>
-                                      </div>
-                                      <div class="modal-footer">
-                                          <button data-dismiss="modal" class="btn btn-primary hover" data-animation="false">Close</button>
-                                      </div><!-- end modal-footer -->
-                                  </div>
-                              </div>
-                          </div>
-                            <div class="modal" id="notAvails<?php echo $_GET['cid'];?>">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="modal-header">
-                                          <!-- <button class="close" data-dismiss="modal" type="button">
-                                              <span>&times;</span>
-                                          </button> -->
-                                          
-                                          <h3 class="modal-title">This table has already been booked</h3>
-                                      </div>
-                                      <div class="modal-footer">
-                                          <button data-dismiss="modal" class="btn btn-primary hover" data-animation="false">Close</button>
-                                      </div><!-- end modal-footer -->
-                                  </div>
-                              </div>
-                          </div> 
-                        <!-- Reservation Modal -->
-                            <div class="modal fade" tabindex="-1" role="dialog" id="bookNow<?php echo $_GET['cid']; ?>">
-                              <div class="modal-dialog" role="document" style="z-index: 1041;">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button class="close" data-dismiss="modal" type="button">
-                                              <span>&times;</span>
-                                          </button>
-                                      <h1 class="modal-title">Book Now!</h1>
-                                          
-                                      </div><!-- end modal-header -->
-                                      <form action="../../Controller/CustomersController/reservation.php?cid=<?php echo $_GET['cid']; ?>" method="POST">
-                                        <div class="modal-body" style="left:20px;">
-                                             <div class="form-group">
-                                               <label>Reservation Date</label>
-                                               <input type="hidden" name="cid" value="<?php echo  $_GET['cid'];?>">
-                                               <input type="hidden" name="table" value="<?php echo $t['table_id'];?>">
-                                               <input type="text" id="datepicker2" name="dat" class="form-control" required>
-                                               <span class="highlight"></span><span class="bar"></span>
-                                             </div>
-                                             <div class="form-group">
-                                               <label>Reservation Time</label>
-                                               <input type="text" name="tim" id="timepicker2" class="form-control" required>
-                                               <span class="highlight"></span><span class="bar"></span>
-                                             </div>
-                                             <div class="form-group">
-                                               <label >No. of Guests</label>
-                                               <input type="number" value="<?php echo $t['maxcapacity'];?>" name="guest" class="form-control" readonly>
-                                               <span class="highlight"></span><span class="bar"></span>
-                                             </div>
-                                             <div class="form-group">
-                                               <label>Special Requests</label>
-                                               <textarea name="special" class="form-control"></textarea>
-                                               <span class="highlight"></span><span class="bar"></span>
-                                             </div>
-                                        </div><!-- end modal-body -->
-                                         <div class="modal-footer">
-                                              <button data-dismiss="modal" class="btn btn-primary hover" data-animation="false">Close</button>
-                                              <input type="submit" name="book" class="btn btn-primary hover" value="Book Now!">
-
-                                          </div><!-- end modal-footer -->
-                                    </form>
-                                  </div><!-- end modal-content --> 
-                              </div><!-- end modal-dialog -->
-                           </div><!-- end Resevation modal-->
+                                        test2.push(moment(data[i].dat).format('DD-M-YYYY'));
+                                          console.log(test2);
+                                              
+                                        }
+                                        
+                                    
+                                        function unavailable(date) {
+                                            dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                                                if ($.inArray(dmy, test2) == -1) {
+                                                        return [true, ""];
+                                                            // console.log(test2);
+                                                } else {
+                                                        return [false,"","Unavailable"];
+                                                        // console.log(test2);
+                                                }
+                                        }
+                                    $('#datepicker').datepicker({ beforeShowDay: unavailable,
+                                                      minDate: -0,
+                                                      maxDate: "+14D",
+                                                      changeMonth: true,
+                                                      changeYear: true, 
+                                                      numberOfMonths: 1,
+                                                      dateFormat: 'MM dd, yy'          
+                                    });
+                                    $("#timepicker").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: '8:00',
+                                                  maxTime: '24:00'
+                                              });
+                                        
+                                    }
+                                  });
+                                 
+                                } 
+                              
+                             </script>
 
                     <?php } ?> 
                    
@@ -143,7 +121,7 @@
                       
   <?php include('footer.php');?>
 
-        <script src="../../assets/js/extension2.js"></script>
+        <!-- <script src="../../assets/js/extension2.js"></script> -->
     
     </body>
 </html>
