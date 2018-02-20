@@ -9,19 +9,20 @@ include('../dbconn.php');
 		$image = $_FILES['image']['name'];
 		$directory = "../../Image/";
 		$path = time().$image;
+		
 		$imageType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
             if($imageType != "jpg" && $imageType != "png" && $imageType != "jpeg"){
-                echo '<script> alert("Image must be a JPG/JPEG/PNG"); window.location="../../Model/Food/food.php?e=Invalid extension&style=danger&head=Oh snap!"; </script>';
-            }else{		
+				
+               echo '<script> alert("Image must be a JPG/JPEG/PNG"); window.location="../../Model/Food/food.php?e=Invalid extension&style=danger&head=Oh snap!"; </script>';
+            }else{	
+					
 			  		if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
 			  		{
-					
 						$data = array($id,$tnum,$desc,$max,$min,$path);
 						addTables($data);
-						// $_SESSION['id'] = $con->lastInsertId();
-					echo '<script> alert("Successfully Added a Table"); window.location="../../Model/Room/rooms.php" </script>';	
+						echo '<script> alert("Successfully Added a Table"); window.location="../../Model/Room/rooms.php" </script>';	
 					}else{
-					echo '<script> alert("Error in adding a Table"); window.location="../../Model/Room/rooms.php" </script>';
+						echo '<script> alert("Error in adding a Table"); window.location="../../Model/Room/rooms.php" </script>';
 					}
 			}
 	}
