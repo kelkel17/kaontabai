@@ -141,6 +141,7 @@
                                           
                                         test2.push(moment(data[i].dat).format('DD-M-YYYY'));
                                           console.log(test2);
+                                              
                                         }
                                         
                                     
@@ -154,12 +155,56 @@
                                                         // console.log(test2);
                                                 }
                                         }
-                                    $('#datepicker').datepicker({ beforeShowDay: unavailable});
-
+                                    $('#datepicker').datepicker({ beforeShowDay: unavailable,
+                                                      minDate: -0,
+                                                      maxDate: "+14D",
+                                                      changeMonth: true,
+                                                      changeYear: true, 
+                                                      numberOfMonths: 1,
+                                                      dateFormat: 'MM dd, yy'          
+                                    });
+                                    $("#timepicker").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: '8:00',
+                                                  maxTime: '24:00'
+                                              });
+                                        
                                     }
                                   });
-                              }
+                                 
+                                } 
+                              
                              </script>
+                             <!-- <script>
+                              function getDate(restId){
+                                // alert(restId);
+                                $('#bookNow'+restId).modal('show');
+                                  $.ajax({
+                                        type: "GET",
+                                        url: "gettime.php?cid="+restId,    
+                                        dataType: 'json',
+                                        success: function(data) {
+                                        // console.log(data);
+                                        // var test2 = [];
+                                        for(var i in data) {
+                                          
+                                        // test2.push(moment(data[i].dat).format('DD-M-YYYY'));
+                                          console.log(data[i]);
+                                              $("#timepicker").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: data[i].open,
+                                                  maxTime: data[i].close
+                                              });
+                                        }
+                                        
+                                    
+                                
+                                        
+                                    }
+                                  });
+                                 
+                                } 
+                                </script> -->
                             </div>
                 </div>
               </div>
