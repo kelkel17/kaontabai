@@ -168,9 +168,9 @@
                                           <div class="form-group text-center">
                                       <label for="image" class="hover">
                                       <!-- <img src="../../Image/blank.jpg" "> -->
-                                      <img src="../../Image/<?php echo $row['image']?>" id="preview" data-tooltip="true" title="Upload product image" data-animation="false" alt="product image" style="width:200px;height:200px"/>
+                                      <img src="../../Image/<?php echo $row['image']?>" id="preview1" data-tooltip="true" title="Upload product image" data-animation="false" alt="product image" style="width:200px;height:200px"/>
                                       </label>
-                                      <input type="file" name="image" onchange="loadImage(event,'preview')" id="image" value="../../Image/<?php echo $row['image']?>">
+                                      <input type="file" name="image" onchange="loadImage(event,'preview1')" id="image" >
                                   </div>
                                       <div class="tab-pane">
 
@@ -184,17 +184,31 @@
                                       <br />
                                       <div class="tab-pane">
                                         <label for="pname">Menu List</label><br/>
+                                        
                                           <?php 
+                                        //   echo $row['combo_menu_id'];
                                             //echo $row['cm_id'];
-                                            $menu = getCombo(array($_SESSION['id']));
-                                            if (count($menu) > 0) { 
-                                            foreach ($menu as $rows) {
+                                            $menu = getCombo();
+                                            //$m = getM(array($_SESSION['id']));
+                                           // $merge = array_merge($menu, $m);
+                                            //print_r($merge);
+                                            // foreach (array_merge($menu,$m) as $rows => $value) {
+                                                $menu_id = explode(",",$row['combo_menu_id']);
+                                               foreach($menu as $key => $asd){
+                                                      @$men_id = $menu_id[$key];
+                                                    if($men_id == $asd['menu_id']){
+                                                        echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'" checked>'.$asd['m_name'].'<br/>';
+                                                    }else{
+                                                        echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'">'.$asd['m_name'].'<br/>';
+                                                   }
+                                                        // $m = getM(array($row['restaurant_id']));
+                                                        // foreach($m as $s){
+                                                        //  echo '<input type="checkbox" name="menu[]" value="'.$s['menu_id'].'">'.$s['m_name'].'<br/>';
+                                                        
+                                                        // } 
+                                                }
                                             ?>
-                                            <input type="checkbox" name="menu[]" value="<?php echo $rows['menu_id'];?>" <?php if($row['cm_number'] == $rows['cm_number']){ echo 'checked';}?>><?php echo $rows['m_name']?><br/>
-                          
-                                            <?php }
-                                              }
-                                            ?>
+                                            
                                   </div>
                                       <br />
                                       <div class="tab-pane">
