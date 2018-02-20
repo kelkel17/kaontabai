@@ -56,7 +56,7 @@
 		<tr>
 	<?php 
 		$id = $_SESSION['id'];
-        $sql = "SELECT * FROM combo_meals cm, menus m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = '$id' GROUP BY cm.cm_number";
+        $sql = "SELECT *, cm.menu_id as combo_menu_id FROM combo_meals cm, menus m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = m.restaurant_id AND cm.restaurant_id = '$id' GROUP BY cm.cm_id";
         $con = con();
         $stmt = $con->prepare($sql);
         $stmt->execute();
@@ -69,7 +69,7 @@
 		  	echo '<td><center>'.$row['cm_number'].'<center></td>';
 		    echo '<td><center>'.$row['cm_name'].'</center></td>';
 		    echo '<td>'.substr($row['cm_desc'], 0, 50).((strlen($row['cm_desc']) > 50) ? '...' : '').'</td>';
-	       	echo '<td><center>'.$row['price'].'</center></td>';
+	       	echo '<td><center>'.$row['price'].'</	></td>';
 	       	echo '<td><img src="../../Image/'.$row['image'].'" style="width:25px; height:25px;"></td>';
 	       	echo '<td><center>'.$row['status'].'</center></td>'; 
 	       // echo '<td>'.'<img src="../../Image/'.$row['Product_image'].'" style="width: 150px; height:150px;"/>'.'</td>';
