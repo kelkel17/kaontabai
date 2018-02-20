@@ -24,11 +24,14 @@ include '../dbconn.php';
                 echo '<script>alert("Already exist!"); window.location="../../index.php";</script>';
             }
                 elseif($pass==$pass2){
-                $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$pass);
-                addCustomer($data);
+                    
                 $subject = 'Registered succesfully';
                 $body = 'You have succesfully registered an account';
+                $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$pass);
+                addCustomer($data);
                 mail($email,$subject,$body,'From: KaonTaBai!');
+                echo '<script> alert("Successfully Registered"); window.location="../../index.php" </script>';
+			
             }
 
             else
