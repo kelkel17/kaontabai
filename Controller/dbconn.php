@@ -163,9 +163,12 @@ function islogged2(){
 			$con = null;
 		}
 
-		function addCombo($data){
+		function addCombo($data,$image){
 			$con = con();
+			if(!(empty($image)))
 			$sql = "INSERT INTO combo_meals(restaurant_id, cm_name, cm_desc, price, image, cm_number, menu_id) VALUES(?,?,?,?,?,?,?)";
+			else
+			$sql = "INSERT INTO combo_meals(restaurant_id, cm_name, cm_desc, price, cm_number, menu_id) VALUES(?,?,?,?,?,?)";
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
@@ -177,9 +180,12 @@ function islogged2(){
 			$add = $stmt->execute($data);
 			$con = null;
 		}
-		function updateCombo($data){
+		function updateCombo($data,$image){
 			$con = con();
-			$sql = "UPDATE combo_meals SET restaurant_id = ?, cm_name = ?, cm_desc = ?, price = ?, image = ? WHERE cm_number = ?";
+			if(!(empty($image)))
+			$sql = "UPDATE combo_meals SET restaurant_id = ?, cm_name = ?, cm_desc = ?, price = ?, image = ?, menu_id = ? WHERE cm_id = ?";
+			else
+			$sql = "UPDATE combo_meals SET restaurant_id = ?, cm_name = ?, cm_desc = ?, price = ?, menu_id = ? WHERE cm_id = ?";
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
@@ -387,10 +393,14 @@ function islogged2(){
 		}//End Staff
 
 		//Add Menu
-		function addMenu($data){
+		function addMenu($data,$image){
 			$con = con();
+			if(!empty($image))
 			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,m_image,menu_number) 
 					VALUES (?,?,?,?,?,?,?,?)";	
+			else
+			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,menu_number) 
+					VALUES (?,?,?,?,?,?,?)";			
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
@@ -694,11 +704,11 @@ function islogged2(){
             $db = null;
         }
 
-        function getCombo($data){
+        function getCombo(){
 			$con = con();
-			$sql = "SELECT * FROM combo_meals as cm, menus as m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = ?";
+			$sql = "SELECT * FROM combo_meals cm, menus m WHERE  m.restaurant_id = 3 GROUP BY m.menu_id";
 			$stmt = $con->prepare($sql);
-			$stmt->execute($data);
+			$stmt->execute();
 			$add = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 			$con = null;
@@ -734,6 +744,17 @@ function islogged2(){
             $db = con();
 
             $sql = "SELECT * FROM menus where menu_id = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($data);
+            $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $menu;
+            $db = null;
+		}
+		function getM($data)
+        {
+            $db = con();
+
+            $sql = "SELECT * FROM menus where restaurant_id = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute($data);
             $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
