@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2018 at 08:28 PM
+-- Generation Time: Feb 20, 2018 at 10:11 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -230,7 +230,20 @@ INSERT INTO `menus` (`menu_id`, `mc_id`, `restaurant_id`, `m_name`, `m_desc`, `m
 (48, 1, 3, 'The Big Bang Burger', '9-inch burger topped with onions, tomatoes, lettuce, mayo, American cheese on a sesame-seed bun. Sharing recommended.', 'Appetizer', '1518891589photo-1.jpg', 'Available', '408.00', '2018-02-17 18:19:49', 456),
 (49, 1, 3, 'Bacon Cheese & Mushroom', 'Juicy beef patty topped with white cheese, bacon & mushroom', 'Appetizer', '151889165913315257_10154167014738774_879608071545030221_n20171211-25618-aew776.jpg', 'Available', '198.00', '2018-02-17 18:20:59', 548),
 (50, 1, 3, 'Seafood Carbonara', 'A must try dish! Treasure from the sea- shrimps and squid in rich creamy white sauce.', 'Soup/Vegetables', '15188917253580712221_c66036cc95_z.jpg', 'Available', '188.00', '2018-02-17 18:22:06', 989),
-(51, 1, 3, 'Victoria''s Secret Spaghetti', 'Do you want to know my secret? Home-made meat sauce topped with oozing cheese. A treat for the young and old.', 'Noodles/and/Rice', '1518891813tumblr_inline_n2sbxj45z51riyq8k.jpg', 'Available', '160.00', '2018-02-17 18:23:33', 751);
+(51, 1, 3, 'Victoria''s Secret Spaghetti', 'Do you want to know my secret? Home-made meat sauce topped with oozing cheese. A treat for the young and old.', 'Noodles/and/Rice', '1518891813tumblr_inline_n2sbxj45z51riyq8k.jpg', 'Available', '160.00', '2018-02-17 18:23:33', 751),
+(52, 1, 11, 'Baked Scallops (seasonal)', '', 'Appetizer', '1519116890Baked Scallops copy.jpg', 'Available', '275.00', '2018-02-20 08:54:50', 580),
+(53, 1, 11, 'Calamares', '', 'Appetizer', '1519116921calamares.jpg', 'Available', '199.00', '2018-02-20 08:55:21', 406),
+(54, 1, 11, 'Chichabits', '', 'Appetizer', '1519117006chichabits.jpg', 'Available', '255.00', '2018-02-20 08:56:46', 217),
+(55, 1, 11, 'Chicken Lollipop', '', 'Appetizer', '1519117047chicken-lollipop.jpg', 'Available', '195.00', '2018-02-20 08:57:27', 473),
+(56, 1, 11, 'Lechon Kawali', '', 'Pork', '1519117189lechon kawai.jpg', 'Available', '275.00', '2018-02-20 08:59:49', 553),
+(57, 1, 11, 'Sizzling Gambas', '', 'Sizzlers/Grilled', '1519117268sizzling gambas.jpg', 'Available', '283.00', '2018-02-20 09:01:08', 368),
+(58, 1, 11, 'Inihaw na Liempo', '', 'Pork', '1519117416pork liempo.jpg', 'Available', '203.00', '2018-02-20 09:03:36', 294),
+(59, 1, 11, 'Inihaw na Pusit', '', 'Sizzlers/Grilled', '1519117441inihaw na pusit.jpg', 'Available', '355.00', '2018-02-20 09:04:01', 143),
+(60, 1, 11, 'Inihaw na Manok', '', 'Sizzlers/Grilled', '1519117522inihaw na manok.jpg', 'Available', '255.00', '2018-02-20 09:05:22', 964),
+(61, 1, 11, 'Chicken Chicharon Skin', '', 'Chicken', '1519117568chicken chicharon skin.jpg', 'Available', '155.00', '2018-02-20 09:06:08', 129),
+(62, 1, 11, 'Beef Kare-kare', '', 'Beef', '1519117622kare kare.jpg', 'Available', '355.00', '2018-02-20 09:07:02', 940),
+(63, 1, 11, 'Sinigang na Baboy', '', 'Pork', '1519117648sinangag na baboy.jpg', 'Available', '280.00', '2018-02-20 09:07:28', 156),
+(64, 3, 11, 'Banana Caramel', '', 'Special', '1519117819the-banana-caramel-dessert.jpg', 'Available', '135.00', '2018-02-20 09:10:19', 327);
 
 -- --------------------------------------------------------
 
@@ -568,7 +581,8 @@ CREATE TABLE `restaurants` (
 INSERT INTO `restaurants` (`restaurant_id`, `sub_id`, `restaurant_name`, `restaurant_desc`, `restaurant_addr`, `restaurant_contact`, `max_capacity`, `hour_open`, `hour_close`, `rate_comm`, `lat`, `lng`, `username`, `password`, `owner_fname`, `owner_mname`, `owner_lname`, `owner_contact`, `owner_email`, `owner_address`, `restaurant_logo`, `restaurant_status`, `sub_date`, `sub_exp`) VALUES
 (1, 3, 'Kuya J', 'KATAKAM-TAKAM NA KUWENTO NI KUYA J\r\n\r\n\r\n\r\n\r\nKuya J Restaurant, formerly known as â€œAng Kan-anan ni Kuya J,â€ started as a humble eatery along the streets of Cebu. But with Kuya Jâ€™s undeniably delicious dishes, mouthwatering words of recommendation quickly spread into every Cebuanosâ€™ palate. With that, Kuya J instantly became one of the well-loved restaurants in Cebu. \r\n\r\nToday, Kuya J continues to satisfy every Filipinoâ€™s appetite nationwide. Using only the freshest ingredients available, Kuya J cooks up a storm of delicious Pinoy food in every corner of the Philippines.\r\n\r\nTHE BLOCKBUSTER BIDA\r\n\r\nJericho Rosales is one of the award-winning drama actors in the country and the best Kuya to his family. \r\n\r\nWhatâ€™s very inspiring about him is his trait of always putting his heart into everything that he does, especially when touching peopleâ€™s lives.\r\n\r\nThis is why Echo is the perfect endorser for Kuya J.', 'Corner Tojong Street, 15 N Escario St, Lungsod ng Cebu, 6000 ', '09989624269', '100', '09:00', '21:00', NULL, 10.3188, 123.902, 'admin', 'admin', 'Mickale', 'Lapasanda', 'Saturre', '09165970601', 'kuyajtest@gmail.com', 'Saint Bernard Southern Leyte', '151825301515174728091517414973151733665615166037981512156053kuyaj.png', 1, '2018-01-31 2:21:52', '2019-01-31 2:21:52'),
 (3, 2, 'Casa Verde', 'Established in August 2002, CASA VERDE is a chain of family-owned restaurants in Cebu City. Spanish for "green house", CASA VERDE''s name was influenced by the owners'' Spanish roots and the color of the Ramos Branch, which used to be one of the family''s ancestral homes. \r\n\r\nOriginally, the Ramos Branch was supposed to be just a small canteen that catered to the residents of the 2nd floor dormitory and some students from nearby colleges. Through word-of-mouth and recommendations by family and friends, the humble canteen soon became a full-scale restaurant. After almost a decade and three branches later, CASA VERDE has grown into one of Cebu''s most popular dining destinations. \r\n\r\n"Value for Money" has always been the restaurant''s philosophy. CASA VERDE believes that everyone deserves to enjoy great food and quality service at reasonable prices in a comfortable atmosphere. It''s casual dining at its best. \r\n\r\nCASA VERDE is the perfect place to let your hair down and enjoy a steak or two with family and friends. The ambiance is simple and casual, with knickknacks and collectibles from the personal collections of the owners. It''s also interesting to note that all of the restaurant''s signature dishes are named after some members of the family. We bring homestyle comfort food to the next level. \r\n\r\nThe next time you''re in the mood for some good food, head on down to the CASA VERDE branch nearest you and try our best-selling ribs, mouth-watering steaks, sumptuous pasta, and sinful desserts. It''s a dining experience that truly exceeds expectation. ', 'Lim Tian Teng Street, Ramos, Cebu City, Philippines, 6000', '+63 32 253.6472', '350', '10:00', '22:00', NULL, 10.3072, 123.896, 'admin2', 'admin2', 'Gian Carlo', 'S', 'Cataraja', '09265976739', 'casaverdetest@gmail.com', 'Cebu City', '15189781501518886223casa-verde-logo-679x410.jpg', 1, '2018-02-18 12:00:15', '2018-08-18 12:00:15'),
-(8, 1, 'AA BBQ', '', 'V. Ranudo St, Cebu City, 6000 Cebu', '03938473', '100', '10:30', '21:30', NULL, 10.3074, 123.897, 'admin3', '123', 'alsdal', 'lkjasldkj', 'lkasjdlkasj', '98938947397', 'aabbqtest@gmail.com', 'Aliwanay Balamban Cebu', '1519036780IMG_2492.JPG', 1, '2018-02-19 6:34:57', '2018-03-19 6:34:57');
+(8, 1, 'AA BBQ', '', 'V. Ranudo St, Cebu City, 6000 Cebu', '03938473', '100', '10:30', '21:30', NULL, 10.3074, 123.897, 'admin3', '123', 'alsdal', 'lkjasldkj', 'lkasjdlkasj', '98938947397', 'aabbqtest@gmail.com', 'Aliwanay Balamban Cebu', '1519036780IMG_2492.JPG', 1, '2018-02-19 6:34:57', '2018-03-19 6:34:57'),
+(11, 4, 'Gerry''s Grill', 'Here at Gerry''s, we aim to give everyone a pleasurable dining experience, serving only the freshest food ranging from Filipino favorites â€“ Sisig, Inihaw na Pusit, Crispy Pata, Beef Kare-kare, Adobo Shreds to exotic cuisines.\r\n\r\nI have always dreamt of putting up a place where everyone could hang out and enjoy good food. With my passion for cooking and love for grilled dishes came Gerry''s.\r\n\r\nAlthough the original concept of my business was one where people could unwind with a drink or two, Gerryâ€™s has become a family restaurant, too.\r\n\r\nFrom opening its first store in Tomas Morato, Quezon City, Gerryâ€™s has come a long way. With its continuous expansion nationwide, Gerryâ€™s has also opened branches in the United States, Singapore and Qatar.\r\n\r\nUp until now, we strive to continue to evolve, responding to the ever growing needs of our customers. We believe in offering our customers the best value for their money. We also take pride in taking care of our people â€“ one of our most valuable assets.\r\n\r\nThese are the reasons why Gerry''s remains to be the favorite among Filipinos. For as long as we can, we guarantee nothing but great food and loads of fun.', 'Robinson Galleria Cebu, Gen. Maxilom Ext, Cebu City, 6000 Cebu', '(032) 231 4738', '300', '10:00', '21:00', NULL, 10.304, 123.912, 'admin6', '123', 'Godwin', 'Margaja', 'Montealto', '098272626', 'gerrygrilltest@gmail.com', 'Aliwanay Balamban Cebu', '1519115864logo.png', 1, '2018-02-20 4:15:49', '2018-02-27 4:15:49');
 
 -- --------------------------------------------------------
 
@@ -718,7 +732,8 @@ INSERT INTO `transactions` (`trans_id`, `restaurant_id`, `payment_id`, `total_pr
 (2, 3, 'PAY-3SU342947X986640ULKEFDEQ', '1000.00', '1ac6562cc74f9b4416739d45c8849508', 1),
 (3, 6, 'PAY-55B4586211243774PLKFKO3I', '500.00', '15e01c506ec914c805814ee917a2e20f', 0),
 (4, 7, 'PAY-3EX27423UW996412YLKFKP4Y', '1500.00', 'fe1ae5d87b57bc6088af78f6972fce8a', 0),
-(5, 8, 'PAY-1WD25542SY765615ELKFKQVY', '500.00', 'a7985a293aa06d9a74041448325f9dd4', 1);
+(5, 8, 'PAY-1WD25542SY765615ELKFKQVY', '500.00', 'a7985a293aa06d9a74041448325f9dd4', 1),
+(6, 11, 'PAY-09T91565JT4183642LKF5SOQ', '1', 'fde6350040cc896df2de1bda94e3601a', 1);
 
 -- --------------------------------------------------------
 
@@ -915,7 +930,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `menu_category`
 --
@@ -970,7 +985,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `schedules`
 --
@@ -995,7 +1010,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `visitors`
 --
