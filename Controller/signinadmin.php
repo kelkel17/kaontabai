@@ -13,25 +13,24 @@ include 'dbconn.php';
 		$stmt = $con->prepare($sql);
 		$stmt->execute(array($userlog,$userpass));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($row['restaurant_status'] == 0){
-				echo '<script>alert("Your account has not yet been verified"); window.location="../paypals/index.php?id='.$row['restaurant_id'].'";</script>';
-		}	elseif($row['restaurant_status'] == 1){
-				if($row['restaurant_name'] == ''){
-				$_SESSION['id'] = $row['restaurant_id'];
-								header('location:../View/loading2.php?id='.$row['restaurant_id'].'');
-				}
-				elseif($row['restaurant_name'] != ''){
-					if($stmt->rowCount() > 0){
+		if($row['password'] == $userpass){
+				if($row['restaurant_status'] == 0){
+						echo '<script>alert("Your account has not yet been verified"); window.location="../paypals/index.php?id='.$row['restaurant_id'].'";</script>';
+				}	elseif($row['restaurant_status'] == 1){
+						if($row['restaurant_name'] == ''){
 						$_SESSION['id'] = $row['restaurant_id'];
-											header('location:../View/loading.php?id='.$row['restaurant_id'].'');		
+										header('location:../View/loading2.php?id='.$row['restaurant_id'].'');
+						}
+						elseif($row['restaurant_name'] != ''){
+							if($stmt->rowCount() > 0){
+								$_SESSION['id'] = $row['restaurant_id'];
+													header('location:../View/loading.php?id='.$row['restaurant_id'].'');		
+							}
 					}
-					else{
-						header('location:../loginadmin.php?mess=Your username or password is incorrect!');
-					}
-			}
-		}	
-		
-}
+				}	
+		}else
+			header('location:../loginadmin.php?mess=Your username or password is incorrect!');
+	}
 
 		
 ?>
