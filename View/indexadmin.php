@@ -318,9 +318,77 @@
 </div>	
 <!-- </div>  -->
 
+ <?php
+	 	$rid = $_GET['id'];
+	 	  $lnglat = getLngLat($rid);
+                        $lnglat = json_encode($lnglat,true);
+        
+                        echo '<div id="data"  style="display:none">'.$lnglat.'</div>';
+        				echo '<div id="map" style="height:200px; width:80%; display:none"></div>';
+                        ?>
 			
 </body>
 </html>
+<!-- MAPS -->
+<script>
+      var map;
+        var geocoder;
+            var marker;
+          function initMap() {
+            var location = {lat: 10.3157, lng: 123.8854};
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: location,
+              zoom: 8
+            });
+              
+               marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+              
+              
+              var cdata =  JSON.parse(document.getElementById('data').innerHTML);
+             geocoder = new google.maps.Geocoder();
+              codeAddress(cdata);
+                   
+          }
+             
+          function codeAddress(cdata) {
+            Array.prototype.forEach.call(cdata, function(data){
+                var address = data.restaurant_name + ' ' + data.restaurant_addr;
+                geocoder.geocode( { 'address': address}, function(results, status) {
+                  if (status == 'OK') {
+                    map.setCenter(results[0].geometry.location);
+    //                alert(map.getCenter().lng()); 
+                      var points = {};
+                      points.id = data.restaurant_id;
+                      points.lat = map.getCenter().lat();
+                      points.lng = map.getCenter().lng();
+                      updateLocation(points);
+                  } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                  }
+                });
+            });
+        }
+             
+        function updateLocation(points)
+        {
+            $.ajax({
+                url:"../Controller/RestaurantsController/action.php",
+                method:"post",
+                data: points,
+                success: function(res){
+                    console.log(res);
+                }
+            })
+    //        console.log(points)
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSycgg4KWvJUmyptQTnn84wV5q0XCMKC0&callback=initMap"
+    async defer></script>
+
+
 <script>
 	
 			function load_unseen_notification(view = '')
