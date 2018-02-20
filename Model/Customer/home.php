@@ -386,26 +386,27 @@
 		url: "getreservation.php",    
         dataType: 'json',
         success: function(data) {
-            for(var i = 0; i < data.length;i++)
-            console.log(data[i]);
-            var date = moment().format('LL');
-            console.log(date);
-            var date2 = data[0].dat; 
-            console.log(date2);
-
+            
+            for(var i in data) {
+                console.log(data[i]);
+                var date = moment().format('LL');
+                // console.log(date);
+                var date2 = data[i].dat; 
+                // console.log(date2);
+            }        
             if(date == date2){
-                console.log('dili okay');
-                if(data[0].stat == 'Reserved'){
-                    swal("Your reservation has been accepted your reservation number is "+data[0].num,{
+                // console.log('dili okay');
+                if(data[i].stat == 'Reserved'){
+                    swal("Your reservation has been accepted your reservation number is "+data[i].num,{
                     icon: "info"
                    });
                 }else{
-                    swal("Your reservation is now "+data[0].stat+" your reservation number is "+data[0].num,{
+                    swal("Your reservation is now "+data[i].stat+" your reservation number is "+data[i].num,{
                     icon: "info"
                    });
                 }
-            }else{
-                console.log('okay');
+            }else if(date > date2){
+                // console.log('okay');
             }
 
         }
