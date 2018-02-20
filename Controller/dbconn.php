@@ -31,12 +31,9 @@ function islogged2(){
 		//$_SESSION['id'] = $set;
 		$con = null;
 
-			if($add){
-				echo '<script> alert("Successfully Registered"); window.location="../../index.php" </script>';
-			}
-			else{
+			if(!($add))
 				echo '<script> alert("Something went wrong! Please Try Again"); window.location="../../index.php"</script>';
-			}
+			
 	}
 
 	function viewAllCustomers(){
