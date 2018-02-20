@@ -39,13 +39,14 @@
 				            if($sthandler->rowCount() > 0)
 				            	 echo '<script>alert("You already availed this promo!"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
 							 else{
-								 addPromo($data2); 
 								 $data2 = array($check,$id);
+								 
+								 addPromo($data2); 
 							}	 
 						 }
 					}		   
 			  }	 
 			  updateOwner($data,$path);
-			 echo '<script> alert("Succesfully Updated your restaurant information"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
+			 echo '<script> alert("Succesfully Updated your restaurant information"); window.location="../../View/indexadmin.php?id='.$id.'";</script>';
 	}	
 ?>
