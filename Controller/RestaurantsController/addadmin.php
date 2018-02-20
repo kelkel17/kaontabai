@@ -38,6 +38,7 @@
 				$hour = new DateTime($date);
 				$hour->add(new DateInterval('P7D'));
 				$sub2 = $hour->format('Y-m-d g:i:s');
+				$total = 1;
 				
 			}
 			
