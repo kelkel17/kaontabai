@@ -54,20 +54,22 @@
 			</div> .cd-pricing-features -->
 
 			<footer class="cd-pricing-footer">
+
 				<a href="#" data-toggle="modal" data-target="#addSub<?php echo $row['sub_id']; ?>">Select</a>
 			</footer> <!-- .cd-pricing-footer -->
 		</li>
+		<?php 
+												if(isset($_GET['id'])){
+                                                $owner = getOwner(array($_GET['id']));
+                                                foreach($owner as $t){ ?>
 			<div class="modal fade" tabindex="-1" role="dialog" id="addSub<?php echo $row['sub_id']; ?>">
 				<div class="modal-dialog" role="document">
 					<div class="cd-form">
 							<form action="../Controller/RestaurantsController/addadmin.php" method="post">
 								<fieldset>
 				                   <legend>Account Info</legend>
-										<?php 
-												if(isset($_GET['id'])){
-                                                $owner = getOwner(array($_GET['id']));
-                                                foreach($owner as $t){
-                                            ?>
+										
+                                            
 										<div class="half-width">
                                             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 											<input type="hidden" name="sub" value="<?php echo $row['sub_id'] ?>">
@@ -104,8 +106,45 @@
 											<label for="userPasswordRepeat">Repeat Password</label>
 											<input type="password" id="userPasswordRepeat" name="password2" value="<?php echo $t['password']; ?>">
 										</div>
-                                    <?php } }?>
-									<div class="half-width">
+								
+								</fieldset>
+								<fieldset>
+									<legend>Payment Method</legend>
+										<div>
+											<ul class="cd-payment-gateways">
+												<li>
+													<input type="radio" name="payment-method" id="paypal" value="paypal">
+													<label for="paypal">Paypal</label>
+												</li>
+														<!-- 
+														<li>
+															<input type="radio" name="payment-method" id="card" value="card" checked>
+															<label for="card">Card</label>
+														</li> -->
+											</ul> <!-- .cd-payment-gateways -->
+										</div>
+								</fieldset>
+								<fieldset>
+									<div>
+										<input type="submit" name="add" value="Get started">
+										
+									</div>
+								</fieldset>
+						</form>
+							<a href="#0" class="cd-close close" data-dismiss="modal" type="button"></a>
+					</div><!-- .cd-form -->
+				</div>	
+        	</div><!-- end of Add Event modal -->	
+        <?php } }?>
+        <div class="modal fade" tabindex="-1" role="dialog" id="addSub<?php echo $row['sub_id']; ?>">
+				<div class="modal-dialog" role="document">
+					<div class="cd-form">
+							<form action="../Controller/RestaurantsController/addadmin.php" method="post">
+								<fieldset>
+				                   <legend>Account Info</legend>
+										
+                                            
+										<div class="half-width">
                                             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 											<input type="hidden" name="sub" value="<?php echo $row['sub_id'] ?>">
 											<input type="hidden" name="price" value="<?php echo $row['sub_price'] ?>">
@@ -168,7 +207,7 @@
 							<a href="#0" class="cd-close close" data-dismiss="modal" type="button"></a>
 					</div><!-- .cd-form -->
 				</div>	
-        	</div><!-- end of Add Event modal -->	
+        	</div><!-- end of Add Event modal -->
 	<?php } ?>
 	</ul> <!-- .cd-pricing -->
 
