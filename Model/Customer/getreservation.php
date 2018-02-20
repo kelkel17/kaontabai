@@ -6,11 +6,11 @@
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $data = array();
-    foreach($row as $r){
-        $data[] = $r;
-    }
+    // $data = array();
+    // foreach($row as $r){
+    //     $data[] = $r;
+    // }
 
-    echo json_encode($data);
+    echo json_encode($row);
 
 ?>
