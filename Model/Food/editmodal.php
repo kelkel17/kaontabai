@@ -94,11 +94,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title"><?php echo $row['customer_fname']?>'s Receipt</h3></center>
-                    </div>
+                        <div id="printableArea">    
+                                            
+                            <center><h3 class="modal-title"><?php echo $row['customer_fname']?>'s Receipt</h3></center>
                     <div class="modal-body" style="padding-left: 30px;"><strong>
                         <div class="row">    
                             Order ID: <?php echo $row['order_number'];?> 
@@ -138,12 +136,14 @@
 
                   if($row['order_id'] == $r['order_id']){
                       ?>
-                          <?php echo $r['m_name'].' '.$r['order_qty'];?> pcs<br/>
+                        <ul style="list-style-type: circle;">
+                          <li style="margin-left:-5%"><?php echo $r['m_name'].' '.$r['order_qty'];?> pcs</li>
+                        </ul>  
                      <?php } } }?>    
-                    </strong></div>
+                    </strong></div></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
-                        
+                        <input type="button" onclick="printDiv('printableArea')" class="btn btn-primary" value="Print Receipt" /></body>
                     </div>
                 </div>
             </div>
