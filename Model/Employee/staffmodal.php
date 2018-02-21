@@ -18,7 +18,7 @@
 					                            </div><br />
 					                            <div class="tab-pane">
 					                            	<label for="mname">Staff Middle Name</label>
-					                                <input type="text" name="mname" id="mname" class="form-control" required>
+					                                <input type="text" name="mname" id="mname" class="form-control">
 					                                <span class="highlight"></span><span class="bar"></span>
 					                            </div><br />
 					                            <div class="tab-pane">
