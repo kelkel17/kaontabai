@@ -2,41 +2,6 @@
   
     include '../../Controller/dbconn.php';
     islogged();
-
-  
-  if(isset($_POST['updateProduct'])){
-      $id = $_POST['id'];
-      $name = $_POST['name']; 
-        $desc = $_POST['desc'];   
-        $type = $_POST['testme'];
-        $category = $_POST['category']; 
-        $price = $_POST['price'];
-        $myID = $_SESSION['id'];
-        $image = $_FILES['image']['name'];
-        $directory = "../../Image/";
-       if(!empty($image))
-            $path = time().$image;
-        else  $path = '';
-      $imageType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
-      if($imageType != "jpg" && $imageType != "png" && $imageType != "jpeg" && !empty($path)){
-             echo '<script> alert("Image must be a JPG/JPEG/PNG"); window.location="../../Model/Food/food.php?e=Invalid extension&style=danger&head=Oh snap!"; </script>';
-        }else{      
-                if(empty($path))
-                    $data = array($myID,$name,$desc,$category,$type,$price,$id);
-                
-                else{
-                    if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
-                        $data = array($myID,$name,$desc,$category,$type,$price,$path, $id);
-                    else
-                        echo '<script> alert("Error in Updating a Product"); window.location="../../Model/Food/food.php" </script>';
-                }
-                    updateProduct($data,$path);   
-                    echo '<script> alert("Successfully Updated the Product"); window.location="../../Model/Food/food.php" </script>';
-        }
-  
-  }
-    
-
 ?>
 
 <!DOCTYPE html>
