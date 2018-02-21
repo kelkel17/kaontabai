@@ -30,6 +30,7 @@
 <div class="tab-content" id="12">
   <label for="ptype">Product Type</label> 
       <select name="type[]" id="type22" class="form-control" required>
+        <!-- <option value="<?php echo $row['m_category']?>" <?php if($row['m_category']==$row['m_category']){ echo 'selected'; }?>><?php echo $row['m_category']?></option>  -->
         <option value="Beer">Beer</option>
         <option value="Soft Drinks">Soft Drinks</option>
         <option value="Tea">Tea</option>
@@ -40,6 +41,7 @@
 <div class="tab-content" id="13">
   <label for="ptype">Product Type</label>
     <select name="type[]" id="type32" class="form-control" required>
+        <!-- <option value="<?php echo $row['m_category']?>" <?php if($row['m_category']==$row['m_category']){ echo 'selected'; }?>><?php echo $row['m_category']?></option>  -->
         <option value="Ice Cream">Ice Cream</option>
         <option value="Cake">Cake</option>
         <option value="Halo-Halo">Halo-Halo</option>
