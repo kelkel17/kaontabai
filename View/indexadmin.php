@@ -319,7 +319,7 @@
 <!-- </div>  -->
 
  <?php
-	 	$rid = $_GET['id'];
+	 	$rid = $_SESSION['id'];
 	 	  $lnglat = getLngLat($rid);
                         $lnglat = json_encode($lnglat,true);
         
