@@ -13,6 +13,12 @@
 <!doctype html>
 
  <html class="no-js" lang="en"> 
+        <style>#classModal {}
+
+.modal-body {
+  overflow-x: auto;
+}
+</style>
           <?php include('header.php'); ?>
         <div>
           <span><br></span>
@@ -100,7 +106,7 @@
                                  <?php
                                       $cid = $_SESSION['id'];
 
-                                      $sql = "SELECT SUM(od.order_qty) as total, o.order_number as num, r.restaurant_name as name, o.order_time as tim, o.status as stat, o.total_price as pr, o.order_id, o.reservation_id, o.order_status, o.payment_id, c.customer_fname FROM orders o, menus m, customers c, order_details od, restaurants r, reservations res WHERE m.menu_id = od.menu_id AND o.reservation_id = res.reservation_number AND o.order_id = od.order_id AND res.restaurant_id = r.restaurant_id AND o.customer_id = c.customer_id AND o.customer_id = '$cid' GROUP BY o.order_number";
+                                      $sql = "SELECT SUM(od.order_qty) as total, o.order_number as num, r.restaurant_name as name, o.order_time as tim, o.status as stat, o.total_price as pr, o.order_id, o.reservation_id, o.order_status, o.payment_id, c.customer_fname FROM orders o, menus m, customers c, order_details od, restaurants r, reservations res WHERE m.menu_id = od.menu_id AND o.reservation_id = res.reservation_number AND o.order_id = od.order_id AND res.restaurant_id = r.restaurant_id AND o.customer_id = c.customer_id AND o.customer_id = '$cid' GROUP BY o.order_number DESC";
                                       $con = con();
                                       $stmt = $con->prepare($sql);
                                       $stmt->execute();
@@ -114,11 +120,11 @@
                                       <td><center><?php echo date('F j, Y g:i A', strtotime($rows['tim'])); ?></center></td>
                                       <td><center>&#8369; <?php echo number_format($rows['pr'],2);?></center></td>
                                       <td><center><?php echo $rows['stat'];?></center></td>
-                                      <td><center><a href="#" data-toggle="modal" data-target="#viewOrder<?php echo $rows['order_id']; ?>"><i class="fa fa-eye" aria-hidden="true" title="View"></i></a>
+                                      <td><center><a href="#" data-toggle="modal" data-target="#viewOrder<?php echo $rows['order_id'] ?>"><i class="fa fa-eye" aria-hidden="true" title="View"></i></a>
                                       </center></td>
 
                                   </tr>
-                                  <?php include('modal.php');?> 
+                                  <?php include('modal2.php');?> 
                                   <?php }} else{?>
                                   <tr>
                                       <td>No Entry</td>
@@ -157,6 +163,17 @@
     } );
 } );
         </script>
-    
+   <script>
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>
     </body>
 </html>
