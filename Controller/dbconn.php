@@ -375,13 +375,6 @@ function islogged2(){
 			$stmt = $con->prepare($sql);
 			$update = $stmt->execute($data);
 			$con = null;
-
-			if($update){
-				echo '<script> alert("Successfully Updated");  window.location="../../Model/Employee/staff.php" </script>';
-			}else{
-				echo '<script> alert("Updating Failed");window.location="../../Model/Employee/staff.php" </script>';
-
-			}
 		}
 
 		function deactivateStaff($id){
@@ -704,11 +697,11 @@ function islogged2(){
             $db = null;
         }
 
-        function getCombo(){
+        function getCombo($data){
 			$con = con();
-			$sql = "SELECT * FROM combo_meals cm, menus m WHERE  m.restaurant_id = 3 GROUP BY m.menu_id";
+			$sql = "SELECT * FROM combo_meals cm, menus m WHERE m.restaurant_id = ? GROUP BY m.menu_id";
 			$stmt = $con->prepare($sql);
-			$stmt->execute();
+			$stmt->execute($data);
 			$add = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 			$con = null;
