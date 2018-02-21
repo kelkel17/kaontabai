@@ -18,7 +18,7 @@
                                       <!-- <img src="../../Image/blank.jpg" "> -->
                                       <img src="../../Image/blank.jpg" id="preview" data-tooltip="true" title="Upload product image" data-animation="false" alt="product image" style="width:200px;height:200px"/>
                                       </label>
-                                      <input type="file" name="image" onchange="loadImage(event,'preview')" style="visibility:hidden" id="image" required>
+                                      <input type="file" name="image" onchange="loadImage(event,'preview')" style="visibility:hidden" id="image">
                                   </div>
                                       <div class="tab-pane">
                                         <label for="pname">Combo Meal Name</label>
