@@ -28,20 +28,20 @@
                     <div class="col-lg-2" style="margin-top: 10%;">
                     <?php
                         $filename = '../Image/'.$row['customer_pic'].'';
-                          if($row['customer_pic']=='' || !(file_exists($filename))){
-                            if($row['customer_gender'] == 'Female'){?>
-                              <img src="../../Image/icon.png" class="lol">
+                        if($row['customer_pic']==''){
+                          if($row['customer_gender'] == 'Female'){?>
+                            <img src="../../Image/icon.png" class="lol">
+                                <div class="overlays">
+                                    <div class="text2">Image not Found</div>
+                                  </div>
+                    <?php } elseif($row['customer_gender'] == 'Male'){?>
+                            <img src="../../Image/icon2.png" class="lol">
                                   <div class="overlays">
-                                      <div class="text2">Image not Found</div>
-                                    </div>
-                      <?php } elseif($row['customer_gender'] == 'Male'){?>
-                              <img src="../../Image/icon2.png" class="lol">
-                                    <div class="overlays">
-                                      <div class="text2">Image not Found</div>
-                                    </div>
-                       <?php } } else{?>  
-                                <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
-                      <?php } ?>
+                                    <div class="text2">Image not Found</div>
+                                  </div>
+                     <?php } } if($row['customer_pic'] != ''){?>  
+                              <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
+                    <?php } ?>
                       <div class="row">
                         <div class="col-sm-12"  style="margin-left: 18%; margin-top: 3%;"> 
                             <?php 
