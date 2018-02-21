@@ -185,28 +185,19 @@
                                       <div class="tab-pane">
                                         <label for="pname">Menu List</label><br/>
                                         
-                                          <?php 
-                                        //   echo $row['combo_menu_id'];
-                                            //echo $row['cm_id'];
-                                            $menu = getCombo();
-                                            //$m = getM(array($_SESSION['id']));
-                                           // $merge = array_merge($menu, $m);
-                                            //print_r($merge);
-                                            // foreach (array_merge($menu,$m) as $rows => $value) {
-                                                $menu_id = explode(",",$row['combo_menu_id']);
-                                               foreach($menu as $key => $asd){
-                                                      @$men_id = $menu_id[$key];
-                                                    if($men_id == $asd['menu_id']){
+                                          <?php     
+                                            $menu = getCombo(array($_SESSION['id']));
+                                            
+                                            $menu_id = explode(",",$row['combo_menu_id']);
+                                            foreach($menu as $key => $asd){
+
+                                                    //   @$men_id = $menu_id[$key];
+                                                    if(in_array($asd['menu_id'],$menu_id)){
                                                         echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'" checked>'.$asd['m_name'].'<br/>';
                                                     }else{
                                                         echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'">'.$asd['m_name'].'<br/>';
                                                    }
-                                                        // $m = getM(array($row['restaurant_id']));
-                                                        // foreach($m as $s){
-                                                        //  echo '<input type="checkbox" name="menu[]" value="'.$s['menu_id'].'">'.$s['m_name'].'<br/>';
-                                                        
-                                                        // } 
-                                                }
+                                                  }
                                             ?>
                                             
                                   </div>
