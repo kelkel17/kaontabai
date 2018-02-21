@@ -837,7 +837,7 @@ function islogged2(){
 		    $sql = "SELECT * FROM restaurants WHERE lat IS NULL AND lng IS NULL AND restaurant_id=$rid";
 		    $s = $db->query($sql);
 		    // $s->execute(array($rid));
-		    $user = $s->fetchall(PDO::FETCH_ASSOC);
+		    $user = $s->fetchAll(PDO::FETCH_ASSOC);
 		    $db = null;
 			return $user;
 		}
