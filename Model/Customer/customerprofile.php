@@ -24,7 +24,7 @@
                       <div class="col-sm-12" style="margin-left:">
                     <?php
                         $filename = '../Image/'.$row['customer_pic'].'';
-                          if($row['customer_pic']=='' || !(file_exists($filename))){
+                          if($row['customer_pic']==''){
                             if($row['customer_gender'] == 'Female'){?>
                               <img src="../../Image/icon.png" class="lol">
                                   <div class="overlays">
@@ -35,7 +35,7 @@
                                     <div class="overlays">
                                       <div class="text2">Image not Found</div>
                                     </div>
-                       <?php } } else{?>  
+                       <?php } } if($row['customer_pic'] != ''){?>  
                                 <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
                       <?php } ?>
                       </div>
