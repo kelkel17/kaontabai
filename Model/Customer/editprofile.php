@@ -136,7 +136,7 @@
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                                     <ul class="nav navbar-nav navbar-left">
-                                        <li><a href="home.php?id=<?phpe echo $_SESSION['id']?>">Home</a></li>
+                                        <li><a href="home.php?id=<?php echo $_SESSION['id']?>">Home</a></li>
                                          <li><a href="restaurant.php?id=<?php echo $_SESSION['id'];?>">Restaurants</a></li>
                                         <!--<li><a href="#features">Tables</a></li>-->
                                         <li><a href="#portfolio">Most Ordered Food</a></li>

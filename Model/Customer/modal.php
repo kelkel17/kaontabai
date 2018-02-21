@@ -43,68 +43,10 @@
                            </div><!-- end Edit Reservation modal-->
 
 
-                                    <div class="modal fade" tabindex="-1" role="dialog" id="viewOrder<?php echo $rows['order_id']; ?>">
-                                      <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                <button class="close" data-dismiss="modal" type="button">
-                                                      <span>&times;</span>
-                                                  </button>
-                                              <center><h3 class="modal-title"><?php echo $row['customer_fname'];?>'s Receipt</h3></center>
-                                              </div>
-                                              <div class="modal-body" style="padding-left: 30px;"><strong>
-                                                  <div class="row">    
-                                                      Order ID: <?php echo $rows['num'];?> 
-                                                   </div>
-                                                  <div class="row">   
-                                                    Reservation ID: <?php echo $rows['reservation_id'];?> 
-                                                  </div>
-                                                  <div class="row">
-                                                    Payment ID: <?php echo $rows['payment_id'];?>
-                                                  </div>
-                                                  <div class="row">
-                                                    Order Date & Time: <?php echo date('F d, Y g:i A', strtotime($rows['tim']));?>
-                                                  </div>
-                                                  <div class="row">
-                                                    Total Payment: &#8369;<?php echo number_format($rows['pr'],2);?>
-                                                  </div>
-                                                  <div class="row">
-                                                    </div>
-                                                  <div class="row">
-                                                    Payment Status: <?php if($rows['order_status']==1){ echo "Paid"; } else{ echo "Not Paid"; }?>
-                                                  </div>
-                                                  <div class="row">
-                                                    Order Status: <?php echo $rows['stat'];?>
-                                                  </div>
-                                                  <div class="row">
-                                                    List of Product Order:
-                                                  </div>  
-                                                <?php 
-                                                  $con = con();
-                                                  $sql = "SELECT * FROM  order_details as od, menus as m WHERE od.menu_id = m.menu_id";
-                                                  $stmt = $con->prepare($sql);
-                                            $stmt->execute();
-                                            $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                             
-                                             if(count($view)>0){
-                                              foreach($view as $r){
-
-                                            if($rows['order_id'] == $r['order_id']){
-                                                ?>
-                                                    <?php echo $r['m_name'].' '.$r['order_qty'];?> pcs<br/>
-                                               <?php } } }?>    
-                                             
-                                          </strong></div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
-                                                  
-                                              </div>
-                                            </div>
-                                      </div>
-                                    </div><!-- end of receipt modal -->
+                          
 
                                      <!-- Message Modal -->
-                            <div class="modal fade" tabindex="-1" role="dialog" id="cancelReservation<?php echo $row['reservation_id']; ?>">
+                                     <div class="modal fade" tabindex="-1" role="dialog" id="cancelReservation<?php echo $row['reservation_id']; ?>">
                               <div class="modal-dialog" role="document" style="z-index:1041;">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -150,4 +92,4 @@
                                     </form>
                                   </div><!-- end modal-content --> 
                               </div><!-- end modal-dialog -->
-                           </div><!-- end Message modal-->
+                           </div><!-- end Message modal-->    
