@@ -8,7 +8,7 @@
 				                        </button>
 				                    	<center><h3 class="modal-title">Update Staff</h3></center>
                    					</div>
-					                <form method="post" class="form-horizontal" enctype="multipart/form-data">
+					                <form method="post" class="form-horizontal" action="../../Controller/EmployeesController/addstaff.php" enctype="multipart/form-data">
 					                
 					                <div class="modal-body">
  				                            	<div class="tab-pane">
@@ -19,7 +19,7 @@
 					                            </div><br />
 					                            <div class="tab-pane">
 					                            	<label for="mname">Staff Middle Name</label>
-					                                <input type="text" name="mname" id="mname" class="form-control" value="<?php echo $row['employee_mname']; ?>" required>
+					                                <input type="text" name="mname" id="mname" class="form-control" value="<?php echo $row['employee_mname']; ?>">
 					                                <span class="highlight"></span><span class="bar"></span>
 					                            </div><br />
 					                            <div class="tab-pane">
