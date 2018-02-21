@@ -58,8 +58,8 @@ $payment->setIntent('sale')
 	->setTransactions([$transaction]);
 
 //Redorect URLs
-$redirectUrls->setReturnUrl('http://localhost/kaontabai/paypals/pays.php?approved=true&id='.$id.'')
-	->setCancelUrl('http://localhost/kaontabai/paypals/cancelled.php?approved=false');
+$redirectUrls->setReturnUrl('http://localhost/kaontabai2/kaontabai/paypals/pays.php?approved=true&id='.$id.'')
+	->setCancelUrl('http://localhost/kaontabai2/kaontabai/paypals/cancelled.php?approved=false');
 
 $payment->setRedirectUrls($redirectUrls);
 
