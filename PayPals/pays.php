@@ -61,6 +61,6 @@ if(isset($_GET['approved'])) {
 
 
 	} else {
-		header ('Location: cancelled.php');
+		header ('Location: ../../index.php');
 	}
 }

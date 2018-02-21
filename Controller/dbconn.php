@@ -11,6 +11,12 @@ function islogged(){
 	}
 }
 
+function isloggedsa(){
+		if (!isset($_SESSION['id'])) {
+	header('Location: ../systemadminlogin.php');
+	}
+}
+
 
 function islogged2(){	
 		if (!isset($_SESSION['id'])) {
@@ -1047,6 +1053,19 @@ function islogged2(){
 			$stmt = $con->prepare($sql);
 			$stmt->execute($id);
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $row;
+			$con = null;
+		}
+
+		//admin
+
+		function getAdmin($id)
+		{
+			$con = con();
+			$sql = "SELECT * FROM admin";
+			$stmt = $con->prepare($sql);
+			$stmt->execute($id);
+			$row = $stmt->fetchall(PDO::FETCH_ASSOC);
 			return $row;
 			$con = null;
 		}

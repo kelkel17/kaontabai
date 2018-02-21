@@ -52,8 +52,10 @@
                                                   </button>
                                               <center><h3 class="modal-title"><?php echo $row['customer_fname'];?>'s Receipt</h3></center>
                                               </div>
-                                              <div class="modal-body" style="padding-left: 30px;"><strong>
-                                                  <div class="row">    
+
+                                                   <div class="modal-body" style="padding-left: 30px;"><strong>
+
+                                                      <div class="row">    
                                                       Order ID: <?php echo $rows['num'];?> 
                                                    </div>
                                                   <div class="row">   
@@ -93,12 +95,13 @@
                                                 ?>
                                                     <?php echo $r['m_name'].' '.$r['order_qty'];?> pcs<br/>
                                                <?php } } }?>    
-                                             
+                                                    
                                           </strong></div>
-                                              <div class="modal-footer">
+                                           <div class="modal-footer">
                                                   <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
                                                   
                                               </div>
+
                                             </div>
                                       </div>
                                     </div><!-- end of receipt modal -->
