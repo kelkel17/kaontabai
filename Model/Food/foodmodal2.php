@@ -1,7 +1,7 @@
        <!-- Edit Product Modal -->
            <div class="modal fade" tabindex="-1" role="dialog" id="updateProduct<?php echo $row['menu_id']; ?>">
               <div class="modal-dialog" role="document">
-                 <form method="post" class="form-horizontal" enctype="multipart/form-data">
+                 <form method="post" class="form-horizontal" action="../../Controller/FoodsController/addfood.php" enctype="multipart/form-data">
                   <div class="modal-content">
                      <div class="modal-header">
                           <button class="close" data-dismiss="modal" type="button">
