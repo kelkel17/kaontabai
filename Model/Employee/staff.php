@@ -3,21 +3,7 @@
     include '../../Controller/dbconn.php';
     islogged();
 
-    if(isset($_POST['updateStaff'])){
-  	$id = trim($_POST['id']);
-	$fname = trim($_POST['fname']);	
-	$mname = trim($_POST['mname']);			
-	$lname = trim($_POST['lname']);
-	$addr = trim($_POST['address']);
-	$phone = trim($_POST['phone']);
-	$gender = trim($_POST['gender']);
-	$ssn = trim($_POST['ssn']);
-			
-				$data = array($fname,$mname,$lname,$addr,$phone,$gender,$ssn,$id);
-				updateStaff($data);
-		
-	
-  	}
+   
   	
 ?>
 
