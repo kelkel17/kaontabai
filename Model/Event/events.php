@@ -109,9 +109,9 @@
 									title: "Close event",
 									text: "Are you sure you want to close this event?",
 									buttons:true
-							}).then(function(){
+							}).then(function(value){
 								
-								if(eventId){
+								if(value){
 									// alert(eventId);
 									$.ajax({
 										type: "post",
@@ -136,9 +136,9 @@
 									title: "Open event",
 									text: "Are you sure you want to Open this event?",
 									buttons:true
-							}).then(function(){
+							}).then(function(value){
 								
-								if(openId){
+								if(value){
 									// alert(eventId);
 									$.ajax({
 										type: "post",

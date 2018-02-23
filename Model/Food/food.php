@@ -120,7 +120,74 @@
         ]
     } );
 } );
+               
  </script>
+<script>
+$(function(){
+$('#updateProduct').on('shown.bs.modal', function(){
+  var data = $('#category2').val();
+if(data == 1){
+  $('#11').show();
+}else if(data == 2){
+  $('#12').show();
+}else if(data == 3){
+  $('#13').show();
+}else{
+  console.log('aw');
+  $('#11').hide();
+  $('#12').hide();
+  $('#13').hide();
+}
+});
+});
 
+                $(function(){
+                          
+                         /*  $('#11').hide();
+                          $('#12').hide();
+                          $('#13').hide(); */
+                      $('#category2').change(function(){
+                        var data = $(this).val();
+                        if(data == 1){
+                          $('#testme2').val('Appetizer');
+                          $('#type4').on('change', function(){
+                            console.log($(this).val());
+                            $('#testme2').val($(this).val());
+                          });
+                          
+                          $('#11').show();
+                          $('#12').hide();
+                          $('#13').hide();
+                          $('#type4').attr("required". true);
+                        } else if(data == 2){
+                                $('#testme2').val('Beer');
+                          $('#type22').on('change', function(){
+                            console.log($(this).val());
+                            $('#testme2').val($(this).val());
+                          });
+                          $('#11').hide();
+                          $('#12').show();
+                          $('#13').hide();
+                          $('#type22').attr("required". true);
+                        } else if(data == 3){
+                                $('#testme2').val('Ice Cream');
+                        $('#type32').on('change', function(){
+                            console.log($(this).val());
+                            $('#testme2').val($(this).val());
+                          });
+                          $('#11').hide();
+                          $('#12').hide();
+                          $('#13').show();
+                          $('#type32').attr("required". true);
+                        } else {
+                                $('#testme2').val('');
+                          $('#11').hide();
+                          $('#12').hide();
+                          $('#13').hide();
+                        }
+
+                      }).change();
+                    });
+</script>
 </body>
 </html>

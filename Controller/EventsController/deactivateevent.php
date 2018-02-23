@@ -7,7 +7,7 @@
 		$stat = "Open";
 		$data = array($stat,$id);
 		deactivateEvent($data);
-		header("Location: ../../Model/Event/events.php");
+		//header("Location: ../../Model/Event/events.php");
 	}
 
 	if(isset($_POST['event_id'])){
