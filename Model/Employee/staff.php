@@ -80,14 +80,14 @@
               		<i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
               	</a>
             <?php if($row['employee_status']=="Active"){?>  	
-                <a href="#" data-toggle="modal" data-target="#deactStaff<?php echo $row['employee_id']; ?>"> 
+                <a href="#" onclick="deact(<?php echo $row['employee_id'];?>);">
                 	<i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                 </a> 
                 	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate"></i>
             <?php } elseif($row['employee_status']=="Deactivate"){?>    
            
                 	<i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate"></i>
-                <a href="#" data-toggle="modal" data-target="#actStaff<?php echo $row['employee_id']; ?>"> 
+					<a href="#" onclick="active(<?php echo $row['employee_id'];?>);">
                 	<i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
                 </a>
             <?php } ?>
@@ -105,6 +105,63 @@
 	</div>	<!--/.main-->
 	
  <script src="../../something/js/global.js"></script>
+ <script>
+					function deact(eventId){
+						swal({
+									title: "Deactivate Menu",
+									text: "Are you sure you want to deactivate this menu?",
+                  buttons:true,
+                  dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EmployeesController/deactivatestaff.php",
+										data: {'deactivate':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully deactivated this menu",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="staff.php";});
+										}
+									});
+								}else{
+									swal("Error in deactivating this menu","","error");
+								}
+							});
+					}
+					function active(openId){
+						swal({
+									title: "Re-activate menu",
+									text: "Are you sure you want to re-activate this menu?",
+									buttons:true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EmployeesController/deactivatestaff.php",
+										data: {'activate':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully re-activated this menu",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="staff.php";});
+										}
+									});
+								}else{
+									swal("Error in re-deactivating this menu","","error");
+								}
+							});
+					}
+				</script>
   <script type="text/javascript">
      $(document).ready(function() {
     $('#dataTable').DataTable( {

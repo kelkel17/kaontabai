@@ -56,8 +56,8 @@
   <tbody id="tableFooter">
     <tr>
   <?php 
-    $id = $_SESSION['id'];
-        $sql = "SELECT * FROM menus m, menu_category c WHERE m.mc_id = c.mc_id AND m.restaurant_id = $id";
+  $id = $_SESSION['id'];
+        $sql = "SELECT * FROM menus m, menu_category c WHERE m.mc_id = c.mc_id AND m.restaurant_id = '$id'";
         $con = con();
         $stmt = $con->prepare($sql);
         $stmt->execute();
@@ -81,14 +81,14 @@
                   
            <?php if($row['m_status'] == "Available"){?>    
            <a href="#" data-toggle="modal" data-target="#updateProduct<?php echo $row['menu_id']; ?>" ><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>   
-                  <a href="#" data-toggle="modal" data-target="#deactProduct<?php echo $row['menu_id']; ?>">
+                  <a href="#" onclick="deact(<?php echo $row['menu_id'];?>);">
                     <i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                   </a>
                     <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate" disabled></i>
            <?php }elseif($row['m_status'] != "Available"){ ?>    
            <a href="#" data-toggle="modal" data-target="#updateProduct<?php echo $row['menu_id']; ?>" ><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>   
                     <i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
-                  <a href="#" data-toggle="modal" data-target="#actProduct<?php echo $row['menu_id']; ?>">
+                    <a href="#" onclick="active(<?php echo $row['menu_id'];?>);">
                     <i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
                   </a>
             <?php } ?>            
@@ -107,6 +107,63 @@
   </div>  <!--/.main-->
 
  <script src="../../something/js/global.js"></script>
+ <script>
+					function deact(eventId){
+						swal({
+									title: "Deactivate Menu",
+									text: "Are you sure you want to deactivate this menu?",
+                  buttons:true,
+                  dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/FoodsController/deactivatefood.php",
+										data: {'deactivate':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully deactivated this menu",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="food.php";});
+										}
+									});
+								}else{
+									swal("Error in deactivating this menu","","error");
+								}
+							});
+					}
+					function active(openId){
+						swal({
+									title: "Re-activate menu",
+									text: "Are you sure you want to re-activate this menu?",
+									buttons:true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/FoodsController/deactivatefood.php",
+										data: {'activate':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully re-activated this menu",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="food.php";});
+										}
+									});
+								}else{
+									swal("Error in re-deactivating this menu","","error");
+								}
+							});
+					}
+				</script>
   <script type="text/javascript">
      $(document).ready(function() {
     $('#dataTable').DataTable( {
@@ -122,72 +179,6 @@
 } );
                
  </script>
-<script>
-$(function(){
-$('#updateProduct').on('shown.bs.modal', function(){
-  var data = $('#category2').val();
-if(data == 1){
-  $('#11').show();
-}else if(data == 2){
-  $('#12').show();
-}else if(data == 3){
-  $('#13').show();
-}else{
-  console.log('aw');
-  $('#11').hide();
-  $('#12').hide();
-  $('#13').hide();
-}
-});
-});
 
-                $(function(){
-                          
-                         /*  $('#11').hide();
-                          $('#12').hide();
-                          $('#13').hide(); */
-                      $('#category2').change(function(){
-                        var data = $(this).val();
-                        if(data == 1){
-                          $('#testme2').val('Appetizer');
-                          $('#type4').on('change', function(){
-                            console.log($(this).val());
-                            $('#testme2').val($(this).val());
-                          });
-                          
-                          $('#11').show();
-                          $('#12').hide();
-                          $('#13').hide();
-                          $('#type4').attr("required". true);
-                        } else if(data == 2){
-                                $('#testme2').val('Beer');
-                          $('#type22').on('change', function(){
-                            console.log($(this).val());
-                            $('#testme2').val($(this).val());
-                          });
-                          $('#11').hide();
-                          $('#12').show();
-                          $('#13').hide();
-                          $('#type22').attr("required". true);
-                        } else if(data == 3){
-                                $('#testme2').val('Ice Cream');
-                        $('#type32').on('change', function(){
-                            console.log($(this).val());
-                            $('#testme2').val($(this).val());
-                          });
-                          $('#11').hide();
-                          $('#12').hide();
-                          $('#13').show();
-                          $('#type32').attr("required". true);
-                        } else {
-                                $('#testme2').val('');
-                          $('#11').hide();
-                          $('#12').hide();
-                          $('#13').hide();
-                        }
-
-                      }).change();
-                    });
-</script>
 </body>
 </html>

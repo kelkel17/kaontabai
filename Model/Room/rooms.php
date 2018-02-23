@@ -80,13 +80,13 @@
                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                   </a>
            <?php if($row['status'] == 0){?>       
-                  <a href="#" data-toggle="modal" data-target="#deactProduct<?php echo $row['table_id']; ?>">
+                  <a href="#" onclick="deact(<?php echo $row['table_id'];?>);">
                     <i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                   </a>
                     <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate" disabled></i>
            <?php }elseif($row['status'] != 0){ ?>       
                     <i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
-                  <a href="#" data-toggle="modal" data-target="#actProduct<?php echo $row['table_id']; ?>">
+                    <a href="#" onclick="activate(<?php echo $row['table_id'];?>);">
                     <i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
                   </a>
             <?php } ?>            
@@ -102,7 +102,64 @@
     </table>
     </div>
   </div>  <!--/.main-->
-
+  <script>
+					function deact(eventId){
+						swal({
+									title: "Deactivate table",
+									text: "Are you sure you want to deactivate this table?",
+									buttons:true,
+                  					dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/addtable.php",
+										data: {'deact':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully deactivate the table",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="rooms.php";});
+										}
+									});
+								}else{
+									swal("Error in deactivating the event","","error");
+								}
+							});
+					}
+					function activate(openId){
+						swal({
+									title: "Re-activate Table",
+									text: "Are you sure you want to re-activate this table?",
+									buttons:true,
+                 					dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/addtable.php",
+										data: {'activate':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully re-activate the table",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="rooms.php";});
+										}
+									});
+								}else{
+									swal("Error in re-activating the table ","","error");
+								}
+							});
+					}
+				</script>
  <script src="../../something/js/global.js"></script>		
   <script type="text/javascript">
      $(document).ready(function() {

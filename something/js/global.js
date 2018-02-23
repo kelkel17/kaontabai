@@ -111,7 +111,6 @@ $(function(){
     if(data == 1){
       $('#testme').val('Appetizer');
       $('#type').on('change', function(){
-        console.log($(this).val());
         $('#testme').val($(this).val());
       });
       $('#1').show();
@@ -121,7 +120,6 @@ $(function(){
     } else if(data == 2){
             $('#testme').val('Beer');
       $('#type2').on('change', function(){
-        console.log($(this).val());
         $('#testme').val($(this).val());
       });
       $('#1').hide();
@@ -131,10 +129,9 @@ $(function(){
     } else if(data == 3){
             $('#testme').val('Ice Cream');
      $('#type3').on('change', function(){
-        console.log($(this).val());
         $('#testme').val($(this).val());
       });
-      $('#1 ').hide();
+      $('#1').hide();
       $('#2').hide();
       $('#3').show();
       $('#type3').attr("required". true);

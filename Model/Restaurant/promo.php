@@ -84,13 +84,13 @@
                   	<i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                   </a>
            <?php if($row['m_status'] == "Available"){?>       
-                  <a href="#" data-toggle="modal" data-target="#deactProduct<?php echo $row['cm_id']; ?>">
+					<a href="#" onclick="deact(<?php echo $row['cm_id'];?>);">
                   	<i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                	  </a>
                	  	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate" disabled></i>
            <?php }elseif($row['m_status'] != "Available"){ ?>       
                   	<i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
-               	  <a href="#" data-toggle="modal" data-target="#actProduct<?php echo $row['cm_id']; ?>">
+					  <a href="#" onclick="activate(<?php echo $row['cm_id'];?>);">
                   	<i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
                   </a>
             <?php } ?>  	    	  
@@ -108,7 +108,64 @@
 	</div>	<!--/.main-->
 
  <script src="../../something/js/global.js"></script>
-		
+ <script>
+					function deact(eventId){
+						swal({
+									title: "Deactivate Combo Meal",
+									text: "Are you sure you want to deactivate this Combo Meal?",
+									buttons:true,
+                  					dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/combo.php",
+										data: {'deact':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully deavtivate the Combo Meal",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="promo.php";});
+										}
+									});
+								}else{
+									swal("Error in deactivating the Combo Meal","","error");
+								}
+							});
+					}
+					function activate(openId){
+						swal({
+									title: "Re-activate event",
+									text: "Are you sure you want to re-activate this Combo Meal?",
+									buttons:true,
+                 					dangerMode: true
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/combo.php",
+										data: {'activate':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully re-activated  Combo Meal",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="promo.php";});
+										}
+									});
+								}else{
+									swal("Error in re-activating the Combo Meal","","error");
+								}
+							});
+					}
+				</script>	
 </body>
 <script>
     function loadImage(event,el){

@@ -1,3 +1,73 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function sweetMimitch(){
+	$(function(){
+		swal({
+				title:"Successfully",
+				text:"Added a Table",
+				icon: "success"
+		}).then(function(){
+				window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+	function updateAlert(){
+		$(function(){
+			swal({
+				title:"Successfully",
+				text:"Updated a Table",
+				icon: "success"
+			}).then(function(){
+					window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+	function errorUpdateAlert(){
+		$(function(){
+			swal({
+				title:"Error",
+				text:"Error in Updating a Table",
+				icon: "error"
+			}).then(function(){
+					window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+	function warningAlert(){
+		$(function(){
+			swal({
+				title:"Image type error",
+				text:"Image type must be PNG/JPEG/JPG only",
+				icon: "Warning"
+			}).then(function(){
+					window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+	function warningAlert2(){
+		$(function(){
+			swal({
+				title:"Error in adding a Table",
+				text:"Table already exist",
+				icon: "Error"
+			}).then(function(){
+					window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+	function errorAlert(){
+		$(function(){
+			swal({
+				title:"Error in adding a Table",
+				text:"",
+				icon: "Error"
+			}).then(function(){
+					window.location = "../../Model/Room/rooms.php";
+			});
+		});
+	}
+</script>
 <?php
 include('../dbconn.php');
 	if(isset($_POST['Add'])){
@@ -13,16 +83,16 @@ include('../dbconn.php');
 		$imageType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
             if($imageType != "jpg" && $imageType != "png" && $imageType != "jpeg"){
 				
-               echo '<script> alert("Image must be a JPG/JPEG/PNG"); window.location="../../Model/Food/food.php?e=Invalid extension&style=danger&head=Oh snap!"; </script>';
+               echo '<script>  warningAlert(); </script>';
             }else{	
 					
 			  		if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
 			  		{
 						$data = array($id,$tnum,$desc,$max,$min,$path);
 						addTables($data);
-						echo '<script> alert("Successfully Added a Table"); window.location="../../Model/Room/rooms.php" </script>';	
+						echo '<script> sweetMimitch(); </script>';	
 					}else{
-						echo '<script> alert("Error in adding a Table"); window.location="../../Model/Room/rooms.php" </script>';
+						echo '<script> errorAlert(); </script>';
 					}
 			}
 	}
@@ -43,7 +113,7 @@ include('../dbconn.php');
         else $path = '';
 		$imageType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
 		if($imageType != "jpg" && $imageType != "png" && $imageType != "jpeg" && !empty($path)){
-	         echo '<script> alert("Image must be a JPG/JPEG/PNG"); window.location="../../Model/Room/rooms.php?e=Invalid extension&style=danger&head=Oh snap!"; </script>';
+	         echo '<script> warningAlert(); </script>';
 	    }else{	
                 if(empty($path))
 		    	     $data = array($rid,$tnum,$desc,$max,$min,$id); 
@@ -52,29 +122,29 @@ include('../dbconn.php');
                     if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
                      $data = array($rid,$tnum,$desc,$max,$min,$path,$id);
                      else
-                        echo '<script> alert("Error in Updating a table"); window.location="../../Model/Room/rooms.php" </script>';
+                        echo '<script> errorUpdateAlert(); </script>';
                     
                 }
 		   		 updateTables($data,$path);
                 
-		    	echo '<script> alert("Successfully Updated the table"); window.location="../../Model/Room/rooms.php" </script>';
+		    	echo '<script> updateAlert(); </script>';
 	  	    }
     }
     
-    if(isset($_POST['deactivate'])){
-        $id = $_POST['id'];
+    if(isset($_POST['deact'])){
+        $id = $_POST['deact'];
         $status = 1;
         $data = array($status,$id);
         changeTable($data);
-        echo '<script> alert("Successfully Updated the table"); window.location="../../Model/Room/rooms.php" </script>';
+      //  echo '<script> alert("Successfully Updated the table"); window.location="../../Model/Room/rooms.php" </script>';
     }
     
     if(isset($_POST['activate'])){
-        $id = $_POST['id'];
+        $id = $_POST['activate'];
         $status = 0;
         $data = array($status,$id);
         changeTable($data);
-        echo '<script> alert("Successfully Updated the table"); window.location="../../Model/Room/rooms.php" </script>';
+      //  echo '<script> alert("Successfully Updated the table"); window.location="../../Model/Room/rooms.php" </script>';
     }
 	
 ?>

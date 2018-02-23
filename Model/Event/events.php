@@ -76,7 +76,7 @@
             <td>
             	<a href="#" data-toggle="modal" data-target="#updateEvent<?php echo $row['event_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
             	<?php if($row['event_status']=="Open") {?>
-					<a href="#"  onclick="getDate(<?php echo $row['event_id'];?>);" id="delete"><i class="fa fa-times" aria-hidden="true" title="Close"></i></a>
+					<a href="#" onclick="getDate(<?php echo $row['event_id'];?>);"><i class="fa fa-times" aria-hidden="true" title="Close"></i></a>
 				<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Open" disabled></i>
                  <?php } elseif($row['event_status']=="Close") {?>
                  <i class="fa fa2 fa-times" aria-hidden="true" title="Close" disabled></i>
@@ -103,12 +103,13 @@
 	</div>	<!--/.main-->
 	
  <script src="../../something/js/global.js"></script>
- <script>
+			 <script>
 					function getDate(eventId){
 						swal({
 									title: "Close event",
 									text: "Are you sure you want to close this event?",
-									buttons:true
+									buttons:true,
+                  					dangerMode: true
 							}).then(function(value){
 								
 								if(value){
@@ -122,7 +123,7 @@
 											swal({
 												title: "Succesfully close the event",
 												text: "",
-												type: "success"
+												icon: "success"
 											}).then(function(){ window.location="events.php";});
 										}
 									});
@@ -135,7 +136,8 @@
 						swal({
 									title: "Open event",
 									text: "Are you sure you want to Open this event?",
-									buttons:true
+									buttons:true,
+                 					dangerMode: true
 							}).then(function(value){
 								
 								if(value){
@@ -149,7 +151,7 @@
 											swal({
 												title: "Succesfully Open the event",
 												text: "",
-												type: "success"
+												icon: "success"
 											}).then(function(){ window.location="events.php";});
 										}
 									});

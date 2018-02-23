@@ -458,6 +458,15 @@ function islogged2(){
 			$s->execute($data);
 			$db = null;
 		}//End Food
+
+		function deactivateCM($data){
+			$db = con();
+			$sql = "UPDATE combo_meals SET status=? WHERE cm_id = ?";
+			$s = $db->prepare($sql);
+			$s->execute($data);
+			$db = null;
+		}//End Food
+
 		
 		function viewAllMenuCategory(){
 			$con = con();
