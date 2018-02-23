@@ -48,7 +48,7 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
              $qnty .=",".$_SESSION['qty'];
             // $_SESSION['qty'] = $qnty;
              $_SESSION['count'] = count($cartitems) + 1;
-          echo '<script>alert("Successlly added a menu to cart."); window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';       
+          echo '<script>window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';       
        
     }
 }else{
@@ -61,6 +61,6 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
      $_SESSION['qty'] = $qnty;
      $_SESSION['count'] = count($item);
      // echo $_SESSION['qty'];
- echo '<script>alert("Successlly added a menu to cart."); window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';
+ echo '<script>window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';
 }
 }

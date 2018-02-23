@@ -10,7 +10,7 @@
                         </button>
                     <center><h3 class="modal-title">Update Event</h3></center>
                     </div>
-                    <form method="post">
+                    <form method="post" action="../../Controller/EventsController/addevent.php">
 
                     <div class="modal-body">
                        <div class="tab-pane">

@@ -1,3 +1,73 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function sweetMimitch(){
+	$(function(){
+		swal({
+				title:"Successfully",
+				text:"Added an Schedule",
+				icon: "success"
+		}).then(function(){
+				window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+	function updateAlert(){
+		$(function(){
+			swal({
+				title:"Successfully",
+				text:"Succsfully Updated an Schedule",
+				icon: "success"
+			}).then(function(){
+					window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+	function errorUpdateAlert(){
+		$(function(){
+			swal({
+				title:"Error",
+				text:"Error in Updating an evnet",
+				icon: "error"
+			}).then(function(){
+					window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+	function warningAlert(){
+		$(function(){
+			swal({
+				title:"Image type error",
+				text:"Image type must be PNG/JPEG/JPG only",
+				icon: "Warning"
+			}).then(function(){
+					window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+	function warningAlert2(){
+		$(function(){
+			swal({
+				title:"Error in adding an Schedule",
+				text:"Schedule already exist",
+				icon: "Error"
+			}).then(function(){
+					window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+	function errorAlert(){
+		$(function(){
+			swal({
+				title:"Error in adding a combo meal",
+				text:"",
+				icon: "Error"
+			}).then(function(){
+					window.location = "../../Model/Schedule/schedules.php";
+			});
+		});
+	}
+</script>
 <?php
 
 include '../dbconn.php';
@@ -11,7 +81,6 @@ include '../dbconn.php';
 		$number = FLOOR(RAND(100,2000));
 			$data = array($id,$date,$time,$date2,$time2,$number);
 			addSchedule($data);
-			echo '<script> alert("Successfully Added a Schedule"); window.location="../../Model/Schedule/schedules.php" </script>';			
+			echo '<script> sweetMimitch();</script>';			
 	}
-			$con = null;
 ?>

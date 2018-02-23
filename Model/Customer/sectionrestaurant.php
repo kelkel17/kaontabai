@@ -143,7 +143,21 @@
                                           console.log(test2);
                                               
                                         }
-                                        
+                                  $.ajax({
+                                        type: "GET",
+                                        url: "gettime.php?cid="+restId,    
+                                        dataType: 'json',
+                                        success: function(datas) {
+                                        for(var x in datas) {
+                                          console.log(datas[x]);
+                                              $("#timepicker").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: datas[x].open,
+                                                  maxTime: datas[x].close
+                                              });
+                                        }
+                                    }
+                                  });
                                     
                                         function unavailable(date) {
                                             dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
@@ -163,11 +177,7 @@
                                                       numberOfMonths: 1,
                                                       dateFormat: 'MM dd, yy'          
                                     });
-                                    $("#timepicker").timepicker({
-                                                  timeFormat: 'g:i A',
-                                                  minTime: '8:00',
-                                                  maxTime: '24:00'
-                                              });
+                                    
                                         
                                     }
                                   });

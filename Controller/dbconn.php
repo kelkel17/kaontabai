@@ -495,11 +495,7 @@ function islogged2(){
 			return $set;
 			$con = null;
 
-			 if($add){
-				echo '<script> alert("Successfully Added"); window.location="../../Model/Schedule/schedules.php" </script>';
-			 }else{
-				echo '<script> alert("Failed in Adding"); window.location="../../Model/Schedule/schedules.php" </script>';
-			 }
+			 
 		}
 
 		function viewAllSchedules(){
@@ -549,6 +545,7 @@ function islogged2(){
 			$stmt = $con->prepare($sql);
 			$stmt->execute($id);
 			$con = null;
+			
 		}
 
 		//End Schedule
@@ -560,13 +557,7 @@ function islogged2(){
 					VALUES (?,?,?,?,?,?,?)";
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
-			$con = null;
-
-			if($add){
-			 	//echo '<script> alert("Successfully Added"); window.location="../../Model/Event/events.php" </script>';
-			 }else{
-			 	//echo '<script> alert("Failed in Adding"); window.location="../../Model/Event/events.php" </script>';
-			 }			
+			$con = null;	
 
 		}
 
@@ -598,15 +589,6 @@ function islogged2(){
 			$stmt = $con->prepare($sql);
 			$update = $stmt->execute($data);
 			$con = null;
-
-
-			if($update){
-				echo '<script> alert("Successfully Updated"); window.location="../../Model/Event/events.php" </script>';
-			}else{
-				echo '<script> alert("Updating Failed"); window.location="../../Model/Event/events.php" </script>';
-
-			}
-
 
 		}
 

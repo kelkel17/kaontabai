@@ -1,91 +1,60 @@
-<?php
-    include('../Controller/dbconn.php');
-?>  
-<!DOCTYPE html>
+                                <!-- <table id="dataTable" class="">     -->
+                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="viewOrder<?php echo $rows['order_id']; ?>" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                              <center><h3 class="modal-title"><?php echo $row['customer_fname'];?>'s Receipt</h3></center>
+                                                 <table id="dataTable" class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
+                                                  <thead>
+                                                        <tr>
+                                                            <th>Order ID:</th>  
+                                                            
+                                                            <th>Reservation ID:</th>  
+                                                            
+                                                            <th>Payment ID:</th> 
+                                                            
+                                                            <th>Order Date & Time:</th>
+                                                            
+                                                            <th>Total Payment:</th> 
+                                                            
+                                                            <th>Payment Status:</th> 
+                                                            
+                                                            <th>Order Status:</th>
+                                                            
+                                                            <th>List of Product Order:</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $rows['num'];?></td>
+                                                            <td><?php echo $rows['reservation_id'];?></td>
+                                                            <td><?php echo $rows['payment_id'];?></td>
+                                                            <td><?php echo date('F d, Y g:i A', strtotime($rows['tim']));?></td>
+                                                            <td>&#8369;<?php echo number_format($rows['pr'],2);?></td>
+                                                            <td><?php if($rows['order_status']==1){ echo "Paid"; } else{ echo "Not Paid"; }?></td>
+                                                            <td><?php echo $rows['stat'];?></td>
+                                                <?php 
+                                                  $con = con();
+                                                  $sql = "SELECT * FROM  order_details as od, menus as m WHERE od.menu_id = m.menu_id";
+                                                  $stmt = $con->prepare($sql);
+                                            $stmt->execute();
+                                            $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                             
+                                             if(count($view)>0){
+                                              foreach($view as $r){
 
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-    
-	<link href="../assets/css/jquery-ui.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="sweetalert.min.js"></script>
-    
-    <script type="text/javascript" src="../assets/js/jquery-ui.js"></script>
-    <script src="moment.js"></script>
-    
-</head>
-<body>
-    <input type="text" name="date" id="iDate">
-</body>
-<script>
-    $(document).ready(function(){
-        var test = '';
-	$.ajax({
-        type: "GET",
-		url: "getdate.php",    
-        dataType: 'json',
-        success: function(data) {
-
-           var test2 = [];
-            for(var i in data) {
-				test2.push(moment(data[i].dat).format('DD-M-YYYY'));
-            console.log(test2);
-			}
-            
-        
-            function unavailable(date) {
-                dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-                    if ($.inArray(dmy, test2) == -1) {
-                            return [true, ""];
-                                console.log(test2);
-                    } else {
-                            return [false,"","Unavailable"];
-                            console.log(test2);
-                    }
-             }
-        $('#iDate').datepicker({ beforeShowDay: unavailable});
-
-        }
-        });
-       
-
-    });
-</script>
-<script>
-    
-
-            
-</script>
-<!-- <script>
-    $(document).ready(function(){
-	$.ajax({
-        type: "GET",
-		url: "getorder.php",    
-        dataType: 'json',
-        success: function(data) {
-            for(var i = 0; i < data.length;i++)
-            console.log(data[i]);
-            var date = moment().format('LL');
-            console.log(date);
-            var date2 = data[0].count; 
-            console.log(date2);
-            // if(date != date2){
-            //     console.log('dili okay');
-                swal("You have new "+date2+" notifications",{
-                    icon: "info"
-                });
-            // }else{
-            //     console.log('okay');
-            // }
-
-        }
-        });
-    });
-</script> -->
-
-</html>
+                                            if($rows['order_id'] == $r['order_id']){
+                                                ?>
+                                                    
+                                                            <td><?php echo $r['m_name'].' '.$r['order_qty'];?> pcs<br/></td>
+                                                        </tr>
+                                                    </tbody>
+                                               <?php } } }?>    
+                                            </table>
+                                           </div> 
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- end of receipt modal -->

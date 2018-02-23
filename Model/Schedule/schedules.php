@@ -78,10 +78,14 @@
 		   if($row['sched_sdate'] != '' && $row['sched_edate'] != ''){
 		   		echo '<td><center>'.date('F j, Y g:i A',strtotime($row['sched_sdate'].$row['sched_stime'])).'</center></td>';
 		   		echo '<td><center>'.date('F j, Y g:i A',strtotime($row['sched_edate'].$row['sched_etime'])).'</center></td>';
-			}else{
+			}elseif($row['sched_sdate'] != '' && $row['sched_edate'] == ''){
 				echo '<td><center> Automatically created an peak hour schedule at </td></center>';
-				echo '<td><center>'.date('F j, Y g:i A',strtotime($row['created'])).' </td></center>';
+				echo '<td><center>'.date('F j, Y',strtotime($row['sched_sdate'])).' </td></center>';
+			}elseif($row['sched_sdate'] == '' && $row['sched_edate'] == ''){
+				echo '<td><center> Automatically created an peak hour schedule at </td></center>';
+				echo '<td><center>'.date('F j, Y',strtotime($row['created'])).' </td></center>';
 			}
+
 			if($row['status'] == 1){
 				$temp = "No online reservation";
 	       		echo '<td><center>'.$temp.'</center></td>';
@@ -102,6 +106,7 @@
 	    	foreach ($get as $r) { //($r is from $row just testing)
 				$date2 = date('Y-m-d g:i');
 				$date3 = date('Y-m-d g:i');
+				$date4 = date('Y-m-d');
 				$temp2 = date('Y-m-d g:i',strtotime($r['sched_sdate'].$r['sched_stime']));
 				$temp3 = date('Y-m-d g:i',strtotime($r['sched_edate'].$r['sched_etime']));
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
@@ -122,14 +127,16 @@
 				}
 				// break;
 			}
-			$temp5 =date('Y-m-d g:i',strtotime($row['sched_sdate']));
+			$temp5 = date('Y-m-d g:i',strtotime($row['sched_sdate']));
 			
-			$temp6 =date('Y-m-d g:i',strtotime($row['sched_edate']));
-	     if($date > $temp5 && $date > $temp6){ ?>
-	    		<i class="fa fa2 fa-pencil-square-o" aria-hidden="true" title="Update"></i>
-	    		<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>
+			$temp6 = date('Y-m-d g:i',strtotime($row['sched_edate']));
+			$temp7 = date('Y-m-d', strtotime($row['sched_sdate']));
+							if($date4 > $temp7 && $date > $temp6){ ?>
+				<i class="fa fa2 fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
+				<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>
 	    		<i class="fa fa2 fa-times" aria-hidden="true" title="Peak-Hour"></i> 
-	    <?php } else{	
+	      <!--else{}-->
+			<?php } else {
 	    if($row['status']== 0){  ?>
 	    		<a href="#" data-toggle="modal" data-target="#update<?php echo $row['sched_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
 	         

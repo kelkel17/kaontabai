@@ -86,7 +86,7 @@
 					                    	<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i></a>
 					                    <?php }elseif($row['res_status'] == "Reserved"){?>	
 					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"	></i>
-					                    	<a href="#" data-toggle="modal" data-target="#cancelReservation<?php echo $row['reservation_id']; ?>">
+					                    	<a href="#" onclick="getData(<?php echo $row['reservation_id'];?>);">
 					                    		<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i>	
 					                    	</a>	
 					                    <?php }elseif($row['res_status'] == "Cancelled"){  ?>
@@ -203,11 +203,11 @@
 					                    <?php if($row['res_status'] == "Pending"){?>	
 					                    	<a href="#" data-toggle="modal" data-target="#updateReservation<?php echo $row['reservation_id']; ?>">
 					                    	<i class="fa fa-thumbs-o-up" aria-hidden="true" title="Accept"></i></a>
-					                    	<a href="#" data-toggle="modal" data-target="#cancelReservation<?php echo $row['reservation_id']; ?>">
+					                    	<a href="#">
 					                    	<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i></a>
 					                    <?php }elseif($row['res_status'] == "Reserved"){?>	
 					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"></i>
-					                    	<a href="#" data-toggle="modal" data-target="#cancelReservation<?php echo $row['reservation_id']; ?>">
+					                    	<a href="#"  onclick="getData(<?php echo $row['reservation_id'];?>);">
 					                    		<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i>	
 					                    	</a>	
 					                    <?php }elseif($row['res_status'] == "Cancelled"){  ?>
@@ -218,7 +218,19 @@
 					               
 					            </div>  
 					            </tr>           
-					             
+								<script>
+									function getData(resId){
+										swal({
+												title: "Cancel Reservation",
+												text: "Are you sure you want to cancel this reservation?",
+												buttons: true
+										}).then(function(){
+											if(resId){
+												alert(resId);
+											}
+										});
+									}
+								</script>
 
 
           <!-- Reservation Modal -->
@@ -303,6 +315,7 @@
                 document.getElementById('div'+ this.value).style.display = '';
             }
         </script>
+		
     <script type="text/javascript">
      $(document).ready(function() {
     $('#dataTable').DataTable( {

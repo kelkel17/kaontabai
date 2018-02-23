@@ -60,7 +60,7 @@
 		$(function(){
 			swal({
 				title:"Error in adding a combo meal",
-				// text:"Combo meal already exist",
+				text:"",
 				icon: "Error"
 			}).then(function(){
 					window.location = "../../Model/Restaurant/promo.php";

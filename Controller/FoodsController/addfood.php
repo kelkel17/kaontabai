@@ -59,8 +59,8 @@
 	function errorAlert(){
 		$(function(){
 			swal({
-				title:"Error in adding a staff",
-				// text:"Combo meal already exist",
+				title:"Error in adding a menu",
+				text:"",
 				icon: "Error"
 			}).then(function(){
 					window.location = "../../Model/Food/food.php";

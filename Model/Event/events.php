@@ -2,18 +2,7 @@
 	
     include '../../Controller/dbconn.php';
     islogged();
-    if(isset($_POST['updateEvent']))
-	{
-		$id = $_POST['id'];
-		$name = $_POST['name'];	
-		$date = $_POST['date'];	
-		$venue = $_POST['venue'];			
-		$time = $_POST['time'];
-		$desc = $_POST['desc'];
-
-			$data = array($name,$venue,$date,$time,$desc,$id);
-			updateEvent($data);
-	}
+  
 ?>
 
 <!DOCTYPE html>
@@ -87,12 +76,19 @@
             <td>
             	<a href="#" data-toggle="modal" data-target="#updateEvent<?php echo $row['event_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
             	<?php if($row['event_status']=="Open") {?>
-                 <a href="#" data-toggle="modal" data-target="#close<?php echo $row['event_id']; ?>"><i class="fa fa-times" aria-hidden="true" title="Close"></i></a>	
-                 <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Open" disabled></i>
+					<a href="#"  onclick="getDate(<?php echo $row['event_id'];?>);" id="delete"><i class="fa fa-times" aria-hidden="true" title="Close"></i></a>
+				<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Open" disabled></i>
                  <?php } elseif($row['event_status']=="Close") {?>
                  <i class="fa fa2 fa-times" aria-hidden="true" title="Close" disabled></i>
-                 <a href="#" data-toggle="modal" data-target="#open<?php echo $row['event_id']; ?>"><i class="fa fa-circle-o" aria-hidden="true" title="Open"></i></a>
-                 <?php } ?>
+                 <a href="#" onclick="postDate(<?php echo $row['event_id'];?>);"><i class="fa fa-circle-o" aria-hidden="true" title="Open"></i></a>
+                
+				 <?php } ?>
+				
+				 <div id="myform">
+					<form method="post" action="../../Controller/EventsController/deactivateevent.php">
+						<input type="hidden" name="id" value="<?php echo $row['event_id'];?>">
+					</form>
+				</div>
              </td>
          </div>
           </tr>
@@ -107,6 +103,62 @@
 	</div>	<!--/.main-->
 	
  <script src="../../something/js/global.js"></script>
+ <script>
+					function getDate(eventId){
+						swal({
+									title: "Close event",
+									text: "Are you sure you want to close this event?",
+									buttons:true
+							}).then(function(){
+								
+								if(eventId){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EventsController/deactivateevent.php",
+										data: {'event_id':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully close the event",
+												text: "",
+												type: "success"
+											}).then(function(){ window.location="events.php";});
+										}
+									});
+								}else{
+									swal("Error in closing the event","","error");
+								}
+							});
+					}
+					function postDate(openId){
+						swal({
+									title: "Open event",
+									text: "Are you sure you want to Open this event?",
+									buttons:true
+							}).then(function(){
+								
+								if(openId){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EventsController/deactivateevent.php",
+										data: {'open_id':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully Open the event",
+												text: "",
+												type: "success"
+											}).then(function(){ window.location="events.php";});
+										}
+									});
+								}else{
+									swal("Error in re-opening the event","","error");
+								}
+							});
+					}
+				</script>
  	 <script type="text/javascript">
 $(document).ready(function() {
     $('#dataTable').DataTable( {
@@ -150,6 +202,22 @@ $(document).ready(function() {
 	});
 });
 
+// function getDate(restId){
+// 	swal({   
+// 		title: "Are you sure?",
+// 		text: "You want to close this Event?",        
+// 		type: "warning",   
+// 		showCancelButton: true,   
+// 		confirmButtonColor: "#DD6B55",
+// 		confirmButtonText: "Yes, delete it!", 
+// 		closeOnConfirm: false 
+// 	}, 
+// 	function(){   
+// 		$("#myform").submit();
+// 	});
+// }
+
  </script>
+
 </body>
 </html>

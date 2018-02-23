@@ -1,5 +1,5 @@
 <?php
-include '../Controller/dbconn.php';
+include '../../Controller/dbconn.php';
 header('Content-Type: application/json');
 
 $con = con();
