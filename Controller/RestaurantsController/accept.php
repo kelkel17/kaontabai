@@ -1,8 +1,10 @@
 <?php
 	include '../dbconn.php';
 	if(isset($_POST['accept'])){
-		$id = $_POST['id'];
+		$id = $_POST['accept'];
+		//echo $id;
 		$table = $_POST['table'];
+		echo $table;
 		$stat = "Reserved";
 		if($table == 0){
 			$data = array($stat,$id);
@@ -42,7 +44,7 @@
 													autoAdd2($data);
 												}
 												else if($r['max_capacity'] > $r['guest']){
-													echo 'pero dili sila equal';
+													//echo 'pero dili sila equal';
 													$get = getAdd(array($asd));
 													$status = 0;
 													//print_R ($get);
@@ -54,7 +56,7 @@
 									   
 									}
 									elseif($date2 > $date5){
-												echo 'dili parihag adlaw';
+												//echo 'dili parihag adlaw';
 												$get = getAdd2(array($date5));
 												$status = 0;
 												print_r($get);
@@ -67,7 +69,7 @@
 											
 									}
 								}
-							echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
+						//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
 						
 					}
 			}
@@ -88,9 +90,16 @@
 						foreach ($res as $key) {
 							$subject = 'Your reservation request has been accepted';
 							$body = ''.$get['customer_fname'].' '.$get['customer_lname'].' your reservation has been accepted your reservation number is '.$key['reservation_number'].'';
-							mai	l($email,$subject,$body,'From: KaonTaBai!');
+							mail($email,$subject,$body,'From: KaonTaBai!');
+							$asd = $_SESSION['id'];
+								date_default_timezone_set("Asia/Manila");
+								$date2 = date('Y-m-d');
+								$sql2 = "SELECT SUM(r.no_of_guests) as guest, t.max_capacity, r.reservation_date, r.res_status FROM reservations as r, restaurants as t WHERE r.restaurant_id = t.restaurant_id AND r.restaurant_id = '$asd' AND r.reservation_id = '$id' GROUP BY r.reservation_date";
+								$stmt2 = $con->prepare($sql2);
+								$stmt2->execute();
+								$rsd = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 							foreach($rsd as $r){
-								print_r($r);
+								//print_r($r);
 								$date5 = date('Y-m-d', strtotime($r['reservation_date']));
 								if($date2 == $date5){
 										echo 'parihag adlaw';
@@ -129,7 +138,7 @@
 										
 								}
 							}
-							echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
+						//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
 				}
 		}
 	}
@@ -137,7 +146,7 @@
 
 
 	if(isset($_POST['cancel'])){
-		$id = $_POST['id'];
+		$id = $_POST['cancel'];
 		$table = $_POST['table'];
 		$stat = "Cancelled";
 		if($table == 0){
@@ -155,7 +164,7 @@
 						$subject = 'Your reservation request has been cancelled';
 						$body = ''.$get['customer_fname'].' '.$get['customer_lname'].' your reservation has been cancelled your reservation number is '.$key['reservation_number'].'';
 						mail($email,$subject,$body,'From: KaonTaBai!');
-						echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
+					//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
 					}
 			}
 		}else{
@@ -176,7 +185,7 @@
 						$subject = 'Your reservation request has been cancelled';
 						$body = ''.$get['customer_fname'].' '.$get['customer_lname'].' your reservation has been cancelled your reservation number is '.$key['reservation_number'].'';
 						mail($email,$subject,$body,'From: KaonTaBai!');
-						echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
+					//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
 					}
 			}
 		}		
