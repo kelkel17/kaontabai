@@ -83,16 +83,15 @@
 
                   	<i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                   </a>
-           <?php if($row['m_status'] == "Available"){?>       
+           <?php if($row['status'] == "Available"){?>       
 					<a href="#" onclick="deact(<?php echo $row['cm_id'];?>);">
                   	<i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                	  </a>
                	  	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate" disabled></i>
-           <?php }elseif($row['m_status'] != "Available"){ ?>       
-                  	<i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
-					  <a href="#" onclick="activate(<?php echo $row['cm_id'];?>);">
-                  	<i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
-                  </a>
+           <?php }elseif($row['status'] !=  "Available"){ ?>       
+                  	  <i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
+					  <a href="#" onclick="activate(<?php echo $row['cm_id'];?>);"><i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i></a>
+
             <?php } ?>  	    	  
                	  </center>
                	</td>
@@ -122,7 +121,7 @@
 									$.ajax({
 										type: "post",
 										url: "../../Controller/RestaurantsController/combo.php",
-										data: {'deact':eventId},
+										data: {'deactivate':eventId},
 										cache: false,
 										success: function(response){
 											swal({
