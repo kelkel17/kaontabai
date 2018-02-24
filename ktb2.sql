@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2018 at 11:49 PM
+-- Generation Time: Feb 25, 2018 at 12:12 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -147,7 +147,8 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`event_id`, `restaurant_id`, `event_name`, `event_date`, `event_venue`, `event_time`, `event_desc`, `event_status`, `created`, `event_number`) VALUES
 (1, 1, 'Event 1', 'February 18, 2018', 'Cebu City', '2:30 PM', 'Event 1', 'Open', '2018-02-18 07:28:39', 946),
-(4, 3, 'Rules of Survival', 'February 27, 2018', 'Voyager Internet Cafe', '8:00 AM', 'Duwa ta after defend', 'Open', '2018-02-20 15:53:42', 1783);
+(4, 3, 'Rules of Survival', 'February 27, 2018', 'Voyager Internet Cafe', '8:00 AM', 'Duwa ta after defend', 'Open', '2018-02-20 15:53:42', 1783),
+(5, 1, 'Event name 1', 'February 26, 2018', 'In our restaurant', '8:30 AM', '2', 'Open', '2018-02-24 18:26:56', 1153);
 
 -- --------------------------------------------------------
 
@@ -336,7 +337,8 @@ INSERT INTO `notifications` (`notification_id`, `customer_id`, `restaurant_id`, 
 (11, 1, 1, NULL, NULL, 6, '2018-02-19 10:02:06', 1),
 (12, 1, 1, 7, NULL, NULL, '2018-02-19 10:21:08', 1),
 (13, 1, 1, 8, NULL, NULL, '2018-02-19 11:50:50', 1),
-(14, 1, 1, 9, NULL, NULL, '2018-02-21 09:03:08', 1);
+(14, 1, 1, 9, NULL, NULL, '2018-02-21 09:03:08', 1),
+(15, 2, 1, 10, NULL, NULL, '2018-02-24 19:52:05', 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +366,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `reservation_id`, `customer_id`, `restaurant_id`, `order_time`, `order_status`, `total_price`, `order_number`, `payment_id`, `hash`, `status`) VALUES
 (1, 31456, 1, 1, '2018-02-17 09:44:25', '1', '5121.00', '15399', 'PAY-6H903408CF900690VLKD73DQ', 'd6ee14f2b1fd12a5359b5aeba3d9e9d6', 'Served'),
-(2, 18589, 1, 1, '2018-02-17 10:23:34', '1', '11771.00', '16761', 'PAY-2PM85741CV089511KLKEAFKI', '8584f3425df337e4de9d377caf2c073d', 'Served'),
+(2, 18589, 1, 1, '2018-02-26 10:23:34', '1', '11771.00', '16761', 'PAY-2PM85741CV089511KLKEAFKI', '8584f3425df337e4de9d377caf2c073d', 'Cancelled'),
 (3, 22002, 2, 2, '2018-02-19 06:19:49', NULL, '0.00', '1895', '', '', 'Queueing'),
 (4, 22002, 2, 2, '2018-02-19 06:20:38', NULL, '0.00', '8367', '', '', 'Queueing'),
 (5, 22002, 2, 2, '2018-02-19 06:20:59', NULL, '0.00', '15217', '', '', 'Queueing'),
@@ -381,7 +383,7 @@ INSERT INTO `orders` (`order_id`, `reservation_id`, `customer_id`, `restaurant_i
 (16, 22002, 2, 2, '2018-02-19 06:29:49', NULL, '0.00', '9645', '', '', 'Queueing'),
 (17, 22002, 2, 2, '2018-02-19 06:30:20', NULL, '425.00', '15342', 'PAY-09G87423M3757035LLKFG6AQ', 'eededaaf82f4cb5818ae05373c94f594', 'Queueing'),
 (18, 22002, 2, 2, '2018-02-19 06:32:23', '1', '520.00', '11379', 'PAY-92Y11845PP835100RLKFG66Q', '0ba42dec8a65b4319e7cecc575213504', 'Queueing'),
-(19, 16563, 1, 1, '2018-02-19 10:22:16', NULL, '1360.00', '8477', 'PAY-951427635X9275342LKFKKZI', 'ea04bfbf2edf13339aa3919dbc873149', 'Queueing');
+(19, 16563, 1, 1, '2018-02-19 10:22:16', NULL, '1360.00', '8477', 'PAY-951427635X9275342LKFKKZI', 'ea04bfbf2edf13339aa3919dbc873149', 'Served');
 
 -- --------------------------------------------------------
 
@@ -544,13 +546,13 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`reservation_id`, `reservation_number`, `reservation_date`, `reservation_time`, `created`, `res_status`, `spec_reqs`, `no_of_guests`, `restaurant_id`, `customer_id`, `table_id`) VALUES
-(2, '18589', 'February 19, 2018', '2:30 PM', '2018-02-17 10:02:51', 'Reserved', 'Tets 2', '100', 1, 1, 0),
-(4, '13648', 'February 20, 2018', '12:30 PM', '2018-02-18 08:50:32', 'Reserved', 'asdada', '100', 1, 2, 0),
+(2, '18589', 'February 19, 2018', '2:30 PM', '2018-02-17 10:02:51', 'Expired', 'Tets 2', '100', 1, 1, 0),
+(4, '13648', 'February 20, 2018', '12:30 PM', '2018-02-18 08:50:32', 'Expired', 'asdada', '100', 1, 2, 0),
 (5, '15910', 'February 18, 2018', '10:00 AM', '2018-02-18 09:45:41', 'Reserved', 'qweqwe', '25', 3, 2, 0),
-(6, '22002', '02/28/2018', '10:30 PM', '2018-02-19 06:18:59', 'Pending', '', '1', 1, 2, 0),
-(7, '16563', '02/13/2018', '4', '2018-02-19 10:21:08', 'Pending', 'lechon nga ilaga', '5', 1, 1, 0),
-(8, '39651', '02/22/2018', '10:30 PM', '2018-02-19 11:50:50', 'Pending', 'Test', '25', 1, 1, 0),
-(9, '41743', 'February 21, 2018', '9:00 AM', '2018-02-21 09:03:07', 'Pending', 'qweqweqw', '25', 1, 1, 0);
+(6, '22002', '02/28/2018', '10:30 PM', '2018-02-19 06:18:59', 'Reserved', '', '1', 1, 2, 0),
+(8, '39651', '02/22/2018', '10:30 PM', '2018-02-19 11:50:50', 'Expired', 'Test', '25', 1, 1, 0),
+(9, '41743', 'February 21, 2018', '9:00 AM', '2018-02-21 09:03:07', 'Expired', 'qweqweqw', '25', 1, 1, 0),
+(10, '38842', 'February 28, 2018', '10:00 AM', '2018-02-24 19:52:05', 'Cancelled', 'esteststs', '5', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -590,7 +592,7 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`restaurant_id`, `sub_id`, `restaurant_name`, `restaurant_desc`, `restaurant_addr`, `restaurant_contact`, `max_capacity`, `hour_open`, `hour_close`, `rate_comm`, `lat`, `lng`, `username`, `password`, `owner_fname`, `owner_mname`, `owner_lname`, `owner_contact`, `owner_email`, `owner_address`, `restaurant_logo`, `restaurant_status`, `sub_date`, `sub_exp`) VALUES
-(1, 3, 'Kuya J', 'KATAKAM-TAKAM NA KUWENTO NI KUYA J\r\n\r\n\r\n\r\n\r\nKuya J Restaurant, formerly known as â€œAng Kan-anan ni Kuya J,â€ started as a humble eatery along the streets of Cebu. But with Kuya Jâ€™s undeniably delicious dishes, mouthwatering words of recommendation quickly spread into every Cebuanosâ€™ palate. With that, Kuya J instantly became one of the well-loved restaurants in Cebu. \r\n\r\nToday, Kuya J continues to satisfy every Filipinoâ€™s appetite nationwide. Using only the freshest ingredients available, Kuya J cooks up a storm of delicious Pinoy food in every corner of the Philippines.\r\n\r\nTHE BLOCKBUSTER BIDA\r\n\r\nJericho Rosales is one of the award-winning drama actors in the country and the best Kuya to his family. \r\n\r\nWhatâ€™s very inspiring about him is his trait of always putting his heart into everything that he does, especially when touching peopleâ€™s lives.\r\n\r\nThis is why Echo is the perfect endorser for Kuya J.', 'Corner Tojong Street, 15 N Escario St, Lungsod ng Cebu, 6000 ', '09989624269', '100', '09:00', '21:00', NULL, 10.3188, 123.902, 'admin', 'admin', 'Mickale', 'Lapasanda', 'Saturre', '09165970601', 'kuyajtest@gmail.com', 'Saint Bernard Southern Leyte', '151825301515174728091517414973151733665615166037981512156053kuyaj.png', 1, '2018-01-31 2:21:52', '2019-01-31 2:21:52'),
+(1, 3, 'Kuya J', 'KATAKAM-TAKAM NA KUWENTO NI KUYA J\r\n\r\n\r\n\r\n\r\nKuya J Restaurant, formerly known as â€œAng Kan-anan ni Kuya J,â€ started as a humble eatery along the streets of Cebu. But with Kuya Jâ€™s undeniably delicious dishes, mouthwatering words of recommendation quickly spread into every Cebuanosâ€™ palate. With that, Kuya J instantly became one of the well-loved restaurants in Cebu. \r\n\r\nToday, Kuya J continues to satisfy every Filipinoâ€™s appetite nationwide. Using only the freshest ingredients available, Kuya J cooks up a storm of delicious Pinoy food in every corner of the Philippines.\r\n\r\nTHE BLOCKBUSTER BIDA\r\n\r\nJericho Rosales is one of the award-winning drama actors in the country and the best Kuya to his family. \r\n\r\nWhatâ€™s very inspiring about him is his trait of always putting his heart into everything that he does, especially when touching peopleâ€™s lives.\r\n\r\nThis is why Echo is the perfect endorser for Kuya J.', 'Corner Tojong Street, 15 N Escario St, Lungsod ng Cebu, 6000 ', '09989624269', '100', '09:00', '21:00', NULL, 10.3188, 123.902, 'admin', 'admin', 'Mickale', 'Lapasanda', 'Saturre', '09165970601', 'saturre.mic2@gmail.com', 'Saint Bernard Southern Leyte', '151825301515174728091517414973151733665615166037981512156053kuyaj.png', 1, '2018-01-31 2:21:52', '2019-01-31 2:21:52'),
 (3, 2, 'Casa Verde', 'Established in August 2002, CASA VERDE is a chain of family-owned restaurants in Cebu City. Spanish for \"green house\", CASA VERDE\'s name was influenced by the owners\' Spanish roots and the color of the Ramos Branch, which used to be one of the family\'s ancestral homes. \r\n\r\nOriginally, the Ramos Branch was supposed to be just a small canteen that catered to the residents of the 2nd floor dormitory and some students from nearby colleges. Through word-of-mouth and recommendations by family and friends, the humble canteen soon became a full-scale restaurant. After almost a decade and three branches later, CASA VERDE has grown into one of Cebu\'s most popular dining destinations. \r\n\r\n\"Value for Money\" has always been the restaurant\'s philosophy. CASA VERDE believes that everyone deserves to enjoy great food and quality service at reasonable prices in a comfortable atmosphere. It\'s casual dining at its best. \r\n\r\nCASA VERDE is the perfect place to let your hair down and enjoy a steak or two with family and friends. The ambiance is simple and casual, with knickknacks and collectibles from the personal collections of the owners. It\'s also interesting to note that all of the restaurant\'s signature dishes are named after some members of the family. We bring homestyle comfort food to the next level. \r\n\r\nThe next time you\'re in the mood for some good food, head on down to the CASA VERDE branch nearest you and try our best-selling ribs, mouth-watering steaks, sumptuous pasta, and sinful desserts. It\'s a dining experience that truly exceeds expectation. ', 'Lim Tian Teng Street, Ramos, Cebu City, Philippines, 6000', '+63 32 253.6472', '350', '10:00', '22:00', NULL, 10.3072, 123.896, 'admin2', 'admin2', 'Gian Carlo', 'S', 'Cataraja', '09265976739', 'casaverdetest@gmail.com', 'Cebu City', '15189781501518886223casa-verde-logo-679x410.jpg', 1, '2018-02-18 12:00:15', '2018-08-18 12:00:15'),
 (8, 1, 'AA BBQ', '', 'V. Ranudo St, Cebu City, 6000 Cebu', '03938473', '100', '10:30', '21:30', NULL, 10.3074, 123.897, 'admin3', '123', 'alsdal', 'lkjasldkj', 'lkasjdlkasj', '98938947397', 'aabbqtest@gmail.com', 'Aliwanay Balamban Cebu', '1519036780IMG_2492.JPG', 1, '2018-02-19 6:34:57', '2018-03-19 6:34:57'),
 (11, 4, 'Gerry\'s Grill', 'Here at Gerry\'s, we aim to give everyone a pleasurable dining experience, serving only the freshest food ranging from Filipino favorites â€“ Sisig, Inihaw na Pusit, Crispy Pata, Beef Kare-kare, Adobo Shreds to exotic cuisines.\r\n\r\nI have always dreamt of putting up a place where everyone could hang out and enjoy good food. With my passion for cooking and love for grilled dishes came Gerry\'s.\r\n\r\nAlthough the original concept of my business was one where people could unwind with a drink or two, Gerryâ€™s has become a family restaurant, too.\r\n\r\nFrom opening its first store in Tomas Morato, Quezon City, Gerryâ€™s has come a long way. With its continuous expansion nationwide, Gerryâ€™s has also opened branches in the United States, Singapore and Qatar.\r\n\r\nUp until now, we strive to continue to evolve, responding to the ever growing needs of our customers. We believe in offering our customers the best value for their money. We also take pride in taking care of our people â€“ one of our most valuable assets.\r\n\r\nThese are the reasons why Gerry\'s remains to be the favorite among Filipinos. For as long as we can, we guarantee nothing but great food and loads of fun.', 'Robinson Galleria Cebu, Gen. Maxilom Ext, Cebu City, 6000 Cebu', '(032) 231 4738', '300', '10:00', '21:00', NULL, 10.304, 123.912, 'admin6', '123', 'Godwin', 'Margaja', 'Montealto', '098272626', 'gerrygrilltest@gmail.com', 'Aliwanay Balamban Cebu', '1519115864logo.png', 1, '2018-02-20 4:15:49', '2018-02-27 4:15:49'),
@@ -623,9 +625,11 @@ INSERT INTO `schedules` (`sched_id`, `restaurant_id`, `sched_sdate`, `sched_stim
 (53, 1, '2018-02-19', '', '', '', '0', '2018-02-18 20:18:04', 39621),
 (54, 1, '2018-02-18', '', '', '', '0', '2018-02-18 20:34:01', 19515),
 (56, 1, '2018-02-20', '', '', '', '0', '2018-02-18 20:38:39', 38643),
-(58, 1, '2018-02-23', '', '', '', '1', '2018-02-18 21:40:32', 23456),
+(58, 1, '2018-02-23', '', '', '', '0', '2018-02-18 21:40:32', 23456),
 (59, 1, '2018-02-19', '', '', '', '0', '2018-02-19 06:47:20', 20263),
-(60, 3, 'February 2, 2018', '10:30 AM', 'February 3, 2018', '10:30 AM', '0', '2018-02-20 15:43:23', 1279);
+(60, 3, 'February 2, 2018', '10:30 AM', 'February 3, 2018', '10:30 AM', '0', '2018-02-20 15:43:23', 1279),
+(61, 1, 'February 26, 2018', '9:30 AM', 'February 27, 2018', '12:30 PM', '0', '2018-02-24 18:18:52', 586),
+(62, 1, 'February 25, 2018', '1:30 AM', 'February 25, 2018', '7:00 PM', '0', '2018-02-24 18:22:55', 415);
 
 -- --------------------------------------------------------
 
@@ -774,10 +778,10 @@ CREATE TABLE `visitors` (
 --
 
 INSERT INTO `visitors` (`visit_id`, `restaurant_id`, `customer_id`, `visit_count`, `last_visited`) VALUES
-(4, 1, 2, 10, '2018-02-19 06:50:15'),
+(4, 1, 2, 11, '2018-02-24 19:51:42'),
 (7, 3, 2, 5, '2018-02-18 09:45:19'),
-(8, 3, 1, 20, '2018-02-20 17:01:13'),
-(9, 1, 1, 103, '2018-02-21 09:02:51');
+(8, 3, 1, 23, '2018-02-24 21:08:16'),
+(9, 1, 1, 105, '2018-02-24 20:52:25');
 
 --
 -- Indexes for dumped tables
@@ -948,7 +952,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -972,7 +976,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -1014,7 +1018,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -1026,7 +1030,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `subscriptions`
