@@ -27,7 +27,7 @@
 		$(function(){
 			swal({
 				title:"Error",
-				text:"Error in Updating an evnet",
+				text:"Error in Updating an schedule",
 				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Schedule/schedules.php";
@@ -80,8 +80,11 @@ include '../dbconn.php';
 		$time2 = $_POST['etime']; 
 		$number = FLOOR(RAND(100,2000));
 			$data = array($id,$date,$time,$date2,$time2,$number);
-			addSchedule($data);
-			echo '<script> sweetMimitch();</script>';			
+		
+		if(addSchedule($data) !== FALSE)
+			echo '<script> sweetMimitch();</script>';	
+		else	
+			echo '<script> errorAlert();</script>';		
 	}
 
 	if(isset($_POST['update'])){
@@ -92,12 +95,12 @@ include '../dbconn.php';
 		$edate = $_POST['edate'];
 		$etime = $_POST['etime'];
 			$data = array($rid,$sdate,$stime,$edate,$etime,$id);
-		updateSchedule($data);
-		if(updateSchedule($data) == TRUE){
+	
+		if(updateSchedule($data) !== FALSE)
 				echo '<script> updateAlert();</script>';	
-		}else{
+		else
 			echo '<script> errorUpdateAlert();</script>';	
-		}
+	
 
 	}
 
