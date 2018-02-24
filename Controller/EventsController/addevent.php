@@ -27,7 +27,7 @@
 		$(function(){
 			swal({
 				title:"Error",
-				text:"Error in Updating an evnet",
+				text:"Error in Updating an event",
 				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Event/events.php";
@@ -89,8 +89,10 @@ include '../dbconn.php';
 				echo '<script>warningAlert2();</script>';
 			else{
 				$data = array($id,$name,$venue,$date,$time,$desc,$number);
-				addEvent($data);
-				echo '<script>sweetMimitch();</script>';
+				if(addEvent($data) !== FALSE)
+					echo '<script>sweetMimitch();</script>';
+				else
+					echo '<script>errorAlert();</script>';
 			}
 	}
 	if(isset($_POST['updateEvent']))
@@ -103,7 +105,9 @@ include '../dbconn.php';
 		$desc = $_POST['desc'];
 
 			$data = array($name,$venue,$date,$time,$desc,$id);
-			updateEvent($data);
-			echo '<script>updateAlert();</script>';
+			if(updateEvent($data) !== FALSE)
+				echo '<script>updateAlert();</script>';
+			else
+				echo '<script>errorUpdateAlert();</script>';
 	}
 ?>
