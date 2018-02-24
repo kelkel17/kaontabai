@@ -59,14 +59,13 @@
                                            if($t['status'] == 1){ ?>
                                               <a href="#" data-toggle="modal" data-target="#notAvails<?php echo $_GET['cid'];?>" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                            <?php } else if($rows['status'] == 0) { ?>
-                                          <a href="#" data-toggle="modal" onclick="getDate(<?php echo $_GET['cid'];?>);" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                          <a href="#" onclick="getDate(<?php echo $_GET['cid'];?>,<?php echo $t['table_id'];?>)" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                       <?php } } ?>
                          </div>
                             <?php include('tablemodal.php'); ?>        
                            <script>
-                              function getDate(restId){
-                                // alert(restId);
-                                $('#bookNow'+restId).modal('show');
+                              function getDate(restId,tableId){
+                                $('#bookNow'+tableId).modal('show');
                                   $.ajax({
                                         type: "GET",
                                         url: "getdate.php?cid="+restId,    
@@ -80,7 +79,26 @@
                                           console.log(test2);
                                               
                                         }
-                                        
+                                  $.ajax({
+                                        type: "GET",
+                                        url: "gettime.php?cid="+restId,    
+                                        dataType: 'json',
+                                        success: function(datas) {
+                                        for(var x in datas) {
+                                          console.log(datas[x]);
+                                              $("#timepicker").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: datas[x].open,
+                                                  maxTime: datas[x].close
+                                              });
+                                              $(".timepicker2").timepicker({
+                                                  timeFormat: 'g:i A',
+                                                  minTime: datas[x].open,
+                                                  maxTime: datas[x].close
+                                              });
+                                        }
+                                    }
+                                  });
                                     
                                         function unavailable(date) {
                                             dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
@@ -100,11 +118,15 @@
                                                       numberOfMonths: 1,
                                                       dateFormat: 'MM dd, yy'          
                                     });
-                                    $("#timepicker").timepicker({
-                                                  timeFormat: 'g:i A',
-                                                  minTime: '8:00',
-                                                  maxTime: '24:00'
-                                              });
+                                    $('.datepicker2').datepicker({ beforeShowDay: unavailable,
+                                                      minDate: -0,
+                                                      maxDate: "+14D",
+                                                      changeMonth: true,
+                                                      changeYear: true, 
+                                                      numberOfMonths: 1,
+                                                      dateFormat: 'MM dd, yy'          
+                                    });
+                                    
                                         
                                     }
                                   });
