@@ -109,7 +109,8 @@
 									title: "Close event",
 									text: "Are you sure you want to close this event?",
 									buttons:true,
-                  					dangerMode: true
+                  					dangerMode: true,
+									icon: "warning"
 							}).then(function(value){
 								
 								if(value){
@@ -137,7 +138,8 @@
 									title: "Open event",
 									text: "Are you sure you want to Open this event?",
 									buttons:true,
-                 					dangerMode: true
+                 					dangerMode: true,
+									icon: "warning"
 							}).then(function(value){
 								
 								if(value){
