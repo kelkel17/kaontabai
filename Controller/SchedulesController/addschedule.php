@@ -83,4 +83,23 @@ include '../dbconn.php';
 			addSchedule($data);
 			echo '<script> sweetMimitch();</script>';			
 	}
+
+	if(isset($_POST['update'])){
+		$id = $_POST['id'];
+		$rid = $_SESSION["id"];
+		$sdate = $_POST['sdate'];
+		$stime = $_POST['stime'];
+		$edate = $_POST['edate'];
+		$etime = $_POST['etime'];
+			$data = array($rid,$sdate,$stime,$edate,$etime,$id);
+		updateSchedule($data);
+		if(updateSchedule($data) == TRUE){
+				echo '<script> updateAlert();</script>';	
+		}else{
+			echo '<script> errorUpdateAlert();</script>';	
+		}
+
+	}
+
+	
 ?>
