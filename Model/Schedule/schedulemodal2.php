@@ -57,21 +57,21 @@
                         </button>
                     <center><h3 class="modal-title">Update Schedule</h3></center>
                     </div>
-                   <form action="../../Controller/SchedulesController/deactivateschedule.php" method="post"> 
+                   <form action="../../Controller/SchedulesController/addschedule.php" method="post"> 
                    <div class="modal-body"> 
                     
                    <div class="tab-pane">
                    <label for="pdate">Schedule Date & Time</label><br/>
                    <input type="hidden" name="id" value="<?php echo $row['sched_id']?>">
-                   <input type="text" name="sdate" id="datepicker3" value="<?php echo $row['sched_sdate']; ?>" style="width:50%; float:left;" class="form-control" required>
-                 <input type="text" name="stime" id="timepicker3" value="<?php echo $row['sched_stime']; ?>" style="width:50%; float:left;" class="form-control" required>
+                   <input type="text" name="sdate" class="form-control datepicker3" value="<?php echo $row['sched_sdate']; ?>" style="width:50%; float:left;" class="form-control" required>
+                 <input type="text" name="stime" class="form-control timepicker3" value="<?php echo $row['sched_stime']; ?>" style="width:50%; float:left;" class="form-control" required>
                    <!-- <label for="pdate">Schedule Date</label> -->           
                    <span class="highlight"></span><span class="bar"></span>
                </div><br /><br/><br/>    
                <div class="tab-pane">
                    <label for="ptime">Schedule End Date & Time</label><br/>
-                   <input type="text" name="edate" id="datepicker4" value="<?php echo $row['sched_edate']; ?>" style="width:50%; float:left;" class="form-control" required>
-                   <input type="text" name="etime" id="timepicker4" value="<?php echo $row['sched_etime']; ?>" style="width:50%; float:left;" class="form-control" required>
+                   <input type="text" name="edate" class="form-control datepicker4" value="<?php echo $row['sched_edate']; ?>" style="width:50%; float:left;" class="form-control" required>
+                   <input type="text" name="etime" class="form-control timepicker4" value="<?php echo $row['sched_etime']; ?>" style="width:50%; float:left;" class="form-control" required>
                    <span class="highlight"></span><span class="bar"></span>
                </div><br />
           <div class="modal-footer">
