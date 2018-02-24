@@ -65,12 +65,25 @@
 		       		$stmt = $con->prepare($sql);
 		       		$stmt->execute();
 		       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		      
-		        foreach($rows as $row){
+					   date_default_timezone_set('Asia/Manila');
+					   $date = date('Y-m-d g');
+					 //	  echo $date;
+		        foreach($rows as $row){	
+						
 		        	if($row['table_id'] == 0){
+						$newdate = date('Y-m-d g', strtotime($row['reservation_date'].$row['reservation_time']));
+						$reservation = $row['reservation_id'];
+						if($date > $newdate){
+							$status = "Expired";
+							$data = array($status, $reservation);
+							ChangeAll($data);
+						}
+						// if($date > date('Y-m-d g', strtotime($row['reservation_date'].$row['reservation_time']))){
+						
+						// }
 					        	 echo '<td><center>'.$row['reservation_number'].'</center></td>';
 							   	 echo '<td><center>'.$row['customer_fname'].' '.$row['customer_lname'].'</center></td>';
-							     echo '<td><center>'.date('F j, Y g:m A',strtotime($row['reservation_date'])).'</center></td>';
+							     echo '<td><center>'.date('F d, Y g:i A',strtotime($row['reservation_date'].$row['reservation_time'])).'</center></td>';
 							     // echo '<td><center>'.$row['table_num'].'</center></td>';
 							   	 echo '<td><center>'.$row['spec_reqs'].'</center></td>'; 
 						         echo '<td><center>'.$row['no_of_guests'].'</center></td>'; 
@@ -79,19 +92,23 @@
 						     ?> 
 						       <div class="cell">
 					                    <td><center>
-					                    <?php if($row['res_status'] == "Pending"){?>	
-					                    	<a href="#" data-toggle="modal" data-target="#updateReservation<?php echo $row['reservation_id']; ?>">
-					                    	<i class="fa fa-thumbs-o-up" aria-hidden="true" title="Accept"></i></a>
-					                    	<a href="#" data-toggle="modal" data-target="#cancelReservation<?php echo $row['reservation_id']; ?>">
-					                    	<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i></a>
-					                    <?php }elseif($row['res_status'] == "Reserved"){?>	
-					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"	></i>
-					                    	<a href="#" onclick="getData(<?php echo $row['reservation_id'];?>);">
-					                    		<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i>	
+										<?php if($date > $newdate){?>
+											<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Accept"></i>
+											<i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
+					                    <?php } elseif($row['res_status'] == "Pending" || $row['res_status'] == "Expired"){?>	
+											
+											<a href="#" onclick="accept(<?php echo $row['reservation_id'];?>);">
+					                    	<i class="fa fa-circle-o" aria-hidden="true" title="Accept"></i></a>
+					                    	
+					                    	<i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i></a>
+					                    <?php }elseif($row['res_status'] == "Reserved" || $row['res_status'] == "Expired"){?>	
+					                    	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Accept"	></i>
+					                    	<a href="#" onclick="cancel(<?php echo $row['reservation_id'];?>);">
+					                    		<i class="fa fa-times" aria-hidden="true" title="Cancel"></i>	
 					                    	</a>	
-					                    <?php }elseif($row['res_status'] == "Cancelled"){  ?>
-					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"	></i>
-					                    	<i class="fa fa2 fa-ban" aria-hidden="true" title="Cancel"></i>
+					                    <?php }elseif($row['res_status'] == "Cancelled" || $row['res_status'] == "Expired"){  ?>
+					                    	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Accept"	></i>
+					                    	<i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
 					                    <?php }?>	
 					                    </center></td>
 					               
@@ -181,14 +198,19 @@
 		       		$stmt = $con->prepare($sql);
 		       		$stmt->execute();
 		       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//		            date_default_timezone_set('Asia/Manila');
-//                    $date = date('Y-m-d');
-//                    $new = new DateTime($date);
-//                    $new->add(new DateInterval('P1D'));
-//                    $news = $new->format('Y-m-d');
+		            date_default_timezone_set('Asia/Manila');
+                    $date = date('Y-m-d g');
+                   
 		        foreach($rows as $row){
 		        	if($row['table_id'] != 0){
-                        
+						$newdate = date('Y-m-d g', strtotime($row['reservation_date'].$row['reservation_time']));
+						$reservation = $row['reservation_id'];
+						if($date > $newdate){
+							$status = "Expired";
+							$data = array($status, $reservation);
+							ChangeAll($data);
+						}	
+									// echo ;
 					        	 echo '<td><center>'.$row['reservation_number'].'</center></td>';
 							   	 echo '<td><center>'.$row['customer_fname'].' '.$row['customer_lname'].'</center></td>';
 							     echo '<td><center>'.date('F j, Y g:m A',strtotime($row['reservation_date'])).'</center></td>';
@@ -200,17 +222,19 @@
 						     ?> 
 						       <div class="cell">
 					                    <td><center>
-					                    <?php if($row['res_status'] == "Pending"){?>	
-					                    	<a href="#" data-toggle="modal" data-target="#updateReservation<?php echo $row['reservation_id']; ?>">
+										<?php if($date > $newdate){?>
+											<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Accept"></i>
+											<i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
+					                    <?php } elseif($row['res_status'] == "Pending" || $row['res_status'] == "Expired"){?>	
+					                    	<a href="#" onclick="accept(<?php echo $row['reservation_id']; ?>,'<?php echo $row['table_id'];?>');">
 					                    	<i class="fa fa-thumbs-o-up" aria-hidden="true" title="Accept"></i></a>
-					                    	<a href="#">
-					                    	<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i></a>
-					                    <?php }elseif($row['res_status'] == "Reserved"){?>	
+					                    	<i class="fa fa2 fa-ban" aria-hidden="true" title="Cancel"></i>
+					                    <?php }elseif($row['res_status'] == "Reserved" || $row['res_status'] == "Expired"){?>	
 					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"></i>
-					                    	<a href="#"  onclick="getData(<?php echo $row['reservation_id'];?>);">
+					                    	<a href="#" onclick="cancel(<?php echo $row['reservation_id'];?>,'<?php echo $row['table_id'];?>');">
 					                    		<i class="fa fa-ban" aria-hidden="true" title="Cancel"></i>	
 					                    	</a>	
-					                    <?php }elseif($row['res_status'] == "Cancelled"){  ?>
+					                    <?php }elseif($row['res_status'] == "Cancelled" || $row['res_status'] == "Expired"){  ?>
 					                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Accept"></i>
 					                    	<i class="fa fa2 fa-ban" aria-hidden="true" title="Cancel"></i>
 					                    <?php }?>	
@@ -218,69 +242,7 @@
 					               
 					            </div>  
 					            </tr>           
-								<script>
-									function getData(resId){
-										swal({
-												title: "Cancel Reservation",
-												text: "Are you sure you want to cancel this reservation?",
-												buttons: true
-										}).then(function(){
-											if(resId){
-												alert(resId);
-											}
-										});
-									}
-								</script>
 
-
-          <!-- Reservation Modal -->
-           <div class="modal fade" tabindex="-1" role="dialog" id="cancelReservation<?php echo $row['reservation_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Cancel Reservation</h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to cancel this Reservation?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/accept.php">
-                        <input type="hidden" name="table" value="<?php echo $row['table_id']?>">
-                        <input type="submit" name="cancel" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['reservation_id'];?>">
-                        </form>
-                    </div>
-                </div>
-            </div>
-          </div><!-- end of accept modal --> 
-          <div class="modal fade" tabindex="-1" role="dialog" id="updateReservation<?php echo $row['reservation_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Accept Reservation</h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to accept this Reservation?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/accept.php">
-                        <input type="hidden" name="table" value="<?php echo $row['table_id']?>">
-                        <input type="submit" name="accept" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['reservation_id'];?>">
-                        </form>
-                    </div>
-                </div>
-            </div>
-          </div><!-- end of cancel modal -->  
-          <!-- End Reservation Modal -->
 					       <?php }
 					      }
 					    ?>
@@ -294,7 +256,72 @@
 			</table>
 		</div>
 </div>	<!--/.main-->
-	
+<script>
+					function accept(eventId,tableId){
+						//alert(eventId+" "+tableId);
+						swal({
+									title: "Accept table",
+									text: "Are you sure you want to Accept this reservations?",
+									buttons:true,
+                  					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/accept.php",
+										data: {'accept':eventId,
+												'table':tableId
+										},
+										cache: false,
+										success: function(response){
+											// console.log(response);
+											swal({
+												title: "Succesfully Accepted the reservations",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="reservations.php"; });
+										}
+									});
+								}else{
+									swal("Error in accepting the reservation","","error");
+								}
+							});
+					}
+					function cancel(openId,tableId){
+						swal({
+									title: "Cancel reservations",
+									text: "Are you sure you want to Cancel this reservations?",
+									buttons:true,
+                 					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/accept.php",
+										data: {'cancel':openId,
+												'table':tableId
+										},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully Cancel the reservations",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="reservations.php";});
+										}
+									});
+								}else{
+									swal("Error in cancelling the reservation ","","error");
+								}
+							});
+					}
+				</script>
  <script src="../../something/js/global.js"></script>
     <script>
             for(var j = 0; j < 2; j++){
