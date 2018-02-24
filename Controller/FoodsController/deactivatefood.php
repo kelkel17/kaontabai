@@ -10,7 +10,7 @@
 
 	if(isset($_POST['activate'])){
 		$id = $_POST['activate'];
-		$stat = "Activate";
+		$stat = "Available";
 		$data = array($stat,$id);
 		deactivateProduct($data);
 		//header("Location: ../../Model/Food/food.php");
