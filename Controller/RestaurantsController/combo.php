@@ -149,17 +149,19 @@
 				}	
 		}
 
-		if(isset($_POST['deact'])){
-			$id = $_POST['deact'];
-			$status = 'Deactivate';
-			data = array($status, $id);
+		if(isset($_POST['deactivate'])){
+			$id = $_POST['deactivate'];
+			$status = 'Not Available';
+			$data = array($status, $id);
 			deactivateCM($data);
 		}
 
 		if(isset($_POST['activate'])){
 			$id = $_POST['activate'];
 			$status = 'Available';
-			data = array($status, $id);
+			$data = array($status, $id);
 			deactivateCM($data);
 		}
+
+		
 ?>
