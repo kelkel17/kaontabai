@@ -174,7 +174,7 @@
 				'print'
 			]
 		} );
-		$( function() {
+		
 			$( "#datepicker" ).datepicker({
 				minDate: -0,
 				maxDate: "+1M",
@@ -201,7 +201,7 @@
 					minTime: '8:00',
 					maxTime: '24:00'
 			});
-			$( "#datepicker3" ).datepicker({
+			$( ".datepicker3" ).datepicker({
 			minDate: -0,
 			maxDate: "+1M",
 			changeMonth: true,
@@ -209,12 +209,12 @@
 			numberOfMonths: 2,
 			dateFormat: 'MM dd, yy' }); 
 
-		$("#timepicker3").timepicker({
+		$(".timepicker3").timepicker({
 				timeFormat: 'g:i A',
 				minTime: '8:00',
 				maxTime: '24:00'
 		});
-		$( "#datepicker4" ).datepicker({
+		$( ".datepicker4" ).datepicker({
 			minDate: -0,
 			maxDate: "+1M",
 			changeMonth: true,
@@ -222,12 +222,10 @@
 			numberOfMonths: 2,
 			dateFormat: 'MM dd, yy' }); 
 
-		$("#timepicker4").timepicker({
+		$(".timepicker4").timepicker({
 				timeFormat: 'g:i A',
 				minTime: '8:00',
 				maxTime: '24:00'
-		});
-
 		});
 	});
  </script>
