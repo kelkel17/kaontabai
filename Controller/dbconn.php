@@ -318,6 +318,14 @@ function islogged2(){
 			$db = null;
 		}
 
+		function ChangeAll($id){
+			$db = con();
+			$sql = "UPDATE reservations SET res_status = ? WHERE reservation_id = ?";
+			$s = $db->prepare($sql);
+			$s->execute($id);
+			$db = null;
+		}
+
 
 		function deactRes($id){
 			$db = con();
