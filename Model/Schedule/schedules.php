@@ -112,7 +112,7 @@
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
 				// echo $temp2,$temp3;
 				
-	    		if($date2 == $temp2){
+	    		if($date2 >= $temp2){
 	    			$status = 1;
 	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
@@ -141,10 +141,10 @@
 	    		<a href="#" data-toggle="modal" data-target="#update<?php echo $row['sched_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
 	         
 	         	<i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>
-	        	<a href="#" data-toggle="modal" data-target="#peak<?php echo $row['sched_id']; ?>"><i class="fa fa-times" aria-hidden="true" title="Peak-Hour"></i></a>	
+				 <a href="#" onclick="peak(<?php echo $row['sched_id'];?>);"><i class="fa fa-times" aria-hidden="true" title="Peak-Hour"></i></a>	
 	    <?php }elseif($row['status']== 1){
 	    		?> 
-	    		<a href="#" data-toggle="modal" data-target="#update<?php echo $row['sched_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
+	    		<a href="#" onclick="off(<?php echo $row['sched_id'];?>);"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
 	         
 	    		<a href="#" data-toggle="modal" data-target="#off<?php echo $row['sched_id']; ?>"><i class="fa fa-circle-o" aria-hidden="true" title="Off-Peak"></i></a>    	
 	         	<i class="fa fa2 fa-times" aria-hidden="true" title="Peak-Hour"></i>
@@ -159,8 +159,67 @@
 		</table>
 	</div>
 		
-	</div>	<!--/.main-->
- <script src="../../something/js/global.js"></script>
+	</div>	<!--/.main-->	
+		 <script>
+					function off(eventId){
+						swal({
+									title: "Turn on online Reservation",
+									text: "Are you sure you want to allow online reservation?",
+									buttons:true,
+                  					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EventsController/deactivateschedule.php",
+										data: {'off':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully change your restaurant status",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="schedules.php";});
+										}
+									});
+								}else{
+									swal("Error in changing your restaurant status","","error");
+								}
+							});
+					}
+					function peak(openId){
+						swal({
+									title: "Turn off online Reservation",
+									text: "Are you sure you want to Open this event?",
+									buttons:true,
+                 					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/EventsController/deactivateschedule.php",
+										data: {'peak':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully change your restaurant status",
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="schedules.php";});
+										}
+									});
+								}else{
+									swal("Error in changing your restaurant status","","error");
+								}
+							});
+					}
+				</script>
  <script src="../../something/js/global.js"></script>
  	 <script type="text/javascript">
     $(document).ready(function() {
