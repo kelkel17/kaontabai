@@ -94,7 +94,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="printableArea">    
+                        <div id="<?php echo $row['order_id'];?>">    
                                             
                             <center><h3 class="modal-title"><?php echo $row['customer_fname']?>'s Receipt</h3></center>
                     <div class="modal-body" style="padding-left: 30px;"><strong>
@@ -143,7 +143,7 @@
                     </strong></div></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
-                        <input type="button" onclick="printDiv('printableArea')" class="btn btn-primary" value="Print Receipt" /></body>
+                        <input type="button" onclick="printDiv('<?php echo $row['order_id']?>');" class="btn btn-primary" value="Print Receipt" /></body>
                     </div>
                 </div>
             </div>
