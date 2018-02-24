@@ -2,8 +2,8 @@
 	include '../dbconn.php';
 
 
-	if(isset($_POST['serve'])){
-		$id = $_POST['id'];
+	if(isset($_POST['ready'])){
+		$id = $_POST['ready'];
 		$stat = "Ready";
 		$data = array($stat,$id);
 		$order = getOrder(array($id));
@@ -13,20 +13,20 @@
 		$body = 'Your order is ready to be serve your order number is '.$order['order_number'].' please bring your phone or a photocopy of your reservation & order details'; 
 			orderStatus($data);
 			mail($email,$subject,$body,$from);
-			header("Location: ../../Model/Restaurant/story.php");
+		//	header("Location: ../../Model/Restaurant/story.php");
 	}
 
-	if(isset($_POST['cooking'])){
-		$id = $_POST['id'];
+	if(isset($_POST['cook'])){
+		$id = $_POST['cook'];
 		$stat = "Cooking";
 		// $points = 0;
 		$data = array($stat,$id);
 		orderStatus($data);
-		header("Location: ../../Model/Restaurant/story.php");
+		//header("Location: ../../Model/Restaurant/story.php");
 	}
 
 	if(isset($_POST['cancel'])){
-		$id = $_POST['id'];
+		$id = $_POST['cancel'];
 		$stat = "Cancelled";
 		$data = array($stat,$id);
 		$order = getOrder(array($id));
@@ -36,16 +36,16 @@
 		$body = 'Your order has been cancelled please contact the restaurant for more information'; 
 			orderStatus($data);
 			mail($email,$subject,$body,$from);
-			header("Location: ../../Model/Restaurant/story.php");
+		//	header("Location: ../../Model/Restaurant/story.php");
 	}
 
 	if(isset($_POST['served'])){
-		$id = $_POST['id'];
+		$id = $_POST['served'];
 		$stat = "Served";
 		// $points = 0;
 		$data = array($stat,$id);
 		orderStatus($data);
-		header("Location: ../../Model/Restaurant/story.php");
+	//	header("Location: ../../Model/Restaurant/story.php");
 	}
 
 	date_default_timezone_set('Asia/Manila');
