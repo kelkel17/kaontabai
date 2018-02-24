@@ -1,4 +1,4 @@
-<script src="../../something/js/jquery.min.js"></script>
+`<script src="../../something/js/jquery.min.js"></script>
 <script src="../../something/js/sweetalert.min.js"></script>
 <script>
 	function sweetMimitch(){
