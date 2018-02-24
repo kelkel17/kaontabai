@@ -461,7 +461,7 @@ function islogged2(){
 
 		function deactivateCM($data){
 			$db = con();
-			$sql = "UPDATE combo_meals SET status=? WHERE cm_id = ?";
+			$sql = "UPDATE combo_meals SET status = ? WHERE cm_id = ?";
 			$s = $db->prepare($sql);
 			$s->execute($data);
 			$db = null;
@@ -539,12 +539,7 @@ function islogged2(){
 			$con = null;
 
 			
-			if($update){
-				echo '<script> alert("Successfully Updated"); window.location="../../Model/Schedule/schedules.php" </script>';
-			}else{
-				echo '<script> alert("Updating Failed"); window.location="../../Model/Schedule/schedules.php" </script>';
-
-			}
+			
 
 		}
 
