@@ -31,7 +31,7 @@
                               </div>
                           </div> 
                         <!-- Reservation Modal -->
-                            <div class="modal fade" tabindex="-1" role="dialog" id="bookNow<?php echo $_GET['cid']; ?>">
+                            <div class="modal fade" tabindex="-1" role="dialog" id="bookNow<?php echo $t['table_id']; ?>">
                               <div class="modal-dialog" role="document" style="z-index: 1041;">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -46,13 +46,13 @@
                                              <div class="form-group">
                                                <label>Reservation Date</label>
                                                <input type="hidden" name="cid" value="<?php echo  $_GET['cid'];?>">
-                                               <input type="hidden" name="table" value="<?php echo $t['table_id'];?>">
-                                               <input type="text" id="datepicker" name="dat" class="form-control" required>
+                                               <input type="text" name="table" value="<?php echo $t['table_id'];?>">
+                                               <input type="text" id="" name="dat" class="form-control datepicker2" required>
                                                <span class="highlight"></span><span class="bar"></span>
                                              </div>
                                              <div class="form-group">
                                                <label>Reservation Time</label>
-                                               <input type="text" name="tim" id="timepicker" class="form-control" required>
+                                               <input type="text" name="tim" id="" class="form-control timepicker2" required>
                                                <span class="highlight"></span><span class="bar"></span>
                                              </div>
                                              <div class="form-group">
