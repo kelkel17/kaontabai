@@ -45,18 +45,17 @@
 
                                         <?php 
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules s, restaurants r WHERE s.restaurant_id = r.restaurant_id AND s.restaurant_id = '$Resid'  GROUP BY restaurant_id";
+                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$Resid' GROUP BY restaurant_id ORDER BY sched_id desc";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                           date_default_timezone_set("Asia/Manila");
                                           $date2 = date('Y-m-d');
                                           foreach ($view as $rows) {
-
+                                            print_r($rows);
                                             $date = date('Y-m-d', strtotime($rows['sched_sdate']));
                                             if($rows['status'] == 1 && $date == $date2){ ?>
-
-                                            <a onclick="notAllo(<?php echo $rows['restaurant_id'];?>,'<?php echo $rows['restaurant_name'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                                <a onclick="notAllo(<?php echo $rows['restaurant_id'];?>,'<?php echo $rows['restaurant_name'];?>','<?php echo $rows['sched_sdate'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                             <?php }
                                            if($t['status'] == 1){ ?>
                                                 <a onclick="alreadyBook(<?php echo $rows['restaurant_id'];?>,'<?php echo $rows['restaurant_name'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
@@ -66,10 +65,10 @@
                         </div>
                         <?php include('tablemodal.php'); ?>
                             <script>
-                                function notAllo(eventId, resName) {
+                                function notAllo(eventId, resName,sDate) {
                                     swal({
                                         title: "Notice",
-                                        text: resName + "'s Restaurant doesn't allow online reservation at the moment.",
+                                        text: resName + "'s Restaurant doesn't allow online reservation at the moment."+sDate,
                                         icon: "warning"
                                     });
                                 }
