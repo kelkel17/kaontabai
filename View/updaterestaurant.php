@@ -133,7 +133,7 @@
 			<li class=""><a href="../Model/Restaurant/reservations.php"><em class="fa fa-bookmark">&nbsp;</em> Reservations</a></li>
 			<li class=""><a href="../Model/Event/events.php"><em class="fa fa-bar-chart">&nbsp;</em> Events</a></li>
 			<li class=""><a href="../Model/Schedule/schedules.php"><em class="fa fa-calendar">&nbsp;</em> Schedules</a></li>
-			<li class=""><a href="../Model/Restaurant/promo.php"><em class="fa fa-bullhorn">&nbsp;</em> Promos</a></li>
+			<li class=""><a href="../Model/Restaurant/promo.php"><em class="fa fa-cutlery">&nbsp;</em> Combo Meals</a></li>
 			<li class=""><a href="../Model/Room/rooms.php"><em class="fa fa-clone">&nbsp;</em> Tables</a></li>
 			<li class=""><a href="../Model/Employee/staff.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
 			<li class=""><a href="../Model/Food/food.php"><em class="fa fa-cutlery">&nbsp;</em> Menu</a></li>
