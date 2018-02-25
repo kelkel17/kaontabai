@@ -125,7 +125,7 @@
 	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
 	    			deactivateSchedule($date);
-	    		} if($date2 >= $temp3 && $date3 > $temp4 && $temp2 != ''){
+	    		} if($date2 >= $temp3 && $date3 > $temp4 && $temp2 != '' && $row['status'] == 1){
 	    			$status = 0;
 	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
