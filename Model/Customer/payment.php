@@ -64,8 +64,8 @@ $payment->setIntent('sale')
 	->setTransactions([$transaction]);
 
 //Redorect URLs
-$redirectUrls->setReturnUrl('http://localhost/kaontabai2/kaontabai/model/customer/pays.php?approved=true&cid=$cid')
-	->setCancelUrl('http://localhost/kaontabai2/kaontabai/model/customer/cancelled.php?approved=false&cid=$cid');
+$redirectUrls->setReturnUrl('http://localhost/kaontabai/model/customer/pays.php?approved=true&cid=$cid')
+	->setCancelUrl('http://localhost/kaontabai/model/customer/cancelled.php?approved=false&cid=$cid');
 
 $payment->setRedirectUrls($redirectUrls);
 
