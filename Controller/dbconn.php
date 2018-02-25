@@ -1038,12 +1038,12 @@ function islogged2(){
 			}
 			elseif($count  > 0)
 			{
-				$_SESSION['id'] = $row['employee_id'];
-				header("location:../View/indexstaff.php");
+				$_SESSION['id'] = $row['restaurant_id'];
+				header('location:../View/loadingstaff.php?id='.$row['restaurant_id'].'');
 			}
 			else
 			{
-				echo '<script> alert("Wrong username or password"); window.location="../loginadmin.php"  </script>';
+				//echo '<script> alert("Wrong username or password"); window.location="../loginadmin.php"  </script>';
 			}
 			$con = null;
 		}

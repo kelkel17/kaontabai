@@ -35,10 +35,10 @@
                                             $stmt = $con->prepare($sql);
                                             $stmt->execute();
                                             $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                            if (count($menu) > 0) { 
+                                            if (count($menu) > 0) {   
                                             foreach ($menu as $row) {
                                             ?>
-                                            <input type="checkbox" name="menu[]" value="<?php echo $row['menu_id'];?>"><?php echo $row['m_name']?>
+                                              <input type="checkbox" name="menu[]" value="<?php echo $row['menu_id'];?>"><?php echo $row['m_name']?><br/>
                                             <?php }
                                               }
                                             ?>

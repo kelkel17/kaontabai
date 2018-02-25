@@ -38,13 +38,14 @@
 <table id="dataTable" class="cell-border compact display">
       <thead>
         <tr class="info" id="tableHeader">  
-          <th><center>Product ID</center></th>  
-          <th><center>Product Name</center></th>  
-          <th><center>Product Description</center></th>          
-          <th><center>Product Category</center></th>           
-          <th><center>Product Type</center></th>   
-          <th><center>Product Price</center></th>
-          <th><center>Product Status</center></th>
+          <th><center>ID</center></th>  
+          <th><center>Name</center></th>  
+          <th><center>Description</center></th>          
+          <th><center>Category</center></th>           
+          <th><center>Type</center></th>   
+          <th><center>Image</center></th> 
+          <th><center>Price</center></th>
+          <th><center>Status</center></th>
           <!--  <th>Image</th> -->
           
           <th><center>Action</center></th>
@@ -72,8 +73,12 @@
         echo '<td>'.substr($row['m_desc'], 0, 50).((strlen($row['m_desc']) > 50) ? '...' : '').'</td>';
         echo '<td><center>'.$row['mc_name'].'</center></td>';
         echo '<td><center>'.$row['m_category'].'</center></td>';
-          echo '<td><center>'.$row['m_price'].'</center></td>';
-          echo '<td><center>'.$row['m_status'].'</center></td>'; 
+        if($row['m_image'] != '')
+          echo '<td><center><img src="../../Image/'.$row['m_image'].'" style="width:25px; height:25px;"></center></td>';
+        else
+          echo '<td><center><img src="../../Image/icon3.png" style="width:25px; height:25px;"></center></td>';
+        echo '<td><center>'.$row['m_price'].'</center></td>';
+        echo '<td><center>'.$row['m_status'].'</center></td>'; 
 
         ?>
         <div class="cell">

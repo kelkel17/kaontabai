@@ -65,7 +65,7 @@
 			$date = date('Y-m-d g');
 			$newdate = date('Y-m-d g', strtotime($row['order_time']));
 			$order = $row['order_id'];
-			if($date > $newdate){
+			if($date > $newdate && $row['status'] != 'Cancelled'){
 				$status = "Served";
 				$data = array($status, $order);
 				orderStatus($data);

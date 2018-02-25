@@ -1,8 +1,19 @@
 <?php 
 	
-    require_once('../Controller/dbconn.php');
+    include('../Controller/dbconn.php');
 
     islogged();
+    date_default_timezone_set('Asia/Manila');
+    $date = date('Y-m-d');
+    $owner = getOwner(array($_SESSION['id']));
+    foreach($owner as $row){
+        $exp = date('Y-m-d', strtotime($row['sub_exp']));
+        if($exp == $date){
+            $status = 0;
+            $data = array($status, $_SESSION['id']);
+            ownerStatus($data);
+        }
+    }
    
 
 ?>
@@ -14,6 +25,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>KaonTaBai!</title>
+
 	<link href="../something/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../something/css/font-awesome.min.css" rel="stylesheet">
 	<link href="../something/css/datepicker3.css" rel="stylesheet">
@@ -26,6 +38,8 @@
       }
 	</style>
 	<script src="../something/js/jquery.min.js"></script>
+
+	
 	<!-- <script src="../something/js/jquery-1.11.1.min.js"></script> -->
 	<script src="../something/js/bootstrap.min.js"></script>
 	<script src="../samples/js/chart.min.js"></script>
@@ -35,12 +49,15 @@
 	<script src="../something/js/easypiechart-data.js"></script>
 	<script src="../something/js/bootstrap-datepicker.js"></script>
 	<script src="../something/js/custom.js"></script>
-	<script src="../samples/js/app.js"></script>
+    <script src="../samples/js/app.js"></script>
 	<link rel="shortcut icon" href="../assets/img/logo.png">
 		 
 	</script>
 </head>
+
 <body>
+<!--
+<div id="asd"> -->
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -52,56 +69,63 @@
 				<ul class="nav navbar-top-links navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 						 <em class="fa fa-envelope"></em><span class="label label-danger count"></span>
+						 	
 					</a>
 						<ul class="dropdown-menu  dropdown-messages">
-	 					
+							
+							
 						</ul>
-						<!-- end of message -->
+						
 						<!-- start of notification -->
-		 <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info count"></span>
-					</a>
-					
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="#">
-							<?php
-								$id = $_SESSION['id'];
-					       		$con = con();
-					       		$sql = "SELECT date_time_receive ,COUNT(mes_status) as total FROM messages WHERE mes_status = 'Unread' and restaurant_id = $id ORDER BY date_time_receive desc";
-					       		//$sql .= "";
-					       		$stmt = $con->prepare($sql);
-					       		$stmt->execute();
-					       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					       		date_default_timezone_set('Asia/Manila');
-					       		$date = date('g:i A');
-					       		foreach ($rows as $row) {
-					  		?>	
-								<div><em class="fa fa-envelope"></em><?php echo $row['total'];?> New Message
-									<span class="pull-right text-muted small"><?php  echo date('g:i A',strtotime($row['date_time_receive']));?></span></div>
-							<?php } $con = null; ?>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="../Model/Restaurant/reservations.php">
-							<?php
-								$id = $_SESSION['id'];
-					       		$con = con();
-					       		$sql = "SELECT COUNT(res_status) as total FROM reservations WHERE res_status = 'Pending' and restaurant_id = $id";
-					       		$stmt = $con->prepare($sql);
-					       		$stmt->execute();
-					       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					       		foreach ($rows as $row) {
-					  		?>	
-								<div><em class="fa fa-heart"></em><?php echo $row['total']; ?> Pending Reservations  
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							<?php } $con = null;?>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="#">
-								<div><em class="fa fa-user"></em> 5 New Followers
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-		 </li> 
+						 <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+										<em class="fa fa-bell"></em><span class="label label-info count"></span>
+									</a>
+									
+										<ul class="dropdown-menu dropdown-alerts">
+											<li><a href="#">
+											<?php
+												$id = $_SESSION['id'];
+									       		$con = con();
+									       		$sql = "SELECT date_time_receive ,COUNT(mes_status) as total FROM messages WHERE mes_status = 'Unread' and restaurant_id = $id ORDER BY date_time_receive desc";
+									       		//$sql .= "";
+									       		$stmt = $con->prepare($sql);
+									       		$stmt->execute();
+									       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+									       		date_default_timezone_set('Asia/Manila');
+									       		$date = date('g:i A');
+									       		foreach ($rows as $row) {
+									       			$date = date('g:i A',strtotime($row['date_time_receive']));
+									  		?>	
+												<div><em class="fa fa-envelope"></em><?php echo $row['total'];?> New Message
+													<span class="pull-right text-muted small"><?php  echo time_ago($date);?></span></div>
+											<?php } $con = null; ?>
+											</a></li>
+											<li class="divider"></li>
+											<li><a href="../Model/Restaurant/reservations.php">
+											<?php
+												$id = $_SESSION['id'];
+									       		$con = con();
+									       		$sql = "SELECT COUNT(res_status) as total, created FROM reservations WHERE res_status = 'Pending' and restaurant_id = $id ORDER BY created DESC";
+									       		$stmt = $con->prepare($sql);
+									       		$stmt->execute();
+									       		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+									       		foreach ($rows as $row) {
+									       				$date = date('g:i A',strtotime($row['created']));
+
+									  		?>	
+												<div><em class="fa fa-bookmark"></em><?php echo $row['total']; ?> Pending Reservations  
+													<span class="pull-right text-muted small"><?php echo time_ago($date); ?></span></div>
+											<?php } $con = null;?>
+											</a></li>
+											<!-- <li class="divider"></li>
+											<li><a href="#">
+												<div><em class="fa fa-user"></em> 5 New Followers
+													<span class="pull-right text-muted small">4 mins ago</span></div>
+											</a></li> -->
+										</ul>
+						 	</li> 
+					</li>		
+				</ul> 	
 					<!-- end of notification -->
 			</div>
 		</div><!-- /.container-fluid -->
@@ -120,7 +144,7 @@
 			<div class="profile-usertitle">
 			
 				<div class="profile-usertitle-name"><?php echo $row['restaurant_name'];?></div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span><a href="updaterestaurant.php?id=<?php echo $row['restaurant_id'];?>">Edit Restaraunt </a>
 				<?php 		}
 					}
 				
@@ -135,10 +159,8 @@
 			<li class=""><a href="../Model/Restaurant/storystaff.php"><em class="fa fa-opencart">&nbsp;</em> Orders</a></li>
 			<li class=""><a href="../Model/Restaurant/reservationsstaff.php"><em class="fa fa-bookmark">&nbsp;</em> Reservations</a></li>
 			<li class=""><a href="../Model/Event/eventstaff.php"><em class="fa fa-bar-chart">&nbsp;</em> Events</a></li>
-			<!-- <li class=""><a href="../Model/Schedule/schedules.php"><em class="fa fa-calendar">&nbsp;</em> Schedules</a></li> -->
-			<li class=""><a href="../Model/Promo/promosstaff.php"><em class="fa fa-clone">&nbsp;</em> Promos</a></li>
+			<li class=""><a href="../Model/Restaurant/promostaff.php"><em class="fa fa-cutlery">&nbsp;</em> Combo Meals</a></li>
 			<li class=""><a href="../Model/Room/roomsstaff.php"><em class="fa fa-clone">&nbsp;</em> Tables</a></li>
-			<!-- <li class=""><a href="../Model/Employee/staff.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li> -->
 			<li class=""><a href="../Model/Food/foodstaff.php"><em class="fa fa-cutlery">&nbsp;</em> Menu</a></li>
 			<li class=""><a href="../Controller/logoutadmin.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
@@ -207,13 +229,16 @@
 							<?php 
 								$id = $_SESSION['id'];
 					       		$con = con();
-					       		$sql = "SELECT SUM(visit_count) as total FROM visitors WHERE restaurant_id = $id";
+					       		$sql = "SELECT count(visit_id) as total FROM visitors WHERE restaurant_id = $id	";
 					       		$stmt = $con->prepare($sql);
 					       		$stmt->execute();
 					       		$rows = $stmt->fetch(); 
-								
+								if($rows['total'] != 0){
 					       		 ?>
 							<div class="large"><?php echo $rows['total'];?></div>
+								<?php } else{ ?>
+							<div class="large">0</div>
+								<?php } ?>
 							<div class="text-muted">People who viewed your restaurant</div>
 						</div>
 					</div>
@@ -288,10 +313,12 @@
 		</div>  -->
 		
 	 </div>	<!-- /.main  -->
-
+</div>	
+<!-- </div>  -->
 			
 </body>
 </html>
+<!-- MAPS -->
 <script>
 	
 			function load_unseen_notification(view = '')
@@ -313,7 +340,6 @@
 					}
 				});
 			}
-
 			load_unseen_notification();
 			 $('#message_form').on('submit',function(event){
 				event.preventDefault();
@@ -337,21 +363,16 @@
 				}	
 			});
 			$(document).on('click','.dropdown-toggle', function(){
-				//alert('asdsads');
-				//$('count').html('');
+				
 				load_unseen_notification('yes');
 				$('.count').html('');
 
 			});
 			setInterval(function(){
-				load_unseen_notification();;
+				load_unseen_notification();
 
 			},5000);
-			// $(document).ready(function(){
-			//         for(var i = 0; i < 7; i++){
-			//             $('#reportTable'+i).DataTable();
-			//         }
-			//     });
+	
 			</script>
 			<script>
 			for(var j = 0; j < 3; j++){

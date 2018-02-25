@@ -152,77 +152,7 @@
 
         
 <!-- Combo meal Modal -->
-<!-- Edit Product Modal -->
-           <div class="modal fade" tabindex="-1" role="dialog" id="updateProduct<?php echo $row['cm_id']; ?>">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Edit Product</h3></center>
-                    </div>
-                     <form method="post" action="../../Controller/RestaurantsController/combo.php" class="form-horizontal" enctype="multipart/form-data">
-                          
-                          <div class="modal-body">
-                                          <div class="form-group text-center">
-                                      <label for="image" class="hover">
-                                      <!-- <img src="../../Image/blank.jpg" "> -->
-                                      <img src="../../Image/<?php echo $row['image']?>" id="preview1" data-tooltip="true" title="Upload product image" data-animation="false" alt="product image" style="width:200px;height:200px"/>
-                                      </label>
-                                      <input type="file" name="image" onchange="loadImage(event,'preview1')" id="image" >
-                                  </div>
-                                      <div class="tab-pane">
-
-                                        <input type="hidden" name="cmid" value="<?php echo $row['cm_number']; ?>">
-                                        <input type="hidden" name="cim" value="<?php echo $row['cm_id']; ?>">
-                                        
-                                        <label for="pname">Combo Meal Name</label>
-                                          <input type="text" name="name" id="pname" class="form-control" value="<?php echo $row['cm_name'];?>" required>
-                                          <span class="highlight"></span><span class="bar"></span>
-                                      </div>
-                                      <br />
-                                      <div class="tab-pane">
-                                        <label for="pname">Menu List</label><br/>
-                                        
-                                          <?php     
-                                            $menu = getCombo(array($_SESSION['id']));
-                                            
-                                            $menu_id = explode(",",$row['combo_menu_id']);
-                                            foreach($menu as $key => $asd){
-
-                                                    //   @$men_id = $menu_id[$key];
-                                                    if(in_array($asd['menu_id'],$menu_id)){
-                                                        echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'" checked>'.$asd['m_name'].'<br/>';
-                                                    }else{
-                                                        echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'">'.$asd['m_name'].'<br/>';
-                                                   }
-                                                  }
-                                            ?>
-                                            
-                                  </div>
-                                      <br />
-                                      <div class="tab-pane">
-                                        <label for="pprice">Combo Meal Price</label>
-                                          <input type="number" step="any" name="price" id="pprice" class="form-control" value="<?php echo $row['price'];?>" required>
-                                          <span class="highlight"></span><span class="bar"></span>
-                                          
-                                      </div>
-                                      <br />
-                                      <div class="tab-pane">
-                                        <label for="psoh">Combo Meal Description</label>
-                                          <textarea type="text" name="desc" id="psoh" class="form-control"><?php echo $row['cm_desc'];?></textarea>
-                                          <span class="highlight"></span><span class="bar"></span>
-                                      </div>
-                        </div>
-                          <div class="modal-footer">
-                              <button data-dismiss="modal" class="btn btn-secondary hover" data-animation="false">Close</button>
-                              <button type="submit" name="update" class="btn btn-primary hover">Save</button>
-                          </div>
-                        </form>
-                </div>
-            </div>
-          </div> <!--End of Edit Product Modal -->    
+ 
 
           <div class="modal fade" tabindex="-1" role="dialog" id="deactProduct<?php echo $row['cm_id']; ?>">
             <div class="modal-dialog" role="document">

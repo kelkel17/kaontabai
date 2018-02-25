@@ -32,18 +32,18 @@
 					<form action="Controller/signinadmin.php" method="POST">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="Username" name="user" type="username" autofocus="">
+								<input class="form-control" placeholder="Username" name="user" type="username" autofocus="" required>
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="pass" type="password" value="">
+								<input class="form-control" placeholder="Password" name="pass" type="password" value="" required>
 							</div>
 							<div class="checkbox">
 								<label>
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-							<input type="submit" name="login" value="Login as Owner" class="btn btn-primary btn-lg" type="button">
-						<input type="submit" name="loginadmin" value="Login as Admin" class="btn btn-primary btn-lg" type="button"></fieldset>
+							<input type="submit" name="login" value="Login as Owner" class="btn btn-primary" type="button">
+							<input type="submit" name="loginadmin" value="Login as Staff" class="btn btn-primary" type="button"></fieldset>
 
 					</form>
 			

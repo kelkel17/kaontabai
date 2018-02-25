@@ -10,12 +10,12 @@
 
 		<ul class="nav menu">
 			<li class="active"><a href="../Restaurant/storystaff.php"><em class="fa fa-opencart">&nbsp;</em> Orders</a></li>
-            <li class=""><a href="../Restaurant/reservationsstaff.php"><em class="fa fa-bookmark">&nbsp;</em> Reservations</a></li>
-            <li class=""><a href="../Event/eventsstaff.php"><em class="fa fa-bar-chart">&nbsp;</em> Events</a></li>
-            <li class=""><a href="../Restaurant/promostaff.php"><em class="fa fa-cutlery">&nbsp;</em> Combo Meals</a></li>
-            <li class=""><a href="../Room/roomsstaff.php"><em class="fa fa-clone">&nbsp;</em> Tables</a></li>
-            <li class=""><a href="../Food/foodstaff.php"><em class="fa fa-cutlery">&nbsp;</em> Menu</a></li>
-            <li class=""><a href="../../Controller/logoutadmin.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li class=""><a href="../Restaurant/reservationsstaff.php"><em class="fa fa-bookmark">&nbsp;</em> Reservations</a></li>
+			<li class=""><a href="../Event/eventstaff.php"><em class="fa fa-bar-chart">&nbsp;</em> Events</a></li>
+			<li class=""><a href="../Restaurant/promostaff.php"><em class="fa fa-cutlery">&nbsp;</em> Combo Meals</a></li>
+			<li class=""><a href="../Room/roomsstaff.php"><em class="fa fa-clone">&nbsp;</em> Tables</a></li>
+			<li class=""><a href="../Food/foodstaff.php"><em class="fa fa-cutlery">&nbsp;</em> Menu</a></li>
+			<li class=""><a href="../Controller/logoutadmin.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -59,7 +59,15 @@
         foreach($rows as $row)
        
         {
-        	
+			date_default_timezone_set('Asia/Manila');
+			$date = date('Y-m-d g');
+			$newdate = date('Y-m-d g', strtotime($row['order_time']));
+			$order = $row['order_id'];
+			if($date > $newdate && $row['status'] != 'Cancelled'){
+				$status = "Served";
+				$data = array($status, $order);
+				orderStatus($data);
+			}	
 		  	 echo '<td><center>'.$row['reservation_number'].'</center></td>';
 		  	 echo '<td><center>'.$row['order_number'].'</center></td>';
 		  	 echo '<td><center>'.$row['payment_id'].'</center></td>';
@@ -70,42 +78,27 @@
 	     ?> 
 	       <div class="cell">
                     <td><center>	
-                    	<a href="#" data-toggle="modal" data-target="#viewOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-eye" aria-hidden="true" title="View"></i></a>
+                    	<a href="#" data-toggle="modal" data-target="#viewOrder<?php echo $row['order_id']; ?>"><i class="fa fa-eye" aria-hidden="true" title="View"></i></a>
                     	<?php if($row['status'] == 'Queueing'){?>
-                    	<a href="#" data-toggle="modal" data-target="#acceptOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i></a>
-                    	<a href="#" data-toggle="modal" data-target="#cancelReservation<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i>
-                    	<a href="#" data-toggle="modal" data-target="#serveOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>
-                    	<a href="#" data-toggle="modal" data-target="#cancelptOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
+						<a href="#" onclick="ready(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i></a>
+                    	<a href="#" onclick="cook(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i></a>
+                    	<a href="#" onclick="served(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>
+                    	<a href="#" onclick="cancel(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
                     	<?php } else if($row['status']=='Ready'){?>
                     	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i>
                     	<i class="fa fa2 fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i>
-                    	<a href="#" data-toggle="modal" data-target="#serveOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>	
-                    	<a href="#" data-toggle="modal" data-target="#cancelptOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
+                    	<a href="#" onclick="served(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>	
+                    	<a href="#" onclick="cancel(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
 						<?php } elseif($row['status']=='Cooking'){?>
-						<a href="#" data-toggle="modal" data-target="#acceptOrder<?php echo $row['order_id']; ?>">
-						<i class="fa fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i></a>
+						<a href="#" onclick="ready(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>'),('<?php echo $row['customer_fname'];?>');"><i class="fa fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i></a>
                     	<i class="fa fa2 fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i>
-                    	<a href="#" data-toggle="modal" data-target="#serveOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>	
-                    	<a href="#" data-toggle="modal" data-target="#cancelptOrder<?php echo $row['order_id']; ?>">
-                    	<i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
-                    	<?php } elseif($row['status']=='Served'){?>
+                    	<a href="#" onclick="served(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-check" aria-hidden="true" title="Change status to SERVED"></i></a>	
+                    	<a href="#" onclick="cancel(<?php echo $row['order_id'];?>,'<?php echo $row['customer_fname'];?>','<?php echo $row['customer_lname'];?>');"><i class="fa fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i></a>
+                    	<?php } elseif($row['status']=='Served' || $row['status']=='Cancelled'){?>
                     	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i>
                     	<i class="fa fa2 fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i>
                     	<i class="fa fa2 fa-check" aria-hidden="true" title="Change status to SERVED"></i>
                     	<i class="fa fa2 fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that has been cancelled"></i>
-                    	<?php } elseif($row['status']=='Cancelled'){?>
-                    	<i class="fa fa2 fa-thumbs-o-up" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is ready to be serve"></i>
-                    	<i class="fa fa2 fa-cutlery" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order is being cook"></i>
-                    	<i class="fa fa2 fa-check" aria-hidden="true" title="Change status to SERVED"></i>	
-                    	<i class="fa fa2 fa-times" aria-hidden="true" title="Notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that his order has been cancelled"></i>
                     	<?php } ?>
                     </center></td>
                
@@ -124,6 +117,124 @@
 	</div>	<!--/.main-->
 	
  <script src="../../something/js/global.js"></script>
+ <script>
+					function ready(eventId,fname,lname){
+						swal({
+									title: "Notify "+fname+" "+lname,
+									text: "Are you sure you want to "+fname+" "+lname+" that his/her order is ready to be serve?",
+									buttons:true,
+                  					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/cooking.php",
+										data: {'ready':eventId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully notified "+fname+" "+lname,
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="story.php";});
+										}
+									});
+								}else{
+									swal("Error in notifying "+fname+" "+lname,"","error");
+								}
+							});
+					}
+					function cook(openId,fname,lname){
+						swal({
+							title: "Notify "+fname+" "+lname,
+							text: "Are you sure you want to "+fname+" "+lname+" that his/her order is now being cook?",
+									buttons:true,
+                 					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/cooking.php",
+										data: {'cook':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully notified "+fname+" "+lname,
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="story.php";});
+										}
+									});
+								}else{
+									swal("Error in notifying "+fname+" "+lname,"","error");
+								}
+							});
+					}
+					function served(openId,fname,lname){
+						swal({
+									title: "Notify "+fname+" "+lname,
+									text: "Are you sure you want to "+fname+" "+lname+" that his/her order has been served?",
+									buttons:true,
+                 					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/cooking.php",
+										data: {'served':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully notified "+fname+" "+lname,
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="story.php";});
+										}
+									});
+								}else{
+									swal("Error in notifying "+fname+" "+lname,"","error");
+								}
+							});
+					}
+					function cancel(openId,fname,lname){
+						swal({
+									title: "Notify "+fname+" "+lname,
+									text: "Are you sure you want to "+fname+" "+lname+" that his/her order has been cancelled?",
+									buttons:true,
+                 					dangerMode: true,
+									icon: "warning"
+							}).then(function(value){
+								
+								if(value){
+									// alert(eventId);
+									$.ajax({
+										type: "post",
+										url: "../../Controller/RestaurantsController/cooking.php",
+										data: {'cancel':openId},
+										cache: false,
+										success: function(response){
+											swal({
+												title: "Succesfully notified "+fname+" "+lname,
+												text: "",
+												icon: "success"
+											}).then(function(){ window.location="story.php";});
+										}
+									});
+								}else{
+									swal("Error in notifying "+fname+" "+lname,"","error");
+								}
+							});
+					}
+				</script>
  <script type="text/javascript">
      $(document).ready(function() {
     $('#dataTable').DataTable( {
@@ -138,6 +249,17 @@
     } );
 } );
  </script>
-			
+	<script>
+function printDiv(el) {
+    var printContents = document.getElementById(el).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>		
 </body>
 </html>

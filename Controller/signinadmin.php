@@ -32,5 +32,10 @@ include 'dbconn.php';
 			header('location:../loginadmin.php?mess=Your username or password is incorrect!');
 	}
 
-		
+	if(isset($_POST['loginadmin'])){
+		$username = $_POST['user'];
+		$password = $_POST['pass'];
+		//$data = array($username,$password);
+		loginStaff($username,$password);
+	}		
 ?>
