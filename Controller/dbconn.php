@@ -345,13 +345,7 @@ function islogged2(){
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
-			
-			if($add){
-				echo '<script> alert("Successfully Added a Staff"); window.location="../../Model/Employee/staff.php" </script>';
-			 }else{
-				echo '<script> alert("Failed in Adding a Staff"); window.location="../../Model/Employee/staff.php" </script>';
-			 }
-				
+		
 
 		}
 

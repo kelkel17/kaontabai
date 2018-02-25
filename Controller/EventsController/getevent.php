@@ -2,7 +2,8 @@
     include('../dbconn.php');
     $con = con();
     $id = $_SESSION['id'];
-    $sql = "SELECT count(reservation_id) as count, reservation_date as dat, reservation_time as tim FROM reservations WHERE res_status = 'Pending' AND restaurant_id = '$id' GROUP BY DATE_FORMAT(reservation_date, '%D')";
+   // $id = 1;
+    $sql = "SELECT count(event_id) as count, event_date as dat FROM events WHERE event_status = 'Open' AND restaurant_id = '$id' GROUP BY event_date";
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

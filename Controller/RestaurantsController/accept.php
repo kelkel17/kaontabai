@@ -4,7 +4,7 @@
 		$id = $_POST['accept'];
 		//echo $id;
 		$table = $_POST['table'];
-		echo $table;
+		// echo $table;
 		$stat = "Reserved";
 		if($table == 0){
 			$data = array($stat,$id);
@@ -53,7 +53,7 @@
 													break;
 												}
 										}
-									   
+
 									}
 									elseif($date2 > $date5){
 												//echo 'dili parihag adlaw';
@@ -64,13 +64,13 @@
 												$date6 = date('Y-m-d', strtotime($jkl['sched_sdate']));
 													  $data = array($asd,$status,$jkl['sched_id']);
 													  updateAdd2($data);
-										
+
 												}
-											
+
 									}
 								}
 						//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
-						
+
 					}
 			}
 		}else{
@@ -122,7 +122,7 @@
 												break;
 											}
 									}
-								   
+
 								}
 								elseif($date2 > $date5){
 											echo 'dili parihag adlaw';
@@ -133,9 +133,9 @@
 											$date6 = date('Y-m-d', strtotime($jkl['sched_sdate']));
 												  $data = array($asd,$status,$jkl['sched_id']);
 												  updateAdd2($data);
-									
+
 											}
-										
+
 								}
 							}
 						//	echo '<script> window.location="../../Model/Restaurant/reservations.php"; </script>';
@@ -143,7 +143,6 @@
 		}
 	}
 }	
-
 
 	if(isset($_POST['cancel'])){
 		$id = $_POST['cancel'];
@@ -190,7 +189,5 @@
 			}
 		}		
 	}
-	
-
 
 ?>

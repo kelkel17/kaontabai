@@ -1,77 +1,80 @@
-<script src="../../something/js/jquery.min.js"></script>
-<script src="../../something/js/sweetalert.min.js"></script>
+<script src = "../../something/js/jquery.min.js" ></script> 
+<script src = "../../something/js/sweetalert.min.js" ></script> 
 <script>
-	function sweetMimitch(){
-	$(function(){
-		swal({
-				title:"Successfully",
-				text:"Added a staff",
-				icon: "success"
-		}).then(function(){
-				window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-	function updateAlert(){
-		$(function(){
-			swal({
-				title:"Successfully",
-				text:"Updated a staff",
-				icon: "success"
-			}).then(function(){
-					window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-	function errorUpdateAlert(){
-		$(function(){
-			swal({
-				title:"Error",
-				text:"Error in Updating a staff",
-				icon: "error"
-			}).then(function(){
-					window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-	function warningAlert(){
-		$(function(){
-			swal({
-				title:"Image type error",
-				text:"Image type must be PNG/JPEG/JPG only",
-				icon: "Warning"
-			}).then(function(){
-					window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-	function warningAlert2(){
-		$(function(){
-			swal({
-				title:"Error in adding a staff",
-				text:"staff already exist",
-				icon: "Error"
-			}).then(function(){
-					window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-	function errorAlert(){
-		$(function(){
-			swal({
-				title:"Error in adding a staff",
-				text:"staff already exist",
-				icon: "Error"
-			}).then(function(){
-					window.location = "../../Model/Employee/staff.php";
-			});
-		});
-	}
-</script>
+    function sweetMimitch() {
+        $(function() {
+            swal({
+                title: "Successfully",
+                text: "Added a staff",
+                icon: "success"
+            }).then(function() {
+                window.location = "../../Model/Employee/staff.php";
+            });
+        });
+    }
+
+function updateAlert() {
+    $(function() {
+        swal({
+            title: "Successfully",
+            text: "Updated a staff",
+            icon: "success"
+        }).then(function() {
+            window.location = "../../Model/Employee/staff.php";
+        });
+    });
+}
+
+function errorUpdateAlert() {
+    $(function() {
+        swal({
+            title: "Error",
+            text: "Error in Updating a staff",
+            icon: "error"
+        }).then(function() {
+            window.location = "../../Model/Employee/staff.php";
+        });
+    });
+}
+
+function warningAlert() {
+    $(function() {
+        swal({
+            title: "Image type error",
+            text: "Image type must be PNG/JPEG/JPG only",
+            icon: "Warning"
+        }).then(function() {
+            window.location = "../../Model/Employee/staff.php";
+        });
+    });
+}
+
+function warningAlert2() {
+    $(function() {
+        swal({
+            title: "Error in adding a staff",
+            text: "staff already exist",
+            icon: "Error"
+        }).then(function() {
+            window.location = "../../Model/Employee/staff.php";
+        });
+    });
+}
+
+function errorAlert() {
+    $(function() {
+        swal({
+            title: "Error in adding a staff",
+            text: "staff already exist",
+            icon: "Error"
+        }).then(function() {
+            window.location = "../../Model/Employee/staff.php";
+        });
+    });
+} </script>
 <?php
 
 include '../dbconn.php';
-
 
 	if(isset($_POST['Add']))
 	{
@@ -86,7 +89,7 @@ include '../dbconn.php';
 			$number = FLOOR(RAND(100,2000));
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			
+
 			$sql1 = "SELECT username FROM employees WHERE username = :username";
 			$con = con();
 			$sthandler = $con->prepare($sql1);
@@ -111,11 +114,10 @@ include '../dbconn.php';
 		$phone = trim($_POST['phone']);
 		$gender = trim($_POST['gender']);
 		$ssn = trim($_POST['ssn']);
-				
+
 					$data = array($fname,$mname,$lname,$addr,$phone,$gender,$ssn,$id);
 					updateStaff($data);
 					echo '<script>updateAlert();</script>';
-			
-	
+
   	}
 ?>

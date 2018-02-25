@@ -1,102 +1,108 @@
-
-
-          <!-- Order Modal -->
-          <div class="modal fade" tabindex="-1" role="dialog" id="cancelReservation<?php echo $row['order_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order is now being cook and will be serve soon?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/cooking.php">
-                        <input type="submit" name="cooking" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
-                        </form>
-                    </div>
-                </div>
+<!-- Order Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="cancelReservation<?php echo $row['order_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">
+                    <span>&times;</span>
+                </button>
+                <center>
+                    <h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
             </div>
-          </div><!-- end of accept modal --> 
-          <div class="modal fade" tabindex="-1" role="dialog" id="acceptOrder<?php echo $row['order_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order is ready to be serve?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/cooking.php">
-                        <input type="submit" name="serve" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
-                        </form>
-                    </div>
-                </div>
+            <div class="modal-body">
+                <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order is now being cook and will be serve soon?</h5>
             </div>
-          </div><!-- end of cancel modal -->  
-          <div class="modal fade" tabindex="-1" role="dialog" id="serveOrder<?php echo $row['order_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
+            <div class="modal-footer">
+                <form method="post" action="../../Controller/RestaurantsController/cooking.php">
+                    <input type="submit" name="cooking" class="btn btn-danger hover" value="Yes">
+                    <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
+                    <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of accept modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="acceptOrder<?php echo $row['order_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">
+                    <span>&times;</span>
+                </button>
+                <center>
+                    <h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order is ready to be serve?</h5>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="../../Controller/RestaurantsController/cooking.php">
+                    <input type="submit" name="serve" class="btn btn-danger hover" value="Yes">
+                    <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
+                    <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of cancel modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="serveOrder<?php echo $row['order_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
                       <button class="close" data-dismiss="modal" type="button">
                             <span>&times;</span>
                         </button>
                     <center><h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
                     </div> -->
-                    <div class="modal-body">
-                        <h5 class="text-center">Is <?php echo $row['customer_fname'].' '.$row['customer_lname'];?>'s order has been served?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/cooking.php">
-                        <input type="submit" name="served" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
-                        </form>
-                    </div>
-                </div>
+            <div class="modal-body">
+                <h5 class="text-center">Is <?php echo $row['customer_fname'].' '.$row['customer_lname'];?>'s order has been served?</h5>
             </div>
-          </div><!-- end of cancel modal --> 
+            <div class="modal-footer">
+                <form method="post" action="../../Controller/RestaurantsController/cooking.php">
+                    <input type="submit" name="served" class="btn btn-danger hover" value="Yes">
+                    <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
+                    <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of cancel modal -->
 
-          <div class="modal fade" tabindex="-1" role="dialog" id="cancelptOrder<?php echo $row['order_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order will be cancelled?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/RestaurantsController/cooking.php">
-                        <input type="submit" name="cancel" class="btn btn-danger hover" value="Yes">
-                        <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
-                        <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
-                        </form>
-                    </div>
-                </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="cancelptOrder<?php echo $row['order_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">
+                    <span>&times;</span>
+                </button>
+                <center>
+                    <h3 class="modal-title">Notify <?php echo $row['customer_fname'].' '.$row['customer_lname']?></h3></center>
             </div>
-          </div><!-- end of cancel modal --> 
-          <div class="modal fade" tabindex="-1" role="dialog" id="viewOrder<?php echo $row['order_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div id="<?php echo $row['order_id'];?>">    
-                                            
-                            <center><h3 class="modal-title"><?php echo $row['customer_fname']?>'s Receipt</h3></center>
+            <div class="modal-body">
+                <h5 class="text-center">Are you sure you want to notify <?php echo $row['customer_fname'].' '.$row['customer_lname'];?> that <?php if($row['customer_gender']=="Male"){ echo 'his'; } elseif($row['customer_gender']=="Female"){ echo 'her'; }?> order will be cancelled?</h5>
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="../../Controller/RestaurantsController/cooking.php">
+                    <input type="submit" name="cancel" class="btn btn-danger hover" value="Yes">
+                    <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
+                    <input type="hidden" name="id" value="<?php echo $row['order_id'];?>">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of cancel modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="viewOrder<?php echo $row['order_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="<?php echo $row['order_id'];?>">
+
+                    <center>
+                        <h3 class="modal-title"><?php echo $row['customer_fname']?>'s Receipt</h3></center>
                     <div class="modal-body" style="padding-left: 30px;"><strong>
                         <div class="row">    
                             Order ID: <?php echo $row['order_number'];?> 
@@ -130,7 +136,7 @@
                         $stmt = $con->prepare($sql);
                   $stmt->execute();
                   $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                   
+
                    if(count($view)>0){
                     foreach($view as $r){
 
@@ -140,69 +146,74 @@
                           <li style="margin-left:-5%"><?php echo $r['m_name'].' '.$r['order_qty'];?> pcs</li>
                         </ul>  
                      <?php } } }?>    
-                    </strong></div></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
-                        <input type="button" onclick="printDiv('<?php echo $row['order_id']?>');" class="btn btn-primary" value="Print Receipt" /></body>
-                    </div>
+                    </strong></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>
+                    <input type="button" onclick="printDiv('<?php echo $row['order_id']?>');" class="btn btn-primary" value="Print Receipt" />
+                    </body>
                 </div>
             </div>
-          </div><!-- end of cancel modal -->   
-          <!-- End Order Modal -->
+        </div>
+    </div>
+    <!-- end of cancel modal -->
+    <!-- End Order Modal -->
 
-        
-<!-- Combo meal Modal -->
- 
+    <!-- Combo meal Modal -->
 
-          <div class="modal fade" tabindex="-1" role="dialog" id="deactProduct<?php echo $row['cm_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Deactivate Product</h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to deactivate this product?</h5>
-                        <p class="m-t-30">
-                            If you deactivate this product, it will not be shown in your restaurant's menu.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/FoodsController/deactivatefood.php">
+    <div class="modal fade" tabindex="-1" role="dialog" id="deactProduct<?php echo $row['cm_id']; ?>">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <center>
+                        <h3 class="modal-title">Deactivate Product</h3></center>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center">Are you sure you want to deactivate this product?</h5>
+                    <p class="m-t-30">
+                        If you deactivate this product, it will not be shown in your restaurant's menu.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="../../Controller/FoodsController/deactivatefood.php">
                         <input type="submit" name="deactivate" class="btn btn-info hover" value="Yes">
                         <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
                         <input type="hidden" name="id" value="<?php echo $row['cm_id'];?>">
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
-          </div><!-- end of deactivate modal -->  
+        </div>
+    </div>
+    <!-- end of deactivate modal -->
 
-          <div class="modal fade" tabindex="-1" role="dialog" id="actProduct<?php echo $row['cm_id']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" data-dismiss="modal" type="button">
-                            <span>&times;</span>
-                        </button>
-                    <center><h3 class="modal-title">Re-Activate Product</h3></center>
-                    </div>
-                    <div class="modal-body">
-                        <h5 class="text-center">Are you sure you want to re-activate this product?</h5>
-                        <p class="m-t-30">
-                            If you re-activate this product, it will be again shown in your restaurant's menu.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" action="../../Controller/FoodsController/deactivatefood.php">
+    <div class="modal fade" tabindex="-1" role="dialog" id="actProduct<?php echo $row['cm_id']; ?>">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <center>
+                        <h3 class="modal-title">Re-Activate Product</h3></center>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center">Are you sure you want to re-activate this product?</h5>
+                    <p class="m-t-30">
+                        If you re-activate this product, it will be again shown in your restaurant's menu.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="../../Controller/FoodsController/deactivatefood.php">
                         <input type="submit" name="activate" class="btn btn-danger hover" value="Yes">
                         <button type="button" class="btn btn-secondary hover" data-dismiss="modal">No</button>
                         <input type="hidden" name="id" value="<?php echo $row['cm_id'];?>">
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
-          </div><!-- end of Activate modal -->      
-<!-- end of combo meal modal -->
+        </div>
+    </div>
+    <!-- end of Activate modal -->
+    <!-- end of combo meal modal -->
