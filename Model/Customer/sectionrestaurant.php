@@ -114,16 +114,20 @@
                                         <?php include('bookmodal.php'); 
                                           $cid = $row['restaurant_id'];
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' GROUP BY restaurant_id";
+                                          $sql = "SELECT * FROM schedules s WHERE restaurant_id = '$cid' ORDER BY sched_sdate DESC LIMIT 1";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           date_default_timezone_set("Asia/Manila");
-                                          $date2 = date('Y-m-d g');
+                                          $date2 = date('Y-m-d');
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                           foreach ($view as $rows) {
-                                            $date = date('Y-m-d g', strtotime($rows['sched_sdate']));
-
-                                           if($rows['status'] == 1 && $date == $date2){ ?>
+                                             
+                                            $date = date('Y-m-d', strtotime($rows['sched_sdate']));
+                                            $date3 = date('Y-m-d', strtotime($rows['sched_edate']));
+                                            echo $date2;
+                                            echo '<br>';
+                                            echo $date3;
+                                           if($rows['status'] == 1 && $date <= $date2 && $date3 >= $date2){ ?>
                                                 <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                             <?php } else { ?>
                                                 <a href="#" onclick="getDate(<?php echo $row['restaurant_id'];?>);" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
