@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2018 at 11:05 AM
+-- Generation Time: Feb 25, 2018 at 02:32 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -86,7 +86,11 @@ INSERT INTO `combo_meals` (`cm_id`, `menu_id`, `restaurant_id`, `created`, `pric
 (30, '32', 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde''s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
 (31, '33', 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde''s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
 (32, '79', 13, '2018-02-25 07:15:16', '100.00', 'Here', '1519542916clock-symbol-icon-63652.png', 'Sample', 7052, 'Available'),
-(33, '79', 13, '2018-02-25 07:28:10', '300.00', 'Consist of 5 meals', '1519543690restaurant-512.png', 'Sample 2', 333, 'Available');
+(33, '79', 13, '2018-02-25 07:28:10', '300.00', 'Consist of 5 meals', '1519543690restaurant-512.png', 'Sample 2', 333, 'Available'),
+(34, '93,95,99', 15, '2018-02-25 12:38:26', '400.00', 'Tinulang Manok, Baked Scallops and Calamares', NULL, 'Combo Meal 1', 4007, 'Available'),
+(35, '98,100,101', 15, '2018-02-25 12:39:10', '400.00', 'Kinilaw, Spicy Scallops and Cordova Express', NULL, 'Combo Meal 2', 4497, 'Available'),
+(36, '102,104,111', 16, '2018-02-25 13:31:13', '800.00', 'Flat iron steak, Chorizo Squid with Banana Flambee', NULL, 'Combo Meal 1', 6889, 'Available'),
+(37, '103,106,108', 16, '2018-02-25 13:31:53', '400.00', 'Chicken Tartufo and Scallops with Cremebule', NULL, 'Combo Meal 2', 1732, 'Available');
 
 -- --------------------------------------------------------
 
@@ -292,7 +296,26 @@ INSERT INTO `menus` (`menu_id`, `mc_id`, `restaurant_id`, `m_name`, `m_desc`, `m
 (89, 1, 14, 'Charred Octopus', 'Squash risotto, grilled grapefruit, romesco', 'Fish', '1519552777DSCF8644-768x512.jpg', 'Available', '450.00', '2018-02-25 09:59:37', 786),
 (90, 1, 14, 'Pork Pork Pork', 'grilled apple puree, sauce chasseur, braised cabbage, shiitake risotto', 'Pork', '1519552802DSCF8665-768x512.jpg', 'Available', '650.00', '2018-02-25 10:00:02', 667),
 (91, 3, 14, 'â€œPottedâ€ Chocolate Tiramisu', 'sabayon, crunchy hazelnut meringue, coffee sponge, chocolate sand, strawberry gelee, vanilla sauce', 'Ice Cream', '1519552834DSCF8679-768x512.jpg', 'Available', '240.00', '2018-02-25 10:00:35', 612),
-(92, 3, 14, 'Sizzling Caramel & Banana plate', '', 'Special', '1519552892DSCF8683-768x512.jpg', 'Available', '250.00', '2018-02-25 10:01:32', 218);
+(92, 3, 14, 'Sizzling Caramel & Banana plate', '', 'Special', '1519552892DSCF8683-768x512.jpg', 'Available', '250.00', '2018-02-25 10:01:32', 218),
+(93, 1, 15, 'Tinulang Manok', '', 'Soup/Vegetables', '1519561992IMG_0122.jpg', 'Available', '290.00', '2018-02-25 12:33:12', 213),
+(94, 1, 15, 'Talaba', '', 'Appetizer', '1519562032wpid-dsc_04301.jpg', 'Available', '145.00', '2018-02-25 12:33:52', 909),
+(95, 1, 15, 'Baked Scallops', '', 'Appetizer', '1519562053lantawduma-21.jpg', 'Available', '150.00', '2018-02-25 12:34:13', 433),
+(96, 1, 15, 'Sisig', '', 'Pork', '1519562076111.jpg', 'Available', '140.00', '2018-02-25 12:34:36', 589),
+(97, 1, 15, 'Sinuglaw', '', 'Appetizer', '1519562115img_1175.jpg', 'Available', '180.00', '2018-02-25 12:35:15', 370),
+(98, 1, 15, 'Kinilaw', '', 'Appetizer', '1519562141lantaw-restaurant.jpg', 'Available', '175.00', '2018-02-25 12:35:41', 511),
+(99, 1, 15, 'Calamares', '', 'Appetizer', '1519562159calamari at Lantaw sa SRP Restaurant in Cebu City, Philippines.jpg', 'Available', '240.00', '2018-02-25 12:35:59', 826),
+(100, 1, 15, 'Spicy Scallops', '', 'Appetizer', '1519562206Spicy-scallops-Lantaw-Floating-Native-Restaurant.jpg', 'Available', '160.00', '2018-02-25 12:36:46', 697),
+(101, 1, 15, 'Cordova Express', '', 'Appetizer', '1519562231lantaw-2-native-restaurant.jpg', 'Available', '160.00', '2018-02-25 12:37:11', 409),
+(102, 3, 16, 'Banana Flambee', '', 'Ice Cream', '1519565170flambee.jpg', 'Available', '120.00', '2018-02-25 13:26:10', 382),
+(103, 3, 16, 'Cremebule', '', 'Special', '1519565194cremebrule.jpg', 'Available', '120.00', '2018-02-25 13:26:34', 756),
+(104, 1, 16, 'Flat Iron Steak', '', 'Beef', '1519565217steak flat.jpg', 'Available', '495.00', '2018-02-25 13:26:57', 908),
+(105, 1, 16, 'Butcher''s Steak', '', 'Beef', '1519565238steak butch.jpg', 'Available', '360.00', '2018-02-25 13:27:18', 413),
+(106, 1, 16, 'Chicken Tartufo', '', 'Chicken', '1519565264chicken.jpg', 'Available', '265.00', '2018-02-25 13:27:44', 490),
+(107, 1, 16, 'Steamed Chilean Mussels', '', 'Appetizer', '1519565305mussels.jpg', 'Available', '320.00', '2018-02-25 13:28:25', 154),
+(108, 1, 16, 'Scallops with Mornay Sauce', '', 'Appetizer', '1519565328scallops.jpg', 'Available', '265.00', '2018-02-25 13:28:48', 833),
+(109, 1, 16, 'Prawn Gambas', '', 'Appetizer', '1519565345prawn.jpg', 'Available', '265.00', '2018-02-25 13:29:05', 237),
+(110, 1, 16, 'Black Pepper Steak', '', 'Beef', '1519565368balck pepper.jpg', 'Available', '395.00', '2018-02-25 13:29:28', 724),
+(111, 1, 16, 'Chorizo Squid', '', 'Appetizer', '1519565421squidcho.jpg', 'Available', '275.00', '2018-02-25 13:30:21', 312);
 
 -- --------------------------------------------------------
 
@@ -557,7 +580,11 @@ INSERT INTO `promo_restaurant` (`pr_id`, `promo_id`, `restaurant_id`, `status`) 
 (17, '5', 13, 'Avail'),
 (18, '3', 14, 'Avail'),
 (19, '4', 14, 'Avail'),
-(20, '5', 14, 'Avail');
+(20, '5', 14, 'Avail'),
+(21, '3', 15, 'Avail'),
+(22, '5', 15, 'Avail'),
+(23, '1', 16, 'Avail'),
+(24, '5', 16, 'Avail');
 
 -- --------------------------------------------------------
 
@@ -653,8 +680,10 @@ INSERT INTO `restaurants` (`restaurant_id`, `sub_id`, `restaurant_name`, `restau
 (1, 3, 'Kuya J', 'KATAKAM-TAKAM NA KUWENTO NI KUYA J\r\n\r\n\r\n\r\n\r\nKuya J Restaurant, formerly known as â€œAng Kan-anan ni Kuya J,â€ started as a humble eatery along the streets of Cebu. But with Kuya Jâ€™s undeniably delicious dishes, mouthwatering words of recommendation quickly spread into every Cebuanosâ€™ palate. With that, Kuya J instantly became one of the well-loved restaurants in Cebu. \r\n\r\nToday, Kuya J continues to satisfy every Filipinoâ€™s appetite nationwide. Using only the freshest ingredients available, Kuya J cooks up a storm of delicious Pinoy food in every corner of the Philippines.\r\n\r\nTHE BLOCKBUSTER BIDA\r\n\r\nJericho Rosales is one of the award-winning drama actors in the country and the best Kuya to his family. \r\n\r\nWhatâ€™s very inspiring about him is his trait of always putting his heart into everything that he does, especially when touching peopleâ€™s lives.\r\n\r\nThis is why Echo is the perfect endorser for Kuya J.', 'Corner Tojong Street, 15 N Escario St, Lungsod ng Cebu, 6000 ', '09989624269', '100', '09:00', '21:00', NULL, 10.3188, 123.902, 'admin', 'admin', 'Mickale', 'Lapasanda', 'Saturre', '09165970601', 'kuyajtest@gmail.com', 'Saint Bernard Southern Leyte', '151825301515174728091517414973151733665615166037981512156053kuyaj.png', 1, '2018-01-31 2:21:52', '2019-01-31 2:21:52'),
 (3, 2, 'Casa Verde', 'Established in August 2002, CASA VERDE is a chain of family-owned restaurants in Cebu City. Spanish for "green house", CASA VERDE''s name was influenced by the owners'' Spanish roots and the color of the Ramos Branch, which used to be one of the family''s ancestral homes. \r\n\r\nOriginally, the Ramos Branch was supposed to be just a small canteen that catered to the residents of the 2nd floor dormitory and some students from nearby colleges. Through word-of-mouth and recommendations by family and friends, the humble canteen soon became a full-scale restaurant. After almost a decade and three branches later, CASA VERDE has grown into one of Cebu''s most popular dining destinations. \r\n\r\n"Value for Money" has always been the restaurant''s philosophy. CASA VERDE believes that everyone deserves to enjoy great food and quality service at reasonable prices in a comfortable atmosphere. It''s casual dining at its best. \r\n\r\nCASA VERDE is the perfect place to let your hair down and enjoy a steak or two with family and friends. The ambiance is simple and casual, with knickknacks and collectibles from the personal collections of the owners. It''s also interesting to note that all of the restaurant''s signature dishes are named after some members of the family. We bring homestyle comfort food to the next level. \r\n\r\nThe next time you''re in the mood for some good food, head on down to the CASA VERDE branch nearest you and try our best-selling ribs, mouth-watering steaks, sumptuous pasta, and sinful desserts. It''s a dining experience that truly exceeds expectation. ', 'Lim Tian Teng Street, Ramos, Cebu City, Philippines, 6000', '+63 32 253.6472', '350', '10:00', '22:00', NULL, 10.3072, 123.896, 'admin2', 'admin2', 'Gian Carlo', 'S', 'Cataraja', '09265976739', 'casaverdetest@gmail.com', 'Cebu City', '15189781501518886223casa-verde-logo-679x410.jpg', 1, '2018-02-18 12:00:15', '2018-08-18 12:00:15'),
 (11, 4, 'Gerry''s Grill', 'Here at Gerry''s, we aim to give everyone a pleasurable dining experience, serving only the freshest food ranging from Filipino favorites â€“ Sisig, Inihaw na Pusit, Crispy Pata, Beef Kare-kare, Adobo Shreds to exotic cuisines.\r\n\r\nI have always dreamt of putting up a place where everyone could hang out and enjoy good food. With my passion for cooking and love for grilled dishes came Gerry''s.\r\n\r\nAlthough the original concept of my business was one where people could unwind with a drink or two, Gerryâ€™s has become a family restaurant, too.\r\n\r\nFrom opening its first store in Tomas Morato, Quezon City, Gerryâ€™s has come a long way. With its continuous expansion nationwide, Gerryâ€™s has also opened branches in the United States, Singapore and Qatar.\r\n\r\nUp until now, we strive to continue to evolve, responding to the ever growing needs of our customers. We believe in offering our customers the best value for their money. We also take pride in taking care of our people â€“ one of our most valuable assets.\r\n\r\nThese are the reasons why Gerry''s remains to be the favorite among Filipinos. For as long as we can, we guarantee nothing but great food and loads of fun.', 'Robinson Galleria Cebu, Gen. Maxilom Ext, Cebu City, 6000 Cebu', '(032) 231 4738', '300', '10:00', '21:00', NULL, 10.304, 123.912, 'admin6', '123', 'Godwin', 'Margaja', 'Montealto', '098272626', 'gerrygrilltest@gmail.com', 'Aliwanay Balamban Cebu', '1519115864logo.png', 1, '2018-02-20 4:15:49', '2018-02-27 4:15:49'),
-(12, 2, 'No.9', 'Our passion for good food started at the kitchen and dining table at home. Having grown up at No. 9, it seemed only fitting for us that we turn our ancestral home into a place where we could share our love of food with you.\r\n\r\nLocated at our old neighborhood of E. Benedicto Street, No. 9 gave us the opportunity to bring together the past and the future, melding elements of the old world with modern day. It features a newly renovated interior that coexists with the original exterior faÃ§ade of the 50 year old house. A new lighting system illuminates the main dining hall while guests have a floor-to-ceiling view of the old garden and trees.\r\n\r\nOur cuisine imbibes the same principles as the restaurantâ€™s design, using both traditional and modern techniques in its preparation. In its essence, our menu can be described as a homage to the food we fell in love with. The dishes may look deceptively simple, but a lot of work and love has gone into its preparation.\r\n\r\nNothing would make us happier than to have our guests feel that love in every bite.', 'E. Benedicto Street, Cebu City', '+63 32 253 9518', '350', '17:00', '00:00', NULL, 10.3102, 123.901, 'admin7', '123', 'Gian Carlo', 'S', 'Cataraja', '123456789', 'aabbqtest@gmail.com', 'Cebu City', '1519158245download.jpg', 1, '2018-02-21 4:12:57', '2018-08-21 4:12:57'),
-(14, 3, 'KAYU: Kitchen + Bar', 'Taking inspiration from the world, KAYUâ€™s modern-fusion cuisine uses only the freshest and finest ingredients cooked with our chefâ€™s imagination and passion. \r\nThe passion for creating sparked within Chef â€œIzzyâ€ Francis Sy at a young age.\r\n\r\nWith a culinary degree in ICAAC, CIA Greystone, Napa, CA and his work experience with Morimoto & Kitchen Door, Chef Izzy is ready to share his love for cooking to his beloved hometown - Cebu City.', 'Sanson Road, Lahug, Cebu City', '(032) 406 3095', '100', '07:30', '22:30', NULL, 10.333, 123.895, 'admin8', '123', 'Fran', 'Margaja', 'Montealto', '(032) 406 3095', 'kayutest@gmail.com', 'Aliwanay Balamban Cebu', '1519551538kayu-cover2.jpg', 1, '2018-02-25 5:31:52', '2019-02-25 5:31:52');
+(12, 2, 'No.9', 'Our passion for good food started at the kitchen and dining table at home. Having grown up at No. 9, it seemed only fitting for us that we turn our ancestral home into a place where we could share our love of food with you.\r\n\r\nLocated at our old neighborhood of E. Benedicto Street, No. 9 gave us the opportunity to bring together the past and the future, melding elements of the old world with modern day. It features a newly renovated interior that coexists with the original exterior faÃ§ade of the 50 year old house. A new lighting system illuminates the main dining hall while guests have a floor-to-ceiling view of the old garden and trees.\r\n\r\nOur cuisine imbibes the same principles as the restaurantâ€™s design, using both traditional and modern techniques in its preparation. In its essence, our menu can be described as a homage to the food we fell in love with. The dishes may look deceptively simple, but a lot of work and love has gone into its preparation.\r\n\r\nNothing would make us happier than to have our guests feel that love in every bite.', 'E. Benedicto Street, Cebu City', '+63 32 253 9518', '350', '17:00', '00:00', NULL, 10.3102, 123.901, 'admin7', '123', 'Gian Carlo', 'S', 'Cataraja', '123456789', 'number9test@gmail.com', 'Cebu City', '1519158245download.jpg', 1, '2018-02-21 4:12:57', '2018-08-21 4:12:57'),
+(14, 3, 'KAYU: Kitchen + Bar', 'Taking inspiration from the world, KAYUâ€™s modern-fusion cuisine uses only the freshest and finest ingredients cooked with our chefâ€™s imagination and passion. \r\nThe passion for creating sparked within Chef â€œIzzyâ€ Francis Sy at a young age.\r\n\r\nWith a culinary degree in ICAAC, CIA Greystone, Napa, CA and his work experience with Morimoto & Kitchen Door, Chef Izzy is ready to share his love for cooking to his beloved hometown - Cebu City.', 'Sanson Road, Lahug, Cebu City', '(032) 406 3095', '100', '07:30', '22:30', NULL, 10.333, 123.895, 'admin8', '123', 'Fran', 'Margaja', 'Montealto', '(032) 406 3095', 'kayutest@gmail.com', 'Aliwanay Balamban Cebu', '1519551538kayu-cover2.jpg', 1, '2018-02-25 5:31:52', '2019-02-25 5:31:52'),
+(15, 3, 'Lantaw Floating Native Restaurant', 'Lantaw promises to be a great addition to the â€˜nativeâ€™ category of restaurantsâ€¦. a category where quality has not always been easy to find, surprisingly.\r\n\r\nWell, youâ€™ll find quality here. Lantaw is the Cebuano term for â€œcan be seen from a distanceâ€ and aside from the fact that the restaurant is actually floating, diners can also enjoy a spectacular view of the hills and city of Cebu in the distance. It is of course open so natural sea breezes will keep you cool while the salt water â€˜scentâ€™ acts as a natural prop to this wonderful stage. The menu boasts a number of mouthwatering native dishes but clearly fresh fish is the order of the day.', 'Sa Baybayon, Cordova, Cebu', '(032) 514 2959', '100', '10:00', '23:00', NULL, 10.256, 123.933, 'admin10', '123', 'Lan', 'Taw', 'Monteatlo', '098272626', 'lantawtest@gmail.com', 'Aliwanay Balamban Cebu', '1519561849lantaw.jpg', 1, '2018-02-25 8:26:12', '2019-02-25 8:26:12'),
+(16, 3, 'Acacia Steakhouse', 'If you fancy steak so much, there''s a place for you in the city. It just opened! You might wanna check it out! You would not regret going to this Steakhouse. Had a very sumptuous dinner with my friends. Medium Rare cooked and very efficient even if the order was in bulk. Lots of varieties of them steaks! ', '1st Acacia St. Green Valley Subdivision, Lahug, Cebu City, 6000 Cebu', '(032) 514 4113', '100', '11:30', '22:00', NULL, 10.3234, 123.892, 'admin11', '123', 'James', 'Christ', 'Jainar', '0982726268', 'acaciatest@gmail.com', 'Cebu City', '1519565125logo.jpg', 1, '2018-02-25 9:17:25', '2019-02-25 9:17:25');
 
 -- --------------------------------------------------------
 
@@ -817,7 +846,9 @@ INSERT INTO `transactions` (`trans_id`, `restaurant_id`, `payment_id`, `total_pr
 (7, 12, 'PAY-322188151E045972ULKGICTI', '1000.00', '9426669bb27d9c0d0eef349da7d9a7b7', 0),
 (8, 12, 'PAY-47N411415C857283JLKGIDRQ', '1000.00', '563f463a25b4429230b8b3b24406d59e', 1),
 (9, 13, 'PAY-0RY17550598780604LKJF6JA', '1000.00', 'bfd7bf8f08c014e6e7c84bfa8c1bee2f', 1),
-(10, 14, 'PAY-06D63143N93635813LKJIFEY', '1500.00', 'e742dcf8399788a423b95f6a023a2b1c', 1);
+(10, 14, 'PAY-06D63143N93635813LKJIFEY', '1500.00', 'e742dcf8399788a423b95f6a023a2b1c', 1),
+(11, 15, 'PAY-83H64546T0120284KLKJKW3Y', '1500.00', '5f03b0a818146e573f13f836b24d657d', 1),
+(12, 16, 'PAY-4AG687403J297042ULKJLO3Y', '1500.00', '3058abe968d8a890ba84cf571ac4c702', 1);
 
 -- --------------------------------------------------------
 
@@ -1006,7 +1037,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `combo_meals`
 --
 ALTER TABLE `combo_meals`
-  MODIFY `cm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `cm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `customers`
 --
@@ -1026,7 +1057,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 --
 -- AUTO_INCREMENT for table `menu_category`
 --
@@ -1066,7 +1097,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT for table `promo_restaurant`
 --
 ALTER TABLE `promo_restaurant`
-  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -1081,7 +1112,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `schedules`
 --
@@ -1106,7 +1137,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `visitors`
 --
