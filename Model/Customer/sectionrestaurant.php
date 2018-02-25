@@ -114,7 +114,7 @@
                                         <?php include('bookmodal.php'); 
                                           $cid = $row['restaurant_id'];
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' GROUP BY restaurant_id";
+                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' AND status = 1 GROUP BY restaurant_id";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           date_default_timezone_set("Asia/Manila");
