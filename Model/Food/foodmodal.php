@@ -26,10 +26,10 @@
                     </div>
                     <br />
                     <div id="category_types" class="tab-pane">
-                        <input type="hidden" name="testme" value="" id="testme">
+                        <input type="text" name="testme" value="" id="content">
                         <label for="pcategory">Product Category</label>
                         <select name="category" id="category" class="form-control" required>
-                            <option disabled selected></option>
+                            <option value="0"></option>
                             <?php 
                                                     $category = viewAllMenuCategory();
                                                     foreach ($category as $rows){  
@@ -98,4 +98,47 @@
     </div>
 
 </div>
+<script>
+	$('#1').hide();
+	$('#2').hide();
+	$('#3').hide();
+	$('#category').on('change', function() {
+        var data = $(this).val();
+        console.log(data);
+		if(data == 1) {
+            
+			$('#1').show();
+			$('#content').val('Appetizer');
+			$('#type').on('change', function() {
+				$('#content').val($(this).val());
+			});
+			$('#2').hide();
+			$('#3').hide();
+		//	$('#type').attr("required".true);
+		} else if(data == 2) {
+			$('#content').val('Beer');
+			$('#type2').on('change', function() {
+				$('#content').val($(this).val());
+			});
+			$('#1').hide();
+			$('#2').show();
+			$('#3').hide();
+		//	$('#type2').attr("required".true);
+		} else if(data == 3) {
+			$('#content').val('Ice Cream');
+			$('#type3').on('change', function() {
+				$('#content').val($(this).val());
+			});
+			$('#1').hide();
+			$('#2').hide();
+			$('#3').show();
+		//	$('#type3').attr("required".true);
+		} else if(data == 0){
+			$('#1').hide();
+			$('#2').hide();
+			$('#3').hide();
+			$('#testme').val('');
+		}
+	});
+</script>
 <!-- end of add product modal -->
