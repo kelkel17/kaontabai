@@ -104,13 +104,13 @@
                                         <center>
 
                                             <?php if($row['m_status'] == "Available"){?>
-                                                <a href="#" data-toggle="modal" data-target="#updateProduct<?php echo $row['menu_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
+                                                <a href="#" onclick="getMenu(<?php echo $row['menu_id']; ?>,<?php echo $row['mc_id']?>)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
                                                 <a href="#" onclick="deact(<?php echo $row['menu_id'];?>);">
                                                     <i class="fa fa-times" aria-hidden="true" title="Deactivate"></i>
                                                 </a>
                                                 <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Activate" disabled></i>
                                                 <?php }elseif($row['m_status'] != "Available"){ ?>
-                                                    <a href="#" data-toggle="modal" data-target="#updateProduct<?php echo $row['menu_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
+                                                    <a href="#" onclick="getMenu(<?php echo $row['menu_id']; ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
                                                     <i class="fa fa2 fa-times" aria-hidden="true" title="Deactivate" disabled></i>
                                                     <a href="#" onclick="active(<?php echo $row['menu_id'];?>);">
                                                         <i class="fa fa-circle-o" aria-hidden="true" title="Activate"></i>
@@ -119,7 +119,106 @@
                                         </center>
                                     </td>
 
-                                    <?php include('foodmodal2.php');?>
+                                   <!-- Edit Product Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="updateProduct<?php echo $row['menu_id']; ?>">
+    <div class="modal-dialog" role="document">
+        <form method="post" class="form-horizontal" action="../../Controller/FoodsController/addfood.php" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">
+                        <span>&times;</span>
+                    </button>
+                    <center>
+                        <h3 class="modal-title">Edit Product</h3></center>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group text-center">
+                        <label for="image<?php echo $row['menu_id']; ?>" class="hover">
+                            <?php
+                                   $filename = '../../Image/'.$row['m_image'];
+
+                                  if($row['m_image']=='' || !(file_exists($filename))){?>
+                                <img src="../../Image/blank.jpg" id="preview<?php echo $row['menu_id']; ?>" data-tooltip="true" title="Product image" data-animation="false" alt="Product image" style="width:200px;height:200px" />
+                                <?php } else{ ?>
+                                    <img src="../../Image/<?php echo $row['m_image']; ?>" id="preview<?php echo $row['menu_id']; ?>" data-tooltip="true" title="Upload product image" data-animation="false" alt="Product image" style="width:200px;height:200px" />
+                        </label>
+                        <input type="file" name="image" onchange="loadImage(event,'preview<?php echo $row['menu_id']; ?>')" style="visibility:hidden" id="image<?php echo $row['menu_id']; ?>" value="<?php echo $row['m_image']?>">
+                        <?php } ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="pname">Product Name</label>
+                        <input type="hidden" name="id" value="<?php echo $row['menu_id'];?>">
+                        <input type="text" value="<?php echo $row['m_name']; ?>" name="name" id="pname" class="form-control" required>
+                        <span class="highlight"></span><span class="bar"></span>
+                    <input type="text" name="testme2" class="mickale">
+                    </div><div id="category_types" class="tab-pane">
+                    <label for="pcategory">Product Category</label>
+                          <select name="category" class="form-control categories" id="" required>
+                             <option value="0"></option>
+                              <?php 
+                                  $category = viewAllMenuCategory();
+                                  foreach ($category as $asd){
+                              ?>
+                              <option value="<?php echo $asd['mc_id'];?>" <?php if($asd['mc_id'] == $row['mc_id']) echo 'selected'; ?>><?php echo $asd['mc_name'];?></option>
+                              <?php } ?> 
+                          </select>
+                             <span class="highlight"></span><span class="bar"></span>
+                </div>
+                <div class="tab-content div1">   
+                  <label for="ptype">Product Type</label>
+                       <select name="type[]" class="form-control type6" required>
+                          <option value="Appetizer">Appetizer</option>
+                          <option value="Pork">Pork</option>
+                          <option value="Beef">Beef</option>
+                          <option value="Fish">Fish</option>
+                          <option value="Chicken">Chicken</option>
+                          <option value="Juice">Juice</option>
+                          <option value="Sizzlers/Grilled">SIZZLERS/GRILLED</option>
+                          <option value="Noodles/and/Rice">NOODLES/RICE</option>
+                          <option value="Soup/Vegetables">Soup/Vegetables/Salad</option>    
+                      </select>   
+                </div>    
+                <div class="tab-content div2">
+                  <label for="ptype">Product Type</label> 
+                      <select name="type[]" class="form-control type7" required>
+                        <option value="Beer">Beer</option>
+                        <option value="Soft Drinks">Soft Drinks</option>
+                        <option value="Tea">Tea</option>
+                        <option value="Shake">Shake</option>
+                        <option value="Wine">Wine</option>   
+                 </select>
+                </div>    
+                <div class="tab-content div3">
+                  <label for="ptype">Product Type</label>
+                    <select name="type[]" class="form-control type8" required>
+                        <option value="Ice Cream">Ice Cream</option>
+                        <option value="Cake">Cake</option>
+                        <option value="Halo-Halo">Halo-Halo</option>
+                        <option value="Special">Special</option>
+                     </select>   
+                </div>
+                        <div class="form-group">
+                            <label for="pprice">Price</label>
+                            <input type="number" step="any" value="<?php echo $row['m_price']; ?>" name="price" id="pprice" class="form-control" required>
+                            <span class="highlight"></span><span class="bar"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="psoh">Product Description</label>
+                            <textarea type="text" name="desc" id="psoh" class="form-control" required><?php echo $row['m_desc']; ?>
+                            </textarea>
+                            <span class="highlight"></span><span class="bar"></span>
+                        </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-secondary hover" data-animation="false">Close</button>
+                    <input type="submit" name="updateProduct" class="btn btn-primary hover" value="Update">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
                                 </div>
                         </tr>
 
@@ -133,6 +232,160 @@
 
         <script src="../../something/js/global.js"></script>
         <script>
+            function getMenu(menuId,mcId){
+                // alert(menuId);
+                $('#updateProduct'+menuId).modal('show');
+                //var n = $('.categories').val();
+                //console.log(n);
+                    $('.div1').hide();
+                    $('.div2').hide();
+                    $('.div3').hide();
+                if(mcId == 1){
+                    $('.categories').on('change', function(){
+                        var data = $(this).val();
+                        if(data == 1){                 
+                            $('.div1').show();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                                $('.mickale').val('Appetizer');
+                                $('.type6').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 2){
+                            $('.div1').hide();
+                            $('.div2').show();
+                            $('.div3').hide();
+                                $('.mickale').val('Beer');
+                                $('.type7').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 3){                 
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').show();
+                                $('.mickale').val('Ice Cream');
+                                $('.type8').on('change', function(){
+                                    console.log('dessert');
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else{
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                            $('.mickale').val('');
+                        }        
+                    });                    
+                }
+                if(mcId == 2){
+                    $('.categories').on('change', function(){
+                        var data = $(this).val();
+                        if(data == 1){
+                            $('.div1').show();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                                $('.mickale').val('Appetizer');
+                                $('.type7').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 2){
+                            $('.div1').hide();
+                            $('.div2').show();
+                            $('.div3').hide();
+                                $('.mickale').val('Beer');
+                                $('.type7').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 3){                 
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').show();
+                                $('.mickale').val('Ice Cream');
+                                $('.type8').on('change', function(){
+                                    console.log('dessert');
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else{
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                            $('.mickale').val('');
+                        }    
+                    });    
+                }            
+                if(mcId == 3){
+                    $('.categories').on('change', function(){ 
+                        var data = $(this).val();
+                        if(data == 1){                 
+                            $('.div1').show();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                                $('.mickale').val('Appetizer');
+                                $('.type8').on('change', function(){
+                                    console.log('dessert');
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 2){
+                            $('.div1').hide();
+                            $('.div2').show();
+                            $('.div3').hide();
+                                $('.mickale').val('Beer');
+                                $('.type7').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else if(data == 3){                 
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').show();
+                                
+                                $('.mickale').val('Ice Cream');
+                                $('.type8').on('change', function(){
+                                    console.log('dessert');
+                                    $('.mickale').val($(this).val());
+                                });
+                        }else{
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').hide();
+                            $('.mickale').val('');
+                        }    
+                    });
+                }
+            
+                //     //console.log($(this).val());
+                //     $('.main').show();
+                    
+                //     $('.mickale').val('Appetizer');
+                //     $('.type6').on('change', function() {
+                //         $('.mickale').val($(this).val());
+                //         console.log($('.mickale').val($(this).val()));
+                //     });
+
+                //     $('.beverage').hide();
+                //     $('.dessert').hide();
+                // }else if($('#categories').val() == 2 || $('#categories').val() == 'Beverages'){
+                //     console.log($(this).val());
+                //     $('.mickale').val('Appetizer');
+                //     $('.type7').on('change', function() {
+                //         $('.mickale').val($(this).val());
+                //         console.log($('.mickale').val($(this).val()));
+                //     });
+                //     $('.main').hide();
+                //     $('.beverage').show();
+                //     $('.dessert').hide();
+                //    // alert($('#categories').val());
+                // }else if($('#categories').val() == 3 || $('#categories').val() == 'Desserts'){
+                //     console.log('dessert');
+                //     $('.mickale').val('Appetizer');
+                //     $('.type8').on('change', function() {
+                //         $('.mickale').val($(this).val());
+                //         console.log($('.mickale').val($(this).val()));
+                //     });
+                //     $('.main').hide();
+                //     $('.beverage').hide();
+                //     $('.dessert').show();
+                //    // alert($('#categories').val());
+                // }
+            }
             function deact(eventId) {
                 swal({
                     title: "Deactivate Menu",
