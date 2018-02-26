@@ -117,11 +117,12 @@ include '../dbconn.php';
 		$id = $_POST['id'];
 		$name = $_POST['name']; 
 		  $desc = $_POST['desc'];   
-		  $type = $_POST['testme'];
+		  $type = $_POST['testme2'];
 		  $category = $_POST['category']; 
 		  $price = $_POST['price'];
 		  $myID = $_SESSION['id'];
 		  $image = $_FILES['image']['name'];
+		 
 		  $directory = "../../Image/";
 		 if(!empty($image))
 			  $path = time().$image;
