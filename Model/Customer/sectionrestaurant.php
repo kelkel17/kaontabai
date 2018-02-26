@@ -114,28 +114,35 @@
                                         <?php include('bookmodal.php'); 
                                           $cid = $row['restaurant_id'];
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' GROUP BY restaurant_id ORDER BY DATE_FORMAT(sched_sdate, '%D')";
+                                          //$sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' GROUP BY restaurant_id ORDER BY DATE_FORMAT(sched_sdate, '%D')";
+                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$cid' ORDER BY DATE_FORMAT(sched_sdate, '%D')";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           date_default_timezone_set("Asia/Manila");
                                           $date2 = date('Y-m-d');
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                          $flag = false;
                                           foreach ($view as $rows) {
-                                             
                                             $date = date('Y-m-d', strtotime($rows['sched_sdate']));
                                             $date3 = date('Y-m-d', strtotime($rows['sched_edate']));
                                             // echo $date2;
                                             // echo '<br>';
                                             // echo $date3;
-                                                if($date == $date2 && $rows['status'] == 1){ ?>
-                                                    <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                            <?php } else{ ?>
-                                                <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a> 
-                                            <?php } ?>
+                                                if($date <= $date2 && $date3 >= $date2 && $rows['status'] == 1){
+                                                    
+                                                    $flag = true;
+                                                    ?>
+                                                        <!-- <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a> -->
+                                                <?php }  
+                                                 }  
 
+                                                if($flag){
+                                                    $flag = true;
+                                                    ?>
+                                                        <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                                <?php } else{ ?>
                                                 <a href="#" onclick="getDate(<?php echo $row['restaurant_id'];?>);" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-
-                                                <?php  }  ?>
+                                                <?php } ?>
                                                     <a href="#" data-toggle="modal" data-target="#messageUs<?php echo $row['restaurant_id'];?>" class="btn btn-primary">&nbsp;Message Us&nbsp;<i class="fa fa-comment" aria-hidden="true"></i></a>
                                     </div>
                                     <script>
