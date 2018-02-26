@@ -62,7 +62,7 @@
                                         <!--<li><a href="#features">Tables</a></li>-->
                                         <li><a href="#portfolio">Most Ordered Food</a></li>
                                         <li><a href="#ourPakeg">News & Events</a></li>
-                                        <li><a href="#mobaileapps">Blogs</a></li>
+                                        <!-- <li><a href="#mobaileapps">Blogs</a></li> -->
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                     <?php        
