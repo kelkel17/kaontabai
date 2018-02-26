@@ -430,8 +430,6 @@
                         var count = data[i].count;
                         var date2 = data[i].dat;
                         if (date2 == date) {
-                            //	console.log(count);
-                            //	console.log(date2);
                             swal("You have " + count + " new notifcation", {
                                 icon: "info"
                             });
