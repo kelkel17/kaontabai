@@ -45,30 +45,44 @@
 
                                         <?php 
                                           $con = con();
-                                          $sql = "SELECT * FROM schedules WHERE restaurant_id = '$Resid' GROUP BY restaurant_id ORDER BY sched_id desc";
+                                         // $sql = "SELECT * FROM schedules WHERE restaurant_id = '$Resid' GROUP BY restaurant_id ORDER BY sched_id desc";
+                                         $sql = "SELECT * FROM schedules s, restaurants r WHERE r.restaurant_id = s.restaurant_id AND s.restaurant_id = '$Resid' ORDER BY DATE_FORMAT(s.sched_sdate, '%D')";
                                           $stmt = $con->prepare($sql);
                                           $stmt->execute();
                                           $view = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                           date_default_timezone_set("Asia/Manila");
+                                          $flag = false;
+                                          $flag2 = false;
                                           $date2 = date('Y-m-d');
-                                          foreach ($view as $rows) {
-                                            print_r($rows);
-                                            $date = date('Y-m-d', strtotime($rows['sched_sdate']));
-                                            if($rows['status'] == 1 && $date == $date2){ ?>
-                                                <a onclick="notAllo(<?php echo $rows['restaurant_id'];?>,'<?php echo $rows['restaurant_name'];?>','<?php echo $rows['sched_sdate'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                            <?php }
-                                           if($t['status'] == 1){ ?>
-                                                <a onclick="alreadyBook(<?php echo $rows['restaurant_id'];?>,'<?php echo $rows['restaurant_name'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                                <?php } else if($rows['status'] == 0) { ?>
-                                                    <a href="#" onclick="getDate(<?php echo $_GET['cid'];?>,<?php echo $t['table_id'];?>)" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
-                                                    <?php } } ?>
+                                          foreach ($view as $r) {
+                                         //   print_r($r);
+                                            $date = date('Y-m-d', strtotime($r['sched_sdate']));
+                                            $date3 = date('Y-m-d', strtotime($r['sched_edate']));
+                                            
+                                                if($date <= $date2 && $date3 >= $date2 && $r['status'] == 1){ 
+                                                        $flag = true;
+                                                }
+                                                if($t['status'] == 1){ 
+                                                            $flag2 = true;
+                                                    }  
+                                          }
+                                                if($flag){?>
+                                                    <a onclick="notAllo(<?php echo $r['restaurant_id'];?>,'<?php echo $r['restaurant_name'];?>','<?php echo $r['sched_sdate'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                                <?php  } 
+                                                if($flag2){ ?>
+                                                    <a onclick="alreadyBook(<?php echo $r['restaurant_id'];?>,'<?php echo $r['restaurant_name'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                                <?php } elseif(!($flag) && !($flag2)){ ?>
+                                                    <a href="#" onclick="getDate(<?php echo $_GET['cid'];?>,<?php echo $t['table_id'];?>)" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>                                    
+                                                <?php }
+                                            ?>
                         </div>
                         <?php include('tablemodal.php'); ?>
                             <script>
                                 function notAllo(eventId, resName,sDate) {
+                                    var date = moment(sDate).format('LL');
                                     swal({
                                         title: "Notice",
-                                        text: resName + "'s Restaurant doesn't allow online reservation at the moment."+sDate,
+                                        text: "As of "+date+" "+resName + "'s Restaurant doesn't allow online reservation at the moment.",
                                         icon: "warning"
                                     });
                                 }
