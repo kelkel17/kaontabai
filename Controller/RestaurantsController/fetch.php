@@ -39,7 +39,7 @@ $date = date('g:i A', strtotime($row['date_time_receive']));
 				  </div>
 			</div>
 			<li class="divider"></li>
-			<div class="all-button"><a href="../Model/Restaurant/visitor.php">
+			<div class="all-button"><a href="../Restaurant/visitor.php">
 									<em class="fa fa-inbox"></em>Reply '.$row['customer_fname'].'</strong>
 								</a></div>
 							
