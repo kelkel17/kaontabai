@@ -276,7 +276,11 @@
                                 swal("You have " + count + " new notifcation", {
                                     icon: "info"
                                 });
-                            }
+                            }else{
+                                swal("You have " + count + " new notifcation", {
+                                    icon: "info"
+                                });
+                             }
                         }
                     }
                 });
