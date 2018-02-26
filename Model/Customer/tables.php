@@ -82,11 +82,11 @@
                                     var date = moment(sDate).format('LL');
                                     swal({
                                         title: "Notice",
-                                        text: "As of "+date+" "+resName + "'s Restaurant doesn't allow online reservation at the moment.",
+                                        text: resName + "'s Restaurant doesn't allow online reservation at the moment.",
                                         icon: "warning"
                                     });
                                 }
-
+sched
                                 function alreadyBook(eventId, resName) {
                                     swal({
                                         title: "Notice",
