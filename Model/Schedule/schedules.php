@@ -112,11 +112,11 @@
 
 	    	$get = getSchedule(array($id));
 	    	foreach ($get as $r) { //($r is from $row just testing)
-				$date2 = date('Y-m-d g');
-				$date3 = date('Y-m-d g');
+				$date2 = date('Y-m-d');
+				$date3 = date('Y-m-d');
 				$date4 = date('Y-m-d');
-				$temp2 = date('Y-m-d g',strtotime($r['sched_sdate'].$r['sched_stime']));
-				$temp3 = date('Y-m-d g',strtotime($r['sched_edate'].$r['sched_etime']));
+				$temp2 = date('Y-m-d',strtotime($r['sched_sdate'].$r['sched_stime']));
+				$temp3 = date('Y-m-d',strtotime($r['sched_edate'].$r['sched_etime']));
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
 				// echo $temp2,$temp3;
 
@@ -125,7 +125,7 @@
 	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
 	    			deactivateSchedule($date);
-	    		} if($date2 >= $temp3 && $date3 > $temp4 && $temp2 != '' && $row['status'] == 1){
+	    		} if($date2 >= $temp3 && $date3 > $temp4 && $temp2 != ''){
 	    			$status = 0;
 	    			$sid = $r['sched_id'];
 	    			$date = array($status,$sid);
