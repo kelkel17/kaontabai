@@ -46,6 +46,8 @@
         <script src="../something/js/easypiechart.js"></script>
         <script src="../something/js/easypiechart-data.js"></script>
         <script src="../something/js/bootstrap-datepicker.js"></script>
+        <script src="../something/js/moment.js"></script>
+        <script src="../something/js/sweetalert.min.js"></script>
         <script src="../something/js/custom.js"></script>
         <script src="../samples/js/app.js"></script>
         <link rel="shortcut icon" href="../assets/img/logo.png">
