@@ -46,7 +46,7 @@
                 <center>
                     <h2 style="color: black;">All</h2></center>
                 <?php 
-                $menu = selectMenu();
+                $menu = selectMenu($Resid);
                 foreach ($menu as $id) {
                     $cid = $id['mc_id'];
                     if($cid==1 && $Resid==$id['restaurant_id']){    
@@ -84,7 +84,7 @@
                 <center>
                     <h2 style="color: black;">Main Course</h2></center>
                 <?php 
-                $menu = selectMenu();
+                $menu = selectMenu($Resid);
                 foreach ($menu as $id) {
                     $cid = $id['mc_id'];
                     if($cid==1 && $Resid==$id['restaurant_id']){    
@@ -121,7 +121,7 @@
                 <center>
                     <h2 style="color: black;">Beverages</h2></center>
                 <?php 
-                $menu = selectMenu();
+                $menu = selectMenu($Resid);
                 foreach ($menu as $id) {
                     $cid = $id['mc_id'];
                     if($cid==2 && $Resid==$id['restaurant_id']){    
@@ -158,7 +158,7 @@
                 <center>
                     <h2 style="color: black;">Desserts</h2></center>
                 <?php 
-                $menu = selectMenu();
+                $menu = selectMenu($Resid);
                 foreach ($menu as $id) {
                     $cid = $id['mc_id'];
                     if($cid==3 && $Resid==$id['restaurant_id']){    
