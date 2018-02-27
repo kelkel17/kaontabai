@@ -498,20 +498,13 @@
                     for (var i = 0; i < data.length; i++) {
                         // console.log(data[i]);
                         var date = moment().format('LL');
+                        var newdate = moment(data[i].dat).format('LL');
                         // console.log(date);
                         var count = data[i].count;
-                        var date2 = data[i].dat;
-                        if (date2 == date) {
-                            //	console.log(count);
-                            //	console.log(date2);
+                        
                             swal("You have " + count + " new notifcation", {
                                 icon: "info"
                             });
-                        }else{
-                            swal("You have " + count + " new notifcation", {
-                                icon: "info"
-                            });
-                        }
                     }
                 }
             });
