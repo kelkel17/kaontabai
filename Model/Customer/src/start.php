@@ -5,17 +5,17 @@
 
     session_start();
 
-   $user = $_SESSION['id'];
+   // $user = $_SESSION['id'];
 
     $db = new PDO('mysql:host = localhost; dbname=ktb2','root','');
 
-    $user = $db->prepare("
-        SELECT * FROM customers WHERE customer_id = :customer_id 
-        ");
+    // $user = $db->prepare("
+        // SELECT * FROM customers WHERE customer_id = :customer_id 
+        // ");
 
-    $user->execute(['customer_id' => $_SESSION['id']]);
+    // $user->execute(['customer_id' => $_SESSION['id']]);
 
-    $user = $user->fetchObject();
+    // $user = $user->fetchObject();
 	//include '../../Controller/dbconn.php';
 
     //islogged3();
