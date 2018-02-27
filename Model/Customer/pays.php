@@ -1,3 +1,20 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function sweetMimitch(Id){
+	$(function(){
+		swal({
+				title:"Successfully",
+				text:"Paid your order!",
+				icon: "success"
+		}).then(function(){
+				window.location = "customerprofile.php?id="+Id;
+			});
+		});
+	}
+</script>
+
+
 <?php
 
 use PayPal\Api\Payment;
@@ -61,7 +78,7 @@ if(isset($_GET['approved'])) {
 	    unset($_SESSION['qty']);
 	    $id = $_SESSION['id'];
 
-		echo '<script>alert("Succesfully paid your order!");window.location="customerprofile.php?id='.$id.'";</script>';
+		echo '<script>sweetMimitch('.$id.');</script>';
 
 
 
