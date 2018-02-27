@@ -1,10 +1,52 @@
+
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function sweetMimitch(resid,cusId,number){
+	$(function(){
+		swal({
+				title:"Successfully",
+				text:"Request a reservation",
+				icon: "success"
+		}).then(function(){
+				window.location = "../../Model/Customer/menu.php?cid="+resid+"&pid="+cusId+"&rid="+number;
+			});
+		});
+	}
+
+	function warningAlert(resId,cusId){
+		$(function(){
+			swal({
+				title:"Failed",
+				text:"You already reserved to that date & time!",
+				icon: "error"
+			}).then(function(){
+					window.location = "../../Model/Customer/restaurantinfo.php?cid="+resId+"&id="+cusId;
+			});
+		});
+	}
+
+	function editSuccess(id){
+		$(function(){
+			swal({
+				title:"Successfully",
+				text:"Updated your reservation",
+				icon: "success"
+			}).then(function(){
+					window.location = "../../Model/Customer/customerprofile.php?id="+id;
+			});
+		});
+	}
+
+</script>
+
 <?php
 
 include '../dbconn.php';
 			if(isset($_POST['submit']))
 			{
 				$id = $_SESSION["id"];
-				$myID = $_POST['cid'];
+				$myID = $_GET['cid'];
 				$date = $_POST['dat'];
 				$time = $_POST['tim'];
 				$number = FLOOR(RAND(10000,50000));
@@ -25,7 +67,7 @@ include '../dbconn.php';
 					// $sthandler3->execute();
 					// if()
 					if($sthandler->rowCount() > 0)
-					    echo '<script>alert("You already reserved to that date & time!"); window.location="../../Model/Customer/restaurantinfo.php?cid='.$_GET['cid'].'&id='.$id.'";</script>';
+					    echo '<script>warningAlert('.$myID.','.$id.');</script>';
 					else{
 						$data = array($id,$myID,$date,$time,$request,$guest,$number);
 						addReservation($data);
@@ -44,7 +86,7 @@ include '../dbconn.php';
 									$email = $ro['owner_email'];
 									$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
 									mail($email,'New Reservation',$message,'From: KaonTaBai!');
-									echo '<script> alert("Successfully Request a reservation"); window.location="../../Model/Customer/menu.php?cid='.$myID.'&pid='.$id.'&rid='.$number.'"; </script>';
+									echo '<script>sweetMimitch('.$myID.','.$id.','.$number.'); </script>';
 									}
 							}
 						}
@@ -62,7 +104,7 @@ include '../dbconn.php';
 
 		$data = array($date,$time,$guest,$special,$id);
 		cancelReservation($data);
-		echo '<script> alert("Successfully Updated your reservation"); window.location="../../Model/Customer/customerprofile.php?id='.$_SESSION['id'].'";</script>';
+		echo '<script>editSuccess('.$id.');</script>';
 
 	}	
 
@@ -111,7 +153,7 @@ include '../dbconn.php';
 										$email = $ro['owner_email'];
 										$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
 										mail($email,'New Reservation',$message,'From: KaonTaBai!');
-											echo '<script> alert("Successfully Request a reservation"); window.location="../../Model/Customer/menu.php?cid='.$_GET['cid'].'&pid='.$id.'&rid='.$number.'"; </script>';
+											echo '<script>sweetMimitch('.$myID.','.$id.','.$number.');</script>';
 										}
 								}
 							}
