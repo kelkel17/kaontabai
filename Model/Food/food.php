@@ -150,7 +150,7 @@
                         <input type="hidden" name="id" value="<?php echo $row['menu_id'];?>">
                         <input type="text" value="<?php echo $row['m_name']; ?>" name="name" id="pname" class="form-control" required>
                         <span class="highlight"></span><span class="bar"></span>
-                    <input type="text" name="testme2" class="mickale">
+                    <input type="hidden" name="testme2" value="<?php echo $row['m_category']; ?>" class="mickale">
                     </div><div id="category_types" class="tab-pane">
                     <label for="pcategory">Product Category</label>
                           <select name="category" class="form-control categories" id="" required>
@@ -166,7 +166,8 @@
                 </div>
                 <div class="tab-content div1">   
                   <label for="ptype">Product Type</label>
-                       <select name="type[]" class="form-control type6" required>
+                       <select name="type" class="form-control type6" required>
+                          <option value="<?php echo $row['m_category']; ?>" <?php if($row['m_category'] == 'selected') echo 'selected'; ?>><?php echo $row['m_category']?></option>
                           <option value="Appetizer">Appetizer</option>
                           <option value="Pork">Pork</option>
                           <option value="Beef">Beef</option>
@@ -180,7 +181,7 @@
                 </div>    
                 <div class="tab-content div2">
                   <label for="ptype">Product Type</label> 
-                      <select name="type[]" class="form-control type7" required>
+                      <select name="type" class="form-control type7" required>
                         <option value="Beer">Beer</option>
                         <option value="Soft Drinks">Soft Drinks</option>
                         <option value="Tea">Tea</option>
@@ -190,7 +191,7 @@
                 </div>    
                 <div class="tab-content div3">
                   <label for="ptype">Product Type</label>
-                    <select name="type[]" class="form-control type8" required>
+                    <select name="type" class="form-control type8" required>
                         <option value="Ice Cream">Ice Cream</option>
                         <option value="Cake">Cake</option>
                         <option value="Halo-Halo">Halo-Halo</option>
@@ -232,15 +233,28 @@
 
         <script src="../../something/js/global.js"></script>
         <script>
+                                $('.type6').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                                $('.type7').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
+                                $('.type8').on('change', function(){
+                                    $('.mickale').val($(this).val());
+                                });
             function getMenu(menuId,mcId){
                 // alert(menuId);
                 $('#updateProduct'+menuId).modal('show');
                 //var n = $('.categories').val();
                 //console.log(n);
-                    $('.div1').hide();
-                    $('.div2').hide();
-                    $('.div3').hide();
+                    // $('.div1').hide();
+                    // $('.div2').hide();
+                    // $('.div3').hide();
                 if(mcId == 1){
+                             
+                            $('.div1').show();
+                            $('.div2').hide();
+                            $('.div3').hide();
                     $('.categories').on('change', function(){
                         var data = $(this).val();
                         if(data == 1){                 
@@ -248,26 +262,27 @@
                             $('.div2').hide();
                             $('.div3').hide();
                                 $('.mickale').val('Appetizer');
-                                $('.type6').on('change', function(){
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type6').on('change', function(){
+                                //     //alert($('.mickale').val($(this).val()));
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 2){
                             $('.div1').hide();
                             $('.div2').show();
                             $('.div3').hide();
                                 $('.mickale').val('Beer');
-                                $('.type7').on('change', function(){
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type7').on('change', function(){
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 3){                 
                             $('.div1').hide();
                             $('.div2').hide();
                             $('.div3').show();
                                 $('.mickale').val('Ice Cream');
-                                $('.type8').on('change', function(){
-                                    console.log('dessert');
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type8').on('change', function(){
+                                //     console.log('dessert');
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else{
                             $('.div1').hide();
                             $('.div2').hide();
@@ -277,33 +292,36 @@
                     });                    
                 }
                 if(mcId == 2){
+                            $('.div1').hide();
+                            $('.div2').show();
+                            $('.div3').hide();
                     $('.categories').on('change', function(){
                         var data = $(this).val();
                         if(data == 1){
                             $('.div1').show();
                             $('.div2').hide();
-                            $('.div3').hide();
+                            $('.div3').show();
                                 $('.mickale').val('Appetizer');
-                                $('.type7').on('change', function(){
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type7').on('change', function(){
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 2){
                             $('.div1').hide();
                             $('.div2').show();
                             $('.div3').hide();
                                 $('.mickale').val('Beer');
-                                $('.type7').on('change', function(){
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type7').on('change', function(){
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 3){                 
                             $('.div1').hide();
                             $('.div2').hide();
                             $('.div3').show();
                                 $('.mickale').val('Ice Cream');
-                                $('.type8').on('change', function(){
-                                    console.log('dessert');
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type8').on('change', function(){
+                                //     console.log('dessert');
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else{
                             $('.div1').hide();
                             $('.div2').hide();
@@ -313,6 +331,10 @@
                     });    
                 }            
                 if(mcId == 3){
+                                     
+                            $('.div1').hide();
+                            $('.div2').hide();
+                            $('.div3').show();
                     $('.categories').on('change', function(){ 
                         var data = $(this).val();
                         if(data == 1){                 
@@ -320,28 +342,28 @@
                             $('.div2').hide();
                             $('.div3').hide();
                                 $('.mickale').val('Appetizer');
-                                $('.type8').on('change', function(){
-                                    console.log('dessert');
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type8').on('change', function(){
+                                //     console.log('dessert');
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 2){
                             $('.div1').hide();
                             $('.div2').show();
                             $('.div3').hide();
                                 $('.mickale').val('Beer');
-                                $('.type7').on('change', function(){
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type7').on('change', function(){
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else if(data == 3){                 
                             $('.div1').hide();
                             $('.div2').hide();
                             $('.div3').show();
                                 
                                 $('.mickale').val('Ice Cream');
-                                $('.type8').on('change', function(){
-                                    console.log('dessert');
-                                    $('.mickale').val($(this).val());
-                                });
+                                // $('.type8').on('change', function(){
+                                //     console.log('dessert');
+                                //     $('.mickale').val($(this).val());
+                                // });
                         }else{
                             $('.div1').hide();
                             $('.div2').hide();

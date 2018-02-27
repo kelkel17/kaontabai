@@ -4,22 +4,17 @@
     <title>KaonTaBai!</title>
     <link href="../../something/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../something/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../something/css/datepicker3.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../something/css/jquery-ui.css">
+    <link rel="stylesheet" href="../../something/css/jquery.timepicker.min.css" />
+   
+   
     <link href="../../something/css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="../../something/css/datatable.css">
     <link rel="stylesheet" href="../../something/css/buttons.dataTables.min.css" />
-    <link rel="stylesheet" href="../../something/css/jquery-ui.css">
-    <link rel="stylesheet" href="../../assets/css/jquery.timepicker.min.css" />
-    <!-- <link rel="stylesheet" href="../../something/css/bootstrap-timepicker.min.css"/> -->
-    <!-- <link rel="stylesheet" href="../../something/css/bootstrap-datepicker.css"/> -->
-
-    <!--scripts-->
-
+   
     <script src="../../something/js/jquery.min.js"></script>
+    <script src="../../something/js/bootstrap.min.js"></script>
 
-    <!-- <script src="../../something/js/bootstrap-datetimepicker.min.js"></script> -->
-    <!-- <script src="../../something/js/bootstrap-timepicker.min.js"></script> -->
-    <!-- <script src="../../something/js/bootstrap-datepicker.js"></script> -->
     <script src="../../something/js/jquery-ui.js"></script>
     <script src="../../something/js/jquery.timepicker.min.js"></script>
     <script src="../../something/js/chart.min.js"></script>
@@ -31,9 +26,8 @@
     <script src="../../something/js/vfs_fonts.js"></script>
     <script src="../../something/js/buttons.print.min.js"></script>
     <script src="../../something/js/buttons.html5.min.js"></script>
-    <!-- <script src="../../something/js/jquery-1.11.1.min.js"></script> -->
-    <script src="../../something/js/bootstrap.min.js"></script>
-
+   
+   
     <script src="../../something/js/custom.js"></script>
 
     <script src="../../something/js/moment.js"></script>

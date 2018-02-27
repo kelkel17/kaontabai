@@ -105,48 +105,6 @@
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link href="../../assets/fonts/css.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
-        <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
-        <!-- <style type="text/css">
-            .a>div { display: none; }
-            .a:hover>div { display: block; }
-        </style> -->
-        <!-- <style>
-            .tooltip {
-                position: relative;
-                display: inline-block;
-                border-bottom: 1px dotted black;
-            }
-
-            .tooltip .tooltiptext {
-                visibility: hidden;
-                width: 120px;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                border-radius: 6px;
-                padding: 5px 0;
-                position: absolute;
-                z-index: 1;
-                bottom: 150%;
-                left: 50%;
-                margin-left: -60px;
-            }
-
-            .tooltip .tooltiptext::after {
-                content: "";
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: black transparent transparent transparent;
-            }
-
-            .tooltip:hover .tooltiptext {
-                visibility: visible;
-            }
-        </style> -->
 
         <!--For Plugins external css-->
         <link rel="stylesheet" href="../../assets/css/animate/animate.css" />

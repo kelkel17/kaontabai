@@ -116,21 +116,13 @@
 	    	foreach ($get as $r){ //($r is from $row just testing)
 				$date2 = date('Y-m-d g');
 				$date3 = date('Y-m-d g:i');
-				$date4 = date('Y-m-d');
+			    $date4 = date('Y-m-d');
 				$temp2 = date('Y-m-d g',strtotime($r['sched_sdate'].$r['sched_stime']));
 				$temp3 = date('Y-m-d g:i',strtotime($r['sched_edate'].$r['sched_etime']));
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
 				$asd = date('Y-m-d g',strtotime($r['sched_edate'].$r['sched_etime']));
-                // echo $temp2,$temp3;
-                // echo 'Date Today: '.date('F j, Y g:i A ',strtotime($date)).'<br>';
-                // echo 'Start Date: '.date('F j, Y g:i A ',strtotime($r['sched_sdate'].$r['sched_stime'])).'<br>';
-                // echo 'End Date: '.date('F j, Y g:i A ',strtotime($r['sched_edate'].$r['sched_etime'])).'<br>'; 
                 
                 if($date2 >= $temp2 && $date2 <= $asd){
-                        
-                   // echo 'Date Today: '.date('F j, Y g:i A ',strtotime($date)).'<br>';
-                   // echo 'Start Date: '.date('F j, Y g:i A ',strtotime($r['sched_sdate'].$r['sched_stime'])).'<br>';
-                   // echo 'End Date: '.date('F j, Y g:i A ',strtotime($r['sched_edate'].$r['sched_etime'])).'<br>'; 
                     $status = 1;
                     $sid = $r['sched_id'];
                     $dat = array($status,$sid);
@@ -145,17 +137,17 @@
                 }   
 				// break;
             }
-			$temp5 = date('Y-m-d g:i',strtotime($row['sched_sdate']));
-
-			$temp6 = date('Y-m-d g:i',strtotime($row['sched_edate']));
+			$temp5 = date('Y-m-d g:i',strtotime($row['sched_sdate'].$row['sched_stime']));
+            
+			$temp6 = date('Y-m-d g:i',strtotime($row['sched_edate'].$row['sched_etime']));
 			$temp7 = date('Y-m-d', strtotime($row['sched_sdate']));
-							if($date3 > $temp5 && $date > $temp6){ ?>
+							if($date3 > $temp6){ ?>
                                             <i class="fa fa2 fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
                                             <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>
                                             <i class="fa fa2 fa-times" aria-hidden="true" title="Peak-Hour"></i>
                                             <!--else{}-->
-                                            <?php } else {
-	    if($row['status']== 0){  ?>
+                                            <?php } elseif($date3 >= $temp5 || $date3 <= $temp6) {
+	        if($row['status']== 0){  ?>
                                                 <a href="#" data-toggle="modal" data-target="#update<?php echo $row['sched_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i></a>
 
                                                 <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Off-Peak"></i>

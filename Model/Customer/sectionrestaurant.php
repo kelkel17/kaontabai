@@ -91,7 +91,7 @@
                                           ?>
 
                                             <h5 class="card-header">Thank you for ratings us</h5>
-                                            <input value=<?php echo $rate[ 'rate'];?> type="number" class="rating" min=0 max=5 step=0 data-size="xs" data-stars="5" productId=
+                                            <input value=<?php echo $rate[ 'rate'];?> type="number" class="rating" min="0" max="5" step="0" data-size="xs" data-stars="5" productId=
                                             <?php echo $resId;?> name="rate" disabled />
                                                 <?php } else{?>
 
@@ -139,7 +139,7 @@
                                                 if($flag){
                                                     $flag = true;
                                                     ?>
-                                                        <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,'<?php echo $row['restaurant_name'];?>');" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                                        <a onclick="notAllo(<?php echo $row['restaurant_id'];?>,`<?php echo $row['restaurant_name'];?>`);" class="btn btn-danger">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                                 <?php } else{ ?>
                                                 <a href="#" onclick="getDate(<?php echo $row['restaurant_id'];?>);" class="btn btn-primary">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                                 <?php } ?>
@@ -182,30 +182,35 @@
                                                 url: "getdate.php?cid=" + restId,
                                                 dataType: 'json',
                                                 success: function(data) {
+                                                    var test2 = [];
+                                                    var dateRange = [];
                                                     for (var i in data) {
-                                                        var test2 = [moment(data[i].dat).format('DD-M-YYYY'),moment(data[i].dats).format('DD-M-YYYY')];
-                                                        console.log(test2);
-                                                        // if(test2 != '' && test3 != ''){
-                                                        //     function unavailable(date) {
-                                                        //         dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-                                                        //        // console.log(dmy);
-                                                        //         if ($.inArray(dmy, tset) == -1) {
-                                                        //             return [true, ""];
-                                                        //         } else {
-                                                        //             return [false, "", "Unavailable"];
-                                                        //         }
-                                                        //     } 
-                                                        //     $('#datepicker').datepicker({
-                                                        //         beforeShowDay: unavailable,
-                                                        //         minDate: -0,
-                                                        //         maxDate: "+14D",
-                                                        //         changeMonth: true,
-                                                        //         changeYear: true,
-                                                        //         numberOfMonths: 1,
-                                                        //         dateFormat: 'MM dd, yy'
-                                                        //     });
-                                                        // }
-                                                            /* function unavailable(date) {
+                                                        test2.push(moment(data[i].dat).format('M-D-YYYY'),moment(data[i].dats).format('M-D-YYYY'));
+                                                       
+                                                    }
+                                                    for (var d = new Date(data[i].dat); d <= new Date(data[i].dats); d.setDate(d.getDate() + 1)) {
+                                                        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+                                                    }
+
+                                                    // use this array 
+                                                    
+                                                    console.log(test2);
+                                                    
+                                                    
+                                                            
+                                                            var disabledDays = [];
+                                                            disabledDays.push("3-1-2018");
+                                                            // console.log(disabledDays);
+                                                            function nationalDays(date) {
+                                                                var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+                                                                for(i = 0; i < test2.length; i++) {
+                                                                    if($.inArray((m+1) + '-' + d + '-' + y,test2) != -1 || new Date() > date) {
+                                                                        return [false];
+                                                                    }else
+                                                                        return [true];
+                                                                }
+                                                              }
+                                                             /*  function nationalDays(date) {
                                                                 dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
                                                                // console.log(dmy);
                                                                 if ($.inArray(dmy, test2) == -1) {
@@ -214,21 +219,32 @@
                                                                     return [false, "", "Unavailable"];
                                                                 }
                                                             }  */
-                                                            $('#datepicker').datepicker({
-                                                                beforeShowDay:  function(date){
-                                                                    var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
-                                                                    console.log(string);
-                                                                    return [ test2.indexOf(string) == -1 ]
-                                                                },
-                                                                minDate: -0,
-                                                                maxDate: "+"+data[i].max+"D",
-                                                                changeMonth: true,
-                                                                changeYear: true,
-                                                                numberOfMonths: 1,
-                                                                dateFormat: 'MM dd, yy'
-                                                            });
-                                                      
-                                                    }
+                                                           if(data[i].test2 !== ''){ 
+                                                                $('#datepicker').datepicker({
+                                                                    beforeShowDay: function (date) {
+                                                                        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                                                                        return [dateRange.indexOf(dateString) == -1];
+                                                                    },
+                                                                    minDate: -0,
+                                                                    maxDate: "+"+data[i].max+"D",
+                                                                    changeMonth: true,
+                                                                    changeYear: true,
+                                                                   // showAnim: "fold",
+                                                                    numberOfMonths: 1,
+                                                                    dateFormat: 'MM dd, yy'
+                                                                });
+                                                            }/* else if(data[i].test2 == ''){
+                                                                $('#datepicker').datepicker({
+                                                                    minDate: -0,
+                                                                    maxDate: "+"+data[i].max+"D",
+                                                                    changeMonth: true,
+                                                                    changeYear: true,
+                                                                   // showAnim: "fold",
+                                                                    numberOfMonths: 1,
+                                                                    dateFormat: 'MM dd, yy'
+                                                                });
+                                                            } */
+                                                           
                                                     $.ajax({
                                                         type: "GET",
                                                         url: "gettime.php?cid=" + restId,
