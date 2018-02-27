@@ -709,11 +709,11 @@ function islogged2(){
             $db = null;
         }
 
-        function selectMenu()
+        function selectMenu($id)
         {
             $db = con();
 
-            $sql = "SELECT * FROM menus WHERE m_status = 'Available'";
+            $sql = "SELECT * FROM menus WHERE m_status = 'Available' AND restaurant_id = $id";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
