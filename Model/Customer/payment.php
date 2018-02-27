@@ -14,6 +14,7 @@ use PayPal\Api\Payee;
  // include 'purchase.php';
 require 'src/start.php';
 
+$ids = $_SESSION['id'];
 $shippingPrice = 0;
 $currency = "PHP";
 $total=$_GET['total'];
@@ -65,7 +66,7 @@ $payment->setIntent('sale')
 
 //Redorect URLs
 $redirectUrls->setReturnUrl('http://localhost/kaontabai/model/customer/pays.php?approved=true&cid=$cid')
-	->setCancelUrl('http://localhost/kaontabai/model/customer/cancelled.php?approved=false&cid=$cid');
+	->setCancelUrl('http://localhost/kaontabai/model/customer/restaurantinfo.php?approved=false&cid=$cid&id=$ids');
 
 $payment->setRedirectUrls($redirectUrls);
 
