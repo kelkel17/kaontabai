@@ -39,7 +39,7 @@
 			swal({
 				title:"Image type error",
 				text:"Image type must be PNG/JPEG/JPG only",
-				icon: "Warning"
+				icon: "warning"
 			}).then(function(){
 					window.location = "../../Model/Schedule/schedules.php";
 			});
@@ -50,7 +50,7 @@
 			swal({
 				title:"Error in adding an Schedule",
 				text:"Schedule already exist",
-				icon: "Error"
+				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Schedule/schedules.php";
 			});
@@ -61,7 +61,7 @@
 			swal({
 				title:"Error in adding a combo meal",
 				text:"",
-				icon: "Error"
+				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Schedule/schedules.php";
 			});

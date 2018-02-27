@@ -71,9 +71,13 @@ function islogged2(){
 
 	}
 
-	function updateCustomer($data){
+	function updateCustomer($data,$image){
 		$con = con();
-		$sql = "UPDATE customers SET customer_fname = ?, customer_mname = ?, customer_lname = ?, customer_email = ?, customer_phone = ?, customer_addr = ?, customer_pic = ? WHERE customer_id = ?";
+		if(!empty($image))
+		$sql = "UPDATE customers SET customer_fname = ?, customer_mname = ?, customer_lname = ?, customer_email = ?, customer_password = ?, customer_phone = ?, customer_addr = ?, customer_pic = ? WHERE customer_id = ?";
+		else
+		$sql = "UPDATE customers SET customer_fname = ?, customer_mname = ?, customer_lname = ?, customer_email = ?, customer_password = ?, customer_phone = ?, customer_addr = ?, WHERE customer_id = ?";
+	
 		$stmt = $con->prepare($sql);
 		$update = $stmt->execute($data);
 		$con = null;
@@ -133,9 +137,9 @@ function islogged2(){
 		function updateOwner($data,$image){
 			$con = con();	
 			if(!empty($image))
-			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_logo = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
+			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_logo = ?, restaurant_desc = ?, max_capacity = ?, maxdate = ?, owner_email = ? WHERE restaurant_id = ?";
 			else
-			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_desc = ?, max_capacity = ?, owner_email = ? WHERE restaurant_id = ?";
+			$sql = "UPDATE restaurants SET username  = ?, password = ?, restaurant_name = ?, restaurant_addr = ?,restaurant_contact = ?, hour_open = ?, hour_close = ?, restaurant_desc = ?, max_capacity = ?, maxdate = ?, owner_email = ? WHERE restaurant_id = ?";
 			$stmt = $con->prepare($sql);
 			$update = $stmt->execute($data);
 			$con = null;

@@ -120,8 +120,17 @@
 				$temp2 = date('Y-m-d g',strtotime($r['sched_sdate'].$r['sched_stime']));
 				$temp3 = date('Y-m-d g:i',strtotime($r['sched_edate'].$r['sched_etime']));
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
-				// echo $temp2,$temp3;
-	    		if($date2 >= $temp2){
+				$asd = date('Y-m-d g',strtotime($r['sched_edate'].$r['sched_etime']));
+                // echo $temp2,$temp3;
+                // echo 'Date Today: '.date('F j, Y g:i A ',strtotime($date)).'<br>';
+                // echo 'Start Date: '.date('F j, Y g:i A ',strtotime($r['sched_sdate'].$r['sched_stime'])).'<br>';
+                // echo 'End Date: '.date('F j, Y g:i A ',strtotime($r['sched_edate'].$r['sched_etime'])).'<br>'; 
+                
+                if($date2 >= $temp2 && $date2 <= $asd){
+                        
+                   // echo 'Date Today: '.date('F j, Y g:i A ',strtotime($date)).'<br>';
+                   // echo 'Start Date: '.date('F j, Y g:i A ',strtotime($r['sched_sdate'].$r['sched_stime'])).'<br>';
+                   // echo 'End Date: '.date('F j, Y g:i A ',strtotime($r['sched_edate'].$r['sched_etime'])).'<br>'; 
                     $status = 1;
                     $sid = $r['sched_id'];
                     $dat = array($status,$sid);

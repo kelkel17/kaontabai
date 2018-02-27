@@ -39,7 +39,7 @@
 			swal({
 				title:"Image type error",
 				text:"Image type must be PNG/JPEG/JPG only",
-				icon: "Warning"
+				w
 			}).then(function(){
 					window.location = "../../Model/Room/rooms.php";
 			});
@@ -50,7 +50,7 @@
 			swal({
 				title:"Error in adding a Table",
 				text:"Table already exist",
-				icon: "Error"
+				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Room/rooms.php";
 			});
@@ -61,7 +61,7 @@
 			swal({
 				title:"Error in adding a Table",
 				text:"",
-				icon: "Error"
+				icon: "error"
 			}).then(function(){
 					window.location = "../../Model/Room/rooms.php";
 			});

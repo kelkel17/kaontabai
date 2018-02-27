@@ -1,6 +1,43 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function updateAlert(id){
+		$(function(){
+			swal({
+				title:"Successfully",
+				text:"Succsfully Updated an event",
+				icon: "success"
+			}).then(function(){
+					window.location = "editprofile.php?id="+id;
+			});
+		});
+	}
+	function errorUpdateAlert(){
+		$(function(){
+			swal({
+				title:"Error",
+				text:"Error in Updating an event",
+				icon: "error"
+			}).then(function(){
+					window.location = "editprofile.php";
+			});
+		});
+	}
+	function warningAlert(){
+		$(function(){
+			swal({
+				title:"Image type error",
+				text:"Image type must be PNG/JPEG/JPG only",
+				icon: "warning"
+			}).then(function(){
+					window.location = "editprofile.php";
+			});
+		});
+	}
+</script>
 <?php 
     include '../../Controller/dbconn.php';
-
+    
     islogged2();
 
     if(isset($_POST['update'])){
@@ -8,19 +45,27 @@
         $fname = $_POST['fname'];
         $mname = $_POST['mname'];
         $lname = $_POST['lname'];
+        $password = $_POST['password'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $address = $_POST['address'];
         $profile = $_FILES['profile']['name'];
         $directory = "../../Image/";
-        $path = time().$profile;
-        if(move_uploaded_file($_FILES['profile']['tmp_name'], $directory.$path)){
-            $data = array($fname, $mname, $lname, $email, $phone, $address, $path, $id);
-            updateCustomer($data);
-            echo '<script> alert("Successfully Updated"); window.location="editprofile.php?id='.$_GET['id'].'"; </script>';
-        }else{
-            echo '<script> alert("Error in updating your profile"); window.location="editprofile.php?id='.$_GET['id'].'"; </script>';
-          }
+        if(!empty($profile))
+            $path = time().$profile;
+        else 
+            $path = '';
+            if(empty($path))
+                $data = array($fname, $mname, $lname, $email,$hashed_password, $phone, $address, $id);
+                else{
+                        if(move_uploaded_file($_FILES['profile']['tmp_name'], $directory.$path))
+                            $data = array($fname, $mname, $lname, $email,$hashed_password, $phone, $address, $path, $id);
+                        else
+                        echo '<script> errorUpdateAlert(); </script>';
+                }
+                updateCustomer($data,$path);
+                echo '<script> updateAlert('.$_SESSION['id'].'); </script>';
        }
 
     if(isset($_GET['id'])){
@@ -32,6 +77,7 @@
               $fname = $row['customer_fname'];
               $mname = $row['customer_mname'];
               $lname = $row['customer_lname'];
+              $password = $row['customer_password'];
               $email = $row['customer_email'];
               $address = $row['customer_addr'];
               $phone = $row['customer_phone'];
@@ -174,8 +220,21 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="abouts_content">
-                            <?php echo '<img src="../../Image/'.$row['customer_pic'].'" class="img-responsive" alt="" data-toggle="modal" style="border-radius:50%; display: block;margin-left: auto;margin-right:auto; width:200px; height:auto;" data-target="#profilePic'.$row['customer_id'].'"/>';?>
-                                <div class="profile-usertitle">
+                        <?php $filename = '../Image/'.$row['customer_pic'].'';
+                        if($row['customer_pic']=='' || !(file_exists($filename))){
+                          if($row['customer_gender'] == 'Female'){?>
+                              <img src="../../Image/icon.png" class="lol">
+                              <div class="overlays">
+                                  <div class="text2">Image not Found</div>
+                              </div>
+                              <?php } elseif($row['customer_gender'] == 'Male'){?>
+                                  <img src="../../Image/icon2.png" class="lol">
+                                  <div class="overlays">
+                                      <div class="text2">Image not Found</div>
+                                  </div>
+                                  <?php } } else{?>
+                                      <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
+                                      <?php } ?>    <div class="profile-usertitle">
                                     <div class="profile-usertitle-name">
                                         <?php 
                                         echo $row['customer_fname'].' '.$row['customer_lname'];
@@ -246,6 +305,10 @@
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Email</label>
                                         <input type="email" class="form-control" id="inputEmail4" name="email" value="<?php echo $email; ?>" placeholder="kaontabai@gmail.com" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Contact Number</label>

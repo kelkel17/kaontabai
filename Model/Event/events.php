@@ -116,7 +116,42 @@
 
             </div>
             <!--/.main-->
-
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#dataTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print']
+                    });
+                    $(function() {
+                        $("#datepicker").datepicker({
+                            minDate: -0,
+                            maxDate: "+1M",
+                            changeMonth: true,
+                            changeYear: true,
+                            numberOfMonths: 2,
+                            dateFormat: 'MM dd, yy'
+                        });
+                        $("#timepicker").timepicker({
+                            timeFormat: 'g:i A',
+                            minTime: '8:00',
+                            maxTime: '24:00'
+                        });
+                        $("#datepicker2").datepicker({
+                            minDate: -0,
+                            maxDate: "+1M",
+                            changeMonth: true,
+                            changeYear: true,
+                            numberOfMonths: 2,
+                            dateFormat: 'MM dd, yy'
+                        });
+                        $("#timepicker2").timepicker({
+                            timeFormat: 'g:i A',
+                            minTime: '8:00',
+                            maxTime: '24:00'
+                        });
+                    });
+                });
+            </script>
             <script src="../../something/js/global.js"></script>
             <script>
                 function getDate(eventId) {
@@ -184,42 +219,6 @@
                         }
                     });
                 }
-            </script>
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#dataTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print']
-                    });
-                    $(function() {
-                        $("#datepicker").datepicker({
-                            minDate: -0,
-                            maxDate: "+1M",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 2,
-                            dateFormat: 'MM dd, yy'
-                        });
-                        $("#timepicker").timepicker({
-                            timeFormat: 'g:i A',
-                            minTime: '8:00',
-                            maxTime: '24:00'
-                        });
-                        $("#datepicker2").datepicker({
-                            minDate: -0,
-                            maxDate: "+1M",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 2,
-                            dateFormat: 'MM dd, yy'
-                        });
-                        $("#timepicker2").timepicker({
-                            timeFormat: 'g:i A',
-                            minTime: '8:00',
-                            maxTime: '24:00'
-                        });
-                    });
-                });
             </script>
             <script>
                 $(document).ready(function() {

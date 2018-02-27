@@ -182,12 +182,52 @@
                                                 url: "getdate.php?cid=" + restId,
                                                 dataType: 'json',
                                                 success: function(data) {
-                                                    // console.log(data);
-                                                    var test2 = [];
                                                     for (var i in data) {
-
-                                                        test2.push(moment(data[i].dat).format('DD-M-YYYY'));
+                                                        var test2 = [moment(data[i].dat).format('DD-M-YYYY'),moment(data[i].dats).format('DD-M-YYYY')];
                                                         console.log(test2);
+                                                        // if(test2 != '' && test3 != ''){
+                                                        //     function unavailable(date) {
+                                                        //         dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                                                        //        // console.log(dmy);
+                                                        //         if ($.inArray(dmy, tset) == -1) {
+                                                        //             return [true, ""];
+                                                        //         } else {
+                                                        //             return [false, "", "Unavailable"];
+                                                        //         }
+                                                        //     } 
+                                                        //     $('#datepicker').datepicker({
+                                                        //         beforeShowDay: unavailable,
+                                                        //         minDate: -0,
+                                                        //         maxDate: "+14D",
+                                                        //         changeMonth: true,
+                                                        //         changeYear: true,
+                                                        //         numberOfMonths: 1,
+                                                        //         dateFormat: 'MM dd, yy'
+                                                        //     });
+                                                        // }
+                                                            /* function unavailable(date) {
+                                                                dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                                                               // console.log(dmy);
+                                                                if ($.inArray(dmy, test2) == -1) {
+                                                                    return [true, ""];
+                                                                } else {
+                                                                    return [false, "", "Unavailable"];
+                                                                }
+                                                            }  */
+                                                            $('#datepicker').datepicker({
+                                                                beforeShowDay:  function(date){
+                                                                    var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                                                                    console.log(string);
+                                                                    return [ test2.indexOf(string) == -1 ]
+                                                                },
+                                                                minDate: -0,
+                                                                maxDate: "+"+data[i].max+"D",
+                                                                changeMonth: true,
+                                                                changeYear: true,
+                                                                numberOfMonths: 1,
+                                                                dateFormat: 'MM dd, yy'
+                                                            });
+                                                      
                                                     }
                                                     $.ajax({
                                                         type: "GET",
@@ -203,29 +243,9 @@
                                                                 });
                                                             }
                                                         }
-                                                    });
-
-                                                    function unavailable(date) {
-                                                        dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-                                                        if ($.inArray(dmy, test2) == -1) {
-                                                            return [true, ""];
-                                                            // console.log(test2);
-                                                        } else {
-                                                            return [false, "", "Unavailable"];
-                                                            // console.log(test2);
-                                                        }
-                                                    }
-                                                    $('#datepicker').datepicker({
-                                                        beforeShowDay: unavailable,
-                                                        minDate: -0,
-                                                        maxDate: "+14D",
-                                                        changeMonth: true,
-                                                        changeYear: true,
-                                                        numberOfMonths: 1,
-                                                        dateFormat: 'MM dd, yy'
-                                                    });
-
+                                                    });    
                                                 }
+                                                
                                             });
 
                                         }

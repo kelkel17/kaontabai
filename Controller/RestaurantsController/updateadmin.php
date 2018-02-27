@@ -1,3 +1,40 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+	function updateAlert(){
+		$(function(){
+			swal({
+				title:"Successfully",
+				text:"Succsfully Updated an event",
+				icon: "success"
+			}).then(function(){
+					window.location = "../../View/indexadmin.php";
+			});
+		});
+	}
+	function errorUpdateAlert(){
+		$(function(){
+			swal({
+				title:"Error",
+				text:"Error in Updating an event",
+				icon: "error"
+			}).then(function(){
+					window.location = "../../View/updaterestaurant.php";
+			});
+		});
+	}
+	function warningAlert(){
+		$(function(){
+			swal({
+				title:"Image type error",
+				text:"Image type must be PNG/JPEG/JPG only",
+				icon: "warning"
+			}).then(function(){
+					window.location = "../../View/updaterestaurant.php";
+			});
+		});
+	}
+</script>
 <?php
 	include('../dbconn.php');
 	
@@ -13,7 +50,8 @@
     	$ctime = $_POST['ctime'];
     	$desc = $_POST['desc'];
     	$image = $_FILES['image']['name'];
-    	$max = $_POST['max'];
+		$max = $_POST['max'];
+		$maxdate = $_POST['maxdate'];
     	$promo = $_POST['promo'];
     	$email = $_POST['email'];
 		$checkbox2 = "";
@@ -21,32 +59,39 @@
 		$path = time().$image;
 		if(!empty($image))
             $path = time().$image;
-		else  $path = '';
+		else  
+			$path = '';
+		
+		$imageType = strtolower(pathinfo($image,PATHINFO_EXTENSION));	
 		if(empty($path))
-			$data = array($user,$pass,$name,$addr,$contact,$otime,$ctime,$desc,$max,$email,$id);
-		  	else{
-				  if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
-				  	{
-						$data = array($user,$pass,$name,$addr,$contact,$otime,$ctime,$path,$desc,$max,$email,$id);
-		  				foreach ($promo as $check) {
-			  				$sql = "SELECT promo_id, restaurant_id FROM promo_restaurant WHERE promo_id = :promo AND restaurant_id = :id";
-				            $con = con();
-				            $sthandler = $con->prepare($sql);
-							$sthandler->bindParam(':promo', $check);
-							$sthandler->bindParam(':id', $id);
-				            $sthandler->execute();
+			$data = array($user,$pass,$name,$addr,$contact,$otime,$ctime,$desc,$max,$maxdate,$email,$id);
+		  	else{	
+				 if($imageType != "jpg" && $imageType != "png" && $imageType != "jpeg" && !(empty($path)))
+						echo '<script>warningAlert();</script>';
+				 else{	
+					if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
+						{
+							$data = array($user,$pass,$name,$addr,$contact,$otime,$ctime,$path,$desc,$max,$maxdate,$email,$id);
+							foreach ($promo as $check) {
+								$sql = "SELECT promo_id, restaurant_id FROM promo_restaurant WHERE promo_id = :promo AND restaurant_id = :id";
+								$con = con();
+								$sthandler = $con->prepare($sql);
+								$sthandler->bindParam(':promo', $check);
+								$sthandler->bindParam(':id', $id);
+								$sthandler->execute();
 
-				            if($sthandler->rowCount() > 0)
-				            	 echo '<script>alert("You already availed this promo!"); window.location="../../View/updaterestaurant.php?id='.$id.'";</script>';
-							 else{
-								 $data2 = array($check,$id);
-								 
-								 addPromo($data2); 
-							}	 
-						 }
-					}		   
+								if($sthandler->rowCount() > 0)
+									echo '<script>errorUpdateAlert();</script>';
+								else{
+									$data2 = array($check,$id);
+									
+									addPromo($data2); 
+								}	 
+							}
+						}
+				 }			   
 			  }	 
 			  updateOwner($data,$path);
-			 echo '<script> alert("Succesfully Updated your restaurant information"); window.location="../../View/indexadmin.php?id='.$id.'";</script>';
+			 echo '<script> updateAlert();</script>';
 	}	
 ?>

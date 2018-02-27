@@ -194,9 +194,10 @@
                                             <label>Restaurant Closing Time</label>
                                             <input class="form-control" placeholder="Restaurant Hour Close" name="ctime" type="time" value="<?php echo $row['hour_close'];?>" required>
                                             <br/>
-                                            <textarea class="form-control" placeholder="Restaurant Description" name="desc" type="text">
-                                                <?php echo $row['restaurant_desc'];?>
-                                            </textarea>
+                                            <label>Restaurant Maximum number of days</label>
+                                            <input class="form-control" placeholder="Restaurant Maximum number of days" name="maxdate" type="text" value="<?php echo $row['maxdate'];?>" required>
+                                            <br/>
+                                            <textarea class="form-control" placeholder="Restaurant Description" name="desc" type="text"><?php echo $row['restaurant_desc'];?></textarea>
                                             <br/>
                                             <?php 
 												$promos = getPromos();
