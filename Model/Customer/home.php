@@ -350,7 +350,7 @@
                                     console.log(data[i]);
                                     var date = moment().format('LL');
                                     // console.log(date);
-                                    var date2 = data[i].dat;
+                                    var date2 = moment(data[i].dat).format('LL');
                                     // console.log(date2);
                                 }
                                 if (date == date2) {
@@ -364,9 +364,10 @@
                                             icon: "info"
                                         });
                                     }
-                                } else if (date > date2) {
-                                    // console.log('okay');
-                                }
+                                } else
+                                swal("Your reservation has been accepted your reservation number is " + data[i].num, {
+                                            icon: "info"
+                                        });
 
                             }
                         });

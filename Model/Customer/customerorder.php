@@ -122,7 +122,7 @@
                                 <?php
                                       $cid = $_SESSION['id'];
 
-                                      $sql = "SELECT SUM(od.order_qty) as total, o.order_number as num, r.restaurant_name as name, o.order_time as tim, o.status as stat, o.total_price as pr, o.order_id, o.reservation_id, o.order_status, o.payment_id, c.customer_fname FROM orders o, menus m, customers c, order_details od, restaurants r, reservations res WHERE m.menu_id = od.menu_id AND o.reservation_id = res.reservation_number AND o.order_id = od.order_id AND res.restaurant_id = r.restaurant_id AND o.customer_id = c.customer_id AND o.customer_id = '$cid' GROUP BY o.order_number DESC";
+                                      $sql = "SELECT SUM(od.order_qty) as total, o.order_number as num, r.restaurant_name as name, res.reservation_date as dat, res.reservation_time as tim, o.status as stat, o.total_price as pr, o.order_id, o.reservation_id, o.order_status, o.payment_id, c.customer_fname FROM orders o, menus m, customers c, order_details od, restaurants r, reservations res WHERE m.menu_id = od.menu_id AND o.reservation_id = res.reservation_number AND o.order_id = od.order_id AND res.restaurant_id = r.restaurant_id AND o.customer_id = c.customer_id AND o.customer_id = '$cid' GROUP BY o.order_number DESC";
                                       $con = con();
                                       $stmt = $con->prepare($sql);
                                       $stmt->execute();
@@ -143,7 +143,7 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <?php echo date('F j, Y g:i A', strtotime($rows['tim'])); ?>
+                                                <?php echo date('F j, Y g:i A', strtotime($rows['dat'].$rows['tim'])); ?>
                                             </center>
                                         </td>
                                         <td>
