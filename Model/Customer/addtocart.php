@@ -30,8 +30,8 @@ if (isset($_POST['carts'])) {
           echo '<script>alert("Successlly added a menu to cart."); window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';  */
 
             $myQty = $_SESSION['qty'];
-            echo " qty before-".$myQty;
-            $myQty. = ",".$qnty;
+            //echo " qty before-".$myQty;
+            $myQty.= ",".$qnty;
 
             echo " qty after-".$myQty;
             $_SESSION["qty"] = $myQty;
@@ -39,8 +39,8 @@ if (isset($_POST['carts'])) {
             // print_r($_SESSION['cart']);
             //echo "-";
             //print_r($_SESSION['qty']);
-            echo "items before  - ".$items;
-            $items. = ",".$_GET['id'];
+            //echo "items before  - ".$items;
+            $items.= ",".$_GET['id'];
 
             echo "items after".$items;
             $ResId = $_GET['cid'];
@@ -48,7 +48,7 @@ if (isset($_POST['carts'])) {
 
             $_SESSION['cart'] = $items;
             $quantity = explode(",", $qnty);
-            $qnty. = ",".$_SESSION['qty'];
+            $qnty.= ",".$_SESSION['qty'];
             // $_SESSION['qty'] = $qnty;
             $_SESSION['count'] = count($cartitems) + 1;
             echo '<script>window.location="menu.php?cid='.$ResId.
