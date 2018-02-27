@@ -13,7 +13,7 @@ include '../dbconn.php';
            // $stat = "Active";
             $pass = $_POST['pass'];
             $pass2 = $_POST['pass2'];
-
+            
             $sql = "SELECT customer_email FROM customers WHERE customer_email = :email";
             $con = con();
             $sthandler = $con->prepare($sql);
@@ -24,10 +24,13 @@ include '../dbconn.php';
                 echo '<script>alert("Already exist!"); window.location="../../index.php";</script>';
             }
                 elseif($pass==$pass2){
-                    
+                
+			    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
                 $subject = 'Registered succesfully';
-                $body = 'You have succesfully registered an account';
-                $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$pass);
+                $body = 'You have succesfully registered an account. 
+                Your email is '.$email.' and your password is '.$pass.'.
+                ';
+                $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$hashed_password);
                 addCustomer($data);
                 mail($email,$subject,$body,'From: KaonTaBai!');
                 echo '<script> alert("Successfully Registered"); window.location="../../index.php" </script>';
