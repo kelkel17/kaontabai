@@ -1,5 +1,5 @@
 <?php
-include '../dbconn.php';
+include 'dbconn.php';
 //	session_start();
 
 	//$userlog = $userpass = "";
@@ -8,17 +8,17 @@ include '../dbconn.php';
 		$userlog = $_POST['userlog'];
 		$userpass = $_POST['userpass'];
 	
-		$sql = "SELECT * FROM customers WHERE customer_email = ? AND customer_password = ?";
+		$sql = "SELECT * FROM customers WHERE customer_email = ?";
 		$con = con();
 		$stmt = $con->prepare($sql);
-		$stmt->execute(array($userlog,$userpass));
+		$stmt->execute(array($userlog));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($stmt->rowCount() > 0){
-			$_SESSION['id'] = $row['id'];
-			header('location:../../index.php');
+		if($stmt->rowCount() > 0 && password_verify($userpass, $row['customer_password'])){
+				$_SESSION['id'] = $row['id'];
+				echo '<script>window.location="../Model/Customer/loading.php?id='.$row['customer_id'].'" </script>';
 		}
 		else{
-			header('location:../../View/Customer/login.php?mess=Your username or password is incorrect!');
+			echo '<script> alert("Invalid Username or Password"); window.location="../index.php?mess=Your username or password is incorrect!" </script>';
 		}
 
 	}
