@@ -26,7 +26,7 @@
                     </div>
                     <br />
                     <div id="category_types" class="tab-pane">
-                        <input type="text" name="testme" value="" id="content">
+                        <input type="hidden" name="testme" value="" id="content">
                         <label for="pcategory">Product Category</label>
                         <select name="category" id="category" class="form-control" required>
                             <option value="0"></option>
