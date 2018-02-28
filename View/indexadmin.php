@@ -3,8 +3,15 @@
     include('../Controller/dbconn.php');
 
     islogged();
+    
     date_default_timezone_set('Asia/Manila');
     $date = date('Y-m-d');
+    $asd = date('g:i A');
+    $test = getSingleOwner(array($_SESSION['id']));
+    $max = date('g:i A',strtotime($test['hour_close']));
+    if($asd >= $max){
+        changetTemp(array($_SESSION['id']));    
+    }
     $owner = getOwner(array($_SESSION['id']));
     foreach($owner as $row){
         $exp = date('Y-m-d', strtotime($row['sub_exp']));
@@ -174,7 +181,7 @@
                 <li class=""><a href="../Model/Restaurant/promo.php"><em class="fa fa-cutlery">&nbsp;</em> Combo Meals</a></li>
                 <li class=""><a href="../Model/Room/rooms.php"><em class="fa fa-clone">&nbsp;</em> Tables</a></li>
                 <li class=""><a href="../Model/Employee/staff.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
-                <li class=""><a href="../Model/Food/food.php"><em class="fa fa-cutlery">&nbsp;</em> Menu</a></li>
+                <li class=""><a href="../Model/Food/food.php"><em class="fa fa-cutlery">&nbsp;</em> Menu  </a></li>
                 <li class=""><a href="../Controller/logoutadmin.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
             </ul>
         </div>

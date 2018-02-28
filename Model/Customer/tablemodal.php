@@ -50,12 +50,12 @@
                         <label>Reservation Date</label>
                         <input type="hidden" name="cid" value="<?php echo  $_GET['cid'];?>">
                         <input type="hidden" name="table" value="<?php echo $t['table_id'];?>">
-                        <input type="text" id="" name="dat" class="form-control datepicker2" required>
+                        <input type="text" id="datepicker" name="dat" class="form-control" required>
                         <span class="highlight"></span><span class="bar"></span>
                     </div>
                     <div class="form-group">
                         <label>Reservation Time</label>
-                        <input type="text" name="tim" id="" class="form-control timepicker2" required>
+                        <input type="text" name="tim" id="timepicker" class="form-control " required>
                         <span class="highlight"></span><span class="bar"></span>
                     </div>
                     <div class="form-group">

@@ -1,12 +1,25 @@
+<?php 
+
+
+
+date_default_timezone_set('Asia/Manila');
+$asd = date('g:i A');
+$test = getSingleOwner(array($_SESSION['id']));
+$max = date('g:i A',strtotime($test['hour_close']));
+if($asd >= $max){
+    changetTemp(array($_SESSION['id']));    
+}
+?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KaonTaBai!</title>
     <link href="../../something/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../something/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../something/css/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="../../something/css/jquery-ui.css"> -->
     <link rel="stylesheet" href="../../something/css/jquery.timepicker.min.css" />
-   
+    <link rel="stylesheet" href="../../assets/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="../../something/css/jquery-bootstrap-datepicker.css" />
    
     <link href="../../something/css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="../../something/css/datatable.css">
@@ -14,8 +27,9 @@
    
     <script src="../../something/js/jquery.min.js"></script>
     <script src="../../something/js/bootstrap.min.js"></script>
-
-    <script src="../../something/js/jquery-ui.js"></script>
+    
+    <script src="../../assets/js/bootstrap-datepicker.js"></script> 
+    <!-- <script src="../../something/js/jquery-ui.js"></script> -->
     <script src="../../something/js/jquery.timepicker.min.js"></script>
     <script src="../../something/js/chart.min.js"></script>
     <script src="../../something/js/chart-data.js"></script>

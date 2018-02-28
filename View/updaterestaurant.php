@@ -185,8 +185,8 @@
                                             <br/>
                                             <input class="form-control" placeholder="Restaurant Email" name="email" type="email" value="<?php echo $row['owner_email'];?>" required>
                                             <br/>
-                                            <label>Maximum Capacity</label>
-                                            <input class="form-control" placeholder="Maximum number of table of your restaurant" name="max" type="number" value="<?php echo $row['max_capacity'];?>" required>
+                                            <label>Maximum Party Size</label>
+                                            <input class="form-control" placeholder="Maximum Party Size" name="max" type="number" value="<?php echo $row['max_capacity'];?>" required>
                                             <br/>
                                             <label>Restaurant Opening Time</label>
                                             <input class="form-control" placeholder="Restaurant Hour Open" name="otime" type="time" value="<?php echo $row['hour_open'];?>" required>
@@ -194,8 +194,8 @@
                                             <label>Restaurant Closing Time</label>
                                             <input class="form-control" placeholder="Restaurant Hour Close" name="ctime" type="time" value="<?php echo $row['hour_close'];?>" required>
                                             <br/>
-                                            <label>Restaurant Maximum number of days</label>
-                                            <input class="form-control" placeholder="Restaurant Maximum number of days" name="maxdate" type="text" value="<?php echo $row['maxdate'];?>" required>
+                                            <label>Advance Booking Range</label>
+                                            <input class="form-control" placeholder="Advance Booking Range" name="maxdate" type="text" value="<?php echo $row['maxdate'];?>" required>
                                             <br/>
                                             <textarea class="form-control" placeholder="Restaurant Description" name="desc" type="text"><?php echo $row['restaurant_desc'];?></textarea>
                                             <br/>

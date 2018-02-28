@@ -61,8 +61,8 @@
                 else{
                         if(move_uploaded_file($_FILES['profile']['tmp_name'], $directory.$path))
                             $data = array($fname, $mname, $lname, $email,$hashed_password, $phone, $address, $path, $id);
-                        else
-                        echo '<script> errorUpdateAlert(); </script>';
+                       else
+                       echo '<script> errorUpdateAlert(); </script>';
                 }
                 updateCustomer($data,$path);
                 echo '<script> updateAlert('.$_SESSION['id'].'); </script>';
@@ -178,21 +178,22 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="abouts_content">
-                        <?php $filename = '../Image/'.$row['customer_pic'].'';
-                        if($row['customer_pic']=='' || !(file_exists($filename))){
-                          if($row['customer_gender'] == 'Female'){?>
-                              <img src="../../Image/icon.png" class="lol">
-                              <div class="overlays">
-                                  <div class="text2">Image not Found</div>
-                              </div>
-                              <?php } elseif($row['customer_gender'] == 'Male'){?>
-                                  <img src="../../Image/icon2.png" class="lol">
-                                  <div class="overlays">
-                                      <div class="text2">Image not Found</div>
-                                  </div>
-                                  <?php } } else{?>
-                                      <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
-                                      <?php } ?>    <div class="profile-usertitle">
+                        <?php
+                        $filename = '../Image/'.$row['customer_pic'].'';
+                          if($row['customer_pic']==''){
+                            if($row['customer_gender'] == 'Female'){?>
+                                <img src="../../Image/icon.png" class="lol">
+                                <div class="overlays">
+                                    <div class="text2">Image not Found</div>
+                                </div>
+                                <?php } elseif($row['customer_gender'] == 'Male'){?>
+                                    <img src="../../Image/icon2.png" class="lol">
+                                    <div class="overlays">
+                                        <div class="text2">Image not Found</div>
+                                    </div>
+                                    <?php } } if($row['customer_pic'] != ''){?>
+                                        <img src="../../Image/<?php echo $row['customer_pic'];?>" class="lol">
+                                        <?php } ?> <div class="profile-usertitle">
                                     <div class="profile-usertitle-name">
                                         <?php 
                                         echo $row['customer_fname'].' '.$row['customer_lname'];
@@ -219,21 +220,21 @@
                                 <div class="profile-usermenu">
                                     <ul class="nav">
                                         <li class="active">
-                                            <a href="#">
+                                            <a href="customerprofile.php?id=<?php echo $row['customer_id'];?>">
                                                 <i class="fa fa-bar-chart"></i> Reservation History </a>
                                         </li>
                                     </ul>
                                     <br/>
                                     <ul class="nav">
                                         <li class="active">
-                                            <a href="#">
+                                            <a hrefcustomerorder.php?id=<?php echo $row['customer_id'];?>
                                                 <i class="fa fa-bar-chart"></i> Order History </a>
                                         </li>
                                     </ul>
                                     <br/>
                                     <ul class="nav">
                                         <li class="active">
-                                            <a href="#">
+                                            <a href="customerpayment.php?id=<?php echo $row['customer_id'];?>">
                                                 <i class="fa fa-bar-chart"></i> Payment History </a>
                                         </li>
                                     </ul>

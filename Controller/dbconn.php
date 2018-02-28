@@ -65,6 +65,13 @@ function islogged2(){
 
 	}
 
+	function changetTemp($data){
+		$con = con();
+		$sql = "UPDATE restaurants SET temp = 0 WHERE restaurant_id = ?";
+		$stmt = $con->prepare($sql);
+		$update = $stmt->execute($data);
+		$con = null;
+	}
 	function getSingleCustomer($data){
 		$con = con();
 		$sql = "SELECT * FROM customers WHERE customer_id = ?";

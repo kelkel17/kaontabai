@@ -6,7 +6,9 @@
     viewAllOwners();
     $Resid = $_GET['cid']; 
     $pid = $_GET['pid'];
-
+    $basta = getSingleOwner(array($Resid));
+    $max = $basta['maxdate'];
+    echo $max;
 ?>
 
     <!doctype html>
@@ -54,8 +56,9 @@
                                           $flag = false;
                                           $flag2 = false;
                                           $date2 = date('Y-m-d');
+                                         
                                           foreach ($view as $r) {
-                                         //   print_r($r);
+                                           print_r($r);
                                             $date = date('Y-m-d', strtotime($r['sched_sdate']));
                                             $date3 = date('Y-m-d', strtotime($r['sched_edate']));
                                             
@@ -72,7 +75,7 @@
                                                 if($flag2){ ?>
                                                     <a onclick="alreadyBook(<?php echo $r['restaurant_id'];?>,'<?php echo $r['restaurant_name'];?>');" class="btn btn-danger pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>
                                                 <?php } elseif(!($flag) && !($flag2)){ ?>
-                                                    <a href="#" onclick="getDate(<?php echo $_GET['cid'];?>,<?php echo $t['table_id'];?>)" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>                                    
+                                                    <a href="#" onclick="getDate(<?php echo $_GET['cid'];?>,<?php echo $t['table_id'];?>,<?php echo $basta['maxdate'];?>);" class="btn btn-primary pull-right">&nbsp;Book Now&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i></a>                                    
                                                 <?php }
                                             ?>
                         </div>
@@ -86,7 +89,6 @@
                                         icon: "warning"
                                     });
                                 }
-sched
                                 function alreadyBook(eventId, resName) {
                                     swal({
                                         title: "Notice",
@@ -96,83 +98,131 @@ sched
                                 }
                             </script>
                             <script>
-                                function getDate(restId, tableId) {
-                                    $('#bookNow' + tableId).modal('show');
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "getdate.php?cid=" + restId,
-                                        dataType: 'json',
-                                        success: function(data) {
-                                            // console.log(data);
-                                            var test2 = [];
-                                            for (var i in data) {
-
-                                                test2.push(moment(data[i].dat).format('DD-M-YYYY'));
-                                                console.log(test2);
-                                                $('.equipCatValidation').on('keydown keyup', function(e) {
-                                                    if ($(this).val() > data[i].max && e.keyCode != 46 && e.keyCode != 8) {
-                                                        e.preventDefault();
-                                                        $(this).val(data[i].max);
-                                                    }
-                                                });
-
-                                            }
+                                        function getDate(restId,tableId,maxDate) {
+                                            alert(maxDate);
+ 
+                                            $('#bookNow' + restId).modal('show');
                                             $.ajax({
                                                 type: "GET",
-                                                url: "gettime.php?cid=" + restId,
+                                                url: "getres.php?cid=" + restId,
                                                 dataType: 'json',
-                                                success: function(datas) {
-                                                    for (var x in datas) {
-                                                        console.log(datas[x]);
-                                                        $("#timepicker").timepicker({
-                                                            timeFormat: 'g:i A',
-                                                            minTime: datas[x].open,
-                                                            maxTime: datas[x].close
-                                                        });
-                                                        $(".timepicker2").timepicker({
-                                                            timeFormat: 'g:i A',
-                                                            minTime: datas[x].open,
-                                                            maxTime: datas[x].close
+                                                success: function(data) {
+                                                    for (var i in data) {
+
+                                                        $('.equipCatValidation').on('keyup keydown', function(e) {
+
+                                                            if ($(this).val() > parseInt(data[i].max) && e.keyCode != 46 && e.keyCode != 8) {
+                                                                e.preventDefault();
+                                                                 var newvalue = data[i].max - data[i].temp;
+                                                                $(this).val(newvalue);
+                                                                console.log($(this).val() > newvalue);
+                                                            }
                                                         });
                                                     }
                                                 }
                                             });
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "getdate.php?cid=" + restId,
+                                                dataType: 'json',
+                                                success: function(data) {
+                                                    // console.log(data);
+                                                    var test2 = [];
+                                                    var dateRange = [];
+                                                    var test = [];
+                                                   if(data.length == 0){
+                                                       console.log(maxDate);
+                                                         $('#datepicker').datepicker({
+                                                                        format: 'MM dd, yyyy',
+                                                                        startDate: '-0d',
+                                                                        endDate: "+"+maxDate+"d",
+                                                                    // datesDisabled: test2,
+                                                         });
+                                                         $.ajax({
+                                                                type: "GET",
+                                                                url: "gettime.php?cid=" + restId,
+                                                                dataType: 'json',
+                                                                success: function(datas) {
+                                                                    for (var x in datas) {
+                                                                       // console.log(datas[x]);
+                                                                        $("#timepicker").timepicker({
+                                                                            timeFormat: 'g:i A',
+                                                                            minTime: datas[x].open,
+                                                                            maxTime: datas[x].close
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });    
+                                                   }
+                                                   else if(data.length > 0){
+                                                            for (var i in data) {
+                                                        
+                                                            if(data[i].stat == '0'){
+                                                        
+                                                            }
+                                                            if(data[i].stat == '1'){
 
-                                            function unavailable(date) {
-                                                dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-                                                if ($.inArray(dmy, test2) == -1) {
-                                                    return [true, ""];
-                                                    // console.log(test2);
-                                                } else {
-                                                    return [false, "", "Unavailable"];
-                                                    // console.log(test2);
-                                                }
-                                            }
-                                            $('#datepicker').datepicker({
-                                                beforeShowDay: unavailable,
-                                                minDate: -0,
-                                                maxDate: "+14D",
-                                                changeMonth: true,
-                                                changeYear: true,
-                                                numberOfMonths: 1,
-                                                dateFormat: 'MM dd, yy'
-                                            });
-                                            $('.datepicker2').datepicker({
-                                                beforeShowDay: unavailable,
-                                                minDate: -0,
-                                                maxDate: "+14D",
-                                                changeMonth: true,
-                                                changeYear: true,
-                                                numberOfMonths: 1,
-                                                dateFormat: 'MM dd, yy'
-                                            });
+                                                                // console.log('wa ni agi');
+                                                                var asd = data[i].dat;
+                                                                //console.log(asd);
+                                                                test2 = [moment(data[i].dat).format('M-D-YYYY'),moment(data[i].dats).format('M-D-YYYY')];
+                                                                test3 = [moment(data[i].dat).format('M-D-YYYY')];
+                                                                test4 = [moment(data[i].dats).format('M-D-YYYY')];
+                                                        
+                                                                }
+                                                            }
+                                                            if(data[i].stat == '0'){
+                                                            $('#datepicker').datepicker({
+                                                                        format: 'MM dd, yyyy',
+                                                                        startDate: '-0d',
+                                                                        endDate: "+"+data[i].max+"d",
+                                                                    // datesDisabled: test2,
+                                                            });
+                                                            }
+                                                            if(data[i].stat == '1'){
+                                                             //   console.log(data[i].max);
+                                                            $('#datepicker').datepicker({
+                                                                        format: 'MM dd, yyyy',
+                                                                        startDate: '-0d',
+                                                                        endDate: "+"+data[i].max+"d",
+                                                                        // todayHighlight: true,
+                                                                        beforeShowDay:  function (currentDate) {
+                                                                            var dayNr = currentDate.getDay();
+                                                                            var dateNr = moment(currentDate.getDate()).format('M-D-YYYY');
+                                                                                if (test2.length > 0) {
+                                                                                    for (var i = 0; i < test2.length; i++) {                        
+                                                                                        if (moment(currentDate).unix()>=moment(test3[i],'M-D-YYYY').unix() && moment(currentDate).unix()<=moment(test4[i],'M-D-YYYY').unix()){
+                                                                                            return false;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                return true;
+                                                                            }
+                                                                    });
+                                                            }        
+                                                                
+                                                            $.ajax({
+                                                                type: "GET",
+                                                                url: "gettime.php?cid=" + restId,
+                                                                dataType: 'json',
+                                                                success: function(datas) {
+                                                                    for (var x in datas) {
+                                                                       // console.log(datas[x]);
+                                                                        $("#timepicker").timepicker({
+                                                                            timeFormat: 'g:i A',
+                                                                            minTime: datas[x].open,
+                                                                            maxTime: datas[x].close
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });  
+                                                        }    
+                                                    }
+                                                    
+                                                });
 
                                         }
-                                    });
-
-                                }
-                            </script>
-
+                                    </script>
                             <?php } ?>
 
                 </div>

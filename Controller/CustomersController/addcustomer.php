@@ -71,7 +71,7 @@ include '../dbconn.php';
 			    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
                 $subject = 'Registered succesfully';
                 $body = 'You have succesfully registered an account. 
-                Click <a href='.$link.'>this</a> link to login ';
+                Click <a href='.$link.'>here</a> link to login ';
                 $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$hashed_password);
                 addCustomer($data);
                 mail($email,$subject,$body,'From: KaonTaBai!');

@@ -140,11 +140,10 @@
 						if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
 							$data = array($id,$name,$desc,$price,$path,$men,$cim);
 						else
-							
-						echo '<script> errorUpdateAlert(); </script>';
+							echo '<script> errorUpdateAlert(); </script>';
 					}
 					
-					addCombo($data,$image);
+					updateCombo($data,$image);
 					echo "<script>updateAlert();</script>";
 				}	
 		}
