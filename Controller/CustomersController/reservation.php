@@ -5,9 +5,9 @@
 	function sweetMimitch(resid,cusId,number){
 	$(function(){
 		swal({
-				title:"Successfully",
-				text:"Request a reservation",
-				icon: "success"
+				title:"Successful!",
+				text:"Order something for your reservation to be valid",
+				icon: "warning"
 		}).then(function(){
 				window.location = "../../Model/Customer/menu.php?cid="+resid+"&pid="+cusId+"&rid="+number;
 			});

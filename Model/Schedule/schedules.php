@@ -27,7 +27,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="page-header" style="float: left;margin: 10px;">Schedules</h1>
+                    <h1 class="page-header" style="float: left;margin: 10px;">Off-Peak/Peak Hour Schedule Management</h1>
 
                     <!-- Add Schedule Modal -->
                     <button type="button" class="btn btn-primary hover m-t-15" style="float: left;margin: 10px;" data-toggle="modal" data-target="#addSchedule">Add Schedule</button>

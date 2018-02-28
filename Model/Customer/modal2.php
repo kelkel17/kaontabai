@@ -5,7 +5,7 @@
             <div id="<?php echo $rows['order_id'];?>">
                 <center>
                     <h3 class="modal-title"><?php echo $row['customer_fname'];?>'s Receipt</h3></center>
-
+                    <hr>
                 <div class="modal-body" style="padding-left: 30px;"><strong>
                                                     Restaurant Name: <?php echo $rows['name']; ?><br/>
                                                     Order ID: <?php echo $rows['num'];?> <br>
@@ -32,8 +32,9 @@
                                                         <li style="margin-left:5%"><?php echo $r['m_name'].' '.$r['order_qty'];?> pcs</li>
                                                     </ul>    
                                                <?php } } }?>    
-
+                                                  
                                           </strong></div>
+                                          <div><strong><p text-align="right">-By KaonTaBai!</p></strong></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary hover" data-dismiss="modal">Close</button>

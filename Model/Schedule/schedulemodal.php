@@ -16,8 +16,8 @@
                     <div class="tab-pane">
                         <label for="pdate">Schedule Date & Time</label>
                         <br/>
-                        <input type="text" name="sdate" id="datepicker" style="width:50%; float:left;" class="form-control" required>
-                        <input type="text" name="stime" id="timepicker" style="width:50%; float:left;" class="form-control" required>
+                        <input type="text" name="sdate" id="datepicker" style="width:50%; float:left;" class="form-control" placeholder="Start Date" required>
+                        <input type="text" name="stime" id="timepicker" style="width:50%; float:left;" class="form-control" placeholder="Start Time" required>
                         <!-- <label for="pdate">Schedule Date</label> -->
                         <span class="highlight"></span><span class="bar"></span>
                     </div>
@@ -27,8 +27,8 @@
                     <div class="tab-pane">
                         <label for="ptime">Schedule End Date & Time</label>
                         <br/>
-                        <input type="text" name="edate" id="datepicker2" style="width:50%; float:left;" class="form-control" required>
-                        <input type="text" name="etime" id="timepicker2" style="width:50%; float:left;" class="form-control" required>
+                        <input type="text" name="edate" id="datepicker2" style="width:50%; float:left;" class="form-control" placeholder="End Date" required>
+                        <input type="text" name="etime" id="timepicker2" style="width:50%; float:left;" class="form-control" placeholder="End Time" required>
                         <span class="highlight"></span><span class="bar"></span>
                     </div>
                     <br />

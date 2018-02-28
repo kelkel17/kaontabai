@@ -237,7 +237,7 @@
                                         ?>
                                             <h3>How many <?php echo $row['m_name']?> would you like to order?</h3>
                                             <?php } ?>
-                                                <input type="number" class="form-control" name="qty" value="1">
+                                                <input type="number" class="form-control" name="qtys" value="1">
 
                                     </div>
                                     <div class="modal-footer">
@@ -298,7 +298,7 @@
                                         ?>
                                             <h3>How many <?php echo $row['m_name']?> would you like to order?</h3>
                                             <?php } ?>
-                                                <input type="number" class="form-control" name="qty" value="1">
+                                                <input type="number" class="form-control" name="qtys" value="1">
 
                                     </div>
                                     <div class="modal-footer">
@@ -360,7 +360,7 @@
                                         ?>
                                             <h3>How many <?php echo $row['m_name']?> would you like to order?</h3>
                                             <?php } ?>
-                                                <input type="number" class="form-control" name="qty" value="1">
+                                                <input type="number" class="form-control" name="qtys" value="1">
 
                                     </div>
                                     <div class="modal-footer">
@@ -420,7 +420,7 @@
                                         ?>
                                             <h3>How many <?php echo $row['m_name']?> would you like to order?</h3>
                                             <?php } ?>
-                                                <input type="number" class="form-control" name="qty" value="1">
+                                                <input type="number" class="form-control" name="qtys" value="1">
 
                                     </div>
                                     <div class="modal-footer">

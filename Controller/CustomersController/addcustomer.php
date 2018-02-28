@@ -1,3 +1,44 @@
+<script src="../../something/js/jquery.min.js"></script>
+<script src="../../something/js/sweetalert.min.js"></script>
+<script>
+    function sweetMimitch(){
+    $(function(){
+        swal({
+                title:"Successfully Registered!",
+                text:"",
+                icon: "success"
+        }).then(function(){
+                window.location = "../../index.php";
+            });
+        });
+    }
+
+    function warningAlert(){
+        $(function(){
+            swal({
+                title:"Failed",
+                text:"Password does not match!",
+                icon: "error"
+            }).then(function(){
+                    window.location = "../../index.php";
+            });
+        });
+    }
+
+    function error(){
+        $(function(){
+            swal({
+                title:"Failed",
+                text:"Email already exist!",
+                icon: "error"
+            }).then(function(){
+                    window.location = "../../index.php";
+            });
+        });
+    }
+
+</script>
+
 <?php
 
 include '../dbconn.php';
@@ -13,6 +54,8 @@ include '../dbconn.php';
            // $stat = "Active";
             $pass = $_POST['pass'];
             $pass2 = $_POST['pass2'];
+
+            $link = "http://localhost/kaontabai/index.php";
             
             $sql = "SELECT customer_email FROM customers WHERE customer_email = :email";
             $con = con();
@@ -21,25 +64,24 @@ include '../dbconn.php';
             $sthandler->execute();
 
             if($sthandler->rowCount() > 0){
-                echo '<script>alert("Already exist!"); window.location="../../index.php";</script>';
+                echo '<script>error();</script>';
             }
                 elseif($pass==$pass2){
                 
 			    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
                 $subject = 'Registered succesfully';
                 $body = 'You have succesfully registered an account. 
-                Your email is '.$email.' and your password is '.$pass.'.
-                ';
+                Click <a href='.$link.'>this</a> link to login ';
                 $data = array($fname,$mname,$lname,$addr,$phone,$email,$gender,$bdate,$hashed_password);
                 addCustomer($data);
                 mail($email,$subject,$body,'From: KaonTaBai!');
-                echo '<script> alert("Successfully Registered"); window.location="../../index.php" </script>';
+                echo '<script>sweetMimitch();</script>';
 			
             }
 
             else
             {
-                echo '<script>alert("Password does not match!"); window.location="../../index.php"; </script>';
+                echo '<script> warningAlert();</script>';
             }
         
     }
