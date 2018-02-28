@@ -93,7 +93,12 @@
 							$status = "Expired";
 							$data = array($status, $reservation);
 							ChangeAll($data);
-						}
+                        }
+                        if($date > $newdate && $row['res_status'] == 'Reserved'){
+                            $status = "Done";
+							$data = array($status, $reservation);
+							ChangeAll($data);
+                        }
 						// if($date > date('Y-m-d g', strtotime($row['reservation_date'].$row['reservation_time']))){
 
 						// }
@@ -110,21 +115,34 @@
                                     <td>
                                         <center>
                                             <?php if($date > $newdate){?>
+                                                <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Done"></i>
                                                 <i class="fa fa2 fa-check" aria-hidden="true" title="Accept"></i>
                                                 <i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
                                                 <?php } elseif($row['res_status'] == "Pending"){?>
+                                                        <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Done"></i>
                                                     <a href="#" onclick="accept(<?php echo $row['reservation_id']; ?>,'<?php echo $row['table_id'];?>');">
                                                         <i class="fa fa-check" aria-hidden="true" title="Accept"></i></a>
                                                     <i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
                                                     <?php }elseif($row['res_status'] == "Reserved"){?>
+                                                        <a href="#" onclick="done(<?php echo $row['reservation_id'];?>,'<?php echo $row['table_id'];?>');">
+                                                            <i class="fa fa-circle-o" aria-hidden="true" title="Done"></i>
+                                                        </a>
                                                         <i class="fa fa2 fa-check" aria-hidden="true" title="Accept"></i>
+
                                                         <a href="#" onclick="cancel(<?php echo $row['reservation_id'];?>,'<?php echo $row['table_id'];?>');">
                                                             <i class="fa fa-times" aria-hidden="true" title="Cancel"></i>
                                                         </a>
                                                         <?php }elseif($row['res_status'] == "Cancelled" || $row['res_status'] == "Expired"){  ?>
+                                                            <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Done"></i>
                                                             <i class="fa fa2 fa-check" aria-hidden="true" title="Accept"></i>
                                                             <i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
-                                                            <?php }?>
+                                                            
+                                                            <?php }elseif($row['res_status'] == "Done"){?>
+                                                                <i class="fa fa2 fa-circle-o" aria-hidden="true" title="Done"></i>
+                                                                <i class="fa fa2 fa-check" aria-hidden="true" title="Accept"></i>
+                                                                <i class="fa fa2 fa-times" aria-hidden="true" title="Cancel"></i>
+                                                            <?php } 
+                                                            ?>
                                         </center>
                                     </td>
 
@@ -339,6 +357,42 @@
                     }
                 });
             }
+
+            function done(openId, tableId) {
+                swal({
+                    title: "Complete Reservation",
+                    text: "Is this reservation done?",
+                    buttons: true,
+                    dangerMode: true,
+                    icon: "warning"
+                }).then(function(value) {
+                    if (value) {
+                        // alert(eventId);
+                        $.ajax({
+                            type: "post",
+                            url: "../../Controller/RestaurantsController/accept.php",
+                            data: {
+                                'cancel': openId,
+                                'table': tableId
+                            },
+                            cache: false,
+                            success: function(response) {
+                                swal({
+                                    title: "Succesfully Cancel the reservations",
+                                    text: "",
+                                    icon: "success"
+                                }).then(function() {
+                                    window.location = "reservations.php";
+                                });
+                            }
+                        });
+                    } else {
+                        swal("Reservation completion cancelled", "", "error");
+                    }
+                });
+            }
+
+            
         </script>
         <script src="../../something/js/global.js"></script>
         <script>

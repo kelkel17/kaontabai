@@ -11,6 +11,12 @@ function islogged(){
 	}
 }
 
+function isloggedsa(){
+		if (!isset($_SESSION['id'])) {
+	header('Location: ../systemadminlogin.php');
+	}
+}
+
 
 function islogged2(){	
 		if (!isset($_SESSION['id'])) {
@@ -405,6 +411,22 @@ function islogged2(){
 			$con = null;
 		}	
 		
+		function addTemp($data){
+			$con = con();
+			$sql = "INSERT INTO restaurants(temp) VALUES(?)";
+			$stmt = $con->prepare($sql);
+			$add = $stmt->execute($data);
+			$con = null;
+		}
+
+		function updateTemp($data){
+			$con = con();
+			$sql = "UPDATE restaurants SET temp = ? WHERE restaurant_id = ?";
+			$stmt = $con->prepare($sql);
+			$update = $stmt->execute($data);
+			$con = null;
+		}
+
 		function updateProduct($data,$image){
             $con = con();
             if(!empty($image))
@@ -464,6 +486,7 @@ function islogged2(){
 			$s->execute($data);
 			$db = null;
 		}//End Food
+
 
 		function deactivateCM($data){
 			$db = con();
@@ -1055,6 +1078,28 @@ function islogged2(){
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			return $row;
 			$con = null;
+		}
+
+				//admin
+
+		function getAdmin($id)
+		{
+			$con = con();
+			$sql = "SELECT * FROM admin";
+			$stmt = $con->prepare($sql);
+			$stmt->execute($id);
+			$row = $stmt->fetchall(PDO::FETCH_ASSOC);
+			return $row;
+			$con = null;
+		}
+
+			//deactivate user
+		function deactivateUser($data){
+			$db = con();
+			$sql = "UPDATE customers SET customer_status=? WHERE customer_id = ?";
+			$s = $db->prepare($sql);
+			$s->execute($data);
+			$db = null;
 		}
 ?>
 

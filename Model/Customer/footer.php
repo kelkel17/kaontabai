@@ -25,7 +25,10 @@
 <script src="../../assets/js/vendor/star-rating.min.js"></script>
 <script src="../../assets/js/vendor/bootstrap.min.js"></script>
 <script src="../../assets/js/wow/wow.min.js"></script>
-<script src="../../assets/js/jquery-ui.js"></script>
+
+<script src="../../assets/js/bootstrap-datepicker.js"></script>
+<!-- <script src="../../assets/js/bootstrap-datetimepicker.js"></script> -->
+<!-- <script src="../../assets/js/jquery-ui.js"></script> -->
 <script src="../../assets/js/jquery.timepicker.min.js"></script>
 <script src="../../assets/js/moment.js"></script>
 <script src="../../assets/js/sweetalert.min.js"></script>

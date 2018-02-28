@@ -65,7 +65,7 @@
                         <tr>
                             <?php 
 		    $id = $_SESSION['id'];
-        $sql = "SELECT * FROM schedules WHERE (restaurant_id LIKE '".$id."%')";
+        $sql = "SELECT * FROM schedules WHERE restaurant_id = '$id'";
         // $sql .= "ORDER BY sched_id desc";
         $con = con();
         $stmt = $con->prepare($sql);
@@ -114,15 +114,15 @@
             $flag = false;
             $flag2 = false;
 	    	foreach ($get as $r){ //($r is from $row just testing)
-				$date2 = date('Y-m-d g');
+				$date2 = date('Y-m-d g A');
 				$date3 = date('Y-m-d g:i');
 			    $date4 = date('Y-m-d');
-				$temp2 = date('Y-m-d g',strtotime($r['sched_sdate'].$r['sched_stime']));
+				$temp2 = date('Y-m-d g A',strtotime($r['sched_sdate'].$r['sched_stime']));
 				$temp3 = date('Y-m-d g:i',strtotime($r['sched_edate'].$r['sched_etime']));
 				$temp4 = date('Y-m-d',strtotime($r['sched_sdate']));
 				$asd = date('Y-m-d g',strtotime($r['sched_edate'].$r['sched_etime']));
                 
-                if($date2 >= $temp2 && $date2 <= $asd){
+                if($date2 >= $temp2 && $date2 < $asd){
                     $status = 1;
                     $sid = $r['sched_id'];
                     $dat = array($status,$sid);

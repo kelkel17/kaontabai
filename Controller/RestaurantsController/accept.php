@@ -25,7 +25,7 @@
 								$asd = $_SESSION['id'];
 								date_default_timezone_set("Asia/Manila");
 								$date2 = date('Y-m-d');
-								$sql2 = "SELECT SUM(r.no_of_guests) as guest, t.max_capacity, r.reservation_date, r.res_status FROM reservations as r, restaurants as t WHERE r.restaurant_id = t.restaurant_id AND r.restaurant_id = '$asd' AND r.reservation_id = '$id' GROUP BY r.reservation_date";
+								$sql2 = "SELECT SUM(r.no_of_guests) as guest, t.max_capacity, r.reservation_date, r.res_status, t.temp as temp FROM reservations as r, restaurants as t WHERE r.restaurant_id = t.restaurant_id AND r.restaurant_id = '$asd' AND r.reservation_id = '$id' GROUP BY r.reservation_date";
 								$stmt2 = $con->prepare($sql2);
 								$stmt2->execute();
 								$rsd = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -36,14 +36,14 @@
 											echo 'parihag adlaw';
 										if($r['res_status']=='Reserved'){ 
 												//echo 'parihag status';
-											if($r['max_capacity'] <= $r['guest'])
+											if($r['max_capacity'] <= $r['guest'] || $r['max_capacity'] == $r['temp'])
 												{
 													$status = 1;
 													$number = FLOOR(RAND(1000,50000));
 													$data = array($asd,$date5,$status,$number);
 													autoAdd2($data);
 												}
-												else if($r['max_capacity'] > $r['guest']){
+												else if($r['max_capacity'] > $r['guest'] || $r['max_capacity'] > $r['temp']){
 													//echo 'pero dili sila equal';
 													$get = getAdd(array($asd));
 													$status = 0;
@@ -94,7 +94,7 @@
 							$asd = $_SESSION['id'];
 								date_default_timezone_set("Asia/Manila");
 								$date2 = date('Y-m-d');
-								$sql2 = "SELECT SUM(r.no_of_guests) as guest, t.max_capacity, r.reservation_date, r.res_status FROM reservations as r, restaurants as t WHERE r.restaurant_id = t.restaurant_id AND r.restaurant_id = '$asd' AND r.reservation_id = '$id' GROUP BY r.reservation_date";
+								$sql2 = "SELECT SUM(r.no_of_guests) as guest, t.max_capacity, r.reservation_date, r.res_status, t.temp as temp FROM reservations as r, restaurants as t WHERE r.restaurant_id = t.restaurant_id AND r.restaurant_id = '$asd' AND r.reservation_id = '$id' GROUP BY r.reservation_date";
 								$stmt2 = $con->prepare($sql2);
 								$stmt2->execute();
 								$rsd = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -105,14 +105,14 @@
 										echo 'parihag adlaw';
 									if($r['res_status']=='Reserved'){ 
 											//echo 'parihag status';
-										if($r['max_capacity'] <= $r['guest'])
+											if($r['max_capacity'] <= $r['guest'] || $r['max_capacity'] == $r['temp'])
 											{
 												$status = 1;
 												$number = FLOOR(RAND(1000,50000));
 												$data = array($asd,$date5,$status,$number);
 												autoAdd2($data);
 											}
-											else if($r['max_capacity'] > $r['guest']){
+											else if($r['max_capacity'] > $r['guest'] || $r['max_capacity'] > $r['temp']){
 												echo 'pero dili sila equal';
 												$get = getAdd(array($asd));
 												$status = 0;

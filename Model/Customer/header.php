@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="../../assets/css/buttons.dataTables.min.css" />
     <link rel="stylesheet" href="../../assets/css/responsive.css" />
     <link rel="stylesheet" href="../../assets/css/star-rating.min.css" />
-    <link rel="stylesheet" href="../../assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap-datepicker.css" />
+    <!-- <link rel="stylesheet" href="../../assets/css/jquery-ui.css"> -->
     <link rel="stylesheet" href="../../assets/css/jquery.timepicker.min.css" />
     <link rel="shortcut icon" href="../../assets/img/logo.png">
 

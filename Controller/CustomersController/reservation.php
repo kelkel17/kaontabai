@@ -73,20 +73,22 @@ include '../dbconn.php';
 						addReservation($data);
 						$view =	getReservation(array($id));
 						foreach ($view as $row) {
-
+							
 							$get = $row['reservation_id'];
 							$sql2 = "INSERT INTO notifications(customer_id,restaurant_id,reservation_id) VALUES (?,?,?)";
 							$true = $con->prepare($sql2);
 							$true->execute(array($id,$myID,$get));
 							$res = getOwner(array($myID));
 							foreach($res as $ro) {
+								$newguest = $ro['temp'] + $guest;
+								updateTemp(array($newguest,$myID));
 								$cus = getCustomer(array($id));
 								foreach ($cus as $c) {
-								
-									$email = $ro['owner_email'];
-									$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
-									mail($email,'New Reservation',$message,'From: KaonTaBai!');
-									echo '<script>sweetMimitch('.$myID.','.$id.','.$number.'); </script>';
+
+										$email = $ro['owner_email'];
+										$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
+										mail($email,'New Reservation',$message,'From: KaonTaBai!');
+										echo '<script>sweetMimitch('.$myID.','.$id.','.$number.'); </script>';
 									}
 							}
 						}
@@ -97,6 +99,7 @@ include '../dbconn.php';
 	if(isset($_POST['edit'])){
 		//$id = $_SESSION["id"];
 		$date = $_POST['dat'];
+		$myID = $_POST['id'];
 		$id = $_POST['rid'];
 		$time = $_POST['tim'];
 		$guest = $_POST['guest'];
@@ -104,6 +107,8 @@ include '../dbconn.php';
 
 		$data = array($date,$time,$guest,$special,$id);
 		cancelReservation($data);
+		$newguest = $ro['temp'] + $guest;
+		updateTemp(array($newguest));
 		echo '<script>editSuccess('.$id.');</script>';
 
 	}	
@@ -147,6 +152,8 @@ include '../dbconn.php';
 								$true->execute(array($id,$myID,$get));
 								$res = getOwner(array($myID));
 								foreach($res as $ro) {
+									$newguest = $ro['temp'] + $guest;
+									updateTemp(array($newguest,$myID));
 									$cus = getCustomer(array($id));
 									foreach ($cus as $c) {
 									

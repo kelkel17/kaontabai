@@ -157,7 +157,7 @@
                                     <script>
                                         function getDate(restId) {
                                             // alert(restId);
-
+ 
                                             $('#bookNow' + restId).modal('show');
                                             $.ajax({
                                                 type: "GET",
@@ -170,8 +170,9 @@
 
                                                             if ($(this).val() > parseInt(data[i].max) && e.keyCode != 46 && e.keyCode != 8) {
                                                                 e.preventDefault();
-                                                                $(this).val(data[i].max);
-                                                                console.log($(this).val() > data[i].max);
+                                                                 var newvalue = data[i].max - data[i].temp;
+                                                                $(this).val(newvalue);
+                                                                console.log($(this).val() > newvalue);
                                                             }
                                                         });
                                                     }
@@ -182,19 +183,70 @@
                                                 url: "getdate.php?cid=" + restId,
                                                 dataType: 'json',
                                                 success: function(data) {
+                                                    // console.log(data);
                                                     var test2 = [];
                                                     var dateRange = [];
+                                                    var test = [];
                                                     for (var i in data) {
-                                                        test2.push(moment(data[i].dat).format('M-D-YYYY'),moment(data[i].dats).format('M-D-YYYY'));
+                                                      //test.push('data[i].stat');
+                                                     
+                                                    }
+                                                    if(data[i].stat == '0'){
+                                                    $('#datepicker').datepicker({
+                                                                format: 'MM dd, yyyy',
+                                                                startDate: '-0d',
+                                                                endDate: "+"+data[i].max+"d",
+                                                               // datesDisabled: test2,
+                                                        });
+                                                        console.log('ni agi');
+                                                    }else if(data[i].stat == '1'){
+                                                        
+                                                        console.log('wa ni agi');
+                                                        test2 = [moment(data[i].dat).format('M-D-YYYY'),moment(data[i].dats).format('M-D-YYYY')];
+                                                   
+                                                    //   test2.push(moment(data[i].dat).format('M-D-YYYY'),moment(data[i].dats).format('M-D-YYYY'));
+                                                    //     for (var d = new Date(data[i].dat); d <= new Date(data[i].dats); d.setDate(d.getDate() + 1)) {
+                                                    //     dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+                                                    // }
                                                        
-                                                    }
-                                                    for (var d = new Date(data[i].dat); d <= new Date(data[i].dats); d.setDate(d.getDate() + 1)) {
-                                                        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
-                                                    }
-
+                                                    // }
+                                                    // if(data[i].stat == 1){ 
+                                                    //             $('#datepicker').datepicker({
+                                                    //                 beforeShowDay: function (date) {
+                                                    //                     var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                                                    //                     return [dateRange.indexOf(dateString) == -1];
+                                                    //                 },
+                                                    //                 minDate: -0,
+                                                    //                 maxDate: "+"+data[i].max+"D",
+                                                    //                 changeMonth: true,
+                                                    //                 changeYear: true,
+                                                    //                // showAnim: "fold",
+                                                    //                 numberOfMonths: 1,
+                                                    //                 dateFormat: 'MM dd, yy'
+                                                    //             });
+                                                    //         }
+                                                            $('#datepicker').datepicker({
+                                                                format: 'MM dd, yyyy',
+                                                                startDate: '-0d',
+                                                                endDate: "+"+data[i].max+"d",
+                                                                // todayHighlight: true,
+                                                                beforeShowDay:  function (currentDate) {
+                                                                    var dayNr = currentDate.getDay();
+                                                                    var dateNr = moment(currentDate.getDate()).format('M-D-YYYY');
+                                                                        if (test2.length > 0) {
+                                                                            for (var i = 0; i < test2.length; i++) {                        
+                                                                                if (moment(currentDate).unix()==moment(test2[i],'M-D-YYYY').unix()){
+                                                                                    return false;
+                                                                            }
+                                                                            }
+                                                                        }
+                                                                        return true;
+                                                                    }
+                                                            });
+                                                        }
                                                     // use this array 
                                                     
-                                                    console.log(test2);
+                                                   // console.log(test2);
                                                     
                                                     
                                                             
@@ -219,21 +271,7 @@
                                                                     return [false, "", "Unavailable"];
                                                                 }
                                                             }  */
-                                                           if(data[i].test2 !== ''){ 
-                                                                $('#datepicker').datepicker({
-                                                                    beforeShowDay: function (date) {
-                                                                        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                                                                        return [dateRange.indexOf(dateString) == -1];
-                                                                    },
-                                                                    minDate: -0,
-                                                                    maxDate: "+"+data[i].max+"D",
-                                                                    changeMonth: true,
-                                                                    changeYear: true,
-                                                                   // showAnim: "fold",
-                                                                    numberOfMonths: 1,
-                                                                    dateFormat: 'MM dd, yy'
-                                                                });
-                                                            }/* else if(data[i].test2 == ''){
+                                                           /* else if(data[i].test2 == ''){
                                                                 $('#datepicker').datepicker({
                                                                     minDate: -0,
                                                                     maxDate: "+"+data[i].max+"D",
