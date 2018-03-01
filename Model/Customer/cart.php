@@ -197,16 +197,32 @@ foreach(array_combine($cartitems, $cartqty) as $key => $value){
                    $i++;
                  }?>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Total: <span>&#8369;</span>
-                                        <label id="total">
-                                            <?php echo number_format($total, 2); ?>
+                                    <th style="border:#ffff;"></th>
+                                    <th style="border:#ffff;" ></th>
+                                    <th style="border:#ffff;"></th>
+                                    <th style="border:#ffff;" ></th>
+                                    <th>Sub Total: <span style="float:right">&#8369;<?php $temp = number_format($total, 2) - (number_format($total, 2) * .12); echo $temp; ?></span> </th>
+                               </tr>
+                                <tr>
+                                <th style="border:#ffff;"></th>
+                                <th style="border:#ffff;" ></th>
+                                <th style="border:#ffff;"></th>
+                                <th style="border:#ffff;" ></th>
+                                    <th>VAT: <span style="float:right">12%</span> </th>
+                               </tr>         
+                                    <tr>
+                                    <th style="border:#ffff;"></th>
+                                    <th style="border:#ffff;" ></th>
+                                    <th style="border:#ffff;"></th>
+                                    <th style="border:#ffff;" ></th>
+                                   
+                                    <th>Total:
+                                        <label id="total" style="float:right;">
+                                        &#8369;<?php echo number_format($total, 2); ?>
                                         </label>
+                                        
                                         <input type="hidden" name="total" value=<?php echo $total?> ></th>
-                                </tr>
+                                        </tr>
 
                     </table>
                     <button type="submit" name="checkout" class="btn btn-primary hover">Checkout</button>
