@@ -58,7 +58,7 @@
                                           $date2 = date('Y-m-d');
                                          
                                           foreach ($view as $r) {
-                                           print_r($r);
+                                         //  print_r($r);
                                             $date = date('Y-m-d', strtotime($r['sched_sdate']));
                                             $date3 = date('Y-m-d', strtotime($r['sched_edate']));
                                             
@@ -99,7 +99,7 @@
                             </script>
                             <script>
                                         function getDate(restId,tableId,maxDate) {
-                                            alert(maxDate);
+ //                                           alert(maxDate);
  
                                             $('#bookNow' + restId).modal('show');
                                             $.ajax({

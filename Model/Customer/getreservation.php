@@ -2,7 +2,7 @@
     include('../../Controller/dbconn.php');
     $con = con();
     $id = $_SESSION['id'];
-    $sql = "SELECT reservation_number as num, reservation_date as dat, res_status as stat FROM reservations WHERE  customer_id = '$id' GROUP BY reservation_date";
+    $sql = "SELECT r.reservation_number as num, r.reservation_date as dat, r.res_status as stat, s.restaurant_name as name FROM reservations r, restaurants s WHERE r.restaurant_id = s.restaurant_id AND  r.customer_id = '$id'";
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

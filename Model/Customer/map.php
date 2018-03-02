@@ -5,8 +5,8 @@ var marker;
 
 function initMap() {
     var location = {
-        lat: 10.3157,
-        lng: 123.8854
+        lat: 10.297164,
+        lng: 123.894688
     };
     var iconBase = '../../Image/';
     var icons = {

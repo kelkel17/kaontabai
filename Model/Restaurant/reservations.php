@@ -375,7 +375,7 @@
                                 'cancel': openId,
                                 'table': tableId
                             },
-                            cache: false,
+                            cache: false, uy
                             success: function(response) {
                                 swal({
                                     title: "Succesfully Cancel the reservations",

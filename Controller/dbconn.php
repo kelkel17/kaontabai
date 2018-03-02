@@ -791,6 +791,17 @@ function islogged2(){
             
         }
 
+		function checkOrder($data){
+        	$con = con();
+        	$sql = "SELECT * FROM orders WHERE customer_id = ? AND restaurant_id = ?";
+        	$stmt = $con->prepare($sql);
+        	$stmt->execute($data);
+        	$view = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        	$con = null;
+
+        	return $view;
+        }
+
         function getOrders($data){
         	$con = con();
         	$sql = "SELECT * FROM orders WHERE customer_id = ? ORDER BY order_time DESC LIMIT 1";

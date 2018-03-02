@@ -359,17 +359,13 @@
                                         swal("Your reservation has been accepted your reservation number is " + data[i].num, {
                                             icon: "info"
                                         });
-                                    } else {
-                                        swal("Your reservation is now " + data[i].stat + " your reservation number is " + data[i].num, {
+                                    }
+                                    if (data[i].stat == 'Cancelled') {
+                                        swal("Your reservation has been cancelled your reservation number is " + data[i].num+". Please contact "+name+" for more information.", {
                                             icon: "info"
                                         });
                                     }
-                                } else
-                                swal("Your reservation has been accepted your reservation number is " + data[i].num, {
-                                            icon: "info"
-                                        });
-
-                            }
+                                }
                         });
                     });
                 </script>
