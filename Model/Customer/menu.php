@@ -153,6 +153,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                            <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -214,6 +216,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                             <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo2<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -266,7 +270,7 @@
                     <div class="col-sm-4 container">
                         <?php 
                         $filename = '../../Image/'.$id['m_image'].'';
-                        if($id['m_image'] == '' || !(file_exists($filename))){?>
+                        if($id['m_image'] == '' || !(file_exists($filename))){ ?>
                             <img src="../../Image/icon3.png" alt="blank" class="img-responsive thumbnail image" style="width: 100%; height: 300px;">
                             <?php }else{ ?>
                                 <img src="../../Image/<?php echo $id['m_image']?>" alt="<?php echo $id['m_name']?>" class="img-responsive thumbnail image" style="width: 100%; height: 300px;">
@@ -275,6 +279,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                             <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo3<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -337,6 +343,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                             <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo4<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -376,6 +384,7 @@
                     <?php } }  ?>
 
             </div>
+
             <div class="col-lg-12" id="div4">
                 <center>
                     <h2 style="color: black;">Combo Meals</h2></center>
@@ -396,31 +405,67 @@
                                     <div class="middle">
                                         <div class="text">
                                             <h4>Name: <?php echo $id['cm_name'];?> </h4>
-                                            <h5>Category: <?php echo $id['menu_id'];?> </h5>
+                                            <h5>Category: <?php echo $id['cm_id'];?> </h5>
                                             <div id="demo5<?php echo $id['cm_number'] ?>" class="collapse">
-                                                <h5>Description: <?php echo $id['desc']; ?> </h5>
+                                                <h5>Description: <?php echo $id['cm_desc']; ?> </h5>
                                             </div>
 
                                             <h5>Price: &#8369; <?php echo $id['price'];?> </h5>
+
                                             <button data-toggle="collapse" data-target="#demo5<?php echo $id['cm_number'] ?>" class="btn btn-primary"><i class="fa fa-info-circle"></i> Show Description</button>
 
-                                            <button data-toggle="modal" data-target="#book5<?php echo $id['cm_number'];?>" class="btn btn-primary"><i class="fa fa-cart-plus"></i> Add to cart</button>
+                                            <button data-toggle="modal" data-target="#book5<?php echo $id['cm_id'];?>" class="btn btn-primary"><i class="fa fa-cart-plus"></i> Add to cart</button>
                                         </div>
                                     </div>
 
                     </div>
-                    <div class="modal" id="book5<?php echo $id['menu_id'];?>">
+
+                    <div class="modal" id="book5<?php echo $id['cm_id'];?>">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="post" action="addtocart.php?id=<?php echo $id['menu_id'];?>&cid=<?php echo $Resid?>&pid=<?php echo $pid;?>&rid=<?php echo $rid;?>">
+                                <form method="post" action="addtocartcomb.php?id=<?php echo $id['cm_id'];?>&cid=<?php echo $Resid?>&pid=<?php echo $pid;?>&rid=<?php echo $rid;?>">
+
+                                    <input type="hidden" name="cim" value="<?php echo $id['cm_id']; ?>">
+                                     <input type="hidden" name="rid" value="<?php echo $rid; ?>">
+                                     <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+                                    <input type="hidden" name="cid" value="<?php echo $Resid; ?>">
 
                                     <div class="modal-header">
-                                        <?php $get = getMenu2(array($id['menu_id']));
+
+                                        <?php $get = getCombo3(array($id['cm_id']));
                                             foreach ($get as $row) {
                                         ?>
-                                            <h3>How many <?php echo $row['m_name']?> would you like to order?</h3>
+                                            <h3>How many <?php echo $row['cm_name']?> would you like to order?</h3>
                                             <?php } ?>
-                                                <input type="number" class="form-control" name="qtys" value="1">
+
+                                             <input type="number" class="form-control" name="qtys" value="1">
+                                                <br><br>
+                                        <label for="pname"> Customize <?php echo $id['cm_name'];?></label>
+                                                <br/>
+                                                    
+                                                    <?php 
+
+                                                    $id = $id['cm_id'];
+                                                    $sql = "SELECT *, cm.menu_id as combo_menu_id FROM combo_meals cm, menus m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = m.restaurant_id AND cm.cm_id = '$id'";
+                                                    $con = con();
+                                                    $stmt = $con->prepare($sql);
+                                                    $stmt->execute();
+                                                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                                    foreach($rows as $row)  
+                                                    {    
+                                                        $menu = getCombo2(array($id));
+                                                        $menu_id = explode(",",$row['combo_menu_id']);
+                                                        foreach($menu as $key => $asd){
+                                                            if(in_array($asd['menu_id'],$menu_id))
+                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'" checked>'.$asd['m_name'].'<br/>';
+                                                            else
+                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'">'.$asd['m_name'].'<br/>';
+                                                        }
+                                                    }
+                                                 ?>
+
+                                               
 
                                     </div>
                                     <div class="modal-footer">
@@ -433,9 +478,19 @@
                             </div>
                         </div>
                     </div>
-                    <?php }   ?>
+
+
+<?php } ?>
+
+
 
             </div>
+
+
+
+
+
+
 
         </div>
 

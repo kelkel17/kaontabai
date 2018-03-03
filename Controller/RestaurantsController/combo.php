@@ -101,7 +101,6 @@
 												echo '<script>warningAlert2();</script>';
 										else
 											   $data = array($id,$name,$desc,$price,$path,$number,$men);
-										
 							 }
 							 else
 							 echo '<script> errorAlert(); </script>';		 

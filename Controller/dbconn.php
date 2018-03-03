@@ -208,6 +208,15 @@ function islogged2(){
 			$con = null;
 		}
 
+		function customizeCombo($data)
+		{
+			$con = con();
+			$sql = "UPDATE combo_meals SET menu_temp = ? WHERE cm_id = ?";
+			$stmt = $con->prepare($sql);
+			$add = $stmt->execute($data);
+			$con = null;
+		}
+
 
 		
 
@@ -408,11 +417,11 @@ function islogged2(){
 		function addMenu($data,$image){
 			$con = con();
 			if(!empty($image))
-			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,m_image,menu_number) 
-					VALUES (?,?,?,?,?,?,?,?)";	
+			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,m_image,menu_number,pieces,volume) 
+					VALUES (?,?,?,?,?,?,?,?,?,?)";	
 			else
-			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,menu_number) 
-					VALUES (?,?,?,?,?,?,?)";			
+			$sql = "INSERT INTO menus(restaurant_id,m_name,m_desc,mc_id,m_category,m_price,menu_number,pieces,volume) 
+					VALUES (?,?,?,?,?,?,?,?,?)";			
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
@@ -437,9 +446,9 @@ function islogged2(){
 		function updateProduct($data,$image){
             $con = con();
             if(!empty($image))
-			     $sql = "UPDATE menus SET restaurant_id = ?, m_name = ?, m_desc = ?, mc_id = ?, m_category = ?, m_price = ?, m_image = ? WHERE menu_id = ?";
+			     $sql = "UPDATE menus SET restaurant_id = ?, m_name = ?, m_desc = ?, mc_id = ?, m_category = ?, m_price = ?, pieces = ?, volume = ?, m_image = ? WHERE menu_id = ?";
             else
-                 $sql = "UPDATE menus SET restaurant_id = ?, m_name = ?, m_desc = ?, mc_id = ?, m_category = ?, m_price = ? WHERE menu_id = ?";
+                 $sql = "UPDATE menus SET restaurant_id = ?, m_name = ?, m_desc = ?, mc_id = ?, m_category = ?, m_price = ?, pieces = ?, volume = ? WHERE menu_id = ?";
 			$stmt = $con->prepare($sql);
 			$update =$stmt->execute($data);
 			$con = null;
@@ -719,6 +728,18 @@ function islogged2(){
             $db = null;
         }
 
+          function getCom($id)
+        {
+            $db = con();
+
+            $sql = "SELECT * FROM combo_meals WHERE cm_id =?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array($id));
+            $menu = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $menu;
+            $db = null;
+        }
+
         function getCombo($data){
 			$con = con();
 			$sql = "SELECT * FROM combo_meals cm, menus m WHERE m.restaurant_id = ? GROUP BY m.menu_id";
@@ -743,6 +764,20 @@ function islogged2(){
             $db = null;
         }
 
+
+        	function getCombosample($data)
+        {
+            $db = con();
+
+            $sql = "SELECT * FROM combo_meals WHERE status = 'Available' AND menu_temp = NULL AND restaurant_id = ?  GROUP BY cm_number";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($data);
+            $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $menu;
+            $db = null;
+        }
+
+
         function selectMenu($id)
         {
             $db = con();
@@ -765,6 +800,52 @@ function islogged2(){
             return $menu;
             $db = null;
 		}
+
+		function getCombo2($data)
+        {
+            $db = con();
+
+            $sql = "SELECT * FROM combo_meals cm, menus m where cm_id = ? AND cm.restaurant_id=m.restaurant_id LIMIT 10";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($data);
+            $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $menu;
+            $db = null;
+		}
+
+
+		function getCombo3($data)
+        {
+            $db = con();
+
+            $sql = "SELECT * FROM combo_meals where cm_id = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($data);
+            $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $menu;
+            $db = null;
+		}
+
+		function sample($id)
+		{
+			  $sql = "SELECT *,cm.menu_id as id FROM combo_meals cm, menus m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = m.restaurant_id AND cm.cm_id = $id";
+			        $con = con();
+			        $stmt = $con->prepare($sql);
+			        $stmt->execute();
+			        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			        return $rows;
+		}
+
+		function sample2()
+		{
+			  $sql = "SELECT * FROM combo_meals cm, menus m WHERE cm.menu_id = m.menu_id AND cm.restaurant_id = m.restaurant_id LIMIT 5";
+			        $con = con();
+			        $stmt = $con->prepare($sql);
+			        $stmt->execute();
+			        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			        return $rows;
+		}
+
 		function getM($data)
         {
             $db = con();

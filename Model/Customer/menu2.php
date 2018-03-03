@@ -64,6 +64,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                            <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -102,6 +104,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                            <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo2<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -139,6 +143,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                            <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo3<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>
@@ -176,6 +182,8 @@
                                         <div class="text">
                                             <h4>Name: <?php echo $id['m_name'];?> </h4>
                                             <h5>Category: <?php echo $id['m_category'];?> </h5>
+                                            <h5>Pieces: <?php echo $id['pieces'];?> &nbsp; &nbsp; &nbsp;
+                                            Volume: <?php echo $id['volume'];?> </h5>
                                             <div id="demo4<?php echo $id['menu_id'] ?>" class="collapse">
                                                 <h5>Description: <?php echo $id['m_desc']; ?> </h5>
                                             </div>

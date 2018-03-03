@@ -56,6 +56,12 @@
                                 <center>Type</center>
                             </th>
                             <th>
+                                <center>Pieces</center>
+                            </th>
+                            <th>
+                                <center>Volume</center>
+                            </th>
+                            <th>
                                 <center>Image</center>
                             </th>
                             <th>
@@ -91,6 +97,8 @@
         echo '<td>'.substr($row['m_desc'], 0, 50).((strlen($row['m_desc']) > 50) ? '...' : '').'</td>';
         echo '<td><center>'.$row['mc_name'].'</center></td>';
         echo '<td><center>'.$row['m_category'].'</center></td>';
+        echo '<td><center>'.$row['pieces'].'</center></td>';
+        echo '<td><center>'.$row['volume'].'</center></td>';
         if($row['m_image'] != '')
           echo '<td><center><img src="../../Image/'.$row['m_image'].'" style="width:25px; height:25px;"></center></td>';
         else
@@ -198,6 +206,25 @@
                         <option value="Special">Special</option>
                      </select>   
                 </div>
+                 <div class="tab-pane">
+                        <label>Pieces</label>
+                       <input type="number" step="any" name="piece" id="ppiece" value="<?php echo $row['pieces'];?>" class="form-control">
+                    </div>
+                    <br/>
+                     <div class="tab-pane">
+                        <label>Volume</label>
+                        <select name="vol" id="volume" class="form-control">
+                            <option value="<?php echo $row['volume'];?>"><?php echo $row['volume'];?></option>
+                            <option value="50mL">50mL</option>
+                            <option value="100mL">100mL</option>
+                            <option value="200mL">200mL</option>
+                            <option value="300mL">300mL</option>
+                            <option value="1L">1 Litre</option>
+                            <option value="2L">2 Litre</option>
+                            <option value="3L">3 Litre</option>
+                            <option value="4L">4 Litre</option>
+                        </select>
+                    </div>
                         <div class="form-group">
                             <label for="pprice">Price</label>
                             <input type="number" step="any" value="<?php echo $row['m_price']; ?>" name="price" id="pprice" class="form-control" required>

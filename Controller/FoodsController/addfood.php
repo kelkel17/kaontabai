@@ -79,6 +79,8 @@ include '../dbconn.php';
 		$type = $_POST['testme'];
 		$number = FLOOR(RAND(100,1000));
 		$category = $_POST['category'];	
+		$pcs = $_POST['piece'];
+		$vol = $_POST['vol'];
 		$price = $_POST['price'];
 		$image = $_FILES['image']['name'];
 		$directory = "../../Image/";
@@ -99,10 +101,10 @@ include '../dbconn.php';
 					echo '<script>warningAlert();</script>';
 				else{
 						if(empty($path))
-							$data = array($id,$name,$desc,$category,$type,$price,$number);	
+							$data = array($id,$name,$desc,$category,$type,$price,$number,$pcs,$vol);	
 						else{
 							if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
-								$data = array($id,$name,$desc,$category,$type,$price,$path,$number);
+								$data = array($id,$name,$desc,$category,$type,$price,$path,$number,$pcs,$vol);
 							else
 								echo '<script>errorAlert2();</script>';
 						}	
@@ -119,6 +121,8 @@ include '../dbconn.php';
 		  $desc = $_POST['desc'];   
 		  $type = $_POST['testme2'];
 		  $category = $_POST['category']; 
+		  $pcs = $_POST['piece'];
+		 $vol = $_POST['vol'];
 		  $price = $_POST['price'];
 		  $myID = $_SESSION['id'];
 		  $image = $_FILES['image']['name'];
@@ -132,10 +136,10 @@ include '../dbconn.php';
 			   echo '<script>warningAlert();</script>';
 		  else{      
 				  if(empty($path))
-					  $data = array($myID,$name,$desc,$category,$type,$price,$id);  
+					  $data = array($myID,$name,$desc,$category,$type,$price,$pcs,$vol,$id);  
 				  else{
 					  	if(move_uploaded_file($_FILES['image']['tmp_name'], $directory.$path))
-						  $data = array($myID,$name,$desc,$category,$type,$price,$path, $id);
+						  $data = array($myID,$name,$desc,$category,$type,$price,$pcs,$vol,$path,$id);
 					  else
 						  echo '<script>errorUpdateAlert();</script>';
 				  }

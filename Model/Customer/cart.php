@@ -113,17 +113,23 @@
         <div class="w3-container w3-margin table-responsive">
             <h1>My Cart</h1>
             <?php 
-if(isset($_SESSION['qty']) && isset($_SESSION['cart']) && !empty($_SESSION['qty']) && !empty($_SESSION['cart'])){
-$items = $_SESSION['cart'];
-$cartitems = explode(",",$items);
-$qnty = $_SESSION['qty'];
-$cartqty = explode(",",$qnty);
-//echo $qnty;
-$total = 0;
-// $i = 0;
-// $quantity = 0;
-$price = array();
-?>
+        if(isset($_SESSION['qty']) && isset($_SESSION['cart']) && !empty($_SESSION['qty']) && !empty($_SESSION['cart']) || isset($_SESSION['qty2']) && isset($_SESSION['cart2']) && !empty($_SESSION['qty2']) && !empty($_SESSION['cart2']) ){
+        $items = $_SESSION['cart'];
+        $items2 = $_SESSION['cart2'];
+        $cartitems = explode(",",$items);
+        $cartitems2 = explode(",",$items2);
+        $qnty = $_SESSION['qty'];
+        $qnty2 = $_SESSION['qty2'];
+        $cartqty = explode(",",$qnty);
+        $cartqty2 = explode(",",$qnty2);
+        //echo $qnty;
+        $total = 0;
+        $total2 = 0;
+        // $i = 0;
+        // $quantity = 0;
+        $price = array();
+        $price2 = array();
+        ?>
 
                 <form method="post" action="purchase.php?cid=<?php echo $_GET['cid']; ?>">
                     <table class="table table-bordered">
@@ -142,18 +148,22 @@ $price = array();
                             </td>
                         </td>
                         <?php 
-  $i = 0;
-foreach(array_combine($cartitems, $cartqty) as $key => $value){
-
-  $item = getMenu($key);
-   $price[] = $item['m_price'];
-?>
+              $i = 0;
+            foreach(array_combine($cartitems, $cartqty) as $key => $value){
+              $item = getMenu($key);
+         
+               $price[] = $item['m_price'];
+             
+                if(!empty($item)){
+            ?>
                             <tr>
-
                                 <td>
                                     <a class="a">
-                                        <?php echo $item['m_name'];?>
+                                        <?php 
+                                         echo $item['m_name'];          
+                                         ?>
                                             <div><img src="../../Image/<?php echo $item['m_image'];?>" style="width: 200px; height: 150px;" /></div>
+                                        
                                     </a>
                                 </td>
                                 <td>
@@ -163,39 +173,129 @@ foreach(array_combine($cartitems, $cartqty) as $key => $value){
                                     <input type="hidden" name="rid" value="<?php echo $rid; ?>">
                                     <input type="hidden" name="qty[]" value="<?php echo $value; ?>">
 
-                                    <?php if(isset($_SESSION['cart'])){ ?>
+                                    <?php 
+                                    if(isset($_SESSION['cart'])){ ?>
                                         <a href="#" onclick="document.getElementById('quantity<?php echo $item['menu_id']; ?>').style.display='block'" class="w3-tooltip w3-border w3-padding" style="text-decoration:none">
                                             <?php echo $value; } ?>
 
                                                 <span class="w3-text w3-tag" style="position:absolute;left:0;bottom:24px">Edit</span>
                                         </a>
                                 </td>
-
                                 <td>
+                                    
                                     <p id="price<?php echo $i; ?>">&#8369;
                                         <?php echo $item['m_price'];?>
                                     </p>
+
                                 </td>
-                                <?php $test = $value * $item['m_price'];?>
+                                <?php
+                                 $test = $value * $item['m_price'];?>
                                     <td>
+
                                         <p id="price<?php echo $i; ?>">&#8369;
                                             <?php echo number_format($test, 2); ?>
                                         </p>
                                     </td>
 
                                     <td>
+
                                         <a href="deleteitem.php?itemID=<?php echo $i; ?>&cid=<?php echo $Resid; ?>&pid=<?php echo $cust_id;?>&rid=<?php echo $rid; ?>" class="w3-tooltip">
                                             <span class="w3-text w3-tag" style="position:absolute;left:0;bottom:18px">Remove</span>
                                             <i class="fa fa-trash w3-text-red"></i></a>
                                     </td>
+                            </tr>
+                            <?php }else{?>
 
+                            <tr>
+                                <td> 
+                                </td>
+                                <td> 
+                                </td>
+                                <td>
+                                </td>
+                                </td>
+                                <td>
+                              </td>
+                            </tr>
+                            <?php }
+              $o = 0;
+              foreach(array_combine($cartitems2, $cartqty2) as $key2 => $value2){
+              $item2 = getCom($key2);
+               $price2[] = $item2['price'];
+
+               if(!empty($item2)){
+               ?>
+                            <tr>
+                                <td>
+                                    <a class="a">
+                                        <?php 
+                                         echo $item2['cm_name'];          
+                                         ?>
+                                            <div><img src="../../Image/<?php echo $item['m_image'];?>" style="width: 200px; height: 150px;" /></div>
+                                        
+                                    </a>
+                                </td>
+                                <td>
+                                    <input type="hidden" name="mid[]" value="<?php echo $item['menu_id']; ?>">
+                                    <input type="hidden" name="resid" value="<?php echo $Resid;?>">
+                                    <input type="hidden" name="cid" value="<?php echo $cust_id; ?>">
+                                    <input type="hidden" name="rid" value="<?php echo $rid; ?>">
+                                    <input type="hidden" name="qty[]" value="<?php echo $value; ?>">
+
+                                    <?php 
+                                    if(isset($_SESSION['cart2'])) {?>
+                                             <a href="#" onclick="document.getElementById('quantity2<?php echo $item2['cm_id']; ?>').style.display='block'" class="w3-tooltip w3-border w3-padding" style="text-decoration:none">
+                                            <?php echo $value2; } ?>
+
+                                                <span class="w3-text w3-tag" style="position:absolute;left:0;bottom:24px">Edit</span>
+                                        </a>
+                                </td>
+                                <td>
+                                    
+                                    <p id="price<?php echo $i; ?>">&#8369;
+                                        <?php echo $item2['price'];?>
+                                    </p>
+
+                                </td>
+                                <?php
+                                 $test2 = $value2 * $item2['price'];?>
+                                    <td>
+
+                                        <p id="price<?php echo $i; ?>">&#8369;
+                                            <?php echo number_format($test2, 2); ?>
+                                        </p>
+                                    </td>
+
+                                    <td>
+
+                                         <a href="deleteitem2.php?itemID=<?php echo $i; ?>&cid=<?php echo $Resid; ?>&pid=<?php echo $cust_id;?>&rid=<?php echo $rid; ?>" class="w3-tooltip">
+                                            <span class="w3-text w3-tag" style="position:absolute;left:0;bottom:18px">Remove</span>
+                                            <i class="fa fa-trash w3-text-red"></i></a>
+                                    </td>
+                            </tr>
+                            <?php } else {
+                                ?>
+                                <tr>
+                                <td> 
+                                </td>
+                                <td> 
+                                </td>
+                                <td>
+                                </td>
+                                </td>
+                                <td>
+                              </td>
                             </tr>
 
-                            <?php 
-                   $initial = $value * $item['m_price'];
-                   $total = $total + $initial; 
+
+                  <?php } $initial = $value * $item['m_price'];
+                   $initial2 = $value2 * $item2['price'];
+                   $temp = $initial2 + $initial; 
+                   $total = $total + $temp;
                    $i++;
-                 }?>
+                 }
+
+             }?>
                                 <tr>
                                     <th style="border:#ffff;"></th>
                                     <th style="border:#ffff;" ></th>
@@ -225,6 +325,10 @@ foreach(array_combine($cartitems, $cartqty) as $key => $value){
                                         </tr>
 
                     </table>
+
+
+
+
                     <button type="submit" name="checkout" class="btn btn-primary hover">Checkout</button>
                 </form>
                 <!-- <form action="sample.php" method="POST">
@@ -258,6 +362,34 @@ foreach(array_combine($cartitems, $cartqty) as $key => $value){
                 </div>
             </div>
             <?php  $x++; } 
+
+             
+            $y = 0;
+             foreach(array_combine($cartitems2, $cartqty2) as $key => $value2){
+                $item2 = getCom($key);    
+            ?>
+            <div class="w3-modal" id="quantity2<?php echo $item2['cm_id']; ?>">
+                <div class="w3-modal-content" style="width:30%">
+                    <header class="w3-container w3-blue">
+                        <button type="button" onclick="document.getElementById('quantity2<?php echo $item2['cm_id']; ?>').style.display='none'" class="w3-display-topright w3-button"><span>&times;</span></button>
+                        <h3>Add more quantity</h3>
+                    </header>
+                    <div class="w3-container">
+                        <form action="#" method="post">
+                            <label>Quantity to buy: </label>
+                            <input type="number" name="quantity2" value="1" id="quantity" class="w3-input input">
+                            <input type="hidden" name="indexqty2" value="<?php echo $y; ?>">
+                    </div>
+                    <div class="w3-container w3-border w3-padding w3-right-align w3-margin-top">
+                        <button type="button" class="w3-btn w3-border" onclick="document.getElementById('quantity2<?php echo $item2['cm_id']; ?>').style.display='none'">Cancel</button>
+                        <button type="submit" name="update2" class="w3-btn w3-blue w3-right w3-border">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <?php  $y++; } 
+
+
 } else { ?>
 
                 <table class="table table-bordered">
@@ -303,6 +435,17 @@ foreach(array_combine($cartitems, $cartqty) as $key => $value){
         $cartqty[$indexqty] = $quantity; 
         $qnty = implode(",",$cartqty);
         $_SESSION['qty'] = $qnty;
+        echo "<script> window.location='cart.php?cid=$Resid&pid=$cust_id&rid=$rid&e=Checkout success&style=success&head=Well done!'; </script>"; 
+    } 
+
+    if(isset($_POST['update2'])){
+    $quantity = $_POST['quantity2'];
+    $indexqty = $_POST['indexqty2'];
+        $qnty = $_SESSION['qty2'];
+        $cartqty = explode(",",$qnty);
+        $cartqty[$indexqty] = $quantity; 
+        $qnty = implode(",",$cartqty);
+        $_SESSION['qty2'] = $qnty;
         echo "<script> window.location='cart.php?cid=$Resid&pid=$cust_id&rid=$rid&e=Checkout success&style=success&head=Well done!'; </script>"; 
     } 
 

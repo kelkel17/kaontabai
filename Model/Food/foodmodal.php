@@ -75,6 +75,26 @@
                             <option value="Special">Special</option>
                         </select>
                     </div>
+                    <br>
+                    <div class="tab-pane">
+                        <label>Pieces</label>
+                       <input type="number" step="any" name="piece" id="ppiece" class="form-control">
+                    </div>
+                    <br/>
+                     <div class="tab-pane">
+                        <label>Volume</label>
+                        <select name="vol" id="volume" class="form-control">
+                            <option value="" selected=""></option>
+                            <option value="50mL">50mL</option>
+                            <option value="100mL">100mL</option>
+                            <option value="200mL">200mL</option>
+                            <option value="300mL">300mL</option>
+                            <option value="1L">1 Litre</option>
+                            <option value="2L">2 Litre</option>
+                            <option value="3L">3 Litre</option>
+                            <option value="4L">4 Litre</option>
+                        </select>
+                    </div>
                     <br/>
                     <div class="tab-pane">
                         <label for="pprice">Price</label>

@@ -33,10 +33,10 @@ if (isset($_POST['carts'])) {
         
 
     $qnty = $_POST['qtys'];
-    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    if (isset($_SESSION['cart2']) && !empty($_SESSION['cart2'])) {
         //    unset($_SESSION['cart']);
         $ResId = $_GET['cid'];
-        $items = $_SESSION['cart'];
+        $items = $_SESSION['cart2'];
         $pid = $_GET['pid'];
         $rid = $_GET['rid'];
         $cartitems = explode(",", $items);
@@ -60,12 +60,12 @@ if (isset($_POST['carts'])) {
              $_SESSION['count'] = count($cartitems) + 1;
           echo '<script>alert("Successlly added a menu to cart."); window.location="menu.php?cid='.$ResId.'&pid='.$pid.'&rid='.$rid.'"; </script>';  */
 
-            $myQty = $_SESSION['qty'];
+            $myQty = $_SESSION['qty2'];
             //echo " qty before-".$myQty;
             $myQty.= ",".$qnty;
 
             echo " qty after-".$myQty;
-            $_SESSION["qty"] = $myQty;
+            $_SESSION["qty2"] = $myQty;
 
             // print_r($_SESSION['cart']);
             //echo "-";
@@ -77,9 +77,9 @@ if (isset($_POST['carts'])) {
             $ResId = $_GET['cid'];
             $custId = $_GET['pid'];
 
-            $_SESSION['cart'] = $items;
+            $_SESSION['cart2'] = $items;
             $quantity = explode(",", $qnty);
-            $qnty.= ",".$_SESSION['qty'];
+            $qnty.= ",".$_SESSION['qty2'];
             // $_SESSION['qty'] = $qnty;
             $_SESSION['count'] = count($cartitems) + 1;
             echo '<script>window.location="menu.php?cid='.$ResId.
@@ -94,9 +94,9 @@ if (isset($_POST['carts'])) {
         $item = $_GET['id'];
         $pid = $_GET['pid'];
         $rid = $_GET['rid'];
-        $_SESSION['cart'] = $item;
-        $_SESSION['qty'] = $qnty;
-        $_SESSION['count'] = count($item);
+        $_SESSION['cart2'] = $item;
+        $_SESSION['qty2'] = $qnty;
+        $_SESSION['count2'] = count($item);
         // echo $_SESSION['qty'];
         echo '<script>window.location="menu.php?cid='.$ResId.
         '&pid='.$pid.

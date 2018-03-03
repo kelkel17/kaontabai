@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2018 at 10:22 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.0.25
+-- Generation Time: Mar 03, 2018 at 03:28 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -50,7 +48,8 @@ INSERT INTO `admin` (`admin_id`, `admin_user`, `admin_pass`, `admin_name`) VALUE
 
 CREATE TABLE `combo_meals` (
   `cm_id` int(11) NOT NULL,
-  `menu_id` varchar(255) NOT NULL,
+  `menu_id` varchar(255) DEFAULT NULL,
+  `menu_temp` varchar(255) DEFAULT NULL,
   `restaurant_id` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `price` decimal(8,2) NOT NULL,
@@ -65,36 +64,36 @@ CREATE TABLE `combo_meals` (
 -- Dumping data for table `combo_meals`
 --
 
-INSERT INTO `combo_meals` (`cm_id`, `menu_id`, `restaurant_id`, `created`, `price`, `cm_desc`, `image`, `cm_name`, `cm_number`, `status`) VALUES
-(1, '13', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(2, '19', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(3, '20', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(4, '21', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(5, '22', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(6, '23', 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
-(7, '6', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(8, '13', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(9, '21', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(10, '22', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(11, '23', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(12, '24', 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
-(19, '2', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(20, '9', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(21, '18', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(22, '22', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(23, '23', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(24, '27', 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
-(29, '31,32,33', 3, '2018-02-20 22:24:51', '800.00', 'Casa Verde\'s Combo Meal 1', '1519165491img_4508.jpg', 'Combo Meal 1', 865, 'Available'),
-(30, '32', 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde\'s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
-(31, '33', 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde\'s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
-(32, '79', 13, '2018-02-25 07:15:16', '100.00', 'Here', '1519542916clock-symbol-icon-63652.png', 'Sample', 7052, 'Available'),
-(33, '79', 13, '2018-02-25 07:28:10', '300.00', 'Consist of 5 meals', '1519543690restaurant-512.png', 'Sample 2', 333, 'Available'),
-(34, '93,95,99', 15, '2018-02-25 12:38:26', '400.00', 'Tinulang Manok, Baked Scallops and Calamares', NULL, 'Combo Meal 1', 4007, 'Available'),
-(35, '98,100,101', 15, '2018-02-25 12:39:10', '400.00', 'Kinilaw, Spicy Scallops and Cordova Express', NULL, 'Combo Meal 2', 4497, 'Available'),
-(36, '102,104,111', 16, '2018-02-25 13:31:13', '800.00', 'Flat iron steak, Chorizo Squid with Banana Flambee', NULL, 'Combo Meal 1', 6889, 'Available'),
-(37, '103,106,108', 16, '2018-02-25 13:31:53', '400.00', 'Chicken Tartufo and Scallops with Cremebule', NULL, 'Combo Meal 2', 1732, 'Available'),
-(38, '66,67,68,77,78', 12, '2018-02-28 16:57:08', '235.00', 'TEst', NULL, 'Test1', 8508, 'Available'),
-(39, '38', 12, '2018-02-28 16:56:14', '235.00', 'Test2                                       ', NULL, 'Test1', 66, 'Available');
+INSERT INTO `combo_meals` (`cm_id`, `menu_id`, `menu_temp`, `restaurant_id`, `created`, `price`, `cm_desc`, `image`, `cm_name`, `cm_number`, `status`) VALUES
+(1, '1,2,3,4,5,6,7,8', '1,2,3,4,5,6,7,8', 1, '2018-03-03 14:24:56', '1528.00', '                                                    SAVE: 81 Pesos                                                ', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(2, '19', NULL, 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(3, '20', NULL, 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(4, '21', NULL, 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(5, '22', NULL, 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(6, '23', NULL, 1, '2018-02-17 08:45:07', '1528.00', 'SAVE: 81 Pesos', '1518857107salo-salo-1-2.jpg', 'Salo-Salo 1', 552, 'Available'),
+(7, '4,5,6', '4,5,6', 1, '2018-03-03 13:50:18', '1435.00', '                                                    Save: 74 Pesos                                                ', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(8, '13', NULL, 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(9, '21', NULL, 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(10, '22', NULL, 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(11, '23', NULL, 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(12, '24', NULL, 1, '2018-02-17 08:46:16', '1435.00', 'Save: 74 Pesos', '1518857176salo-salo-1-2.jpg', 'Salo-Salo 2', 149, 'Available'),
+(19, '1,2,3', '1,2,3', 1, '2018-03-03 13:47:20', '1380.00', '                                                    Save: 75 Pesos                                                ', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(20, '9', NULL, 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(21, '18', NULL, 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(22, '22', NULL, 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(23, '23', NULL, 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(24, '27', NULL, 1, '2018-02-17 08:48:20', '1380.00', 'Save: 75 Pesos', '1518857300salo-salo-3-4.jpg', 'Salo-Salo 4', 678, 'Available'),
+(29, '31,32,33', NULL, 3, '2018-02-20 22:24:51', '800.00', 'Casa Verde''s Combo Meal 1', '1519165491img_4508.jpg', 'Combo Meal 1', 865, 'Available'),
+(30, '32', NULL, 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde''s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
+(31, '33', NULL, 3, '2018-02-20 18:17:14', '800.00', 'Casa Verde''s Combo Meal 1', '151915063414700186347_bdab564c00_b.jpg', 'Combo Meal 1', 865, 'Available'),
+(32, '79', NULL, 13, '2018-02-25 07:15:16', '100.00', 'Here', '1519542916clock-symbol-icon-63652.png', 'Sample', 7052, 'Available'),
+(33, '79', NULL, 13, '2018-02-25 07:28:10', '300.00', 'Consist of 5 meals', '1519543690restaurant-512.png', 'Sample 2', 333, 'Available'),
+(34, '93,95,99', NULL, 15, '2018-02-25 12:38:26', '400.00', 'Tinulang Manok, Baked Scallops and Calamares', NULL, 'Combo Meal 1', 4007, 'Available'),
+(35, '98,100,101', NULL, 15, '2018-02-25 12:39:10', '400.00', 'Kinilaw, Spicy Scallops and Cordova Express', NULL, 'Combo Meal 2', 4497, 'Available'),
+(36, '102,104,111', NULL, 16, '2018-02-25 13:31:13', '800.00', 'Flat iron steak, Chorizo Squid with Banana Flambee', NULL, 'Combo Meal 1', 6889, 'Available'),
+(37, '103,106,108', NULL, 16, '2018-02-25 13:31:53', '400.00', 'Chicken Tartufo and Scallops with Cremebule', NULL, 'Combo Meal 2', 1732, 'Available'),
+(38, '66,67,68,77,78', NULL, 12, '2018-02-28 16:57:08', '235.00', 'TEst', NULL, 'Test1', 8508, 'Available'),
+(39, '38', NULL, 12, '2018-02-28 16:56:14', '235.00', 'Test2                                       ', NULL, 'Test1', 66, 'Available');
 
 -- --------------------------------------------------------
 
@@ -125,7 +124,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_mname`, `customer_lname`, `customer_addr`, `customer_phone`, `customer_email`, `customer_gender`, `customer_birthdate`, `customer_status`, `customer_password`, `customer_pic`, `date_created`) VALUES
 (1, 'Desiree', 'Petilla', 'Omapoy', 'Saint Bernard Southern Leyte', '09266942645', 'desiree@gmail.com', 'Female', '1997-09-21', 'Active', '12345', '', '2018-01-30 19:13:54'),
 (2, 'Francis Godwin', 'Margaja', 'Montealto', 'Balamban', '09234567', 'godwin@gmail.com', 'Male', '1997-02-13', 'Active', '12345', '151954335717842315_1267121283342741_1334223570_n.jpg', '2018-02-12 17:15:46'),
-(3, 'Mickale', 'Lapasanda', 'Saturre', 'Saint Bernard Southern Leyte2', '09165970601', 'saturre.mic2@gmail.com', 'Male', '2018-03-21', 'Active', '$2y$10$RsWXxdnk55yudr3C5PCIyeAYb2abLrx2aOvT7QL1NXPbY99eigR42', '1519846316Koala.jpg', '2018-02-28 18:10:26');
+(3, 'Mickale', 'Lapasanda', 'Saturre', 'Saint Bernard Southern Leyte2', '09165970601', 'saturre.mic2@gmail.com', 'Male', '2018-03-21', 'Active', '$2y$10$RsWXxdnk55yudr3C5PCIyeAYb2abLrx2aOvT7QL1NXPbY99eigR42', '1519846316Koala.jpg', '2018-02-28 18:10:26'),
+(4, 'Godwin', 'Margaja', 'Montealto', 'Aliwanay Balamban Cebu', '099674777532', 'godwinmontealto@gmail.com', 'Male', '2121-12-11', 'Active', '$2y$10$Z.EEPgeoGvfx.nm8qmBNNuWUjUt08dOTe104hLdAhSogarOKRo3cm', '', '2018-03-03 03:10:50');
 
 -- --------------------------------------------------------
 
@@ -203,124 +203,130 @@ CREATE TABLE `menus` (
   `m_status` varchar(255) NOT NULL DEFAULT 'Available',
   `m_price` decimal(8,2) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `menu_number` int(255) NOT NULL
+  `menu_number` int(255) NOT NULL,
+  `pieces` varchar(255) DEFAULT NULL,
+  `volume` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menus`
 --
 
-INSERT INTO `menus` (`menu_id`, `mc_id`, `restaurant_id`, `m_name`, `m_desc`, `m_category`, `m_image`, `m_status`, `m_price`, `created`, `menu_number`) VALUES
-(1, 2, 1, 'KUYA J FRUIT SHAKE SPECIAL', '', 'Shake', '1518853428Kuya-J-Fruit-Shake-Special-SM-Megamall-Mandaluyong.jpg', 'Available', '95.00', '2018-02-20 16:05:58', 788),
-(2, 1, 1, 'KUYA J GRILLED SCALLOPS', 'Ang all-time favorite grilled scallops na puno ng cheese, garlic, butter topping.', 'Appetizer', '1518853532Grilled-Scallops-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '245.00', '2018-02-17 07:45:32', 593),
-(3, 1, 1, 'Mangga Tuna Salad', 'A plate of crisp lettuce leaves, ripe mango slices, and tuna flakes. It\'s definitely buffer in between eating Crispy Pata and Kare-Kare!', 'Soup/Vegetables', '1518855042Mangga-Tuna-Salad-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 08:10:42', 253),
-(4, 1, 1, 'KUYA J LUMPIA PRESKO', 'SautÃ©ed crabmeat and bamboo shoots filling rolled in malunggay-infused wrapper with sweet garlic sauce.', 'Soup/Vegetables', '1518855149Lumpia-Presko-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '105.00', '2018-02-17 08:12:29', 294),
-(5, 1, 1, 'CHORIZO DINAMITAS', 'Deep-fried pastry wrapped jalapeÃ±os with Cebu chorizo and cheddar cheese.', 'Appetizer', '1518855202Chorizo-Dinamitas-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '225.00', '2018-02-17 08:13:22', 258),
-(6, 1, 1, 'PANCIT CANTON', 'Generous amounts of tender pork meat, shrimp, squid and squid balls na hinalo sa stir-fried egg noodles.', 'Noodles/and/Rice', '1518855239Pancit-Canton-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 08:13:59', 932),
-(7, 1, 1, 'DANGGIT RICE', 'Sinangag na dinagdagan ng danggit bits, oil, chives at fried danggit.', 'Noodles/and/Rice', '1518855267Danggit-Rice-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '195.00', '2018-02-17 08:14:27', 484),
-(8, 1, 1, 'HUMBINAGOONGAN RICE PLATTER', 'Sinangag with bagoong na topped with pork humba meat, green mangoes, bell peppers and red onions.', 'Appetizer', '1518854309Humba-Binagoongan-Rice-Platter-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '225.00', '2018-02-17 07:58:29', 688),
-(9, 1, 1, 'PINAKBET', 'Kuya J version of the Filipino favorite gulay dish na carefully cooked para yummy and healthy.', 'Soup/Vegetables', '1518854349Pinakbet-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 07:59:09', 294),
-(10, 1, 1, 'GRILLED TUNA BELLY', 'Classic inihaw na tuna belly marinated Filipino-style with soy sauce and calamansi.', 'Sizzlers/Grilled', '1518854388Grilled-Tuna-Belly-in-Chili-Sauce-from-Kuya-J-Restaurant-in-SM-Megamall-Mandaluyong.jpg', 'Available', '350.00', '2018-02-17 07:59:48', 404),
-(11, 1, 1, 'POCHERO BULALO TAGALOG', 'Slow-cooked beef shanks in rich savory broth with mais, saging na saba, kamote, pechay, at Baguio beans.', 'Soup/Vegetables', '1518854512Pochero-Bulalo-Tagalog-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '395.00', '2018-02-17 08:01:52', 374),
-(12, 1, 1, 'SIZZLING SISIG WITH EGG', 'The all-time Filipino favorite sizzling food! Crispy and crumbly chopped pork belly na hot na hot sa sarap.', 'Sizzlers/Grilled', '1518854557Sizzling-Sisig-with-Egg-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '235.00', '2018-02-17 08:02:37', 103),
-(13, 1, 1, 'KUYA J CRISPY PATA', 'Ang specialty ni Kuya J! Deep-fried crispy pork skin with tender juicy pata meat. - Regular', 'Pork', '1518854913Crispy-Pata-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '549.00', '2018-02-17 08:08:33', 753),
-(14, 3, 1, 'KUYA J TABLEA COFFEE FLAN', 'Batangas tablea flavored flan with coffee caramel topped with dried coconut sprinkles and cream.', 'Special', '1518854963Tablea-Coffee-Flan-Dessert-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '85.00', '2018-02-17 08:09:23', 881),
-(15, 3, 1, 'KUYA J MANGO PANDAN', 'Ang classic panghimagas na favotire ni Kuya J! Creamy mango at pandan topped with pulled sugar.', 'Special', '1518855095Mango-Pandan-and-Cebuan-Mangga-Cheesecake-Desserts-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '85.00', '2018-02-17 08:11:35', 562),
-(16, 3, 1, 'KUYA J UBE HALO-HALO ESPESYAL', 'Milky-smooth, ube-flavored ice na may katakam-takam na sangkap, topped with homemade leche flan, sprinkled with crunchy cornflakes, and drizzled with sweet ube cream.', 'Halo-Halo', '1518855200maxresdefault.jpg', 'Available', '109.00', '2018-02-17 08:13:20', 493),
-(17, 1, 1, 'CRISPY BEEF TADYANG', 'Deep-fried tender beef na crispy on the outside and moist on the inside at pinasarap ng chili tuba sauce.', 'Beef', '1518855301ee2b9e7177b85ad75bde53530209a712.jpg', 'Available', '325.00', '2018-02-17 08:15:01', 772),
-(18, 1, 1, 'KUYA J ROAST CHICKEN', 'Roasted chicken na may sweet & smoky barbecue flavor na surefire hit sa handaan.', 'Chicken', '1518855537Roasted_Chix20171211-25618-1pygkfn.jpg', 'Available', '455.00', '2018-02-17 08:18:57', 960),
-(19, 1, 1, 'Chicken Halang-Halang', 'Chicken cooked tinola-style na may added creaminess of coconut milk and extra kick of spiciness ng green chili peppers.', 'Chicken', '1518857030HalangHalang640.jpg', 'Available', '285.00', '2018-02-17 08:43:50', 186),
-(20, 1, 1, 'CHOPSUEY', 'Ang all-time favorite Filipino vegetable dish! Stir-fried vegetables with pork meat and chicken atay.', 'Soup/Vegetables', '1518857115img_5139.jpg', 'Available', '205.00', '2018-02-17 08:45:15', 916),
-(21, 1, 1, 'Sinigang na Bangus', 'Home-cooked sinigang na bangus served with green vegetables.', 'Soup/Vegetables', '1518857175IMG_5949.JPG', 'Available', '265.00', '2018-02-17 08:46:15', 180),
-(22, 2, 1, 'ICED TEA PITCHER', '', 'Tea', '1518857242kuya-j.jpg', 'Available', '125.00', '2018-02-17 08:47:22', 617),
-(23, 1, 1, 'Plain Rice', 'PLAIN RICE', 'Noodles/and/Rice', '1518857324parboiled-rice-for-polow-1.jpg', 'Available', '45.00', '2018-02-17 08:48:44', 856),
-(24, 1, 1, 'AMPALAYA CON CARNE', 'Stir-fried ampalaya and tender beef strips seasoned in thick, brown tasty sauce.', 'Soup/Vegetables', '1518857425IMG_3888.jpg', 'Available', '210.00', '2018-02-17 08:50:25', 131),
-(25, 1, 1, 'BICOL EXPRESS', 'Ang sikat na Bicol dish ala Kuya J! Ginisang karneng baboy with chillies, spices, and rich coconut cream.', 'Pork', '1518857504Bicol-Express.png', 'Available', '280.00', '2018-02-17 08:51:44', 116),
-(26, 1, 1, 'LUMPIA PRITO', 'Fried seasoned pork-filled spring rolls na pinasarap ng Kuya J dipping sauce.', 'Appetizer', '1518857629Filipino-Lumpia-Style-Pork-and-Shrimp-Spring-Rolls.jpg', 'Available', '175.00', '2018-02-17 08:53:49', 570),
-(27, 1, 1, 'SINIGANG NA BABOY', 'Classic pork sinigang na sakto sa asim at sobra sa sarap.', 'Soup/Vegetables', '15188569660124 015.JPG', 'Available', '270.00', '2018-02-17 08:42:46', 465),
-(28, 2, 1, 'CUCUMBER SHAKE', '', 'Shake', '1518857479KUYA J RESTAURANT 14.jpg', 'Available', '95.00', '2018-02-17 08:51:19', 397),
-(29, 2, 1, 'WATERMELON SHAKE', '', 'Shake', '151885751520150322_115256.jpg', 'Available', '95.00', '2018-02-17 08:51:55', 969),
-(30, 3, 1, 'KUYA J MANGO PANDAN', 'Ang classic panghimagas na favotire ni Kuya J! Creamy mango at pandan topped with pulled sugar.', 'Special', '1518857625Untitled.png', 'Available', '85.00', '2018-02-17 08:53:45', 856),
-(31, 1, 3, 'BrianÊ¼s Ribs', 'Once you taste me, youâ€™ll never forget meâ€ Our best seller! Baked pork ribs with a sweet, tangy piquet sauce served with rice, corn and carrots.', 'Pork', '1518888293Brians-Back.jpg', 'Available', '228.00', '2018-02-17 17:24:53', 211),
-(32, 1, 3, 'Peter\'s Pork Steak', 'Grilled pork steak, lightly seasoned and served with vegetable medley and harvest rice', 'Sizzlers/Grilled', '1518888830P1020631+copy.jpg', 'Available', '228.00', '2018-02-17 17:33:50', 602),
-(33, 1, 3, 'Roasted Seasoned Chicken', 'Chicken quarter spiced with our secret spices, roasted and served with mashed potato and vegetable medley', 'Chicken', '1518889306Brians-Back.jpg', 'Available', '188.00', '2018-02-17 17:41:46', 504),
-(34, 1, 3, 'Chicken Fried Chicken', 'Battered chicken breast fillet, lightly fried and topped with cream gravy and served with mashed potatoes and Vegetable medley.', 'Chicken', '1518889442thumb_600.jpg', 'Not Available', '188.00', '2018-02-20 21:46:14', 730),
-(35, 1, 3, 'David Dean\'s Tenderloin', 'Some like me rare. Others like me medium but itâ€™s up to you if you like me done well. Single USDA steak on top of a mound of mashed potatoes and topped with cheese. Served with brown sauce and garnished with fried onions and roasted almonds', 'Beef', '1518889531Casa-Verde_Ayala-Terraces_Cebu_3.JPG', 'Available', '235.00', '2018-02-17 17:45:31', 481),
-(36, 1, 3, 'Jon Jay\'s Steak and Pasta', 'Youâ€™ll need a fork and knife to finish us both. Marinated USDA steak served with brown sauce and a side of spaghetti noodles sautÃ©ed in olive oil and garlic.', 'Pork', '1518889636casaverdejonjayssteaknpasta.jpg', 'Available', '235.00', '2018-02-17 17:47:16', 551),
-(37, 1, 3, 'Tricia ala Pobre', 'Grilled fish fillet topped with garlic bits together with rice and vegetable medley.', 'Fish', '15188907449215746753_d405783493_b.jpg', 'Available', '178.00', '2018-02-17 18:05:44', 795),
-(38, 1, 3, 'Ting-Tingâ€™s Tavern Shrimp', 'Item\r\nTing-Tingâ€™s Tavern Shrimp\r\nEight would be great if you ate â€¦..Delicious butterflied and lightly crusted in breadcrumbs and fried â€˜til golden. Served with our own tartar sauce paired with harvest rice and seasoned vegetables.', 'Fish', '1518890793thumb_600 (1).jpg', 'Available', '198.00', '2018-02-17 18:06:33', 648),
-(39, 1, 3, 'Rice', '', 'Noodles/and/Rice', '1518890892KERALA-MEALS-PLAIN-RICE-WHITE.jpg', 'Available', '35.00', '2018-02-17 18:08:12', 996),
-(40, 3, 3, 'Death by Chocolate', 'This dessert is to die for- chocolate and nutty rocky road ice cream mixed with chocolate bits on a bed of chocolate cookie crust. Drizzled with chocolate syrup.', 'Ice Cream', '1518890985b4ea47c84ed4489ec4033bae476c0777.jpg', 'Available', '158.00', '2018-02-17 18:09:45', 873),
-(41, 3, 3, 'Bliss O\' Berry', 'A one of a kind cheesecake that literally melts in your mouth. Home-made ice cream based cheesecake paired with strawberry compote.', 'Special', '1518891049download (1).jpg', 'Available', '218.00', '2018-02-17 18:10:49', 118),
-(42, 3, 3, 'Victorâ€™s Peak', 'Height does matter , finishing me will be harder. Peanut butter cookie bits, chopped nuts, chocolate fudge and peanut butter layered in chocolate and vanilla ice cream on top of a chocolate cookie crust. ', 'Special', '1518891094casa5.jpg', 'Available', '240.00', '2018-02-17 18:11:34', 727),
-(43, 3, 3, 'Lauren\'s Lava', 'Some say Iâ€™m cold, but handle me with care coz Iâ€™m hot to holdâ€¦ Chocolate cake filled with oozing chocolate lava. Topped with vanilla ice cream and covered in a crunchy chocolate shell. ', 'Special', '1518891174download (2).jpg', 'Available', '155.00', '2018-02-17 18:12:54', 389),
-(44, 2, 3, 'Iced Tea', 'Serving\r\nGlass 40.00 Pitcher 125.00 Bottomless 65.00', 'Tea', '1518891254download (3).jpg', 'Available', '125.00', '2018-02-17 18:14:14', 965),
-(45, 2, 3, 'Juice', 'Mango Pineapple Watermelon Pineapple-Orange Four Seasons Calamansi\r\n', 'Juice', '1518891419Fruit-Juices.jpg', 'Available', '80.00', '2018-02-17 18:16:59', 414),
-(46, 2, 3, 'John\'s Mix', 'Orange and pineapple juice mixed with Sprite and grenadine', 'Juice', '1518891465thumb_600 (3).jpg', 'Available', '75.00', '2018-02-17 18:17:45', 498),
-(47, 3, 3, 'Milky Way', 'The biggest milkshake in town! Imagine a large chocolaty shake good for you and your partner. Best served with Big Bang Burger. Limited! Please ask your server for its availability.', 'Special', '1518891537casa verde milkyway.jpg', 'Available', '298.00', '2018-02-17 18:18:57', 853),
-(48, 1, 3, 'The Big Bang Burger', '9-inch burger topped with onions, tomatoes, lettuce, mayo, American cheese on a sesame-seed bun. Sharing recommended.', 'Appetizer', '1518891589photo-1.jpg', 'Available', '408.00', '2018-02-17 18:19:49', 456),
-(49, 1, 3, 'Bacon Cheese & Mushroom', 'Juicy beef patty topped with white cheese, bacon & mushroom', 'Appetizer', '151889165913315257_10154167014738774_879608071545030221_n20171211-25618-aew776.jpg', 'Available', '198.00', '2018-02-17 18:20:59', 548),
-(50, 1, 3, 'Seafood Carbonara', 'A must try dish! Treasure from the sea- shrimps and squid in rich creamy white sauce.', 'Soup/Vegetables', '15188917253580712221_c66036cc95_z.jpg', 'Available', '188.00', '2018-02-17 18:22:06', 989),
-(51, 1, 3, 'Victoria\'s Secret Spaghetti', 'Do you want to know my secret? Home-made meat sauce topped with oozing cheese. A treat for the young and old.', 'Noodles/and/Rice', '1518891813tumblr_inline_n2sbxj45z51riyq8k.jpg', 'Available', '160.00', '2018-02-17 18:23:33', 751),
-(52, 1, 11, 'Baked Scallops (seasonal)', '', 'Appetizer', '1519116890Baked Scallops copy.jpg', 'Available', '275.00', '2018-02-20 08:54:50', 580),
-(53, 1, 11, 'Calamares', '', 'Appetizer', '1519116921calamares.jpg', 'Available', '199.00', '2018-02-20 08:55:21', 406),
-(54, 1, 11, 'Chichabits', '', 'Appetizer', '1519117006chichabits.jpg', 'Available', '255.00', '2018-02-20 08:56:46', 217),
-(55, 1, 11, 'Chicken Lollipop', '', 'Appetizer', '1519117047chicken-lollipop.jpg', 'Available', '195.00', '2018-02-20 08:57:27', 473),
-(56, 1, 11, 'Lechon Kawali', '', 'Pork', '1519117189lechon kawai.jpg', 'Available', '275.00', '2018-02-20 08:59:49', 553),
-(57, 1, 11, 'Sizzling Gambas', '', 'Sizzlers/Grilled', '1519117268sizzling gambas.jpg', 'Available', '283.00', '2018-02-20 09:01:08', 368),
-(58, 1, 11, 'Inihaw na Liempo', '', 'Pork', '1519117416pork liempo.jpg', 'Available', '203.00', '2018-02-20 09:03:36', 294),
-(59, 1, 11, 'Inihaw na Pusit', '', 'Sizzlers/Grilled', '1519117441inihaw na pusit.jpg', 'Available', '355.00', '2018-02-20 09:04:01', 143),
-(60, 1, 11, 'Inihaw na Manok', '', 'Sizzlers/Grilled', '1519117522inihaw na manok.jpg', 'Available', '255.00', '2018-02-20 09:05:22', 964),
-(61, 1, 11, 'Chicken Chicharon Skin', '', 'Chicken', '1519117568chicken chicharon skin.jpg', 'Available', '155.00', '2018-02-20 09:06:08', 129),
-(62, 1, 11, 'Beef Kare-kare', '', 'Beef', '1519117622kare kare.jpg', 'Available', '355.00', '2018-02-20 09:07:02', 940),
-(63, 1, 11, 'Sinigang na Baboy', '', 'Pork', '1519117648sinangag na baboy.jpg', 'Available', '280.00', '2018-02-20 09:07:28', 156),
-(64, 3, 11, 'Banana Caramel', '', 'Special', '1519117819the-banana-caramel-dessert.jpg', 'Available', '135.00', '2018-02-20 09:10:19', 327),
-(65, 2, 3, 'test', 'asdasdsa', 'Beer', NULL, 'Available', '23.00', '2018-02-20 17:00:03', 780),
-(66, 1, 12, 'SOPA DE AJO', 'bone broth, slow cooked egg', 'Appetizer', NULL, 'Available', '150.00', '2018-02-20 20:29:53', 157),
-(67, 1, 12, 'TURKISH EGGS', 'garlic, yogurt, harissa, sourdough', 'Appetizer', NULL, 'Available', '150.00', '2018-02-20 20:31:56', 424),
-(68, 1, 12, 'EGGPLANT', '& honey chips', 'Soup/Vegetables', NULL, 'Available', '150.00', '2018-02-20 20:33:57', 582),
-(69, 1, 12, 'CHORIZO', 'with sourdough', 'Appetizer', NULL, 'Available', '270.00', '2018-02-20 20:34:17', 508),
-(70, 1, 12, 'CALAMARES', 'fried squid, aioli, pickled charred espada', 'Appetizer', NULL, 'Available', '340.00', '2018-02-20 20:34:31', 848),
-(71, 1, 12, 'PULPO', 'potato, adobo', 'Appetizer', NULL, 'Available', '220.00', '2018-02-20 20:34:49', 649),
-(72, 1, 12, 'RUSA', 'ensaladilla, scallops', 'Appetizer', NULL, 'Available', '160.00', '2018-02-20 20:36:37', 296),
-(73, 1, 12, 'MORCILLA', 'qual eggs, red pepper', 'Appetizer', NULL, 'Available', '210.00', '2018-02-20 20:36:52', 116),
-(74, 1, 12, 'LAMB', 'harissa spices, eggplant puree', 'Appetizer', NULL, 'Available', '200.00', '2018-02-20 20:37:09', 621),
-(75, 3, 12, 'CREMA CATALANA CON MANGO', 'custard, burnt sugar, mango', 'Special', NULL, 'Available', '200.00', '2018-02-20 20:37:44', 973),
-(76, 3, 12, 'TARTA DE QUESO', 'cheesecake', 'Cake', NULL, 'Available', '240.00', '2018-02-20 20:38:00', 302),
-(77, 2, 12, 'NO. 9', 'our signature drink. Light rum, calamansi', 'Wine', NULL, 'Available', '150.00', '2018-02-20 20:39:10', 333),
-(78, 2, 12, 'EL MEXICANO', 'espresso, milk, coffee liquor, tequila', 'Wine', NULL, 'Available', '200.00', '2018-02-20 20:39:39', 905),
-(80, 1, 14, 'Beetroot salad', 'goatâ€™s milk ricotta, tzatziki, guava gel, orange garam masala vinaigrette', 'Appetizer', '1519552402DSCF8610-768x512.jpg', 'Available', '270.00', '2018-02-25 09:53:22', 988),
-(81, 1, 14, 'Tomato Sriracha Soup', 'Spiced Bleack Beans, Chorizo [included in lunch set]', 'Soup/Vegetables', '1519552464DSCF8619.jpg', 'Available', '200.00', '2018-02-25 09:54:24', 263),
-(82, 1, 14, 'Scallion', 'USDA ribeye, house pickled slaw,  chili bean aiolo, honey glazed peanuts', 'Appetizer', '1519552493DSCF8617-768x467.jpg', 'Available', '380.00', '2018-02-25 09:54:53', 727),
-(83, 1, 14, 'Fish Taco', 'crispy fish skin, spicy glazed tuna, pear, sesame\r\n', 'Fish', '1519552516DSCF8608-665x435.jpg', 'Available', '320.00', '2018-02-25 09:55:16', 738),
-(84, 1, 14, 'Belly Chips', 'Pork Belly, Nuoc Cham', 'Pork', '1519552548DSCF8603-768x512.jpg', 'Available', '190.00', '2018-02-25 09:55:48', 779),
-(85, 1, 14, 'Glazed Salmon', 'Sushi rice cake, bokchoy, teriyaki', 'Fish', '1519552572DSCF8630-768x458.jpg', 'Available', '590.00', '2018-02-25 09:56:12', 972),
-(86, 1, 14, 'Duck Confit', 'soy bean cassoulet, strawberry glazed cabbage, cilantro', 'Appetizer', '1519552612DSCF8628-768x512.jpg', 'Available', '490.00', '2018-02-25 09:56:52', 859),
-(87, 1, 14, 'Braised Shortrib', 'cornbread puree, braised shallot, beech mushroom, demi glaze', 'Beef', '1519552636DSCF8653-768x512.jpg', 'Available', '950.00', '2018-02-25 09:57:16', 848),
-(88, 1, 14, 'Poached Red Snapper', 'Coconut rice, banana puree, gochujang foam', 'Noodles/and/Rice', '1519552731DSCF8652-768x512.jpg', 'Available', '450.00', '2018-02-25 09:58:51', 922),
-(89, 1, 14, 'Charred Octopus', 'Squash risotto, grilled grapefruit, romesco', 'Fish', '1519552777DSCF8644-768x512.jpg', 'Available', '450.00', '2018-02-25 09:59:37', 786),
-(90, 1, 14, 'Pork Pork Pork', 'grilled apple puree, sauce chasseur, braised cabbage, shiitake risotto', 'Pork', '1519552802DSCF8665-768x512.jpg', 'Available', '650.00', '2018-02-25 10:00:02', 667),
-(91, 3, 14, 'â€œPottedâ€ Chocolate Tiramisu', 'sabayon, crunchy hazelnut meringue, coffee sponge, chocolate sand, strawberry gelee, vanilla sauce', 'Ice Cream', '1519552834DSCF8679-768x512.jpg', 'Available', '240.00', '2018-02-25 10:00:35', 612),
-(92, 3, 14, 'Sizzling Caramel & Banana plate', '', 'Special', '1519552892DSCF8683-768x512.jpg', 'Available', '250.00', '2018-02-25 10:01:32', 218),
-(93, 1, 15, 'Tinulang Manok', '', 'Soup/Vegetables', '1519561992IMG_0122.jpg', 'Available', '290.00', '2018-02-25 12:33:12', 213),
-(94, 1, 15, 'Talaba', '', 'Appetizer', '1519562032wpid-dsc_04301.jpg', 'Available', '145.00', '2018-02-25 12:33:52', 909),
-(95, 1, 15, 'Baked Scallops', '', 'Appetizer', '1519562053lantawduma-21.jpg', 'Available', '150.00', '2018-02-25 12:34:13', 433),
-(96, 1, 15, 'Sisig', '', 'Pork', '1519562076111.jpg', 'Available', '140.00', '2018-02-25 12:34:36', 589),
-(97, 1, 15, 'Sinuglaw', '', 'Appetizer', '1519562115img_1175.jpg', 'Available', '180.00', '2018-02-25 12:35:15', 370),
-(98, 1, 15, 'Kinilaw', '', 'Appetizer', '1519562141lantaw-restaurant.jpg', 'Available', '175.00', '2018-02-25 12:35:41', 511),
-(99, 1, 15, 'Calamares', '', 'Appetizer', '1519562159calamari at Lantaw sa SRP Restaurant in Cebu City, Philippines.jpg', 'Available', '240.00', '2018-02-25 12:35:59', 826),
-(100, 1, 15, 'Spicy Scallops', '', 'Appetizer', '1519562206Spicy-scallops-Lantaw-Floating-Native-Restaurant.jpg', 'Available', '160.00', '2018-02-25 12:36:46', 697),
-(101, 1, 15, 'Cordova Express', '', 'Appetizer', '1519562231lantaw-2-native-restaurant.jpg', 'Available', '160.00', '2018-02-25 12:37:11', 409),
-(102, 3, 16, 'Banana Flambee', '', 'Ice Cream', '1519565170flambee.jpg', 'Available', '120.00', '2018-02-25 13:26:10', 382),
-(103, 3, 16, 'Cremebule', '', 'Special', '1519565194cremebrule.jpg', 'Available', '120.00', '2018-02-25 13:26:34', 756),
-(104, 1, 16, 'Flat Iron Steak', '', 'Beef', '1519565217steak flat.jpg', 'Available', '495.00', '2018-02-25 13:26:57', 908),
-(105, 1, 16, 'Butcher\'s Steak', '', 'Beef', '1519565238steak butch.jpg', 'Available', '360.00', '2018-02-25 13:27:18', 413),
-(106, 1, 16, 'Chicken Tartufo', '', 'Chicken', '1519565264chicken.jpg', 'Available', '265.00', '2018-02-25 13:27:44', 490),
-(107, 1, 16, 'Steamed Chilean Mussels', '', 'Appetizer', '1519565305mussels.jpg', 'Available', '320.00', '2018-02-25 13:28:25', 154),
-(108, 1, 16, 'Scallops with Mornay Sauce', '', 'Appetizer', '1519565328scallops.jpg', 'Available', '265.00', '2018-02-25 13:28:48', 833),
-(109, 1, 16, 'Prawn Gambas', '', 'Appetizer', '1519565345prawn.jpg', 'Available', '265.00', '2018-02-25 13:29:05', 237),
-(110, 1, 16, 'Black Pepper Steak', '', 'Beef', '1519565368balck pepper.jpg', 'Available', '395.00', '2018-02-25 13:29:28', 724),
-(111, 1, 16, 'Chorizo Squid', '', 'Appetizer', '1519565421squidcho.jpg', 'Available', '275.00', '2018-02-25 13:30:21', 312);
+INSERT INTO `menus` (`menu_id`, `mc_id`, `restaurant_id`, `m_name`, `m_desc`, `m_category`, `m_image`, `m_status`, `m_price`, `created`, `menu_number`, `pieces`, `volume`) VALUES
+(1, 2, 1, 'KUYA J FRUIT SHAKE SPECIAL', '', 'Shake', '1518853428Kuya-J-Fruit-Shake-Special-SM-Megamall-Mandaluyong.jpg', 'Available', '95.00', '2018-02-20 16:05:58', 788, NULL, NULL),
+(2, 1, 1, 'KUYA J GRILLED SCALLOPS', 'Ang all-time favorite grilled scallops na puno ng cheese, garlic, butter topping.', 'Appetizer', '1518853532Grilled-Scallops-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '245.00', '2018-02-17 07:45:32', 593, NULL, NULL),
+(3, 1, 1, 'Mangga Tuna Salad', 'A plate of crisp lettuce leaves, ripe mango slices, and tuna flakes. It''s definitely buffer in between eating Crispy Pata and Kare-Kare!', 'Soup/Vegetables', '1518855042Mangga-Tuna-Salad-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 08:10:42', 253, NULL, NULL),
+(4, 1, 1, 'KUYA J LUMPIA PRESKO', 'SautÃ©ed crabmeat and bamboo shoots filling rolled in malunggay-infused wrapper with sweet garlic sauce.', 'Soup/Vegetables', '1518855149Lumpia-Presko-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '105.00', '2018-02-17 08:12:29', 294, NULL, NULL),
+(5, 1, 1, 'CHORIZO DINAMITAS', 'Deep-fried pastry wrapped jalapeÃ±os with Cebu chorizo and cheddar cheese.', 'Appetizer', '1518855202Chorizo-Dinamitas-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '225.00', '2018-02-17 08:13:22', 258, NULL, NULL),
+(6, 1, 1, 'PANCIT CANTON', 'Generous amounts of tender pork meat, shrimp, squid and squid balls na hinalo sa stir-fried egg noodles.', 'Noodles/and/Rice', '1518855239Pancit-Canton-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 08:13:59', 932, NULL, NULL),
+(7, 1, 1, 'DANGGIT RICE', 'Sinangag na dinagdagan ng danggit bits, oil, chives at fried danggit.', 'Noodles/and/Rice', '1518855267Danggit-Rice-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '195.00', '2018-02-17 08:14:27', 484, NULL, NULL),
+(8, 1, 1, 'HUMBINAGOONGAN RICE PLATTER', 'Sinangag with bagoong na topped with pork humba meat, green mangoes, bell peppers and red onions.', 'Appetizer', '1518854309Humba-Binagoongan-Rice-Platter-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '225.00', '2018-02-17 07:58:29', 688, NULL, NULL),
+(9, 1, 1, 'PINAKBET', 'Kuya J version of the Filipino favorite gulay dish na carefully cooked para yummy and healthy.', 'Soup/Vegetables', '1518854349Pinakbet-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '180.00', '2018-02-17 07:59:09', 294, NULL, NULL),
+(10, 1, 1, 'GRILLED TUNA BELLY', 'Classic inihaw na tuna belly marinated Filipino-style with soy sauce and calamansi.', 'Sizzlers/Grilled', '1518854388Grilled-Tuna-Belly-in-Chili-Sauce-from-Kuya-J-Restaurant-in-SM-Megamall-Mandaluyong.jpg', 'Available', '350.00', '2018-02-17 07:59:48', 404, NULL, NULL),
+(11, 1, 1, 'POCHERO BULALO TAGALOG', 'Slow-cooked beef shanks in rich savory broth with mais, saging na saba, kamote, pechay, at Baguio beans.', 'Soup/Vegetables', '1518854512Pochero-Bulalo-Tagalog-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '395.00', '2018-02-17 08:01:52', 374, NULL, NULL),
+(12, 1, 1, 'SIZZLING SISIG WITH EGG', 'The all-time Filipino favorite sizzling food! Crispy and crumbly chopped pork belly na hot na hot sa sarap.', 'Sizzlers/Grilled', '1518854557Sizzling-Sisig-with-Egg-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '235.00', '2018-02-17 08:02:37', 103, NULL, NULL),
+(13, 1, 1, 'KUYA J CRISPY PATA', 'Ang specialty ni Kuya J! Deep-fried crispy pork skin with tender juicy pata meat. - Regular', 'Pork', '1518854913Crispy-Pata-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '549.00', '2018-02-17 08:08:33', 753, NULL, NULL),
+(14, 3, 1, 'KUYA J TABLEA COFFEE FLAN', 'Batangas tablea flavored flan with coffee caramel topped with dried coconut sprinkles and cream.', 'Special', '1518854963Tablea-Coffee-Flan-Dessert-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '85.00', '2018-02-17 08:09:23', 881, NULL, NULL),
+(15, 3, 1, 'KUYA J MANGO PANDAN', 'Ang classic panghimagas na favotire ni Kuya J! Creamy mango at pandan topped with pulled sugar.', 'Special', '1518855095Mango-Pandan-and-Cebuan-Mangga-Cheesecake-Desserts-from-Kuya-J-Restaurant-SM-Megamall-Mandaluyong.jpg', 'Available', '85.00', '2018-02-17 08:11:35', 562, NULL, NULL),
+(16, 3, 1, 'KUYA J UBE HALO-HALO ESPESYAL', 'Milky-smooth, ube-flavored ice na may katakam-takam na sangkap, topped with homemade leche flan, sprinkled with crunchy cornflakes, and drizzled with sweet ube cream.', 'Halo-Halo', '1518855200maxresdefault.jpg', 'Available', '109.00', '2018-02-17 08:13:20', 493, NULL, NULL),
+(17, 1, 1, 'CRISPY BEEF TADYANG', 'Deep-fried tender beef na crispy on the outside and moist on the inside at pinasarap ng chili tuba sauce.', 'Beef', '1518855301ee2b9e7177b85ad75bde53530209a712.jpg', 'Available', '325.00', '2018-02-17 08:15:01', 772, NULL, NULL),
+(18, 1, 1, 'KUYA J ROAST CHICKEN', 'Roasted chicken na may sweet & smoky barbecue flavor na surefire hit sa handaan.', 'Chicken', '1518855537Roasted_Chix20171211-25618-1pygkfn.jpg', 'Available', '455.00', '2018-02-17 08:18:57', 960, NULL, NULL),
+(19, 1, 1, 'Chicken Halang-Halang', 'Chicken cooked tinola-style na may added creaminess of coconut milk and extra kick of spiciness ng green chili peppers.', 'Chicken', '1518857030HalangHalang640.jpg', 'Available', '285.00', '2018-02-17 08:43:50', 186, NULL, NULL),
+(20, 1, 1, 'CHOPSUEY', 'Ang all-time favorite Filipino vegetable dish! Stir-fried vegetables with pork meat and chicken atay.', 'Soup/Vegetables', '1518857115img_5139.jpg', 'Available', '205.00', '2018-02-17 08:45:15', 916, NULL, NULL),
+(21, 1, 1, 'Sinigang na Bangus', 'Home-cooked sinigang na bangus served with green vegetables.', 'Soup/Vegetables', '1518857175IMG_5949.JPG', 'Available', '265.00', '2018-02-17 08:46:15', 180, NULL, NULL),
+(22, 2, 1, 'ICED TEA PITCHER', '', 'Tea', '1518857242kuya-j.jpg', 'Available', '125.00', '2018-02-17 08:47:22', 617, NULL, NULL),
+(23, 1, 1, 'Plain Rice', 'PLAIN RICE', 'Noodles/and/Rice', '1518857324parboiled-rice-for-polow-1.jpg', 'Available', '45.00', '2018-02-17 08:48:44', 856, NULL, NULL),
+(24, 1, 1, 'AMPALAYA CON CARNE', 'Stir-fried ampalaya and tender beef strips seasoned in thick, brown tasty sauce.', 'Soup/Vegetables', '1518857425IMG_3888.jpg', 'Available', '210.00', '2018-02-17 08:50:25', 131, NULL, NULL),
+(25, 1, 1, 'BICOL EXPRESS', 'Ang sikat na Bicol dish ala Kuya J! Ginisang karneng baboy with chillies, spices, and rich coconut cream.', 'Pork', '1518857504Bicol-Express.png', 'Available', '280.00', '2018-02-17 08:51:44', 116, NULL, NULL),
+(26, 1, 1, 'LUMPIA PRITO', 'Fried seasoned pork-filled spring rolls na pinasarap ng Kuya J dipping sauce.', 'Appetizer', '1518857629Filipino-Lumpia-Style-Pork-and-Shrimp-Spring-Rolls.jpg', 'Available', '175.00', '2018-02-17 08:53:49', 570, NULL, NULL),
+(27, 1, 1, 'SINIGANG NA BABOY', 'Classic pork sinigang na sakto sa asim at sobra sa sarap.', 'Soup/Vegetables', '15188569660124 015.JPG', 'Available', '270.00', '2018-02-17 08:42:46', 465, NULL, NULL),
+(28, 2, 1, 'CUCUMBER SHAKE', '', 'Shake', '1518857479KUYA J RESTAURANT 14.jpg', 'Available', '95.00', '2018-02-17 08:51:19', 397, NULL, NULL),
+(29, 2, 1, 'WATERMELON SHAKE', '', 'Shake', '151885751520150322_115256.jpg', 'Available', '95.00', '2018-02-17 08:51:55', 969, NULL, NULL),
+(30, 3, 1, 'KUYA J MANGO PANDAN', 'Ang classic panghimagas na favotire ni Kuya J! Creamy mango at pandan topped with pulled sugar.', 'Special', '1518857625Untitled.png', 'Available', '85.00', '2018-02-17 08:53:45', 856, NULL, NULL),
+(31, 1, 3, 'BrianÊ¼s Ribs', 'Once you taste me, youâ€™ll never forget meâ€ Our best seller! Baked pork ribs with a sweet, tangy piquet sauce served with rice, corn and carrots.', 'Pork', '1518888293Brians-Back.jpg', 'Available', '228.00', '2018-02-17 17:24:53', 211, NULL, NULL),
+(32, 1, 3, 'Peter''s Pork Steak', 'Grilled pork steak, lightly seasoned and served with vegetable medley and harvest rice', 'Sizzlers/Grilled', '1518888830P1020631+copy.jpg', 'Available', '228.00', '2018-02-17 17:33:50', 602, NULL, NULL),
+(33, 1, 3, 'Roasted Seasoned Chicken', 'Chicken quarter spiced with our secret spices, roasted and served with mashed potato and vegetable medley', 'Chicken', '1518889306Brians-Back.jpg', 'Available', '188.00', '2018-02-17 17:41:46', 504, NULL, NULL),
+(34, 1, 3, 'Chicken Fried Chicken', 'Battered chicken breast fillet, lightly fried and topped with cream gravy and served with mashed potatoes and Vegetable medley.', 'Chicken', '1518889442thumb_600.jpg', 'Not Available', '188.00', '2018-02-20 21:46:14', 730, NULL, NULL),
+(35, 1, 3, 'David Dean''s Tenderloin', 'Some like me rare. Others like me medium but itâ€™s up to you if you like me done well. Single USDA steak on top of a mound of mashed potatoes and topped with cheese. Served with brown sauce and garnished with fried onions and roasted almonds', 'Beef', '1518889531Casa-Verde_Ayala-Terraces_Cebu_3.JPG', 'Available', '235.00', '2018-02-17 17:45:31', 481, NULL, NULL),
+(36, 1, 3, 'Jon Jay''s Steak and Pasta', 'Youâ€™ll need a fork and knife to finish us both. Marinated USDA steak served with brown sauce and a side of spaghetti noodles sautÃ©ed in olive oil and garlic.', 'Pork', '1518889636casaverdejonjayssteaknpasta.jpg', 'Available', '235.00', '2018-02-17 17:47:16', 551, NULL, NULL),
+(37, 1, 3, 'Tricia ala Pobre', 'Grilled fish fillet topped with garlic bits together with rice and vegetable medley.', 'Fish', '15188907449215746753_d405783493_b.jpg', 'Available', '178.00', '2018-02-17 18:05:44', 795, NULL, NULL),
+(38, 1, 3, 'Ting-Tingâ€™s Tavern Shrimp', 'Item\r\nTing-Tingâ€™s Tavern Shrimp\r\nEight would be great if you ate â€¦..Delicious butterflied and lightly crusted in breadcrumbs and fried â€˜til golden. Served with our own tartar sauce paired with harvest rice and seasoned vegetables.', 'Fish', '1518890793thumb_600 (1).jpg', 'Available', '198.00', '2018-02-17 18:06:33', 648, NULL, NULL),
+(39, 1, 3, 'Rice', '', 'Noodles/and/Rice', '1518890892KERALA-MEALS-PLAIN-RICE-WHITE.jpg', 'Available', '35.00', '2018-02-17 18:08:12', 996, NULL, NULL),
+(40, 3, 3, 'Death by Chocolate', 'This dessert is to die for- chocolate and nutty rocky road ice cream mixed with chocolate bits on a bed of chocolate cookie crust. Drizzled with chocolate syrup.', 'Ice Cream', '1518890985b4ea47c84ed4489ec4033bae476c0777.jpg', 'Available', '158.00', '2018-02-17 18:09:45', 873, NULL, NULL),
+(41, 3, 3, 'Bliss O'' Berry', 'A one of a kind cheesecake that literally melts in your mouth. Home-made ice cream based cheesecake paired with strawberry compote.', 'Special', '1518891049download (1).jpg', 'Available', '218.00', '2018-02-17 18:10:49', 118, NULL, NULL),
+(42, 3, 3, 'Victorâ€™s Peak', 'Height does matter , finishing me will be harder. Peanut butter cookie bits, chopped nuts, chocolate fudge and peanut butter layered in chocolate and vanilla ice cream on top of a chocolate cookie crust. ', 'Special', '1518891094casa5.jpg', 'Available', '240.00', '2018-02-17 18:11:34', 727, NULL, NULL),
+(43, 3, 3, 'Lauren''s Lava', 'Some say Iâ€™m cold, but handle me with care coz Iâ€™m hot to holdâ€¦ Chocolate cake filled with oozing chocolate lava. Topped with vanilla ice cream and covered in a crunchy chocolate shell. ', 'Special', '1518891174download (2).jpg', 'Available', '155.00', '2018-02-17 18:12:54', 389, NULL, NULL),
+(44, 2, 3, 'Iced Tea', 'Serving\r\nGlass 40.00 Pitcher 125.00 Bottomless 65.00', 'Tea', '1518891254download (3).jpg', 'Available', '125.00', '2018-02-17 18:14:14', 965, NULL, NULL),
+(45, 2, 3, 'Juice', 'Mango Pineapple Watermelon Pineapple-Orange Four Seasons Calamansi\r\n', 'Juice', '1518891419Fruit-Juices.jpg', 'Available', '80.00', '2018-02-17 18:16:59', 414, NULL, NULL),
+(46, 2, 3, 'John''s Mix', 'Orange and pineapple juice mixed with Sprite and grenadine', 'Juice', '1518891465thumb_600 (3).jpg', 'Available', '75.00', '2018-02-17 18:17:45', 498, NULL, NULL),
+(47, 3, 3, 'Milky Way', 'The biggest milkshake in town! Imagine a large chocolaty shake good for you and your partner. Best served with Big Bang Burger. Limited! Please ask your server for its availability.', 'Special', '1518891537casa verde milkyway.jpg', 'Available', '298.00', '2018-02-17 18:18:57', 853, NULL, NULL),
+(48, 1, 3, 'The Big Bang Burger', '9-inch burger topped with onions, tomatoes, lettuce, mayo, American cheese on a sesame-seed bun. Sharing recommended.', 'Appetizer', '1518891589photo-1.jpg', 'Available', '408.00', '2018-02-17 18:19:49', 456, NULL, NULL),
+(49, 1, 3, 'Bacon Cheese & Mushroom', 'Juicy beef patty topped with white cheese, bacon & mushroom', 'Appetizer', '151889165913315257_10154167014738774_879608071545030221_n20171211-25618-aew776.jpg', 'Available', '198.00', '2018-02-17 18:20:59', 548, NULL, NULL),
+(50, 1, 3, 'Seafood Carbonara', 'A must try dish! Treasure from the sea- shrimps and squid in rich creamy white sauce.', 'Soup/Vegetables', '15188917253580712221_c66036cc95_z.jpg', 'Available', '188.00', '2018-02-17 18:22:06', 989, NULL, NULL),
+(51, 1, 3, 'Victoria''s Secret Spaghetti', 'Do you want to know my secret? Home-made meat sauce topped with oozing cheese. A treat for the young and old.', 'Noodles/and/Rice', '1518891813tumblr_inline_n2sbxj45z51riyq8k.jpg', 'Available', '160.00', '2018-02-17 18:23:33', 751, NULL, NULL),
+(52, 1, 11, 'Baked Scallops (seasonal)', '', 'Appetizer', '1519116890Baked Scallops copy.jpg', 'Available', '275.00', '2018-02-20 08:54:50', 580, NULL, NULL),
+(53, 1, 11, 'Calamares', '', 'Appetizer', '1519116921calamares.jpg', 'Available', '199.00', '2018-02-20 08:55:21', 406, NULL, NULL),
+(54, 1, 11, 'Chichabits', '', 'Appetizer', '1519117006chichabits.jpg', 'Available', '255.00', '2018-02-20 08:56:46', 217, NULL, NULL),
+(55, 1, 11, 'Chicken Lollipop', '', 'Appetizer', '1519117047chicken-lollipop.jpg', 'Available', '195.00', '2018-02-20 08:57:27', 473, NULL, NULL),
+(56, 1, 11, 'Lechon Kawali', '', 'Pork', '1519117189lechon kawai.jpg', 'Available', '275.00', '2018-02-20 08:59:49', 553, NULL, NULL),
+(57, 1, 11, 'Sizzling Gambas', '', 'Sizzlers/Grilled', '1519117268sizzling gambas.jpg', 'Available', '283.00', '2018-02-20 09:01:08', 368, NULL, NULL),
+(58, 1, 11, 'Inihaw na Liempo', '', 'Pork', '1519117416pork liempo.jpg', 'Available', '203.00', '2018-02-20 09:03:36', 294, NULL, NULL),
+(59, 1, 11, 'Inihaw na Pusit', '', 'Sizzlers/Grilled', '1519117441inihaw na pusit.jpg', 'Available', '355.00', '2018-02-20 09:04:01', 143, NULL, NULL),
+(60, 1, 11, 'Inihaw na Manok', '', 'Sizzlers/Grilled', '1519117522inihaw na manok.jpg', 'Available', '255.00', '2018-02-20 09:05:22', 964, NULL, NULL),
+(61, 1, 11, 'Chicken Chicharon Skin', '', 'Chicken', '1519117568chicken chicharon skin.jpg', 'Available', '155.00', '2018-02-20 09:06:08', 129, NULL, NULL),
+(62, 1, 11, 'Beef Kare-kare', '', 'Beef', '1519117622kare kare.jpg', 'Available', '355.00', '2018-02-20 09:07:02', 940, NULL, NULL),
+(63, 1, 11, 'Sinigang na Baboy', '', 'Pork', '1519117648sinangag na baboy.jpg', 'Available', '280.00', '2018-02-20 09:07:28', 156, NULL, NULL),
+(64, 3, 11, 'Banana Caramel', '', 'Special', '1519117819the-banana-caramel-dessert.jpg', 'Available', '135.00', '2018-02-20 09:10:19', 327, NULL, NULL),
+(65, 2, 3, 'test', 'asdasdsa', 'Beer', NULL, 'Available', '23.00', '2018-02-20 17:00:03', 780, NULL, NULL),
+(66, 1, 12, 'SOPA DE AJO', 'bone broth, slow cooked egg', 'Appetizer', NULL, 'Available', '150.00', '2018-02-20 20:29:53', 157, NULL, NULL),
+(67, 1, 12, 'TURKISH EGGS', 'garlic, yogurt, harissa, sourdough', 'Appetizer', NULL, 'Available', '150.00', '2018-02-20 20:31:56', 424, NULL, NULL),
+(68, 1, 12, 'EGGPLANT', '& honey chips', 'Soup/Vegetables', NULL, 'Available', '150.00', '2018-02-20 20:33:57', 582, NULL, NULL),
+(69, 1, 12, 'CHORIZO', 'with sourdough', 'Appetizer', NULL, 'Available', '270.00', '2018-02-20 20:34:17', 508, NULL, NULL),
+(70, 1, 12, 'CALAMARES', 'fried squid, aioli, pickled charred espada', 'Appetizer', NULL, 'Available', '340.00', '2018-02-20 20:34:31', 848, NULL, NULL),
+(71, 1, 12, 'PULPO', 'potato, adobo', 'Appetizer', NULL, 'Available', '220.00', '2018-02-20 20:34:49', 649, NULL, NULL),
+(72, 1, 12, 'RUSA', 'ensaladilla, scallops', 'Appetizer', NULL, 'Available', '160.00', '2018-02-20 20:36:37', 296, NULL, NULL),
+(73, 1, 12, 'MORCILLA', 'qual eggs, red pepper', 'Appetizer', NULL, 'Available', '210.00', '2018-02-20 20:36:52', 116, NULL, NULL),
+(74, 1, 12, 'LAMB', 'harissa spices, eggplant puree', 'Appetizer', NULL, 'Available', '200.00', '2018-02-20 20:37:09', 621, NULL, NULL),
+(75, 3, 12, 'CREMA CATALANA CON MANGO', 'custard, burnt sugar, mango', 'Special', NULL, 'Available', '200.00', '2018-02-20 20:37:44', 973, NULL, NULL),
+(76, 3, 12, 'TARTA DE QUESO', 'cheesecake', 'Cake', NULL, 'Available', '240.00', '2018-02-20 20:38:00', 302, NULL, NULL),
+(77, 2, 12, 'NO. 9', 'our signature drink. Light rum, calamansi', 'Wine', NULL, 'Available', '150.00', '2018-02-20 20:39:10', 333, NULL, NULL),
+(78, 2, 12, 'EL MEXICANO', 'espresso, milk, coffee liquor, tequila', 'Wine', NULL, 'Available', '200.00', '2018-02-20 20:39:39', 905, NULL, NULL),
+(80, 1, 14, 'Beetroot salad', 'goatâ€™s milk ricotta, tzatziki, guava gel, orange garam masala vinaigrette', 'Appetizer', '1519552402DSCF8610-768x512.jpg', 'Available', '270.00', '2018-02-25 09:53:22', 988, NULL, NULL),
+(81, 1, 14, 'Tomato Sriracha Soup', 'Spiced Bleack Beans, Chorizo [included in lunch set]', 'Soup/Vegetables', '1519552464DSCF8619.jpg', 'Available', '200.00', '2018-02-25 09:54:24', 263, NULL, NULL),
+(82, 1, 14, 'Scallion', 'USDA ribeye, house pickled slaw,  chili bean aiolo, honey glazed peanuts', 'Appetizer', '1519552493DSCF8617-768x467.jpg', 'Available', '380.00', '2018-02-25 09:54:53', 727, NULL, NULL),
+(83, 1, 14, 'Fish Taco', 'crispy fish skin, spicy glazed tuna, pear, sesame\r\n', 'Fish', '1519552516DSCF8608-665x435.jpg', 'Available', '320.00', '2018-02-25 09:55:16', 738, NULL, NULL),
+(84, 1, 14, 'Belly Chips', 'Pork Belly, Nuoc Cham', 'Pork', '1519552548DSCF8603-768x512.jpg', 'Available', '190.00', '2018-02-25 09:55:48', 779, NULL, NULL),
+(85, 1, 14, 'Glazed Salmon', 'Sushi rice cake, bokchoy, teriyaki', 'Fish', '1519552572DSCF8630-768x458.jpg', 'Available', '590.00', '2018-02-25 09:56:12', 972, NULL, NULL),
+(86, 1, 14, 'Duck Confit', 'soy bean cassoulet, strawberry glazed cabbage, cilantro', 'Appetizer', '1519552612DSCF8628-768x512.jpg', 'Available', '490.00', '2018-02-25 09:56:52', 859, NULL, NULL),
+(87, 1, 14, 'Braised Shortrib', 'cornbread puree, braised shallot, beech mushroom, demi glaze', 'Beef', '1519552636DSCF8653-768x512.jpg', 'Available', '950.00', '2018-02-25 09:57:16', 848, NULL, NULL),
+(88, 1, 14, 'Poached Red Snapper', 'Coconut rice, banana puree, gochujang foam', 'Noodles/and/Rice', '1519552731DSCF8652-768x512.jpg', 'Available', '450.00', '2018-02-25 09:58:51', 922, NULL, NULL),
+(89, 1, 14, 'Charred Octopus', 'Squash risotto, grilled grapefruit, romesco', 'Fish', '1519552777DSCF8644-768x512.jpg', 'Available', '450.00', '2018-02-25 09:59:37', 786, NULL, NULL),
+(90, 1, 14, 'Pork Pork Pork', 'grilled apple puree, sauce chasseur, braised cabbage, shiitake risotto', 'Pork', '1519552802DSCF8665-768x512.jpg', 'Available', '650.00', '2018-02-25 10:00:02', 667, NULL, NULL),
+(91, 3, 14, 'â€œPottedâ€ Chocolate Tiramisu', 'sabayon, crunchy hazelnut meringue, coffee sponge, chocolate sand, strawberry gelee, vanilla sauce', 'Ice Cream', '1519552834DSCF8679-768x512.jpg', 'Available', '240.00', '2018-02-25 10:00:35', 612, NULL, NULL),
+(92, 3, 14, 'Sizzling Caramel & Banana plate', '', 'Special', '1519552892DSCF8683-768x512.jpg', 'Available', '250.00', '2018-02-25 10:01:32', 218, NULL, NULL),
+(93, 1, 15, 'Tinulang Manok', '', 'Soup/Vegetables', '1519561992IMG_0122.jpg', 'Available', '290.00', '2018-02-25 12:33:12', 213, NULL, NULL),
+(94, 1, 15, 'Talaba', '', 'Appetizer', '1519562032wpid-dsc_04301.jpg', 'Available', '145.00', '2018-02-25 12:33:52', 909, NULL, NULL),
+(95, 1, 15, 'Baked Scallops', '', 'Appetizer', '1519562053lantawduma-21.jpg', 'Available', '150.00', '2018-02-25 12:34:13', 433, NULL, NULL),
+(96, 1, 15, 'Sisig', '', 'Pork', '1519562076111.jpg', 'Available', '140.00', '2018-02-25 12:34:36', 589, NULL, NULL),
+(97, 1, 15, 'Sinuglaw', '', 'Appetizer', '1519562115img_1175.jpg', 'Available', '180.00', '2018-02-25 12:35:15', 370, NULL, NULL),
+(98, 1, 15, 'Kinilaw', '', 'Appetizer', '1519562141lantaw-restaurant.jpg', 'Available', '175.00', '2018-02-25 12:35:41', 511, NULL, NULL),
+(99, 1, 15, 'Calamares', '', 'Appetizer', '1519562159calamari at Lantaw sa SRP Restaurant in Cebu City, Philippines.jpg', 'Available', '240.00', '2018-02-25 12:35:59', 826, NULL, NULL),
+(100, 1, 15, 'Spicy Scallops', '', 'Appetizer', '1519562206Spicy-scallops-Lantaw-Floating-Native-Restaurant.jpg', 'Available', '160.00', '2018-02-25 12:36:46', 697, NULL, NULL),
+(101, 1, 15, 'Cordova Express', '', 'Appetizer', '1519562231lantaw-2-native-restaurant.jpg', 'Available', '160.00', '2018-02-25 12:37:11', 409, NULL, NULL),
+(102, 3, 16, 'Banana Flambee', '', 'Ice Cream', '1519565170flambee.jpg', 'Available', '120.00', '2018-02-25 13:26:10', 382, NULL, NULL),
+(103, 3, 16, 'Cremebule', '', 'Special', '1519565194cremebrule.jpg', 'Available', '120.00', '2018-02-25 13:26:34', 756, NULL, NULL),
+(104, 1, 16, 'Flat Iron Steak', '', 'Beef', '1519565217steak flat.jpg', 'Available', '495.00', '2018-02-25 13:26:57', 908, NULL, NULL),
+(105, 1, 16, 'Butcher''s Steak', '', 'Beef', '1519565238steak butch.jpg', 'Available', '360.00', '2018-02-25 13:27:18', 413, NULL, NULL),
+(106, 1, 16, 'Chicken Tartufo', '', 'Chicken', '1519565264chicken.jpg', 'Available', '265.00', '2018-02-25 13:27:44', 490, NULL, NULL),
+(107, 1, 16, 'Steamed Chilean Mussels', '', 'Appetizer', '1519565305mussels.jpg', 'Available', '320.00', '2018-02-25 13:28:25', 154, NULL, NULL),
+(108, 1, 16, 'Scallops with Mornay Sauce', '', 'Appetizer', '1519565328scallops.jpg', 'Available', '265.00', '2018-02-25 13:28:48', 833, NULL, NULL),
+(109, 1, 16, 'Prawn Gambas', '', 'Appetizer', '1519565345prawn.jpg', 'Available', '265.00', '2018-02-25 13:29:05', 237, NULL, NULL),
+(110, 1, 16, 'Black Pepper Steak', '', 'Beef', '1519565368balck pepper.jpg', 'Available', '395.00', '2018-02-25 13:29:28', 724, NULL, NULL),
+(111, 1, 16, 'Chorizo Squid', '', 'Appetizer', '1519565421squidcho.jpg', 'Available', '275.00', '2018-02-25 13:30:21', 312, NULL, NULL),
+(112, 2, 1, 'Test', '                                                                                    ', 'Beer', NULL, 'Available', '200.00', '2018-03-03 04:06:41', 102, '3', '200mL'),
+(113, 1, 1, 'Sample', '', 'Beef', NULL, 'Available', '200.00', '2018-03-03 03:51:23', 161, '3', ''),
+(114, 3, 1, 'Last', '', 'Ice Cream', NULL, 'Available', '200.00', '2018-03-03 03:55:16', 882, '3', '100mL'),
+(115, 3, 1, 'Last Sample', '', 'Halo-Halo', '152005004714907137_1249224755133963_7707735390257428027_n.jpg', 'Available', '300.00', '2018-03-03 04:07:27', 441, '3', '200mL');
 
 -- --------------------------------------------------------
 
@@ -408,7 +414,13 @@ INSERT INTO `notifications` (`notification_id`, `customer_id`, `restaurant_id`, 
 (14, 2, 1, 9, NULL, NULL, '2018-02-25 07:19:34', 0),
 (15, 3, 1, 10, NULL, NULL, '2018-02-28 18:11:02', 0),
 (16, 3, 1, 11, NULL, NULL, '2018-02-28 18:32:25', 0),
-(17, 1, 1, 12, NULL, NULL, '2018-02-28 18:55:41', 0);
+(17, 1, 1, 12, NULL, NULL, '2018-02-28 18:55:41', 0),
+(18, 11, 1, 13, NULL, NULL, '2018-03-03 03:09:53', 0),
+(19, 4, 1, 14, NULL, NULL, '2018-03-03 03:11:36', 0),
+(20, 4, 12, 15, NULL, NULL, '2018-03-03 04:08:56', 0),
+(21, 4, 1, 16, NULL, NULL, '2018-03-03 04:57:20', 0),
+(22, 4, 1, 17, NULL, NULL, '2018-03-03 05:44:03', 0),
+(23, 4, 1, 18, NULL, NULL, '2018-03-03 05:44:56', 0);
 
 -- --------------------------------------------------------
 
@@ -558,7 +570,7 @@ CREATE TABLE `promos` (
 INSERT INTO `promos` (`promo_id`, `promo_name`, `promo_desc`) VALUES
 (1, 'Birthday Freebies', 'Your customer(s) can have a free meal/free dessert on their birthday.'),
 (2, 'Promo Points', 'For every meal your customer(s) order they will earn 1 point, and for every 100 points they earned, they can exchange it for a 20% discount for 1 meal.'),
-(3, 'The more the merrier', 'Free 1 meal for those customers who\'ll be bringing more than 12 people with them'),
+(3, 'The more the merrier', 'Free 1 meal for those customers who''ll be bringing more than 12 people with them'),
 (4, 'TGIF Freebies', '10% discount every Friday night for every meal ordered.'),
 (5, 'Sharing is loving', 'As a restaurant owner, you can give a free meals for the homeless people.');
 
@@ -648,7 +660,13 @@ INSERT INTO `reservations` (`reservation_id`, `reservation_number`, `reservation
 (9, '44726', 'February 28, 2018', '10:30 AM', '2018-02-25 07:19:34', 'Expired', '', '10', 1, 2, 0),
 (10, '15234', '03/02/2018', '10:30 AM', '2018-02-28 18:11:02', 'Expired', 'Test', '5', 1, 3, 2),
 (11, '30468', 'March 12, 2018', '10:30 AM', '2018-02-28 18:32:25', 'Expired', 'test', '5', 1, 3, 1),
-(12, '20039', 'March 07, 2018', '10:30 AM', '2018-02-28 18:55:41', 'Expired', 'test', '5', 1, 1, 1);
+(12, '20039', 'March 07, 2018', '10:30 AM', '2018-02-28 18:55:41', 'Expired', 'test', '5', 1, 1, 1),
+(13, '24032', 'March 27, 2018', '10:00 AM', '2018-03-03 03:09:53', 'Pending', '', '2', 1, 11, 0),
+(14, '23754', 'February 22, 2018', '10:30 AM', '2018-03-03 03:11:36', 'Pending', '', '2', 1, 4, 0),
+(15, '24361', 'February 22, 2018', '6:30 PM', '2018-03-03 04:08:56', 'Pending', '', '3', 12, 4, 0),
+(16, '33195', 'March 08, 2018', '10:30 AM', '2018-03-03 04:57:20', 'Pending', '', '1', 1, 4, 0),
+(17, '22654', 'March 12, 2018', '10:30 AM', '2018-03-03 05:44:03', 'Pending', '', '2', 1, 4, 0),
+(18, '35585', 'February 14, 2018', '2:00 PM', '2018-03-03 05:44:56', 'Pending', '', '3', 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -691,12 +709,12 @@ CREATE TABLE `restaurants` (
 
 INSERT INTO `restaurants` (`restaurant_id`, `sub_id`, `restaurant_name`, `restaurant_desc`, `restaurant_addr`, `restaurant_contact`, `max_capacity`, `maxdate`, `temp`, `hour_open`, `hour_close`, `rate_comm`, `lat`, `lng`, `username`, `password`, `owner_fname`, `owner_mname`, `owner_lname`, `owner_contact`, `owner_email`, `owner_address`, `restaurant_logo`, `restaurant_status`, `sub_date`, `sub_exp`) VALUES
 (1, 3, 'Kuya J', 'KATAKAM-TAKAM NA KUWENTO NI KUYA J\r\n\r\n\r\n\r\n\r\nKuya J Restaurant, formerly known as â€œAng Kan-anan ni Kuya J,â€ started as a humble eatery along the streets of Cebu. But with Kuya Jâ€™s undeniably delicious dishes, mouthwatering words of recommendation quickly spread into every Cebuanosâ€™ palate. With that, Kuya J instantly became one of the well-loved restaurants in Cebu. \r\n\r\nToday, Kuya J continues to satisfy every Filipinoâ€™s appetite nationwide. Using only the freshest ingredients available, Kuya J cooks up a storm of delicious Pinoy food in every corner of the Philippines.\r\n\r\nTHE BLOCKBUSTER BIDA\r\n\r\nJericho Rosales is one of the award-winning drama actors in the country and the best Kuya to his family. \r\n\r\nWhatâ€™s very inspiring about him is his trait of always putting his heart into everything that he does, especially when touching peopleâ€™s lives.\r\n\r\nThis is why Echo is the perfect endorser for Kuya J.', 'Corner Tojong Street, 15 N Escario St, Lungsod ng Cebu, 6000 ', '09989624269', '100', '21', '0', '09:00', '4:11', NULL, 10.3188, 123.902, 'admin', 'admin', 'Mickale', 'Lapasanda', 'Saturre', '09165970601', 'kuyajtest@gmail.com', 'Saint Bernard Southern Leyte', '151825301515174728091517414973151733665615166037981512156053kuyaj.png', 1, '2018-01-31 2:21:52', '2019-01-31 2:21:52'),
-(3, 2, 'Casa Verde', 'Established in August 2002, CASA VERDE is a chain of family-owned restaurants in Cebu City. Spanish for \"green house\", CASA VERDE\'s name was influenced by the owners\' Spanish roots and the color of the Ramos Branch, which used to be one of the family\'s ancestral homes. \r\n\r\nOriginally, the Ramos Branch was supposed to be just a small canteen that catered to the residents of the 2nd floor dormitory and some students from nearby colleges. Through word-of-mouth and recommendations by family and friends, the humble canteen soon became a full-scale restaurant. After almost a decade and three branches later, CASA VERDE has grown into one of Cebu\'s most popular dining destinations. \r\n\r\n\"Value for Money\" has always been the restaurant\'s philosophy. CASA VERDE believes that everyone deserves to enjoy great food and quality service at reasonable prices in a comfortable atmosphere. It\'s casual dining at its best. \r\n\r\nCASA VERDE is the perfect place to let your hair down and enjoy a steak or two with family and friends. The ambiance is simple and casual, with knickknacks and collectibles from the personal collections of the owners. It\'s also interesting to note that all of the restaurant\'s signature dishes are named after some members of the family. We bring homestyle comfort food to the next level. \r\n\r\nThe next time you\'re in the mood for some good food, head on down to the CASA VERDE branch nearest you and try our best-selling ribs, mouth-watering steaks, sumptuous pasta, and sinful desserts. It\'s a dining experience that truly exceeds expectation. ', 'Lim Tian Teng Street, Ramos, Cebu City, Philippines, 6000', '+63 32 253.6472', '350', '19', '', '10:00', '22:00', NULL, 10.3072, 123.896, 'admin2', 'admin2', 'Gian Carlo', 'S', 'Cataraja', '09265976739', 'casaverdetest@gmail.com', 'Cebu City', '15189781501518886223casa-verde-logo-679x410.jpg', 1, '2018-02-18 12:00:15', '2018-08-18 12:00:15'),
-(11, 4, 'Gerry\'s Grill', 'Here at Gerry\'s, we aim to give everyone a pleasurable dining experience, serving only the freshest food ranging from Filipino favorites â€“ Sisig, Inihaw na Pusit, Crispy Pata, Beef Kare-kare, Adobo Shreds to exotic cuisines.\r\n\r\nI have always dreamt of putting up a place where everyone could hang out and enjoy good food. With my passion for cooking and love for grilled dishes came Gerry\'s.\r\n\r\nAlthough the original concept of my business was one where people could unwind with a drink or two, Gerryâ€™s has become a family restaurant, too.\r\n\r\nFrom opening its first store in Tomas Morato, Quezon City, Gerryâ€™s has come a long way. With its continuous expansion nationwide, Gerryâ€™s has also opened branches in the United States, Singapore and Qatar.\r\n\r\nUp until now, we strive to continue to evolve, responding to the ever growing needs of our customers. We believe in offering our customers the best value for their money. We also take pride in taking care of our people â€“ one of our most valuable assets.\r\n\r\nThese are the reasons why Gerry\'s remains to be the favorite among Filipinos. For as long as we can, we guarantee nothing but great food and loads of fun.', 'Robinson Galleria Cebu, Gen. Maxilom Ext, Cebu City, 6000 Cebu', '(032) 231 4738', '300', '14', '', '10:00', '21:00', NULL, 10.304, 123.912, 'admin6', '123', 'Godwin', 'Margaja', 'Montealto', '098272626', 'gerrygrilltest@gmail.com', 'Aliwanay Balamban Cebu', '1519115864logo.png', 1, '2018-02-20 4:15:49', '2018-02-27 4:15:49'),
-(12, 2, 'No.9', 'Our passion for good food started at the kitchen and dining table at home. Having grown up at No. 9, it seemed only fitting for us that we turn our ancestral home into a place where we could share our love of food with you.\r\n\r\nLocated at our old neighborhood of E. Benedicto Street, No. 9 gave us the opportunity to bring together the past and the future, melding elements of the old world with modern day. It features a newly renovated interior that coexists with the original exterior faÃ§ade of the 50 year old house. A new lighting system illuminates the main dining hall while guests have a floor-to-ceiling view of the old garden and trees.\r\n\r\nOur cuisine imbibes the same principles as the restaurantâ€™s design, using both traditional and modern techniques in its preparation. In its essence, our menu can be described as a homage to the food we fell in love with. The dishes may look deceptively simple, but a lot of work and love has gone into its preparation.\r\n\r\nNothing would make us happier than to have our guests feel that love in every bite.', 'E. Benedicto Street, Cebu City', '+63 32 253 9518', '350', '28', '', '17:00', '00:00', NULL, 10.3102, 123.901, 'admin7', '123', 'Gian Carlo', 'S', 'Cataraja', '123456789', 'number9test@gmail.com', 'Cebu City', '1519158245download.jpg', 1, '2018-02-21 4:12:57', '2018-08-21 4:12:57'),
+(3, 2, 'Casa Verde', 'Established in August 2002, CASA VERDE is a chain of family-owned restaurants in Cebu City. Spanish for "green house", CASA VERDE''s name was influenced by the owners'' Spanish roots and the color of the Ramos Branch, which used to be one of the family''s ancestral homes. \r\n\r\nOriginally, the Ramos Branch was supposed to be just a small canteen that catered to the residents of the 2nd floor dormitory and some students from nearby colleges. Through word-of-mouth and recommendations by family and friends, the humble canteen soon became a full-scale restaurant. After almost a decade and three branches later, CASA VERDE has grown into one of Cebu''s most popular dining destinations. \r\n\r\n"Value for Money" has always been the restaurant''s philosophy. CASA VERDE believes that everyone deserves to enjoy great food and quality service at reasonable prices in a comfortable atmosphere. It''s casual dining at its best. \r\n\r\nCASA VERDE is the perfect place to let your hair down and enjoy a steak or two with family and friends. The ambiance is simple and casual, with knickknacks and collectibles from the personal collections of the owners. It''s also interesting to note that all of the restaurant''s signature dishes are named after some members of the family. We bring homestyle comfort food to the next level. \r\n\r\nThe next time you''re in the mood for some good food, head on down to the CASA VERDE branch nearest you and try our best-selling ribs, mouth-watering steaks, sumptuous pasta, and sinful desserts. It''s a dining experience that truly exceeds expectation. ', 'Lim Tian Teng Street, Ramos, Cebu City, Philippines, 6000', '+63 32 253.6472', '350', '19', '', '10:00', '22:00', NULL, 10.3072, 123.896, 'admin2', 'admin2', 'Gian Carlo', 'S', 'Cataraja', '09265976739', 'casaverdetest@gmail.com', 'Cebu City', '15189781501518886223casa-verde-logo-679x410.jpg', 1, '2018-02-18 12:00:15', '2018-08-18 12:00:15'),
+(11, 4, 'Gerry''s Grill', 'Here at Gerry''s, we aim to give everyone a pleasurable dining experience, serving only the freshest food ranging from Filipino favorites â€“ Sisig, Inihaw na Pusit, Crispy Pata, Beef Kare-kare, Adobo Shreds to exotic cuisines.\r\n\r\nI have always dreamt of putting up a place where everyone could hang out and enjoy good food. With my passion for cooking and love for grilled dishes came Gerry''s.\r\n\r\nAlthough the original concept of my business was one where people could unwind with a drink or two, Gerryâ€™s has become a family restaurant, too.\r\n\r\nFrom opening its first store in Tomas Morato, Quezon City, Gerryâ€™s has come a long way. With its continuous expansion nationwide, Gerryâ€™s has also opened branches in the United States, Singapore and Qatar.\r\n\r\nUp until now, we strive to continue to evolve, responding to the ever growing needs of our customers. We believe in offering our customers the best value for their money. We also take pride in taking care of our people â€“ one of our most valuable assets.\r\n\r\nThese are the reasons why Gerry''s remains to be the favorite among Filipinos. For as long as we can, we guarantee nothing but great food and loads of fun.', 'Robinson Galleria Cebu, Gen. Maxilom Ext, Cebu City, 6000 Cebu', '(032) 231 4738', '300', '14', '', '10:00', '21:00', NULL, 10.304, 123.912, 'admin6', '123', 'Godwin', 'Margaja', 'Montealto', '098272626', 'gerrygrilltest@gmail.com', 'Aliwanay Balamban Cebu', '1519115864logo.png', 1, '2018-02-20 4:15:49', '2018-02-27 4:15:49'),
+(12, 2, 'No.9', 'Our passion for good food started at the kitchen and dining table at home. Having grown up at No. 9, it seemed only fitting for us that we turn our ancestral home into a place where we could share our love of food with you.\r\n\r\nLocated at our old neighborhood of E. Benedicto Street, No. 9 gave us the opportunity to bring together the past and the future, melding elements of the old world with modern day. It features a newly renovated interior that coexists with the original exterior faÃ§ade of the 50 year old house. A new lighting system illuminates the main dining hall while guests have a floor-to-ceiling view of the old garden and trees.\r\n\r\nOur cuisine imbibes the same principles as the restaurantâ€™s design, using both traditional and modern techniques in its preparation. In its essence, our menu can be described as a homage to the food we fell in love with. The dishes may look deceptively simple, but a lot of work and love has gone into its preparation.\r\n\r\nNothing would make us happier than to have our guests feel that love in every bite.', 'E. Benedicto Street, Cebu City', '+63 32 253 9518', '350', '28', '3', '17:00', '00:00', NULL, 10.3102, 123.901, 'admin7', '123', 'Gian Carlo', 'S', 'Cataraja', '123456789', 'number9test@gmail.com', 'Cebu City', '1519158245download.jpg', 1, '2018-02-21 4:12:57', '2018-08-21 4:12:57'),
 (14, 3, 'KAYU: Kitchen + Bar', 'Taking inspiration from the world, KAYUâ€™s modern-fusion cuisine uses only the freshest and finest ingredients cooked with our chefâ€™s imagination and passion. \r\nThe passion for creating sparked within Chef â€œIzzyâ€ Francis Sy at a young age.\r\n\r\nWith a culinary degree in ICAAC, CIA Greystone, Napa, CA and his work experience with Morimoto & Kitchen Door, Chef Izzy is ready to share his love for cooking to his beloved hometown - Cebu City.', 'Sanson Road, Lahug, Cebu City', '(032) 406 3095', '100', '30', '', '07:30', '22:30', NULL, 10.333, 123.895, 'admin8', '123', 'Fran', 'Margaja', 'Montealto', '(032) 406 3095', 'kayutest@gmail.com', 'Aliwanay Balamban Cebu', '1519551538kayu-cover2.jpg', 1, '2018-02-25 5:31:52', '2019-02-25 5:31:52'),
 (15, 3, 'Lantaw Floating Native Restaurant', 'Lantaw promises to be a great addition to the â€˜nativeâ€™ category of restaurantsâ€¦. a category where quality has not always been easy to find, surprisingly.\r\n\r\nWell, youâ€™ll find quality here. Lantaw is the Cebuano term for â€œcan be seen from a distanceâ€ and aside from the fact that the restaurant is actually floating, diners can also enjoy a spectacular view of the hills and city of Cebu in the distance. It is of course open so natural sea breezes will keep you cool while the salt water â€˜scentâ€™ acts as a natural prop to this wonderful stage. The menu boasts a number of mouthwatering native dishes but clearly fresh fish is the order of the day.', 'Sa Baybayon, Cordova, Cebu', '(032) 514 2959', '100', '25', '', '10:00', '23:00', NULL, 10.256, 123.933, 'admin10', '123', 'Lan', 'Taw', 'Monteatlo', '098272626', 'lantawtest@gmail.com', 'Aliwanay Balamban Cebu', '1519561849lantaw.jpg', 1, '2018-02-25 8:26:12', '2019-02-25 8:26:12'),
-(16, 3, 'Acacia Steakhouse', 'If you fancy steak so much, there\'s a place for you in the city. It just opened! You might wanna check it out! You would not regret going to this Steakhouse. Had a very sumptuous dinner with my friends. Medium Rare cooked and very efficient even if the order was in bulk. Lots of varieties of them steaks! ', '1st Acacia St. Green Valley Subdivision, Lahug, Cebu City, 6000 Cebu', '(032) 514 4113', '100', '15', '', '11:30', '22:00', NULL, 10.3234, 123.892, 'admin11', '123', 'James', 'Christ', 'Jainar', '0982726268', 'acaciatest@gmail.com', 'Cebu City', '1519565125logo.jpg', 1, '2018-02-25 9:17:25', '2019-02-25 9:17:25');
+(16, 3, 'Acacia Steakhouse', 'If you fancy steak so much, there''s a place for you in the city. It just opened! You might wanna check it out! You would not regret going to this Steakhouse. Had a very sumptuous dinner with my friends. Medium Rare cooked and very efficient even if the order was in bulk. Lots of varieties of them steaks! ', '1st Acacia St. Green Valley Subdivision, Lahug, Cebu City, 6000 Cebu', '(032) 514 4113', '100', '15', '', '11:30', '22:00', NULL, 10.3234, 123.892, 'admin11', '123', 'James', 'Christ', 'Jainar', '0982726268', 'acaciatest@gmail.com', 'Cebu City', '1519565125logo.jpg', 1, '2018-02-25 9:17:25', '2019-02-25 9:17:25');
 
 -- --------------------------------------------------------
 
@@ -883,7 +901,9 @@ INSERT INTO `visitors` (`visit_id`, `restaurant_id`, `customer_id`, `visit_count
 (9, 1, 1, 125, '2018-02-28 20:17:03'),
 (10, 14, 2, 2, '2018-02-25 10:04:42'),
 (11, 1, 3, 40, '2018-02-28 19:51:47'),
-(12, 12, 3, 1, '2018-02-28 19:52:03');
+(12, 12, 3, 1, '2018-02-28 19:52:03'),
+(13, 15, 11, 1, '2018-03-03 03:08:16'),
+(14, 1, 4, 4, '2018-03-03 05:44:50');
 
 --
 -- Indexes for dumped tables
@@ -1043,140 +1063,116 @@ ALTER TABLE `visitors`
 --
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `combo_meals`
 --
 ALTER TABLE `combo_meals`
   MODIFY `cm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
   MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
-
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT for table `menu_category`
 --
 ALTER TABLE `menu_category`
   MODIFY `mc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
 --
 -- AUTO_INCREMENT for table `points`
 --
 ALTER TABLE `points`
   MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `promos`
 --
 ALTER TABLE `promos`
   MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `promo_restaurant`
 --
 ALTER TABLE `promo_restaurant`
   MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
   MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
   MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
   MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
-
 --
 -- AUTO_INCREMENT for table `subscriptions`
 --
 ALTER TABLE `subscriptions`
   MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
   MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
   MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
   MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `visit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-COMMIT;
-
+  MODIFY `visit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
