@@ -16,7 +16,7 @@ $(document).ready(function(){
 			}
 			
 			//var ctx = document.getElementById('#myChart').getContext('2d');
-
+			// for(var x = 0; x < data.length; x++)
 			var myChart = {
 
 			        labels: test,
