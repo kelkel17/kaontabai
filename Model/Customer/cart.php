@@ -149,7 +149,7 @@
                         </td>
                         <?php 
               $i = 0;
-            foreach(array_combine($cartitems, $cartqty) as $key => $value){
+            foreach(array_combine($cartitems, $cartqty) as $key => $value) {
               $item = getMenu($key);
          
                $price[] = $item['m_price'];
@@ -217,11 +217,12 @@
                                 <td>
                               </td>
                             </tr>
-                            <?php }
+                            <?php } }
+             
               $o = 0;
               foreach(array_combine($cartitems2, $cartqty2) as $key2 => $value2){
               $item2 = getCom($key2);
-               $price2[] = $item2['price'];
+              $price2[] = $item2['price_temp'];
 
                if(!empty($item2)){
                ?>
@@ -231,16 +232,16 @@
                                         <?php 
                                          echo $item2['cm_name'];          
                                          ?>
-                                            <div><img src="../../Image/<?php echo $item['m_image'];?>" style="width: 200px; height: 150px;" /></div>
+                                            <div><img src="../../Image/<?php echo $item2['image'];?>" style="width: 200px; height: 150px;" /></div>
                                         
                                     </a>
                                 </td>
                                 <td>
-                                    <input type="hidden" name="mid[]" value="<?php echo $item['menu_id']; ?>">
+                                    <input type="hidden" name="cmd[]" value="<?php echo $item2['cm_id']; ?>">
                                     <input type="hidden" name="resid" value="<?php echo $Resid;?>">
                                     <input type="hidden" name="cid" value="<?php echo $cust_id; ?>">
                                     <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                                    <input type="hidden" name="qty[]" value="<?php echo $value; ?>">
+                                    <input type="hidden" name="qty[]" value="<?php echo $value2; ?>">
 
                                     <?php 
                                     if(isset($_SESSION['cart2'])) {?>
@@ -253,12 +254,13 @@
                                 <td>
                                     
                                     <p id="price<?php echo $i; ?>">&#8369;
-                                        <?php echo $item2['price'];?>
+                                        <?php echo number_format($item2['price_temp'],2);?>
                                     </p>
 
                                 </td>
                                 <?php
-                                 $test2 = $value2 * $item2['price'];?>
+                                 $test2 = $value2 * $item2['price_temp'];
+                                 ?>
                                     <td>
 
                                         <p id="price<?php echo $i; ?>">&#8369;
@@ -286,14 +288,14 @@
                                 <td>
                               </td>
                             </tr>
+                            <?php } ?>
 
-
-                  <?php } $initial = $value * $item['m_price'];
-                   $initial2 = $value2 * $item2['price'];
+                  <?php  $initial = $value * $item['m_price'];
+                   $initial2 = $value2 * $item2['price_temp'];
                    $temp = $initial2 + $initial; 
                    $total = $total + $temp;
                    $i++;
-                 }
+                 
 
              }?>
                                 <tr>

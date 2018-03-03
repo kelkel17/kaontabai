@@ -211,7 +211,7 @@ function islogged2(){
 		function customizeCombo($data)
 		{
 			$con = con();
-			$sql = "UPDATE combo_meals SET menu_temp = ? WHERE cm_id = ?";
+			$sql = "UPDATE combo_meals SET menu_temp = ?, price_temp=? WHERE cm_id = ?";
 			$stmt = $con->prepare($sql);
 			$add = $stmt->execute($data);
 			$con = null;
@@ -805,7 +805,7 @@ function islogged2(){
         {
             $db = con();
 
-            $sql = "SELECT * FROM combo_meals cm, menus m where cm_id = ? AND cm.restaurant_id=m.restaurant_id LIMIT 10";
+            $sql = "SELECT * FROM combo_meals cm, menus m where cm_id = ? AND cm.restaurant_id=m.restaurant_id LIMIT 8";
             $stmt = $db->prepare($sql);
             $stmt->execute($data);
             $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);

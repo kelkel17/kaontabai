@@ -76,6 +76,9 @@ if(isset($_GET['approved'])) {
 		unset($_SESSION['cart']);
 	    unset($_SESSION['count']); 
 	    unset($_SESSION['qty']);
+	    unset($_SESSION['cart2']);
+	    unset($_SESSION['count2']); 
+	    unset($_SESSION['qty2']);
 	    $id = $_SESSION['id'];
 
 		echo '<script>sweetMimitch('.$id.');</script>';

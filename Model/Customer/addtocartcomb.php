@@ -23,11 +23,11 @@ if (isset($_POST['carts'])) {
         $id = $_POST['id'];
         $cid = $_POST['cid'];
         // $id = $_SESSION["id"];
-        $menu = $_POST['menu'];
+        $sub = array_sum($menu = $_POST['menu']);
 
         $men = implode(",",$menu);  
 
-        $data = array($men,$cim);       
+        $data = array($men,$sub,$cim);       
         customizeCombo($data);
         echo "<script>updateAlert('$rid','$id','$cid');</script>";
         

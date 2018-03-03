@@ -12,12 +12,16 @@ if(isset($_POST['checkout'])){
       $qty = $_POST['qty'];
      
       $get = getEmail(array($restaurant));
+
       $email = $get['owner_email'];
-      foreach(array_combine($_POST['mid'],$qty) as $mid => $x){
-      
-       addOrderDetails($order,$mid,$x);
-    
-                  }  
+      $cmd = $_POST['cmd'];
+      $mid = $_POST['mid'];
+
+      $comb = array_merge($cmd,$mid);
+      foreach(array_combine($comb,$qty) as $mid => $x){
+        addOrderDetails($order,$mid,$x);
+      }
+
       echo "<script> window.location='payment.php?cid=$order&total=$total&rid=$cid&email=$email'; </script>"; 
                 }
 

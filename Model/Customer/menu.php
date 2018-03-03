@@ -458,9 +458,9 @@
                                                         $menu_id = explode(",",$row['combo_menu_id']);
                                                         foreach($menu as $key => $asd){
                                                             if(in_array($asd['menu_id'],$menu_id))
-                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'" checked>'.$asd['m_name'].'<br/>';
+                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['m_price'].'" checked />'.$asd['m_name'].'<br/>';
                                                             else
-                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['menu_id'].'">'.$asd['m_name'].'<br/>';
+                                                                echo '<input type="checkbox" name="menu[]" value="'.$asd['m_price'].'">'.$asd['m_name'].' <br/>';
                                                         }
                                                     }
                                                  ?>
