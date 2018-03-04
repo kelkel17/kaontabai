@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$.ajax({
 		url: "../Samples/getsomething.php",
 		method: "GET",
+		dataType: 'json',
 		success: function(data) {
 			console.log(data);
 			var test = [];
@@ -10,18 +11,15 @@ $(document).ready(function(){
 			//var dout = Date.parse(test);
 			for(var i in data) {
 				//console.log(new Date(data[i].tim).toDateString());
-				test.push("Sales as of " + new Date(data[i].tim).toDateString());
+				test.push("Sales as of " + new Date(data[i].daytime).toDateString());
                 cs.push(data[i].total);
-                sd.push(data[i].name);
+              //  sd.push(data[i].name);
 			}
-			
-			//var ctx = document.getElementById('#myChart').getContext('2d');
-			// for(var x = 0; x < data.length; x++)
 			var myChart = {
 
 			        labels: test,
 			        datasets: [{
-			            label: sd,
+			            label: total,
 			            fill: false,
 			            data: cs,
 			            backgroundColor: [
