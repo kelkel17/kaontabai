@@ -289,9 +289,10 @@
 
                                         <label for="filter" class="pull-left m-t-5 m-r-5">Filter by: </label>
                                         <select name="filter" id="filter" class="form-control float-right w-25 m-b-40">
-                                            <option value="0">Over All Reports</option>
-                                            <option value="1">Daily Reports</option>
-                                            <option value="2">Monthly Reports</option>
+                                            <option value="0">Menu Sales</option>
+                                            <option value="1">Over All Reports</option>
+                                            <option value="2">Daily Reports</option>
+                                            <option value="3">Monthly Reports</option>
                                         </select>
 
                                     </div>
@@ -300,7 +301,27 @@
                                 <div class="large">Reports
                                     <br/>
                                 </div>
-                                <div id="div1">
+                                <div id="div0">
+                                <div id="chart-sales">
+                                    <canvas id="mycanvas8"></canvas>
+                                </div>
+                                <form method="post">
+                                    <select name="menu" id="menuid">
+                                    <?php 
+                                        $menu = viewAllProducts();
+                                        foreach ($menu as $row) {
+                                            if($row['restaurant_id'] == 1){
+                                    ?>
+                                            <option value="<?php echo $row['menu_id']; ?>"><?php echo $row['menu_id']; ?>.<?php echo $row['m_name']; ?></option>
+                                            <?php } }?>
+                                    </select>
+                                    <input type="text" name="sdate" id="start">
+                                    <input type="text" name="edate" id="end">
+                                </form>	
+                                    <button type="submit" value="Sales" id="getsales" name="sales">Sales</button>
+                                
+                                </div>
+                                <div id="div2">
                                     <div id="chart-container">
                                         <!-- Daily Sales -->
                                         <canvas id="mycanvas"></canvas>
@@ -316,7 +337,7 @@
                                 </div>
                                 <br/>
 
-                                <div id="div0">
+                                <div id="div1">
                                     <div id="chart-container">
                                         <!-- Total Sold Per Product (OVER ALL REPORT) -->
                                         <canvas id="mycanvas3"></canvas>
@@ -324,7 +345,7 @@
                                 </div>
                                 <br/>
 
-                                <div id="div2">
+                                <div id="div3">
                                     <div id="chart-container">
                                         <!-- Monthly Sales -->
                                         <canvas id="mycanvas4"></canvas>
@@ -477,7 +498,7 @@
         }, 5000);
     </script>
     <script>
-        for (var j = 0; j < 3; j++) {
+        for (var j = 0; j < 4; j++) {
             if (j == 0) {
                 document.getElementById('div' + j).style.display = '';
                 console.log(j);
@@ -489,7 +510,7 @@
         var opt = document.getElementById('filter');
         opt.onchange = function() {
             //document.getElementById('div0').style.display = 'none';
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 4; i++) {
                 // alert(i);
                 document.getElementById('div' + i).style.display = 'none';
             }
@@ -518,3 +539,95 @@
             });
         });
     </script>
+    <script>
+			var date = new Date();
+			$('#chart-sales').hide();
+				date.setDate(date.getDate());
+						
+			$('#start').datepicker({
+				format: 'MM dd, yyyy',
+                startDate: '-0d',
+			});
+			$('#end').datepicker({
+				format: 'MM dd, yyyy',
+                startDate: '-0d',
+			});
+			$('#getsales').click(function(){
+				var s = $('#start').val();
+				var e = $('#end').val();
+				var id = $('#menuid').val();
+		
+				$(document).ready(function(){
+				$.ajax({
+					url: "../Samples/getsomething.php",
+					method: "POST",
+					dataType: 'json',
+					data: {	'menuid': id,
+								'start': s,
+								'end' : e	
+						},
+					success: function(data) {
+						console.log(data);
+						var test = [];
+						var cs = [];
+						var sd = [];
+						//var dout = Date.parse(test);
+						for(var i in data) {
+							//console.log(new Date(data[i].tim).toDateString());
+							test.push("Sales as of " + new Date(data[i].daytime).toDateString());
+							cs.push(data[i].total);
+							
+						}
+						sd = data[i].name;
+						var myChart = {
+
+								labels: test,
+								datasets: [{
+									label: sd,
+									fill: false,
+									data: cs,
+									backgroundColor: [
+										'rgba(255, 99, 132, 0.2)',
+										'rgba(54, 162, 235, 0.2)',
+										'rgba(255, 206, 86, 0.2)',
+										'rgba(75, 192, 192, 0.2)',
+										'rgba(153, 102, 255, 0.2)',
+										'rgba(255, 159, 64, 0.2)'
+									],
+									borderColor: [
+										'rgba(255,99,132,1)',
+										'rgba(54, 162, 235, 1)',
+										'rgba(255, 206, 86, 1)',
+										'rgba(75, 192, 192, 1)',
+										'rgba(153, 102, 255, 1)',
+										'rgba(255, 159, 64, 1)'
+									],
+									borderWidth: 1
+								}]
+							};
+						var ctx = $("#mycanvas8");
+
+						var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: myChart,
+							options: {
+							scales: {
+								yAxes: [{
+									ticks: {
+										beginAtZero:true
+									}
+								}]
+							}
+							}
+						});
+
+					$('#chart-sales').show();
+					},
+					error: function(data) {
+						console.log(data);
+					}
+				});
+			});
+			});
+        </script>
+			

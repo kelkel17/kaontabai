@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<div id="chart-container">
-			<canvas id="mycanvas5"></canvas>
+			<canvas id="mycanvas8"></canvas>
 		</div>
 		<form method="post">
 			<select name="menu" id="menuid">
@@ -117,7 +117,7 @@
 									borderWidth: 1
 								}]
 							};
-						var ctx = $("#mycanvas5");
+						var ctx = $("#mycanvas8");
 
 						var barGraph = new Chart(ctx, {
 							type: 'bar',
@@ -141,8 +141,6 @@
 				});
 			});
 			});
-		
-		
         </script>
 			
 	</body>

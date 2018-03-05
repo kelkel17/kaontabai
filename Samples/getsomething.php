@@ -27,7 +27,6 @@ if(isset($_POST['menuid'])){
 
 	echo json_encode($data);
 	
-// $sql = "SELECT  SUM(p.purchase_total) as amount FROM tbl_purchase_details as pd, tbl_purchase as p, tbl_products as pr  WHERE pd.purchase_id = p.purchase_id AND pd.product_id = pr.product_id";
 }
 ?>
 
