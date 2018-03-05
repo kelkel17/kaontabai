@@ -11,7 +11,7 @@
     // $cart = con();
     //islogged2();
    // checker();
-error_reporting(0);
+   error_reporting(0);
 ?>
 
     <!doctype html>
@@ -126,6 +126,8 @@ error_reporting(0);
         //echo $qnty;
         $total = 0;
         $total2 = 0;
+        $samp1 = 0;
+        $samp2 = 0;
         // $i = 0;
         // $quantity = 0;
         $price = array();
@@ -291,10 +293,18 @@ error_reporting(0);
                             </tr>
                             <?php } ?>
 
-                  <?php  $initial = $value * $item['m_price'];
+                  <?php  
+                   $initial = $value * $item['m_price'];
                    $initial2 = $value2 * $item2['price_temp'];
-                   $temp = $initial2 + $initial; 
-                   $total = $total + $temp;
+
+                   $samp1 = $samp1 + $initial;
+                   $samp2 = $samp2 + $initial2;
+
+                   // $temp2 = $initial + $initial2; 
+                   // $total2 = $total2 + $temp2;
+
+                   $total = $samp1 + $samp2;
+
                    $i++;
                  
 
