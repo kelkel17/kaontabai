@@ -87,7 +87,7 @@ include '../dbconn.php';
 
 										$email = $ro['owner_email'];
 										$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
-										mail($email,'New Reservation',$message,'From: KaonTaBai!');
+										//mail($email,'New Reservation',$message,'From: KaonTaBai!');
 										echo '<script>sweetMimitch('.$myID.','.$id.','.$number.'); </script>';
 									}
 							}
@@ -159,7 +159,7 @@ include '../dbconn.php';
 									
 										$email = $ro['owner_email'];
 										$message = 'You have new reservation from '.$c['customer_fname'].' '.$c['customer_lname'].' at '.date('F j, Y g:i', strtotime($date)).'.';
-										mail($email,'New Reservation',$message,'From: KaonTaBai!');
+									//	mail($email,'New Reservation',$message,'From: KaonTaBai!');
 											echo '<script>sweetMimitch('.$myID.','.$id.','.$number.');</script>';
 										}
 								}

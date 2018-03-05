@@ -11,6 +11,7 @@
     // $cart = con();
     //islogged2();
    // checker();
+error_reporting(0);
 ?>
 
     <!doctype html>
